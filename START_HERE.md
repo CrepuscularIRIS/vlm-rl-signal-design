@@ -10,7 +10,7 @@
 4. `observations/PHENOMENA.md`，再读 `cases/mme_1231.md`、`cases/test_Manage_234.md`、`cases/test_Music_299.md`（均在observations下）：读助手原句和审查限制。
 5. `context/MENTOR_REQUIREMENTS.md`、`design/METHOD_HISTORY.md`：理解已定目标及已做工作，不能把导师判断当机制实证。
 6. `design/HYPOTHESES.md`：暂定问题，不能当结论。
-7. `literature/README.md`：只按当前问题选读对应来源；3份详细阅读稿存在未完成核查项。
+7. `literature/README.md`：只按当前问题选读对应来源；3份详细阅读稿存在未完成核查项。结合 [推导阅读方式](literature/REASONING_GUIDE.md)，学习现象如何转成问题和算法步骤。
 8. `design/DISCUSSION.md`：本轮讨论要回答什么。
 
 ## 五种证据标签

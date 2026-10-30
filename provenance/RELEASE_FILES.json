@@ -16,8 +16,8 @@
   },
   {
     "path": "README.md",
-    "bytes": 3695,
-    "sha256": "aff62ab2d03e9c79e24d31059a888d1efc30c958e488fb92ce9567a87f13d76e"
+    "bytes": 3974,
+    "sha256": "4d1b24b95afa7d50ac36cf26b0cec4f02fb3cb9c9288d29c1f14c4cf36f7f11d"
   },
   {
     "path": "REPRODUCIBILITY.md",
@@ -31,8 +31,8 @@
   },
   {
     "path": "START_HERE.md",
-    "bytes": 1842,
-    "sha256": "7228b1f45415381058bf9325dbbc27b84c04afa01278b9a5203a889ef5e349b1"
+    "bytes": 1951,
+    "sha256": "e7d7172c2ebaafc590e5c0551ea93427cbee7eb53403dce7859d47fd23c1776a"
   },
   {
     "path": "cards/PC-F1-08-frozen-model-necessity-label.md",
@@ -221,8 +221,8 @@
   },
   {
     "path": "design/DISCUSSION.md",
-    "bytes": 1395,
-    "sha256": "49219d0ca7c162375ec91dde57d339236eaa24372a860cd3f290fd6bbc676b47"
+    "bytes": 2776,
+    "sha256": "22260c777db4380292273bdfc94e97b11b6dbb1bfb5f00bd6ceeadd27768ebb9"
   },
   {
     "path": "design/HYPOTHESES.md",
@@ -288,6 +288,11 @@
     "path": "literature/README.md",
     "bytes": 3216,
     "sha256": "c769d1f4d9bb650960a6c0316358d70f43e59cd1783f1381dade3454f2682e49"
+  },
+  {
+    "path": "literature/REASONING_GUIDE.md",
+    "bytes": 1944,
+    "sha256": "0f05edee17a269c685a067671c920f68ec6e8ed694a22a85172e41ae47235c06"
   },
   {
     "path": "literature/SOURCES.json",
@@ -411,8 +416,8 @@
   },
   {
     "path": "prompts/PRO_START.md",
-    "bytes": 3912,
-    "sha256": "0aea9f294e799edf3092c5bbf6243fcfc4c10c4073dfda5c3dcfaf52d6cb79e0"
+    "bytes": 4728,
+    "sha256": "7466f8cf6f8ae361f0151224f46d61e364591a28af840a0dccab91034d544937"
   },
   {
     "path": "protocol/CURRENT_PROTOCOL.md",
