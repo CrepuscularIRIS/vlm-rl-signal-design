@@ -16,8 +16,8 @@
   },
   {
     "path": "README.md",
-    "bytes": 4424,
-    "sha256": "7aea5593332a34b15e93d3acd1cfa47f08b60c6416a8b1f09a14b2a7eba1c573"
+    "bytes": 4599,
+    "sha256": "4d6e248ed6136de2baae58fb4e35a6b9bb51911b59cd46ed773e3a4d6eef84db"
   },
   {
     "path": "REPRODUCIBILITY.md",
@@ -31,8 +31,8 @@
   },
   {
     "path": "START_HERE.md",
-    "bytes": 2181,
-    "sha256": "9806abaca24c33aa6c712ec215f3619058829cea37d4f5478e9c3b1554d69591"
+    "bytes": 2248,
+    "sha256": "5646759d7590f9327517f3a693a029c98caf9e5ca2673b2cbbbbc356b7489627"
   },
   {
     "path": "cards/PC-F1-08-frozen-model-necessity-label.md",
@@ -235,14 +235,19 @@
     "sha256": "b7a1296ef1c030d62cada7d984bcc07a165d4554490d9a53e7213a09839ff922"
   },
   {
+    "path": "design/CREDIT_ASSIGNMENT_FOCUS.md",
+    "bytes": 6685,
+    "sha256": "f2e75403dcd393bb0b6146be220c146650aeceb698023134ba27a83de6dc41af"
+  },
+  {
     "path": "design/DISCUSSION.md",
-    "bytes": 2776,
-    "sha256": "22260c777db4380292273bdfc94e97b11b6dbb1bfb5f00bd6ceeadd27768ebb9"
+    "bytes": 3033,
+    "sha256": "db14fd923fc4262550206472211d6fa8cc229f9d105e7ccabb35bb9e549e685f"
   },
   {
     "path": "design/HYPOTHESES.md",
-    "bytes": 2577,
-    "sha256": "e8526f4763ea5fb9736ee05f11cd60afcdbfcd907cc8046e92f6bccec37e693a"
+    "bytes": 2692,
+    "sha256": "e71890ab6a96fe5b29fe286115b2300d1de66729e09aac09e48ffb4cce01c595"
   },
   {
     "path": "design/METHOD_HISTORY.md",
@@ -251,8 +256,8 @@
   },
   {
     "path": "design/STAGEWISE_QUESTIONS.md",
-    "bytes": 3846,
-    "sha256": "d3e27c20119fdf8311dc32bc1e17d82f6ddfe5c2e5a39fa52bd9b03996d70a49"
+    "bytes": 4090,
+    "sha256": "a71f30b9a9c1940999ad00f3d442f07ab69977d37278e57bbd99b20a9c100dec"
   },
   {
     "path": "figures/crop_stratified_accuracy.pdf",
@@ -350,7 +355,7 @@
     "sha256": "2903d0d2f696500daf61bbabd863177d55273b4bcca1cfba3aaad53b3b1ef992"
   },
   {
-    "path": "literature/readings/adaptvision/\u7cbe\u8bfb.zh.md",
+    "path": "literature/readings/adaptvision/精读.zh.md",
     "bytes": 9624,
     "sha256": "2f9132cf830ab80e60caddeab075d9c5363f28b5e094b5a5963b40e6be574ee2"
   },
@@ -365,7 +370,7 @@
     "sha256": "29366eebd9b34c7cdf5dccf320bfb74f25f2b76e956c3807c469d92d6b41a9b8"
   },
   {
-    "path": "literature/readings/countercredit/\u7cbe\u8bfb.zh.md",
+    "path": "literature/readings/countercredit/精读.zh.md",
     "bytes": 12755,
     "sha256": "38585edd97735e3378f376af61652a06e9ee40ab51cc4e3a3b6f284c063b9dfe"
   },
@@ -380,7 +385,7 @@
     "sha256": "b13480bd3edb0f596573de9d45f836550033bfccc8dcd9da5ef2417d6541fd6a"
   },
   {
-    "path": "literature/readings/mini-o3/\u7cbe\u8bfb.zh.md",
+    "path": "literature/readings/mini-o3/精读.zh.md",
     "bytes": 9951,
     "sha256": "7cd0a108aaa195c5e0cbf6a60f7578f5b0ae1e2784da64e44e808e9848414d08"
   },
@@ -456,8 +461,8 @@
   },
   {
     "path": "prompts/PRO_ALGORITHM_NEXT.md",
-    "bytes": 3521,
-    "sha256": "a91b23c1cbc1d017ba62e13d97fd22e9e960bced384eb43dae90cd10cb4b3882"
+    "bytes": 4442,
+    "sha256": "6b68656b8d6f7cde905e7283f6d8f211cf0c86e1b0a88728036a3271e80555c8"
   },
   {
     "path": "prompts/PRO_START.md",
