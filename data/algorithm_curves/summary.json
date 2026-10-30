@@ -1,0 +1,132 @@
+{
+  "validation": {
+    "grpo": [
+      [
+        0,
+        0.533
+      ],
+      [
+        25,
+        0.576
+      ],
+      [
+        32,
+        0.602
+      ]
+    ],
+    "dapo": [
+      [
+        0,
+        0.533
+      ],
+      [
+        25,
+        0.595
+      ],
+      [
+        32,
+        0.637
+      ]
+    ],
+    "gspo": [
+      [
+        0,
+        0.533
+      ],
+      [
+        25,
+        0.6
+      ],
+      [
+        32,
+        0.621
+      ]
+    ],
+    "gigpo": [
+      [
+        0,
+        0.533
+      ],
+      [
+        25,
+        0.576
+      ],
+      [
+        32,
+        0.555
+      ]
+    ],
+    "rloo": [
+      [
+        0,
+        0.538
+      ],
+      [
+        25,
+        0.571
+      ],
+      [
+        32,
+        0.595
+      ]
+    ],
+    "decision": [
+      [
+        0,
+        0.538
+      ],
+      [
+        25,
+        0.573
+      ],
+      [
+        32,
+        0.585
+      ]
+    ]
+  },
+  "training": {
+    "grpo": {
+      "generated_main_groups": 4096,
+      "processed_tokens_including_forks": 210875246,
+      "update_mixed_groups": 2309,
+      "unique_update_questions": 4096,
+      "summed_step_hours": 6.780920555555556
+    },
+    "dapo": {
+      "generated_main_groups": 7872,
+      "processed_tokens_including_forks": 478822888,
+      "update_mixed_groups": 4096,
+      "unique_update_questions": 2648,
+      "summed_step_hours": 11.212165277777776
+    },
+    "gspo": {
+      "generated_main_groups": 4096,
+      "processed_tokens_including_forks": 286498622,
+      "update_mixed_groups": 2308,
+      "unique_update_questions": 4096,
+      "summed_step_hours": 8.20085388888889
+    },
+    "gigpo": {
+      "generated_main_groups": 4096,
+      "processed_tokens_including_forks": 230552365,
+      "update_mixed_groups": 2333,
+      "unique_update_questions": 4096,
+      "summed_step_hours": 7.233305277777778
+    },
+    "rloo": {
+      "generated_main_groups": 4096,
+      "processed_tokens_including_forks": 214449299,
+      "update_mixed_groups": 2308,
+      "unique_update_questions": 4096,
+      "summed_step_hours": 9.540941111111112
+    },
+    "decision": {
+      "generated_main_groups": 4096,
+      "processed_tokens_including_forks": 357279357,
+      "update_mixed_groups": 2544,
+      "unique_update_questions": 4096,
+      "summed_step_hours": 11.394238055555553
+    }
+  }
+}

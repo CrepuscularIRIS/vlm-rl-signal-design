@@ -20,3 +20,5 @@ DAPO生成7872题组次，而更新4096组次、2648唯一题。这三个分母�
 ## 原始证据可用性
 
 本库提供聚合与来源hash；含机器状态的私有原始ledger没有整份公开。因此CPU脚本可独立复算E1同题统计，不能仅用E1重建训练梯度。训练预算/主与fork成本来自data/training_summary.json。
+
+本次新增[完整曲线、配置和筛前组构成](ALGORITHM_CURVE_AUDIT.md)，区分不同阶段与生成成本；对机制的解释见[候选讨论](../design/STAGEWISE_QUESTIONS.md)，不是因果结果。

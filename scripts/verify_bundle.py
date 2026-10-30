@@ -50,6 +50,22 @@ for s in x['summary']:
  assert abs(s['delta_pp']-s['net_rows']/2208*100)<1e-9
 for r in json.loads((R/'provenance/CODE_HASHES.json').read_text()):
  assert hashlib.sha256((R/r['file']).read_bytes()).hexdigest()==r['sha256']
+# Frozen training aggregates: denominators and endpoints, not a raw-log replay.
+rows=list(csv.DictReader((R/'data/algorithm_curves/curves.csv').open()))
+curves=json.loads((R/'data/algorithm_curves/summary.json').read_text())
+assert len(rows)==192
+for method,total in curves['training'].items():
+ rs=sorted([r for r in rows if r['method']==method],key=lambda r:int(r['step']))
+ assert [int(r['step']) for r in rs]==list(range(1,33))
+ assert sum(int(r['generated_groups']) for r in rs)==total['generated_main_groups']
+ assert sum(int(r['update_mixed_groups']) for r in rs)==total['update_mixed_groups']
+ assert int(rs[-1]['cumulative_processed_tokens'])==total['processed_tokens_including_forks']
+ assert abs(float(rs[-1]['cumulative_step_hours'])-total['summed_step_hours'])<1e-9
+ assert [s for s,_ in curves['validation'][method]]==[0,25,32]
+for v in json.loads((R/'data/algorithm_curves/generated_group_composition.json').read_text()).values():
+ assert sum(v['binary_outcome_groups'].values())==v['generated_groups']
+for r in json.loads((R/'provenance/CURVE_AUDIT.json').read_text())['outputs']:
+ assert hashlib.sha256((R/r['path']).read_bytes()).hexdigest()==r['sha256']
 f=R/'provenance/RELEASE_FILES.json'
 if f.exists():
  for r in json.loads(f.read_text()):assert hashlib.sha256((R/r['path']).read_bytes()).hexdigest()==r['sha256'],r['path']

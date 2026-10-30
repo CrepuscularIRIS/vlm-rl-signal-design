@@ -1,0 +1,71 @@
+{
+  "description": "2026-10-30 frozen training-log reaggregation; no new training or evaluation. Private inputs identified by labels and SHA only.",
+  "inputs": [
+    {
+      "label": "curve_input_01",
+      "sha256": "7d1bbb171fa5a92f57f377dc09a3d71166b904fed55055a551392962f64bfb49"
+    },
+    {
+      "label": "curve_input_02",
+      "sha256": "227fb028424bf92956497c9392b9f0848ca40b2ea655fe9514d2478452b0b6e7"
+    },
+    {
+      "label": "curve_input_03",
+      "sha256": "e79d3624cd078d2d42eb3758c20863a6cc2f36b00015d5bdde7f3fc92f903b47"
+    },
+    {
+      "label": "curve_input_04",
+      "sha256": "6eb3350c7fcc0bafdd596120117c18a10bca2b0184cbe4f50e8a0daccafdbd90"
+    },
+    {
+      "label": "curve_input_05",
+      "sha256": "364cc9748be1b92f8c5257b57dcf195ab1af61b5697e79cd81ab3ec0c6df50fc"
+    },
+    {
+      "label": "curve_input_06",
+      "sha256": "9f6e3e2f9d2852c30bac479a93ca57bab09f6ff34b79b76a75051005ddfffa3f"
+    },
+    {
+      "label": "curve_input_07",
+      "sha256": "9146a10fb88ba687010bc844d79c82d9b7702ecd817f6fe3fdccf7dada36a215"
+    },
+    {
+      "label": "curve_input_08",
+      "sha256": "8822b9a5d6224147ac251d1950493cbbc591006fac5638d5266b4e22e4be5eb8"
+    },
+    {
+      "label": "curve_input_09",
+      "sha256": "7e567df41f17b14f6dfcd09ad0a2b60112809465677ff49217278576343e4386"
+    },
+    {
+      "label": "curve_input_10",
+      "sha256": "e9268d0dee47e0f6e9c49ae3c691cdb5834ce05c5b1ef2008d8c6cf3229fd77f"
+    },
+    {
+      "label": "curve_input_11",
+      "sha256": "6c84cc1fdba49e76ba0cb83f52e1214df9fd9253016e5031118f8871102ce217"
+    },
+    {
+      "label": "curve_input_12",
+      "sha256": "12060f277a9485d4660a820df9203c133a17b4998ff385c8e1eeb394356c82a4"
+    },
+    {
+      "label": "curve_input_13",
+      "sha256": "ad97abef4cfe61d53256684cfcb2cfd2becaa0b7cc8704ac473ca44c77f6effb"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "data/algorithm_curves/curves.csv",
+      "sha256": "574a25a8c333580b1143be8aaa434a578b7b626c7d3bcbbff171a4c9f177b526"
+    },
+    {
+      "path": "data/algorithm_curves/generated_group_composition.json",
+      "sha256": "ccd6cf299ae21913264349572bfbfae6a8f76f5062d8e9aa3673af5cd6bb8679"
+    },
+    {
+      "path": "data/algorithm_curves/summary.json",
+      "sha256": "b905a4c529e33c2d0aa18badd0a67d099c2d22c3b233054e17949c62f0af1f64"
+    }
+  ]
+}

@@ -6,6 +6,12 @@
 
 讨论按轮推进：先现象与竞争解释，再明确候选gap，随后检查组件必要性、推导最小改动。第一轮不要求完整算法；“多个问题交织”与“算法可能臃肿”都保留为待检验判断。见 [讨论顺序](design/DISCUSSION.md)。
 
+## 最新更新：阶段差异与下一轮算法讨论
+
+新增[六算法配置与曲线核对](results/ALGORITHM_CURVE_AUDIT.md)、[阶段差异的竞争解释](design/STAGEWISE_QUESTIONS.md)和[下一轮Pro提示词](prompts/PRO_ALGORITHM_NEXT.md)。目标是在可比协议与明确预算下超过baseline；先解释现象，再推导最小改动，尚未选择或启动新算法。
+
+![验证曲线与生成成本](figures/validation_curves.png)
+
 ## 当前事实
 
 - 25个历史评测条件，共55,200条已脱敏模型轨迹；重点比较6个本地32步RL条件与Mini-o3-7B、DeepEyes-7B。

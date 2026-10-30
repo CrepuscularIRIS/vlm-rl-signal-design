@@ -16,13 +16,13 @@
   },
   {
     "path": "README.md",
-    "bytes": 3974,
-    "sha256": "4d1b24b95afa7d50ac36cf26b0cec4f02fb3cb9c9288d29c1f14c4cf36f7f11d"
+    "bytes": 4424,
+    "sha256": "7aea5593332a34b15e93d3acd1cfa47f08b60c6416a8b1f09a14b2a7eba1c573"
   },
   {
     "path": "REPRODUCIBILITY.md",
-    "bytes": 1048,
-    "sha256": "10470f094aa672f2a45efb4f3f41f12c40339b558cd1318466ad9681848ca3b3"
+    "bytes": 1309,
+    "sha256": "7030559f35be9cb7f483797890de37eb4e086cfe6958f73a7dadfc23005d1970"
   },
   {
     "path": "RIGHTS.md",
@@ -31,8 +31,8 @@
   },
   {
     "path": "START_HERE.md",
-    "bytes": 1951,
-    "sha256": "e7d7172c2ebaafc590e5c0551ea93427cbee7eb53403dce7859d47fd23c1776a"
+    "bytes": 2181,
+    "sha256": "9806abaca24c33aa6c712ec215f3619058829cea37d4f5478e9c3b1554d69591"
   },
   {
     "path": "cards/PC-F1-08-frozen-model-necessity-label.md",
@@ -88,6 +88,21 @@
     "path": "context/MENTOR_REQUIREMENTS.md",
     "bytes": 3779,
     "sha256": "0c99136ea0f4085a171cab73dd7916496a0db54c9ceed3126327d5957bd23b88"
+  },
+  {
+    "path": "data/algorithm_curves/curves.csv",
+    "bytes": 26725,
+    "sha256": "574a25a8c333580b1143be8aaa434a578b7b626c7d3bcbbff171a4c9f177b526"
+  },
+  {
+    "path": "data/algorithm_curves/generated_group_composition.json",
+    "bytes": 1121,
+    "sha256": "ccd6cf299ae21913264349572bfbfae6a8f76f5062d8e9aa3673af5cd6bb8679"
+  },
+  {
+    "path": "data/algorithm_curves/summary.json",
+    "bytes": 2322,
+    "sha256": "b905a4c529e33c2d0aa18badd0a67d099c2d22c3b233054e17949c62f0af1f64"
   },
   {
     "path": "data/audit_findings.jsonl",
@@ -235,6 +250,11 @@
     "sha256": "959243ec959b04a34bd1d8ed185b7b08c6fd8fefce6409a57f127c7fa6423ee4"
   },
   {
+    "path": "design/STAGEWISE_QUESTIONS.md",
+    "bytes": 3846,
+    "sha256": "d3e27c20119fdf8311dc32bc1e17d82f6ddfe5c2e5a39fa52bd9b03996d70a49"
+  },
+  {
     "path": "figures/crop_stratified_accuracy.pdf",
     "bytes": 21899,
     "sha256": "bc888450e0d96b9719d58c64bf7bdb59c719a1d9e540378602c38b54be740a2e"
@@ -285,6 +305,26 @@
     "sha256": "b497a404493867f062b79b93e142667fd5162d7ed4bbb6062c2ff63402b67c3e"
   },
   {
+    "path": "figures/training_diagnostics.pdf",
+    "bytes": 30056,
+    "sha256": "b6c478aff61a7a436dd0c73c260d161939d5c0597790932efcc748eb562bada1"
+  },
+  {
+    "path": "figures/training_diagnostics.png",
+    "bytes": 689111,
+    "sha256": "776f8694566e485bb13b6579aa83a337c8d163ad85ba95209f4ba6a19253f25b"
+  },
+  {
+    "path": "figures/validation_curves.pdf",
+    "bytes": 24585,
+    "sha256": "f041cdc9663dcd622a6b0566ba2a3ac0c97826c06ad2d4a25f0360a25e81e373"
+  },
+  {
+    "path": "figures/validation_curves.png",
+    "bytes": 242215,
+    "sha256": "c468c67446d9c54e218fda88917822b8e31ead32563c408bf4bdac864c69d250"
+  },
+  {
     "path": "literature/README.md",
     "bytes": 3216,
     "sha256": "c769d1f4d9bb650960a6c0316358d70f43e59cd1783f1381dade3454f2682e49"
@@ -310,7 +350,7 @@
     "sha256": "2903d0d2f696500daf61bbabd863177d55273b4bcca1cfba3aaad53b3b1ef992"
   },
   {
-    "path": "literature/readings/adaptvision/精读.zh.md",
+    "path": "literature/readings/adaptvision/\u7cbe\u8bfb.zh.md",
     "bytes": 9624,
     "sha256": "2f9132cf830ab80e60caddeab075d9c5363f28b5e094b5a5963b40e6be574ee2"
   },
@@ -325,7 +365,7 @@
     "sha256": "29366eebd9b34c7cdf5dccf320bfb74f25f2b76e956c3807c469d92d6b41a9b8"
   },
   {
-    "path": "literature/readings/countercredit/精读.zh.md",
+    "path": "literature/readings/countercredit/\u7cbe\u8bfb.zh.md",
     "bytes": 12755,
     "sha256": "38585edd97735e3378f376af61652a06e9ee40ab51cc4e3a3b6f284c063b9dfe"
   },
@@ -340,7 +380,7 @@
     "sha256": "b13480bd3edb0f596573de9d45f836550033bfccc8dcd9da5ef2417d6541fd6a"
   },
   {
-    "path": "literature/readings/mini-o3/精读.zh.md",
+    "path": "literature/readings/mini-o3/\u7cbe\u8bfb.zh.md",
     "bytes": 9951,
     "sha256": "7cd0a108aaa195c5e0cbf6a60f7578f5b0ae1e2784da64e44e808e9848414d08"
   },
@@ -415,9 +455,14 @@
     "sha256": "1802bbbb47ca6c67e0feabdb529e71d87667d6b3a86ff61c61c6c80ba43f6bb7"
   },
   {
+    "path": "prompts/PRO_ALGORITHM_NEXT.md",
+    "bytes": 3521,
+    "sha256": "a91b23c1cbc1d017ba62e13d97fd22e9e960bced384eb43dae90cd10cb4b3882"
+  },
+  {
     "path": "prompts/PRO_START.md",
-    "bytes": 4728,
-    "sha256": "7466f8cf6f8ae361f0151224f46d61e364591a28af840a0dccab91034d544937"
+    "bytes": 4885,
+    "sha256": "b4a3cf5b0c2f432e9cdf5e965c100f05a34880e840b7f23661df230539df7bf4"
   },
   {
     "path": "protocol/CURRENT_PROTOCOL.md",
@@ -450,6 +495,11 @@
     "sha256": "5f3e3f28e7e44defb000bf64ef3a5e23d4440e41d586aa70556e784707522613"
   },
   {
+    "path": "provenance/CURVE_AUDIT.json",
+    "bytes": 2326,
+    "sha256": "d59dc70f1f05136e4798634acd7915b89ba16186b01c5ed3c207a37105c2fb8a"
+  },
+  {
     "path": "provenance/IMPORTED_FILES.json",
     "bytes": 23944,
     "sha256": "2ddf5d3811019ed072b834c8cb4e1dcc864cb4a4218f807fbdedce2922da6979"
@@ -461,13 +511,18 @@
   },
   {
     "path": "provenance/README.md",
-    "bytes": 1225,
-    "sha256": "d348f8b5f2ce493aebfe994ab9fc31a1b47bbd7af489849dc3cf0330294db42a"
+    "bytes": 1429,
+    "sha256": "c5ccb3d83cd121e0b9e5b3eedd0f6a49192a541bfa36ab6dd0111a6de50c583e"
   },
   {
     "path": "requirements.txt",
-    "bytes": 12,
-    "sha256": "a83a2a4ed7ab2e022b9b8a83cfa2b8cf52cc243006c597e8b96f90a8365590ac"
+    "bytes": 28,
+    "sha256": "3375370eec2c6a1f458a4abab8f8f13f27981197d3b20cb8b14fb200dacf3fca"
+  },
+  {
+    "path": "results/ALGORITHM_CURVE_AUDIT.md",
+    "bytes": 5183,
+    "sha256": "03fc987e6632b132b7b4ad6ef42aa40baa0421d62051fc7b964d3ce3e93eeee8"
   },
   {
     "path": "results/CONDITIONS.md",
@@ -486,8 +541,8 @@
   },
   {
     "path": "results/TRAINING_SIGNALS.md",
-    "bytes": 1651,
-    "sha256": "9a979c7484ad47a73c4f8e0b2dedac6bbc0f1ca1c9fa514a2cf417357df7e056"
+    "bytes": 1864,
+    "sha256": "285408ffb53ae8b1f9187422df72b4e5777a0445e7f1648f8855407d899f2c18"
   },
   {
     "path": "results/data/strata.csv",
@@ -530,6 +585,11 @@
     "sha256": "cb50742cac86f3896065cdaf454b44d7852a05085594e1dc8d4f0a121b7fa71e"
   },
   {
+    "path": "scripts/plot_algorithm_curves.py",
+    "bytes": 3126,
+    "sha256": "d447e61c7d37ef40017aa5459e0950edbbcd4955897aad5deb530524de5de6ed"
+  },
+  {
     "path": "scripts/recompute_pairs.py",
     "bytes": 4648,
     "sha256": "5f43d65b318c96d3588c1c1af22b72da0f1c0d7a23bff346a21707e589193e0a"
@@ -541,7 +601,7 @@
   },
   {
     "path": "scripts/verify_bundle.py",
-    "bytes": 3386,
-    "sha256": "2231949a9f4469f38a7cb5504536d0cde3262d79631dbd5837022dcbd5b11680"
+    "bytes": 4559,
+    "sha256": "11b2e1f157a33cccdb5e9dcfce176684c38bfc55eb413ab6ef82e8d664da5016"
   }
 ]

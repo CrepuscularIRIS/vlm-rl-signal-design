@@ -2,6 +2,8 @@
 
 请先确认你确实通过GitHub工具读到了文件，而不是仅凭仓库名推理。GitHub MCP不同实现支持不同文件大小；优先读取下面的Markdown和CSV，不必一次解压25份轨迹。
 
+最新讨论优先读[六算法曲线核对](results/ALGORITHM_CURVE_AUDIT.md)与[阶段问题](design/STAGEWISE_QUESTIONS.md)，使用[更新提示词](prompts/PRO_ALGORITHM_NEXT.md)。旧开场提示词保留作通用入口。
+
 ## 建议第一轮读取（按顺序）
 
 1. `README.md`：范围、当前状态。

@@ -1,0 +1,42 @@
+{
+  "grpo": {
+    "generated_groups": 4096,
+    "binary_outcome_groups": {
+      "all_correct": 1298,
+      "mixed": 2309,
+      "all_wrong": 489
+    },
+    "all_wrong_with_nonanswer_terminal": 48,
+    "note": "answer terminal alone does not establish full protocol validity"
+  },
+  "dapo": {
+    "generated_groups": 7872,
+    "binary_outcome_groups": {
+      "all_correct": 2573,
+      "mixed": 4350,
+      "all_wrong": 949
+    },
+    "all_wrong_with_nonanswer_terminal": 102,
+    "note": "answer terminal alone does not establish full protocol validity"
+  },
+  "gspo": {
+    "generated_groups": 4096,
+    "binary_outcome_groups": {
+      "all_correct": 1296,
+      "mixed": 2308,
+      "all_wrong": 492
+    },
+    "all_wrong_with_nonanswer_terminal": 58,
+    "note": "answer terminal alone does not establish full protocol validity"
+  },
+  "gigpo": {
+    "generated_groups": 4096,
+    "binary_outcome_groups": {
+      "all_correct": 1248,
+      "mixed": 2333,
+      "all_wrong": 515
+    },
+    "all_wrong_with_nonanswer_terminal": 58,
+    "note": "answer terminal alone does not establish full protocol validity"
+  }
+}

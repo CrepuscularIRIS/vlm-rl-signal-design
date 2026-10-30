@@ -13,3 +13,5 @@ recompute_pairs读取11个主要公开条件，验证每条件2208条、552题�
 原始训练ledger/所有图像不在本库，所以仅凭此库不能重放训练梯度、独立判定裁图内容或验证全部GT。training_signals.json是先前CPU汇总结果，不能从E1反推。图片图表是实际数据绘制；验证曲线仅0/25/32三个记录点。
 
 GitHub MCP读取可用Markdown病例与CSV，不必运行脚本。public仓库可通过GitHub和raw内容读取，但本次未代用户验证其具体网页Pro会话的MCP账号权限。
+
+新增训练聚合可重画：`python scripts/plot_algorithm_curves.py --out recomputed/curves`。输入为公开192行逐步聚合和18个验证点；可核对合计并重画，不代表独立复核私有原始训练日志。旧冻结分数与轨迹不改。
