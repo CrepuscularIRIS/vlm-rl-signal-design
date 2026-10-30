@@ -1,0 +1,62 @@
+{
+  "grpo": {
+    "updated_group_occurrences": 4096,
+    "binary_groups": {
+      "mixed": 2309,
+      "all_correct": 1298,
+      "all_wrong": 489
+    },
+    "mean_step_adv_nonzero_token_share": 0.6394100001103598,
+    "unique_update_qids": 4096
+  },
+  "dapo": {
+    "updated_group_occurrences": 4096,
+    "binary_groups": {
+      "mixed": 4096,
+      "all_correct": 0,
+      "all_wrong": 0
+    },
+    "mean_step_adv_nonzero_token_share": 1.0,
+    "unique_update_qids": 2648
+  },
+  "gspo": {
+    "updated_group_occurrences": 4096,
+    "binary_groups": {
+      "mixed": 2308,
+      "all_correct": 1296,
+      "all_wrong": 492
+    },
+    "mean_step_adv_nonzero_token_share": 0.6468149762527088,
+    "unique_update_qids": 4096
+  },
+  "gigpo": {
+    "updated_group_occurrences": 4096,
+    "binary_groups": {
+      "mixed": 2333,
+      "all_correct": 1248,
+      "all_wrong": 515
+    },
+    "mean_step_adv_nonzero_token_share": 0.6418069575982401,
+    "unique_update_qids": 4096
+  },
+  "rloo_control": {
+    "updated_group_occurrences": 4096,
+    "binary_groups": {
+      "mixed": 2308,
+      "all_correct": 1284,
+      "all_wrong": 504
+    },
+    "reward_variance_nonzero_groups": 3153,
+    "unique_update_qids": 4096
+  },
+  "rloo_decision": {
+    "updated_group_occurrences": 4096,
+    "binary_groups": {
+      "mixed": 2544,
+      "all_correct": 1051,
+      "all_wrong": 501
+    },
+    "reward_variance_nonzero_groups": 3334,
+    "unique_update_qids": 4096
+  }
+}

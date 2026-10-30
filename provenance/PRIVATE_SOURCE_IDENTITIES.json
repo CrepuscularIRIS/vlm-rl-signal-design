@@ -1,0 +1,32 @@
+[
+  {
+    "label": "Conversation.md",
+    "sha256": "f9bce396002a665b86497b8339d6c014a5b489cf3bee040ee16a5684c8a34837",
+    "published_in_full": false
+  },
+  {
+    "label": "training_completion_counts.json",
+    "sha256": "227fb028424bf92956497c9392b9f0848ca40b2ea655fe9514d2478452b0b6e7",
+    "published_in_full": false
+  },
+  {
+    "label": "k8_grpo_updates.jsonl",
+    "sha256": "9f6e3e2f9d2852c30bac479a93ca57bab09f6ff34b79b76a75051005ddfffa3f",
+    "published_in_full": false
+  },
+  {
+    "label": "k8_dapo_updates.jsonl",
+    "sha256": "8822b9a5d6224147ac251d1950493cbbc591006fac5638d5266b4e22e4be5eb8",
+    "published_in_full": false
+  },
+  {
+    "label": "k8_gspo_updates.jsonl",
+    "sha256": "6c84cc1fdba49e76ba0cb83f52e1214df9fd9253016e5031118f8871102ce217",
+    "published_in_full": false
+  },
+  {
+    "label": "k8_gigpo_updates.jsonl",
+    "sha256": "ad97abef4cfe61d53256684cfcb2cfd2becaa0b7cc8704ac473ca44c77f6effb",
+    "published_in_full": false
+  }
+]

@@ -1,0 +1,145 @@
+[
+  {
+    "id": "adaptvision",
+    "arxiv": "2512.03794v2",
+    "abs_url": "https://arxiv.org/abs/2512.03794v2",
+    "pdf_url": "https://arxiv.org/pdf/2512.03794v2",
+    "local_pdf_sha256": "9abd3f7986659b70f026c84cedac3104a1016680c08f6572efb31908b311da4a",
+    "pdf_bytes": 6670137,
+    "reading_status": "SOURCE记录首轮10项核查及修正；本次仅打包，没有重新逐条复核。",
+    "version_note": "原归档指定版本；本次未查询是否存在更新版本。",
+    "redistributed_pdf": false
+  },
+  {
+    "id": "countercredit",
+    "arxiv": "2609.22910v1",
+    "abs_url": "https://arxiv.org/abs/2609.22910v1",
+    "pdf_url": "https://arxiv.org/pdf/2609.22910v1",
+    "local_pdf_sha256": "f7bf7bb5a7a25b37fd4ef8432493c052d1f8c87c71d636e972c74cc44e8894a4",
+    "pdf_bytes": 5083566,
+    "reading_status": "已有详细阅读稿；原核查中断，不能标成全文独立复核通过。",
+    "version_note": "原归档指定版本；本次未查询是否存在更新版本。",
+    "redistributed_pdf": false
+  },
+  {
+    "id": "mini-o3",
+    "arxiv": "2509.07969v1",
+    "abs_url": "https://arxiv.org/abs/2509.07969v1",
+    "pdf_url": "https://arxiv.org/pdf/2509.07969v1",
+    "local_pdf_sha256": "d6bc21d118a7772fb735643bb72fb41d0182c9fb51d7beec8ec35bf537dcd036",
+    "pdf_bytes": 19901859,
+    "reading_status": "已有详细阅读稿；独立核查未完成；arXiv v1与会议稿的差异保留。",
+    "version_note": "原归档指定版本；本次未查询是否存在更新版本。",
+    "redistributed_pdf": false
+  },
+  {
+    "id": "pixel-reasoner",
+    "arxiv": "2505.15966",
+    "abs_url": "https://arxiv.org/abs/2505.15966",
+    "pdf_url": "https://arxiv.org/pdf/2505.15966",
+    "local_pdf_sha256": "e77d0a67b739591c26d1b01c1f72e39459ce075a2572ff411bf58b1d33d5a322",
+    "pdf_bytes": 5401663,
+    "reading_status": "本批只有PDF归档；没有本目录精读笔记，不标成已精读。",
+    "version_note": "URL未钉版本；哈希识别当时下载文件。",
+    "redistributed_pdf": false
+  },
+  {
+    "id": "deepeyes",
+    "arxiv": "2505.14362",
+    "abs_url": "https://arxiv.org/abs/2505.14362",
+    "pdf_url": "https://arxiv.org/pdf/2505.14362",
+    "local_pdf_sha256": "51eea8896d15a2774370f63fa713a667c9aa161b68a5e5208ab6bf846c527ebb",
+    "pdf_bytes": 6966235,
+    "reading_status": "本批只有PDF归档；没有本目录精读笔记，不标成已精读。",
+    "version_note": "URL未钉版本；哈希识别当时下载文件。",
+    "redistributed_pdf": false
+  },
+  {
+    "id": "gigpo",
+    "arxiv": "2505.10978v1",
+    "abs_url": "https://arxiv.org/abs/2505.10978v1",
+    "pdf_url": "https://arxiv.org/pdf/2505.10978v1",
+    "local_pdf_sha256": "bf116d7a25f680ce6d784eb3a5d3d13766ed213db1669697a3dbf87785e3b747",
+    "pdf_bytes": 1819058,
+    "reading_status": "本批只有PDF归档；没有本目录精读笔记，不标成已精读。",
+    "version_note": "原归档指定版本；本次未查询是否存在更新版本。",
+    "redistributed_pdf": false
+  },
+  {
+    "id": "visualprm",
+    "arxiv": "2503.10291v1",
+    "abs_url": "https://arxiv.org/abs/2503.10291v1",
+    "pdf_url": "https://arxiv.org/pdf/2503.10291v1",
+    "local_pdf_sha256": "4aebef0ed4f59f70029463e72bfb8afa117c8c21d8bfd5f8b35ef37bc5428d7c",
+    "pdf_bytes": 4034159,
+    "reading_status": "本批只有PDF归档；没有本目录精读笔记，不标成已精读。",
+    "version_note": "原归档指定版本；本次未查询是否存在更新版本。",
+    "redistributed_pdf": false
+  },
+  {
+    "id": "med",
+    "arxiv": "2602.01334",
+    "abs_url": "https://arxiv.org/abs/2602.01334",
+    "pdf_url": "https://arxiv.org/pdf/2602.01334",
+    "local_pdf_sha256": "62f52e4ab7a80a9c0df3ddf92b399f3134e1e90ba249b95dd00ba7c20783510d",
+    "pdf_bytes": 6680216,
+    "reading_status": "本批只有PDF归档；没有本目录精读笔记，不标成已精读。",
+    "version_note": "URL未钉版本；哈希识别当时下载文件。",
+    "redistributed_pdf": false
+  },
+  {
+    "id": "deepseekmath",
+    "arxiv": "2402.03300v3",
+    "abs_url": "https://arxiv.org/abs/2402.03300v3",
+    "pdf_url": "https://arxiv.org/pdf/2402.03300v3",
+    "local_pdf_sha256": "6cc20b3c5b8d25b8b53868fc4ec1792c144f07d67bdf7395138efd4422197e7b",
+    "pdf_bytes": 1844642,
+    "reading_status": "本批只有PDF归档；没有本目录精读笔记，不标成已精读。",
+    "version_note": "原归档指定版本；本次未查询是否存在更新版本。",
+    "redistributed_pdf": false
+  },
+  {
+    "id": "rloo",
+    "arxiv": "2402.14740v2",
+    "abs_url": "https://arxiv.org/abs/2402.14740v2",
+    "pdf_url": "https://arxiv.org/pdf/2402.14740v2",
+    "local_pdf_sha256": "c997e5b1fe4e767385f6d4bcab2427ff1f65398572f79143feb899da1b6da398",
+    "pdf_bytes": 989314,
+    "reading_status": "本批只有PDF归档；没有本目录精读笔记，不标成已精读。",
+    "version_note": "原归档指定版本；本次未查询是否存在更新版本。",
+    "redistributed_pdf": false
+  },
+  {
+    "id": "dr-grpo",
+    "arxiv": "2503.20783v1",
+    "abs_url": "https://arxiv.org/abs/2503.20783v1",
+    "pdf_url": "https://arxiv.org/pdf/2503.20783v1",
+    "local_pdf_sha256": "4bb21c1d5bf7bd306a58e9dac9e0aeca660e204a8fa2e81f0ee2231f5d0f0173",
+    "pdf_bytes": 1611721,
+    "reading_status": "本批只有PDF归档；没有本目录精读笔记，不标成已精读。",
+    "version_note": "原归档指定版本；本次未查询是否存在更新版本。",
+    "redistributed_pdf": false
+  },
+  {
+    "id": "dapo",
+    "arxiv": "2503.14476v1",
+    "abs_url": "https://arxiv.org/abs/2503.14476v1",
+    "pdf_url": "https://arxiv.org/pdf/2503.14476v1",
+    "local_pdf_sha256": "560e8846e3fe37b5367aa9d7bb38d463bb16c36846467b29b3e3f2a4ed56fed6",
+    "pdf_bytes": 869221,
+    "reading_status": "本批只有PDF归档；没有本目录精读笔记，不标成已精读。",
+    "version_note": "原归档指定版本；本次未查询是否存在更新版本。",
+    "redistributed_pdf": false
+  },
+  {
+    "id": "gspo",
+    "arxiv": "2507.18071v2",
+    "abs_url": "https://arxiv.org/abs/2507.18071v2",
+    "pdf_url": "https://arxiv.org/pdf/2507.18071v2",
+    "local_pdf_sha256": "67221ec313f42d8b3029686b604b2621a311ae0d74e38524092e7c7a94613bd0",
+    "pdf_bytes": 458773,
+    "reading_status": "本批只有PDF归档；没有本目录精读笔记，不标成已精读。",
+    "version_note": "原归档指定版本；本次未查询是否存在更新版本。",
+    "redistributed_pdf": false
+  }
+]

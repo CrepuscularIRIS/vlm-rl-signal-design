@@ -1,0 +1,37 @@
+{
+  "X1_minio3": {
+    "n": 2208,
+    "length_terminated_with_tool_marker": 0,
+    "any_turn_tool_and_answer_close": 0,
+    "terminal_no_tool_or_answer_close": 2,
+    "length_with_tool_examples": []
+  },
+  "X2_deepeyes": {
+    "n": 2208,
+    "length_terminated_with_tool_marker": 216,
+    "any_turn_tool_and_answer_close": 916,
+    "terminal_no_tool_or_answer_close": 3,
+    "length_with_tool_examples": [
+      [
+        "mme_6725",
+        3
+      ],
+      [
+        "mme_7996",
+        1
+      ],
+      [
+        "mme_7995",
+        1
+      ],
+      [
+        "mme_16858",
+        2
+      ],
+      [
+        "mme_16857",
+        1
+      ]
+    ]
+  }
+}

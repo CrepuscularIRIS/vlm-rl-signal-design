@@ -1,0 +1,14 @@
+{
+  "status": "pass",
+  "conditions": 25,
+  "trajectories": 55200,
+  "audits": 96,
+  "cases": 12,
+  "all_scores_recomputed": true,
+  "local_links_valid": true,
+  "sensitive_pattern_scan": "pass",
+  "paired_results_reproduced_byte_for_byte": true,
+  "checked_date": "2026-10-30 America/New_York",
+  "notes": "No GPU inference, training, new Pro consultation or image re-audit.",
+  "git_diff_check": "pass (CSV CRLF and exact transcript whitespace retained through attributes)"
+}

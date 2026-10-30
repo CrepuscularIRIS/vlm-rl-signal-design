@@ -1,0 +1,14 @@
+{
+  "deepeyes_eval_vstar.py": {
+    "url": "https://raw.githubusercontent.com/Visual-Agent/DeepEyes/11d20c6be32b2cf62c914e0c73a06db2f9a7e3a1/eval/eval_vstar.py",
+    "sha256": "d646c2255be051cb8da3e968aec5be4eadef32ff4cd2a013ef11da9333f5e3e2"
+  },
+  "minio3_README.md": {
+    "url": "https://raw.githubusercontent.com/Mini-o3/Mini-o3/2c5a0dedb5279eff2c0e6049aac05de97bf7a2b3/README.md",
+    "sha256": "16fcfed1f15c4b60f12c165e7a3ea8eeb404206d35d4d0b8df567778192d7b54"
+  },
+  "minio3_constants.py": {
+    "url": "https://raw.githubusercontent.com/Mini-o3/Mini-o3/2c5a0dedb5279eff2c0e6049aac05de97bf7a2b3/verl/trainer/constants.py",
+    "sha256": "0370441888cdddcdac385394a94ea770b8ef16881a49cf0bf1e49787f39c5d96"
+  }
+}

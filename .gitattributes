@@ -1,0 +1,6 @@
+*.jsonl.gz binary
+*.png binary
+*.pdf binary
+*.csv whitespace=cr-at-eol
+# Preserve exact whitespace in quoted model transcripts.
+observations/cases/*.md -whitespace

@@ -1,0 +1,8 @@
+{
+  "system==TOOL_CROP_SYSTEM_PROMPT": true,
+  "tool_prompt==TOOL_CALL_CROP_MULTI_TRUN_PROMPT": true,
+  "error_prompt==ERROR_INFO_MULTI_TURN_PROMPT": true,
+  "deepeyes_system_exact": true,
+  "deepeyes_system_whitespace_normalized": true,
+  "deepeyes_user_suffix_exact": true
+}
