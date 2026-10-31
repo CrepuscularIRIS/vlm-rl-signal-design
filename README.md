@@ -6,9 +6,17 @@
 
 讨论按轮推进：先现象与竞争解释，再明确候选gap，随后检查组件必要性、推导最小改动。第一轮不要求完整算法；“多个问题交织”与“算法可能臃肿”都保留为待检验判断。见 [讨论顺序](design/DISCUSSION.md)。
 
+## PO阶段性结果审查（2026-10-30晚）
+
+新执行的PO两方法训练发生内存中断：SP完成20/32、CA23/32；双方最后完整保存20步。**没有PO最终E1分数**，不能与旧32步baseline混写。已整理真实训练曲线、局部信号/成本、3题6条训练分叉逐图记录及仍待回答的问题。
+
+[PO阶段报告](results/po_review_20261030/REPORT.md) · [6条审查](results/po_review_20261030/audit_findings.jsonl) · [数值与SHA](results/po_review_20261030/PROVENANCE.json)
+
+![PO训练阶段曲线](results/po_review_20261030/training_curves.png)
+
 ## 最新更新：优先推导credit assignment
 
-新增[六算法配置与曲线核对](results/ALGORITHM_CURVE_AUDIT.md)、[阶段差异的竞争解释](design/STAGEWISE_QUESTIONS.md)和[下一轮Pro提示词](prompts/PRO_ALGORITHM_NEXT.md)。研究者最新选择是[以DAPO为工作基线，优先推导中间信用](design/CREDIT_ASSIGNMENT_FOCUS.md)：让尚未答对但有可测视觉进展的探索获得有依据的信号。能力／状态表示保留为竞争解释，独立行为目标的reward shaping后置。尚未冻结损失或启动新算法。
+新增[六算法配置与曲线核对](results/ALGORITHM_CURVE_AUDIT.md)、[阶段差异的竞争解释](design/STAGEWISE_QUESTIONS.md)和[下一轮Pro提示词](prompts/PRO_ALGORITHM_NEXT.md)。研究者最新选择是[以DAPO为工作基线，优先推导中间信用](design/CREDIT_ASSIGNMENT_FOCUS.md)：让尚未答对但有可测视觉进展的探索获得有依据的信号。能力／状态表示保留为竞争解释，独立行为目标的reward shaping后置。该段为PO实施前的讨论状态；最新PO阶段性记录见上方。
 
 ![验证曲线与生成成本](figures/validation_curves.png)
 
@@ -18,7 +26,7 @@
 - 每个条件E1为552题 × 4次采样，统一终答评分；E1有数据交叉，**不是独立盲测**。
 - 12题 × 8方法 = 96条定向逐图审查，保留未判定项和重建限制；原图/完整题面不公开，不能把文字记录当本次网页模型的亲眼验图。
 - 新增SFT→RL、GRPO→其他方法、RLOO control→decision的同题得失；完整题号、分母、脚本都在库内。
-- 所有既有训练与E1已结束。本仓库没有调度训练、后台监控或自动执行Pro建议。
+- 旧baseline与v53训练及E1已结束；新PO训练中断，最终评测未完成。本仓库没有调度训练、后台监控或自动执行Pro建议。
 
 ## 阅读入口
 
