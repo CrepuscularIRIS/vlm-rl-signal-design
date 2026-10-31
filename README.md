@@ -1,22 +1,28 @@
 # VLM RL Signal Design
 
-**算法／建模讨论的证据入口。** 围绕多轮视觉裁图模型，先比较实际成败和过程证据，再讨论 advantage、credit assignment 与必要时的 reward shaping。这个仓库保存截至 **2026-10-30（America/New_York）** 的实验快照、匿名导师要求、文献阅读和待验证理解，不宣称已经找到统一瓶颈或新方法。
+**算法／建模讨论的证据入口。** 围绕多轮视觉裁图模型，先比较实际成败和过程证据，再讨论 advantage、credit assignment 与必要时的 reward shaping。这个仓库保存截至 **2026-10-31（America/New_York）** 的实验快照、匿名导师要求、文献阅读和待验证理解，不宣称已经找到统一瓶颈或新方法。
 
 面向研究者及通过 GitHub MCP 访问的网页 Pro。先读 [START_HERE](START_HERE.md)；可直接复制 [Pro 开场提示词](prompts/PRO_START.md)。
 
 讨论按轮推进：先现象与竞争解释，再明确候选gap，随后检查组件必要性、推导最小改动。第一轮不要求完整算法；“多个问题交织”与“算法可能臃肿”都保留为待检验判断。见 [讨论顺序](design/DISCUSSION.md)。
 
-## PO阶段性结果审查（2026-10-30晚）
+## PO最终32步结果（2026-10-31）
 
-新执行的PO两方法训练发生内存中断：SP完成20/32、CA23/32；双方最后完整保存20步。**没有PO最终E1分数**，不能与旧32步baseline混写。已整理真实训练曲线、局部信号/成本、3题6条训练分叉逐图记录及仍待回答的问题。
+两组已从完整step20恢复至32步并exit0；最终开发验证SP .6209、CA .5995，**不是E1**。固定最终32步E1各552题×4，原评分器与池/协议hash核验通过：SP 1410/2208=.6386，CA 1445/2208=.6544，对照DAPO 1465/2208=.6635。相对DAPO，SP新增214/失去269，CA新增223/失去243；不作因果归因。E1不是独立盲测，等步数不是等计算。
 
-[PO阶段报告](results/po_review_20261030/REPORT.md) · [6条审查](results/po_review_20261030/audit_findings.jsonl) · [数值与SHA](results/po_review_20261030/PROVENANCE.json)
+[最终报告与多源/裁图分层](results/po_final32_20261031/REPORT.md) · [24条逐图审查](results/po_final32_20261031/audit_findings.jsonl) · [验收与SHA](results/po_final32_20261031/PROVENANCE.json)。四来源各三题×两组已审24条，原14条训练审查独立；病理与部分小目标保留未判定。全部4416条模型轨迹已脱敏导出到同目录PO-SP-32/PO-CA-32.jsonl.gz。原图与题面不公开。
 
-![当前算法曲线对照](results/po_review_20261030/algorithm_comparison.png)
+![七方法训练与开发验证曲线](results/po_final32_20261031/algorithm_comparison.png)
+
+![固定E1性能与成本](results/po_final32_20261031/performance_cost.png)
+
+明确观察包括：裁图排除目标却仍引用、声称读到不存在的数字、货架/人物身份转移，以及为匹配选项更换算式。也有UNCLEAR拒答实例，依既定评分计0。定向样本不外推发生率；不能由E1错答反推训练advantage或梯度。下一步仍需用户讨论具体瓶颈，不自动新建模。
+
+历史中断与14条训练审查见[旧阶段报告](results/po_review_20261030/REPORT.md)，不混入本轮24条E1审查。
 
 ## 最新更新：优先推导credit assignment
 
-新增[六算法配置与曲线核对](results/ALGORITHM_CURVE_AUDIT.md)、[阶段差异的竞争解释](design/STAGEWISE_QUESTIONS.md)和[下一轮Pro提示词](prompts/PRO_ALGORITHM_NEXT.md)。研究者最新选择是[以DAPO为工作基线，优先推导中间信用](design/CREDIT_ASSIGNMENT_FOCUS.md)：让尚未答对但有可测视觉进展的探索获得有依据的信号。能力／状态表示保留为竞争解释，独立行为目标的reward shaping后置。该段为PO实施前的讨论状态；最新PO阶段性记录见上方。
+新增[六算法配置与曲线核对](results/ALGORITHM_CURVE_AUDIT.md)、[阶段差异的竞争解释](design/STAGEWISE_QUESTIONS.md)和[下一轮Pro提示词](prompts/PRO_ALGORITHM_NEXT.md)。研究者最新选择是[以DAPO为工作基线，优先推导中间信用](design/CREDIT_ASSIGNMENT_FOCUS.md)：让尚未答对但有可测视觉进展的探索获得有依据的信号。能力／状态表示保留为竞争解释，独立行为目标的reward shaping后置。该段为PO实施前的讨论状态；最新PO最终结果见上方。
 
 ![验证曲线与生成成本](figures/validation_curves.png)
 
@@ -26,7 +32,7 @@
 - 每个条件E1为552题 × 4次采样，统一终答评分；E1有数据交叉，**不是独立盲测**。
 - 12题 × 8方法 = 96条定向逐图审查，保留未判定项和重建限制；原图/完整题面不公开，不能把文字记录当本次网页模型的亲眼验图。
 - 新增SFT→RL、GRPO→其他方法、RLOO control→decision的同题得失；完整题号、分母、脚本都在库内。
-- 旧baseline与v53训练及E1已结束；新PO训练中断，最终评测未完成。本仓库没有调度训练、后台监控或自动执行Pro建议。
+- 旧baseline与v53训练及E1已结束；新PO两组32步及E1已完成。本仓库没有调度训练、后台监控或自动执行Pro建议。
 
 ## 阅读入口
 
@@ -63,4 +69,4 @@
 上游数据与公开实验代码固定于[实验仓库2c5155d](https://github.com/CrepuscularIRIS/vlm-caption-trajectories/tree/2c5155d7e629e6eadb043bb8c751035f9132fca9)。本仓库专门用于建模推导，包含公开数据快照与新的同题分析；不会替代或修改上游结果。公开范围见 [RIGHTS](RIGHTS.md)。
 
 
-2026-10-31更新：PO已获准从完整step20恢复至累计32步，各双卡串行。当前图比较GRPO/GSPO/DAPO/GiGPO/RLOO control/PO-SP/PO-CA，不展示RLOO+Decision；历史证据保留。PO最终E1待训练完成。
+2026-10-31更新：PO已获准从完整step20恢复至累计32步，各双卡串行。当前图比较GRPO/GSPO/DAPO/GiGPO/RLOO control/PO-SP/PO-CA，不展示RLOO+Decision；历史证据保留。该恢复说明为历史安排；最终32步训练与E1已完成，见顶部。
