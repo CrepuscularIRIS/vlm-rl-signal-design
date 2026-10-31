@@ -1,0 +1,31 @@
+{
+  "published_at": "2026-10-31T10:51:52.738956-04:00",
+  "scope": "Existing E1 outputs and formal steps 1-20; no new training or inference",
+  "reviewed_e1_count": 18,
+  "new_vs_prior_PO24": 12,
+  "rechecked_vs_prior_PO24": 6,
+  "source_export_hashes": {
+    "GRPO": "959279f5cf30c09c67f26afbc13675e98a19c22745502a525afb2ffea1963524",
+    "GSPO": "7dddea9f57fd90de52d722ce77a08ceb3a9c5c73ab507a1c16dbc08e4e1c2f01",
+    "DAPO": "d54a2987c35180cee328710299231e5cf25cd43a6140df52943c137f4f655a2a",
+    "GiGPO": "6cb387ae64742e5f87d4a14a9dda03c5099c1cc2f368098a4a82d32cbfb1b82c",
+    "RLOO": "9169fe10c2696f499eb5f28477681117359398e655089c4d7af52d02df317291",
+    "SP": "404fdacef0c6068e2e90c149536edc85dbb1619f1b681148fb85bbf2e3403305",
+    "CA": "06f5731132e74b0209a7b785c9726b0826469153d29f2ab1a55a45f4856f0afd"
+  },
+  "source_audit_sha256": "636c27ddce386a8376bcc092a6b6ae5e54b7a3a82b47a9877a5fb63cbefd3b50",
+  "source_local_trace_sha256": [
+    "3965a02ad12634dbd3d4cc6d9225ea5055cbe7b89a51dca52e7379e2026d10a2",
+    "3cc2960b586903b5bf3915f6f01e9ee402e0ba258f9ae6d9f202067f9bcf2b57",
+    "807071153e407f58a67d5a76a00e08a96ed3c75e54c9cb14ed9f528e5e227f7c",
+    "3644e2f6651206e0a779b5c2038c341b87569b743ab0b69e4169015a9ec5c5b0"
+  ],
+  "export_notes": "Model quotes, view hashes, scores and rounds preserved; editorial conclusions removed from observation text. Original images, full questions and machine paths excluded.",
+  "artifact_sha256": {
+    "RESULTS.md": "1d13f4f658a13bb4063c3ea03181b0c20ef9729792d89de7069487692085eaf2",
+    "paired_crop_outcomes.csv": "b2d85affda26fd57e0e8eb2299f397f91683f34189bff0eec551bc77a3c23f89",
+    "credit_first20_summary.json": "233b27292fa156fe747a981f616ff1e1a94cebafb09d009a1cabeed1ae23b218",
+    "audit_findings.jsonl": "6144e8b1ab4d95cc1eca235dcf5c5ca5e63e48fac7070c6bea55527a82c6acd4",
+    "AUDIT_PROGRESS.json": "93d8a56535840ebb33c89b4436b928dff2cc424d76d11d99f0fa447f76fc8c6c"
+  }
+}

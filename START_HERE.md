@@ -1,10 +1,12 @@
 # 从这里开始
 
+**最新入口：**先读[给导师的阶段汇报](context/MENTOR_UPDATE_20261031.md)：本轮结果、失败实例、此前三个核心问题，以及研究者当前的猜测与打算。详细记录见[18条轨迹对照](results/po_diagnostic_20261031/RESULTS.md)。该说明是待发送草稿。
+
 本轮先读[PO最终32步报告](results/po_final32_20261031/REPORT.md)与[24条审查](results/po_final32_20261031/audit_findings.jsonl)。两组E1已完成，勿把历史中断报告当当前状态；没有新算法设计授权。
 
 请先确认你确实通过GitHub工具读到了文件，而不是仅凭仓库名推理。GitHub MCP不同实现支持不同文件大小；优先读取下面的Markdown和CSV，不必一次解压25份轨迹。
 
-最新讨论先读[信用分配研究选择](design/CREDIT_ASSIGNMENT_FOCUS.md)，再读[六算法曲线核对](results/ALGORITHM_CURVE_AUDIT.md)与[阶段问题](design/STAGEWISE_QUESTIONS.md)，使用[更新提示词](prompts/PRO_ALGORITHM_NEXT.md)。旧开场提示词保留作通用入口。
+PO实施前的历史推导见[信用分配研究选择](design/CREDIT_ASSIGNMENT_FOCUS.md)，再读[六算法曲线核对](results/ALGORITHM_CURVE_AUDIT.md)与[阶段问题](design/STAGEWISE_QUESTIONS.md)，使用[更新提示词](prompts/PRO_ALGORITHM_NEXT.md)。旧开场提示词保留作通用入口。
 
 ## 建议第一轮读取（按顺序）
 

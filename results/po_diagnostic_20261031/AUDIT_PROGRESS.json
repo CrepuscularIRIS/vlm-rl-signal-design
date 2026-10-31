@@ -1,0 +1,27 @@
+{
+  "checked_at": "2026-10-31T10:37:36.533545-04:00",
+  "e1_visually_reviewed_this_pass": 18,
+  "unique_images": 4,
+  "uid_sample_pairs": 6,
+  "methods": [
+    "GRPO",
+    "GSPO",
+    "DAPO",
+    "SP",
+    "CA"
+  ],
+  "overlap_with_prior_PO24": 6,
+  "additional_vs_prior_PO24": 12,
+  "other_exported_records_not_visually_reviewed_this_pass": 12,
+  "training_local_reviewed": {
+    "method": "CA",
+    "step": 9,
+    "qid": "mme_3887",
+    "anchor_round": 2,
+    "trace_indices": [
+      0,
+      6
+    ]
+  },
+  "no_new_inference": true
+}

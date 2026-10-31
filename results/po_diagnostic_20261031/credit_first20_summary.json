@@ -1,0 +1,31 @@
+{
+  "scope": "formal1 completed steps 1-20, 160 anchors per arm; fixed split 0,1 vs 2,3 is sensitivity only, not independent replication or uncertainty estimate",
+  "counts": {
+    "sp": {
+      "anchors": 160,
+      "nonzero": 70,
+      "terminal_candidates": 120,
+      "candidates": 320
+    },
+    "ca": {
+      "anchors": 160,
+      "nonzero": 112,
+      "terminal_candidates": 79,
+      "candidates": 160,
+      "split_eligible": 158,
+      "caption_nonzero": 96,
+      "caption_abs_quarter": 59,
+      "caption_halves_sign_disagree": 71,
+      "caption_halves_strict_opposite": 4,
+      "caption_positive": 45,
+      "caption_negative": 51,
+      "action_nonzero": 47,
+      "action_abs_quarter": 32,
+      "action_halves_sign_disagree": 43,
+      "action_halves_strict_opposite": 8,
+      "action_positive": 30,
+      "action_negative": 17,
+      "fallback_anchors": 2
+    }
+  }
+}

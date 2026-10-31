@@ -1,0 +1,16 @@
+source,ca_crops,n,both_correct,gained,lost,both_wrong,dapo_total_crops,ca_total_crops
+all,fewer,478,218,71,58,131,1691,778
+all,same,1321,793,109,118,301,2140,2140
+all,more,409,211,43,67,88,789,1513
+mme_realworld,fewer,281,153,42,28,58,980,466
+mme_realworld,same,815,494,67,76,178,1313,1313
+mme_realworld,more,260,144,27,38,51,488,954
+mmmu_pro,fewer,60,14,4,10,32,158,42
+mmmu_pro,same,76,13,7,12,44,120,120
+mmmu_pro,more,20,4,1,2,13,38,66
+vstar,fewer,67,40,9,10,8,250,123
+vstar,same,305,263,7,12,23,426,426
+vstar,more,76,51,6,15,4,136,274
+worldbench,fewer,70,11,16,10,33,303,147
+worldbench,same,125,23,28,18,56,281,281
+worldbench,more,53,12,9,12,20,127,219
