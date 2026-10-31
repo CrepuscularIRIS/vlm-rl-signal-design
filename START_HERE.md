@@ -1,6 +1,6 @@
 # 从这里开始
 
-**最新入口：**先读[给导师的阶段汇报](context/MENTOR_UPDATE_20261031.md)：本轮结果、失败实例、此前三个核心问题，以及研究者当前的猜测与打算。详细记录见[18条轨迹对照](results/po_diagnostic_20261031/RESULTS.md)。该说明是待发送草稿。
+**最新入口：**先读[给导师的阶段汇报](context/MENTOR_UPDATE_20261031.md)：本轮结果、失败实例、此前三个核心问题，以及研究者当前的猜测与打算。详细记录见[18条轨迹对照](results/po_diagnostic_20261031/RESULTS.md)。两种方法的公式与参数见[SP／CA设计说明](design/PO_METHODS.md)。该说明是待发送草稿。
 
 本轮先读[PO最终32步报告](results/po_final32_20261031/REPORT.md)与[24条审查](results/po_final32_20261031/audit_findings.jsonl)。两组E1已完成，勿把历史中断报告当当前状态；没有新算法设计授权。
 

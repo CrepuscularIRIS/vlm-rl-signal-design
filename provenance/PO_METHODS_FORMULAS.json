@@ -1,0 +1,34 @@
+{
+  "checked_at": "2026-10-31T10:59:17.542423-04:00",
+  "scope": "Read-only verification of the implemented SP and CA formulas; no new experiment",
+  "sources": {
+    "po_core.py": {
+      "sha256": "101cc01babf20d47be8ea21d499d7886352055cd10cbe21a0b4616f64867e4b7",
+      "matches_frozen_PO_SOURCE": true
+    },
+    "po_rollout.py": {
+      "sha256": "ac862d065ffbd52920860d398d0f013becd16ab3a96d232997063cdf81532b8e",
+      "matches_frozen_PO_SOURCE": true
+    },
+    "po_integration.py": {
+      "sha256": "8b9b27390620e116297ac60138d08319bb90caad1d2cc6da6a04266e2247cd83",
+      "matches_frozen_PO_SOURCE": true
+    },
+    "run.sh": {
+      "sha256": "9fb327a2c416f751e058c8a07d68fdc8f19003cb67b37e76615a55ca54675639",
+      "matches_frozen_PO_SOURCE": true
+    },
+    "core_algos.py": {
+      "sha256": "871cadc71a8b04295ebdc8ff516ba242697e49cb27680920d4870a8431023d71",
+      "identity": "Read from the EasyR1 runtime used by the launcher; not a member of the PO SOURCE manifest"
+    }
+  },
+  "formula_mapping": {
+    "SP": "po_core.loo; po_rollout.make_local(sp)",
+    "CA": "po_core.ca_adv; po_core.caption_boundary; po_rollout.make_local(ca)",
+    "anchor_selection": "po_core.select_anchors; po_integration.install/make_batch",
+    "loss_and_token_normalization": "po_integration.aux_backward; core_algos.compute_policy_loss",
+    "main_advantage": "core_algos.compute_grpo_outcome_advantage",
+    "training_settings": "run.sh; archived PLAN and final run receipts"
+  }
+}

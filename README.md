@@ -8,7 +8,7 @@
 
 ## 给导师的最新说明（2026-10-31）
 
-[阶段汇报：结果、失败实例与我们的猜测](context/MENTOR_UPDATE_20261031.md) · [本轮18条轨迹对照与局部信用记录](results/po_diagnostic_20261031/RESULTS.md)。
+[阶段汇报：结果、失败实例与我们的猜测](context/MENTOR_UPDATE_20261031.md) · [本轮18条轨迹对照与局部信用记录](results/po_diagnostic_20261031/RESULTS.md) · [SP／CA设计与实跑公式](design/PO_METHODS.md)。
 
 此前提出的三个核心问题——**信用分配、模型视觉／多模态能力与状态表示、奖励目标不完整**——已保存在[原推导](design/CREDIT_ASSIGNMENT_FOCUS.md)。最新说明沿用这条思路，分别记录结果与研究者的猜测，供向导师请教；尚未发送。
 
