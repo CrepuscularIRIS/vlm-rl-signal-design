@@ -12,7 +12,7 @@
 
 [PO阶段报告](results/po_review_20261030/REPORT.md) · [6条审查](results/po_review_20261030/audit_findings.jsonl) · [数值与SHA](results/po_review_20261030/PROVENANCE.json)
 
-![PO训练阶段曲线](results/po_review_20261030/training_curves.png)
+![当前算法曲线对照](results/po_review_20261030/algorithm_comparison.png)
 
 ## 最新更新：优先推导credit assignment
 
@@ -61,3 +61,6 @@
 ![八方法结果与成本](figures/eight_method_comparison.png)
 
 上游数据与公开实验代码固定于[实验仓库2c5155d](https://github.com/CrepuscularIRIS/vlm-caption-trajectories/tree/2c5155d7e629e6eadb043bb8c751035f9132fca9)。本仓库专门用于建模推导，包含公开数据快照与新的同题分析；不会替代或修改上游结果。公开范围见 [RIGHTS](RIGHTS.md)。
+
+
+2026-10-31更新：PO已获准从完整step20恢复至累计32步，各双卡串行。当前图比较GRPO/GSPO/DAPO/GiGPO/RLOO control/PO-SP/PO-CA，不展示RLOO+Decision；历史证据保留。PO最终E1待训练完成。
