@@ -1,8 +1,8 @@
-"""Validate RL-pool evidence annotations (ANNOTATION_SPEC v1 §6) and optionally render box overlays.
+"""Validate tiered evidence annotations (ANNOTATION_SPEC v2 §6) and render box overlays.
 
 usage:
-  python3 validate_annotations.py MANIFEST.jsonl ANNOT.jsonl [ANNOT2.jsonl ...]        # report errors / warnings
-  python3 validate_annotations.py --render MANIFEST.jsonl ANNOT.jsonl IMAGE_ROOT OUT_DIR  # draw boxes for spot checks
+  python3 validate_annotations.py MANIFEST.jsonl OUT_DIR            # OUT_DIR holds L0/ L1/ L2/ *.jsonl
+  python3 validate_annotations.py --render MANIFEST.jsonl OUT_DIR IMAGE_ROOT OVERLAY_DIR [uid ...]
   python3 validate_annotations.py --selftest
 """
 import json
@@ -12,8 +12,14 @@ from pathlib import Path
 
 UNITS = {"single_box", "multi_set", "keyed_set", "pair_relation", "multi_compare", "ordered_chain",
          "region_global", "absent", "unanswerable"}
-REASONS = {"needs_temporal", "needs_external_knowledge", "evidence_not_found", "ambiguous_question"}
+REQUIRED_TIER = {"unanswerable": 0, "absent": 1, "region_global": 1, "single_box": 2, "multi_set": 2,
+                 "keyed_set": 2, "pair_relation": 2, "multi_compare": 2, "ordered_chain": 2}
+ANSWERABILITY = {"answerable", "target_absent", "visually_insufficient", "question_unanswerable"}
+REASONS = {"needs_temporal", "needs_external_knowledge", "evidence_not_found", "ambiguous_question",
+           "low_resolution"}
 GT = {"agree", "disagree", "cannot_tell"}
+BINDING_TYPES = {"table", "chart", "entity", "relation", "count", "compare", "chain"}
+MULTI = {"multi_set", "keyed_set", "pair_relation", "multi_compare", "ordered_chain"}
 
 
 def bad_box(b) -> bool:
@@ -31,122 +37,223 @@ def iou(a, b) -> float:
     return i / (area(a) + area(b) - i) if i else 0.0
 
 
-def check(rec: dict, item: dict | None) -> tuple[list[str], list[str]]:
-    e, w = [], []
-    if item is None:
-        return ["uid_not_in_manifest"], w
-    u = rec.get("unit")
+def check_l0(r: dict) -> list[str]:
+    e = []
+    u, a = r.get("unit"), r.get("answerability")
     if u not in UNITS:
-        return [f"bad_unit:{u}"], w
-    boxes = rec.get("boxes") or []
-    all_b = [x.get("bbox") for x in boxes]
+        return [f"L0_bad_unit:{u}"]
+    if a not in ANSWERABILITY:
+        e.append(f"L0_bad_answerability:{a}")
+    elif (u == "absent") != (a == "target_absent") or (u == "unanswerable") != (a in {"visually_insufficient", "question_unanswerable"}):
+        e.append("L0_unit_answerability_mismatch")
+    if u == "unanswerable" and r.get("unanswerable_reason") not in REASONS:
+        e.append("L0_unanswerable_reason")
+    if r.get("required_tier") != REQUIRED_TIER[u]:
+        e.append(f"L0_required_tier:{r.get('required_tier')}!={REQUIRED_TIER[u]}")
+    if r.get("gt_check") not in GT:
+        e.append("L0_bad_gt_check")
+    elif r["gt_check"] != "agree" and not r.get("gt_note"):
+        e.append("L0_gt_note_missing")
+    return e
+
+
+def all_boxes(l1: dict) -> list[dict]:
+    out = list(l1.get("boxes") or [])
     for k in ("negatives", "checked_candidates", "key_parts"):
-        all_b += [x.get("bbox") for x in rec.get(k) or []]
-    all_b += list(rec.get("search_scope") or [])
-    for b in all_b:
+        out += list(l1.get(k) or [])
+    return out
+
+
+def check_l1(r: dict, unit: str) -> tuple[list[str], list[str]]:
+    e, w = [], []
+    boxes = r.get("boxes") or []
+    objs = all_boxes(r)
+    for x in objs:
+        if bad_box(x.get("bbox")):
+            e.append(f"L1_bad_bbox:{x.get('id')}")
+    for b in r.get("search_scope") or []:
         if bad_box(b):
-            e.append(f"bad_bbox:{b}")
+            e.append("L1_bad_search_scope")
     if e:
         return e, w
-    for x in boxes:
-        if u != "region_global" and area(x["bbox"]) > 0.9 and not rec.get("note"):
-            e.append("mega_box_without_note")
+    ids = [x.get("id") for x in objs]
+    if None in ids or len(ids) != len(set(ids)):
+        e.append("L1_box_ids")
+    if unit != "region_global" and any(area(x["bbox"]) > 0.9 for x in boxes) and not r.get("note"):
+        e.append("L1_mega_box_without_note")
     roles = [x.get("role") for x in boxes]
     need = {
-        "single_box": len(boxes) == 1,
+        "single_box": len(boxes) >= 1,
         "multi_set": len(boxes) >= 1,
         "keyed_set": len(boxes) >= 2 and len(set(roles)) >= 2,
-        "pair_relation": sorted(roles) == ["reference", "subject"] and bool(rec.get("relation")),
-        "multi_compare": len(boxes) >= 2,
-        "ordered_chain": len(boxes) >= 2 or len(rec.get("points") or []) >= 2,
+        "pair_relation": "subject" in roles and "reference" in roles,
+        "multi_compare": roles.count("candidate") >= 2,
+        "ordered_chain": len(boxes) >= 2 or len(r.get("points") or []) >= 2,
         "region_global": roles.count("main_figure") == 1,
-        "absent": not boxes and bool(rec.get("search_scope")),
-        "unanswerable": not boxes and rec.get("unanswerable_reason") in REASONS,
+        "absent": not boxes and bool(r.get("search_scope")),
+        "unanswerable": True,
     }
-    if not need[u]:
-        e.append(f"unit_fields:{u}")
-    if rec.get("gt_check") not in GT:
-        e.append("bad_gt_check")
-    elif rec["gt_check"] != "agree" and not rec.get("gt_note"):
-        e.append("gt_note_missing")
-    # consistency warnings
-    if u == "multi_set" and re.fullmatch(r"\s*\d+\s*\.?\s*", item.get("gt_option", "")):
-        if len(boxes) != int(item["gt_option"].strip(" .")):
-            w.append(f"count_mismatch:{len(boxes)}vs{item['gt_option'].strip()}")
-    if u == "pair_relation" and not e:
-        s = next(x["bbox"] for x in boxes if x["role"] == "subject")
-        r = next(x["bbox"] for x in boxes if x["role"] == "reference")
-        dx, dy = (s[0] + s[2] - r[0] - r[2]) / 2, (s[1] + s[3] - r[1] - r[3]) / 2
-        rel = rec["relation"]
-        for word, ok in (("left_of", dx < 0), ("right_of", dx > 0), ("above", dy < 0), ("below", dy > 0)):
-            if word in rel and not ok:
-                w.append(f"relation_geometry:{word}")
+    if not need[unit]:
+        e.append(f"L1_unit_fields:{unit}")
     for i in range(len(boxes)):
         for j in range(i + 1, len(boxes)):
             if iou(boxes[i]["bbox"], boxes[j]["bbox"]) > 0.9:
-                w.append(f"duplicate_boxes:{i},{j}")
+                w.append(f"L1_duplicate_boxes:{boxes[i]['id']},{boxes[j]['id']}")
     return e, w
 
 
-def load(p):
-    return [json.loads(x) for x in open(p) if x.strip()]
+def check_l2(r: dict, unit: str, l1: dict, gt_option: str) -> tuple[list[str], list[str]]:
+    e, w = [], []
+    known = {x["id"]: x for x in all_boxes(l1)}
+    refs = list((r.get("values") or {}).keys())
+    sets = r.get("evidence_sets") or []
+    if not sets:
+        e.append("L2_no_evidence_sets")
+    for s in sets:
+        refs += list(s)
+    binds = r.get("bindings") or []
+    if unit in MULTI and not binds:
+        e.append("L2_no_bindings")
+    for b in binds:
+        t = b.get("type")
+        if t not in BINDING_TYPES:
+            e.append(f"L2_bad_binding_type:{t}")
+            continue
+        refs += list(b.get("support") or [])
+        if t == "table" and not (b.get("row_key") and b.get("col_path") and b.get("value")):
+            e.append("L2_table_binding_incomplete")
+        if t == "count":
+            ids = b.get("instance_ids") or []
+            refs += ids
+            if b.get("total") is not None and str(b["total"]).strip() != str(len(ids)):
+                w.append(f"L2_count_total:{b['total']}vs{len(ids)}")
+            if re.fullmatch(r"\s*\d+\s*\.?\s*", gt_option or "") and str(b.get("total")).strip() != gt_option.strip(" ."):
+                w.append(f"L2_count_vs_gt:{b.get('total')}vs{gt_option.strip()}")
+        if t == "relation":
+            refs += [b.get("subject"), b.get("reference")]
+            if b.get("computable_from_boxes") and b.get("subject") in known and b.get("reference") in known:
+                s, q = known[b["subject"]]["bbox"], known[b["reference"]]["bbox"]
+                dx, dy = (s[0] + s[2] - q[0] - q[2]) / 2, (s[1] + s[3] - q[1] - q[3]) / 2
+                rel = str(b.get("relation"))
+                for word, ok in (("left", dx < 0), ("right", dx > 0), ("above", dy < 0), ("below", dy > 0)):
+                    if word in rel and not ok:
+                        w.append(f"L2_relation_geometry:{word}")
+        if t == "entity":
+            refs.append(b.get("candidate"))
+        if t in ("compare", "chain"):
+            refs += list(b.get("candidates") or b.get("steps") or [])
+    missing = sorted({x for x in refs if x not in known})
+    if missing:
+        e.append(f"L2_unknown_ids:{missing}")
+    negs = {x["id"] for x in l1.get("negatives") or []}
+    covered = {d.get("negative") for d in r.get("distinguishing_condition") or []}
+    if negs - covered:
+        w.append(f"L2_negative_without_condition:{sorted(negs - covered)}")
+    return e, w
 
 
-def validate(manifest: str, files: list[str]) -> int:
-    items = {r["uid"]: r for r in load(manifest)}
-    seen, n_err = set(), 0
-    for f in files:
-        for rec in load(f):
-            uid = rec.get("uid")
-            e, w = check(rec, items.get(uid))
-            if uid in seen:
-                e.append("duplicate_uid")
-            seen.add(uid)
-            n_err += bool(e)
-            if e or w:
-                print(json.dumps({"uid": uid, "file": f, "errors": e, "warnings": w}, ensure_ascii=False))
-    print(f"# records={len(seen)} with_errors={n_err} remaining={len(set(items) - seen)}")
-    return 1 if n_err else 0
+def load_dir(d: Path) -> tuple[dict, list[str]]:
+    recs, dup = {}, []
+    for f in sorted(d.glob("*.jsonl")) if d.exists() else []:
+        for line in open(f):
+            if line.strip():
+                r = json.loads(line)
+                if r.get("uid") in recs:
+                    dup.append(r.get("uid"))
+                recs[r.get("uid")] = r
+    return recs, dup
 
 
-def render(manifest: str, annot: str, root: str, out: str) -> None:
+def validate(manifest: str, out_dir: str, quiet: bool = False) -> dict:
+    items = {r["uid"]: r for r in map(json.loads, open(manifest)) if r}
+    L = [load_dir(Path(out_dir) / f"L{k}") for k in range(3)]
+    stats = {"items": len(items), "L0": len(L[0][0]), "L1": len(L[1][0]), "L2": len(L[2][0]),
+             "complete": 0, "with_errors": 0}
+    for k in range(3):
+        for uid in L[k][1]:
+            print(json.dumps({"uid": uid, "errors": [f"L{k}_duplicate_uid"]})) if not quiet else None
+    for uid in sorted(set().union(*(set(x[0]) for x in L))):
+        e, w = [], []
+        if uid not in items:
+            e.append("uid_not_in_manifest")
+        l0, l1, l2 = (L[k][0].get(uid) for k in range(3))
+        if l0 is None:
+            e.append("L0_missing")
+        else:
+            e += check_l0(l0)
+        unit = (l0 or {}).get("unit")
+        if unit in UNITS and not e:
+            need = REQUIRED_TIER[unit]
+            done = max([k for k, x in enumerate((l0, l1, l2)) if x is not None])
+            if l1 is not None:
+                a, b = check_l1(l1, unit)
+                e += a
+                w += b
+            if l2 is not None:
+                if l1 is None:
+                    e.append("L2_without_L1")
+                else:
+                    a, b = check_l2(l2, unit, l1, items.get(uid, {}).get("gt_option", ""))
+                    e += a
+                    w += b
+            complete = done >= need and not e
+            stats["complete"] += complete
+        stats["with_errors"] += bool(e)
+        if (e or w) and not quiet:
+            print(json.dumps({"uid": uid, "errors": e, "warnings": w}, ensure_ascii=False))
+    if not quiet:
+        print("# " + json.dumps(stats))
+    return stats
+
+
+def render(manifest: str, out_dir: str, root: str, overlay: str, uids: list[str]) -> None:
     from PIL import Image, ImageDraw
-    items = {r["uid"]: r for r in load(manifest)}
-    Path(out).mkdir(parents=True, exist_ok=True)
+    items = {r["uid"]: r for r in map(json.loads, open(manifest))}
+    l1s, _ = load_dir(Path(out_dir) / "L1")
+    Path(overlay).mkdir(parents=True, exist_ok=True)
     colors = ["#e6194b", "#3cb44b", "#4363d8", "#f58231", "#911eb4", "#42d4f4", "#f032e6", "#9a6324"]
-    for rec in load(annot):
-        it = items[rec["uid"]]
+    for uid in uids or list(l1s):
+        r, it = l1s[uid], items[uid]
         im = Image.open(Path(root) / it["image_rel"]).convert("RGB")
         W, H = im.size
         d = ImageDraw.Draw(im)
         lw = max(2, round(max(W, H) / 400))
-        layers = [(x, colors[i % 8]) for i, x in enumerate(rec.get("boxes") or [])]
-        layers += [(x, "#888888") for x in (rec.get("negatives") or []) + (rec.get("checked_candidates") or [])]
+        layers = [(x, colors[i % 8]) for i, x in enumerate(r.get("boxes") or [])]
+        layers += [(x, "#888888") for x in (r.get("negatives") or []) + (r.get("checked_candidates") or [])]
+        layers += [(x, "#00aaaa") for x in r.get("key_parts") or []]
         for x, c in layers:
             b = x["bbox"]
             d.rectangle([b[0] * W, b[1] * H, b[2] * W, b[3] * H], outline=c, width=lw)
-            d.text((b[0] * W + lw, b[1] * H + lw), f"{x.get('role', 'neg')}:{x.get('label', '')}"[:40], fill=c)
-        for b in rec.get("search_scope") or []:
+            d.text((b[0] * W + lw, b[1] * H + lw), f"{x.get('id')}:{x.get('role', 'neg')}"[:30], fill=c)
+        for b in r.get("search_scope") or []:
             d.rectangle([b[0] * W, b[1] * H, b[2] * W, b[3] * H], outline="#000000", width=lw)
         im.thumbnail((1600, 1600))
-        im.save(Path(out) / f"{rec['uid']}.jpg", quality=88)
+        im.save(Path(overlay) / f"{uid}.jpg", quality=88)
 
 
 def selftest() -> None:
-    item = {"uid": "u", "gt_option": "3"}
-    ok = {"uid": "u", "unit": "multi_set", "gt_check": "agree",
-          "boxes": [{"role": "instance", "bbox": [0.1 * i, 0.1, 0.1 * i + 0.05, 0.2]} for i in range(3)]}
-    assert check(ok, item) == ([], [])
-    assert check(dict(ok, boxes=ok["boxes"][:2]), item)[1] == ["count_mismatch:2vs3"]
-    assert check(dict(ok, unit="single_box"), item)[0] == ["unit_fields:single_box"]
-    assert check(dict(ok, boxes=[{"role": "x", "bbox": [0.5, 0.1, 0.4, 0.2]}]), item)[0][0].startswith("bad_bbox")
-    rel = {"uid": "u", "unit": "pair_relation", "gt_check": "agree", "relation": "subject left_of reference",
-           "boxes": [{"role": "subject", "bbox": [0.6, 0, 0.7, 0.1]}, {"role": "reference", "bbox": [0.1, 0, 0.2, 0.1]}]}
-    assert check(rel, item)[1] == ["relation_geometry:left_of"]
-    ab = {"uid": "u", "unit": "absent", "gt_check": "disagree", "gt_note": "", "boxes": [], "search_scope": [[0, 0, 1, 1]]}
-    assert check(ab, item)[0] == ["gt_note_missing"]
-    big = {"uid": "u", "unit": "single_box", "gt_check": "agree", "boxes": [{"role": "target", "bbox": [0, 0, 1, 0.95]}]}
-    assert check(big, item)[0] == ["mega_box_without_note"]
+    import tempfile
+    t = Path(tempfile.mkdtemp())
+    (t / "m.jsonl").write_text(json.dumps({"uid": "u1", "gt_option": "2"}) + "\n" + json.dumps({"uid": "u2", "gt_option": "x"}) + "\n")
+    for k in range(3):
+        (t / "o" / f"L{k}").mkdir(parents=True)
+    l0 = lambda uid, unit, tier: {"uid": uid, "unit": unit, "answerability": "answerable", "required_tier": tier, "gt_check": "agree"}
+    (t / "o/L0/a.jsonl").write_text(json.dumps(l0("u1", "multi_set", 2)) + "\n" + json.dumps(l0("u2", "keyed_set", 2)) + "\n")
+    inst = [{"id": f"b{i}", "role": "instance", "bbox": [0.1 * i, 0.1, 0.1 * i + 0.05, 0.2]} for i in (1, 2, 3)]
+    tbl = [{"id": "b1", "role": "cell", "bbox": [0.5, 0.5, 0.6, 0.55]}, {"id": "b2", "role": "row_header", "bbox": [0.0, 0.5, 0.2, 0.55]}]
+    (t / "o/L1/a.jsonl").write_text(json.dumps({"uid": "u1", "boxes": inst}) + "\n" + json.dumps({"uid": "u2", "boxes": tbl,
+                                    "negatives": [{"id": "n1", "bbox": [0.62, 0.5, 0.7, 0.55]}]}) + "\n")
+    (t / "o/L2/a.jsonl").write_text(
+        json.dumps({"uid": "u1", "evidence_sets": [["b1", "b2", "b3"]], "bindings": [{"type": "count", "instance_ids": ["b1", "b2", "b3"], "total": 3, "support": []}]}) + "\n"
+        + json.dumps({"uid": "u2", "evidence_sets": [["b1", "b9"]], "bindings": [{"type": "table", "row_key": "r", "col_path": [], "value": "1", "support": ["b1"]}]}) + "\n")
+    s = validate(str(t / "m.jsonl"), str(t / "o"), quiet=True)
+    assert s == {"items": 2, "L0": 2, "L1": 2, "L2": 2, "complete": 1, "with_errors": 1}, s
+    l1 = {"boxes": inst}
+    assert check_l2({"evidence_sets": [["b1"]], "bindings": [{"type": "count", "instance_ids": ["b1", "b2", "b3"], "total": 3}]}, "multi_set", l1, "2")[1] == ["L2_count_vs_gt:3vs2"]
+    rel = {"boxes": [{"id": "s", "role": "subject", "bbox": [0.6, 0, 0.7, 0.1]}, {"id": "r", "role": "reference", "bbox": [0.1, 0, 0.2, 0.1]}]}
+    assert check_l2({"evidence_sets": [["s", "r"]], "bindings": [{"type": "relation", "subject": "s", "reference": "r", "relation": "left_of", "frame": "image", "computable_from_boxes": True}]}, "pair_relation", rel, "")[1] == ["L2_relation_geometry:left"]
+    assert check_l0({"unit": "absent", "answerability": "answerable", "required_tier": 1, "gt_check": "agree"}) == ["L0_unit_answerability_mismatch"]
+    assert check_l1({"boxes": [{"id": "a", "role": "target", "bbox": [0, 0, 1, 0.95]}]}, "single_box")[0] == ["L1_mega_box_without_note"]
     print("selftest ok")
 
 
@@ -155,6 +262,7 @@ if __name__ == "__main__":
     if a and a[0] == "--selftest":
         selftest()
     elif a and a[0] == "--render":
-        render(*a[1:5])
+        render(a[1], a[2], a[3], a[4], a[5:])
     else:
-        sys.exit(validate(a[0], a[1:]))
+        st = validate(a[0], a[1])
+        sys.exit(1 if st["with_errors"] else 0)
