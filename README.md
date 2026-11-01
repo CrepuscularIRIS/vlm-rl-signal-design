@@ -15,7 +15,8 @@
 | [A 路线方案](design/PRIMITIVES_ROUTE_A.md) | 目标、现有区域命中与行为统计、待验证的过程信号 |
 | [Visual Primitives 对照](design/VISUAL_PRIMITIVES_BRIDGE.md) | 论文方法与 caption 协议的对应、目标逼近／探索信号 |
 | [13 类 hint 与奖励](design/HINTS_AS_REWARD.md) | hint 覆盖、候选用法及逐类讨论 |
-| [RL 题池证据标注规范](design/ANNOTATION_SPEC.md) | 回答所需的视觉证据框、9 种标注单位、复核与校验；先试标已审查的 163 题 |
+| [A 路线设计 v1](design/ROUTE_A_DESIGN_V1.md) | 最终取舍：hint 先作为条件输入，用于探针与课程；证据状态审计 M_t=(F,D,U)；审计通过后再加过程信号；事件级信用分配后置 |
+| [证据标注规范 v2（分级）](design/ANNOTATION_SPEC.md) | L0 定性 / L1 证据框 / L2 转录值、绑定元组、充分证据组合；覆盖 RL 4,096 题与开发探针 1,399 题；先试标 163 题 |
 | [导师过程信号要求](context/MENTOR_20261031_PROCESS_SIGNAL.md) | 匿名技术整理；与已测结果分开记录 |
 
 DAPO-LOO 两组已按用户要求停止：L0 完整 24 步、L01 完整 28 步，未完成 32 步，未做 E1。checkpoint 和日志保留。下面的 Native Zoom 对照已经结束，监控已关闭。
