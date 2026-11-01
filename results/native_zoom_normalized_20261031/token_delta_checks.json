@@ -1,0 +1,97 @@
+{
+  "identical_turn_records": 2198,
+  "changed_count": 10,
+  "added_generation_total": 228741,
+  "changes": [
+    {
+      "uid": "test_Architecture_and_Engineering_250",
+      "sample_idx": 0,
+      "gen_added": 23034,
+      "same_previous_turns": true,
+      "last_text_prefix": true,
+      "both_length": true,
+      "new_gen": 31226
+    },
+    {
+      "uid": "test_Math_492",
+      "sample_idx": 2,
+      "gen_added": 22996,
+      "same_previous_turns": true,
+      "last_text_prefix": true,
+      "both_length": true,
+      "new_gen": 31188
+    },
+    {
+      "uid": "validation_Geography_1",
+      "sample_idx": 1,
+      "gen_added": 23079,
+      "same_previous_turns": true,
+      "last_text_prefix": true,
+      "both_length": true,
+      "new_gen": 31271
+    },
+    {
+      "uid": "validation_Geography_1",
+      "sample_idx": 3,
+      "gen_added": 23344,
+      "same_previous_turns": true,
+      "last_text_prefix": true,
+      "both_length": true,
+      "new_gen": 31536
+    },
+    {
+      "uid": "mme_17701",
+      "sample_idx": 0,
+      "gen_added": 23024,
+      "same_previous_turns": true,
+      "last_text_prefix": true,
+      "both_length": true,
+      "new_gen": 31216
+    },
+    {
+      "uid": "mme_8092",
+      "sample_idx": 2,
+      "gen_added": 22066,
+      "same_previous_turns": true,
+      "last_text_prefix": true,
+      "both_length": true,
+      "new_gen": 30258
+    },
+    {
+      "uid": "test_Electronics_135",
+      "sample_idx": 1,
+      "gen_added": 22949,
+      "same_previous_turns": true,
+      "last_text_prefix": true,
+      "both_length": true,
+      "new_gen": 31141
+    },
+    {
+      "uid": "test_Energy_and_Power_16",
+      "sample_idx": 0,
+      "gen_added": 22907,
+      "same_previous_turns": true,
+      "last_text_prefix": true,
+      "both_length": true,
+      "new_gen": 31099
+    },
+    {
+      "uid": "worldbench_441",
+      "sample_idx": 2,
+      "gen_added": 22330,
+      "same_previous_turns": true,
+      "last_text_prefix": true,
+      "both_length": true,
+      "new_gen": 30522
+    },
+    {
+      "uid": "mme_1151",
+      "sample_idx": 3,
+      "gen_added": 23012,
+      "same_previous_turns": true,
+      "last_text_prefix": true,
+      "both_length": true,
+      "new_gen": 31204
+    }
+  ]
+}

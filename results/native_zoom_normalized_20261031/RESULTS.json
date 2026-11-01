@@ -1,0 +1,117 @@
+{
+  "acceptance": "passed",
+  "summaries": {
+    "old": {
+      "file": "traj_B3_native.jsonl",
+      "n": 2208,
+      "acc": 0.3216,
+      "fmt": 0.4592,
+      "first": 0.9995,
+      "later": 4.5648,
+      "tokens": 14955.827,
+      "gen": 454.2188,
+      "truncated": 0.0023,
+      "error": 0.0018,
+      "by_source": {
+        "mme_realworld": 0.3046,
+        "mmmu_pro": 0.1603,
+        "vstar": 0.4933,
+        "worldbench": 0.2056
+      },
+      "correct": 710,
+      "end_counts": {
+        "crop_budget": 1173,
+        "answer": 1023,
+        "error": 4,
+        "truncated": 5,
+        "round_limit": 3
+      },
+      "output_sha256": "8965486afe2cac611b7aecb92c461e0a23fe23487be7a4e601016361b9eb6da1",
+      "normalization_calls": {
+        "not_logged": 12286
+      },
+      "mean_crops": 5.5643115942028984
+    },
+    "norm8": {
+      "file": "traj_B3_native_norm8_1031.jsonl",
+      "n": 2208,
+      "acc": 0.4488,
+      "fmt": 0.6798,
+      "first": 0.9995,
+      "later": 3.4832,
+      "tokens": 12034.6042,
+      "gen": 406.9384,
+      "truncated": 0.0045,
+      "error": 0.0018,
+      "by_source": {
+        "mme_realworld": 0.4617,
+        "mmmu_pro": 0.25,
+        "vstar": 0.5647,
+        "worldbench": 0.2944
+      },
+      "correct": 991,
+      "end_counts": {
+        "answer": 1515,
+        "crop_budget": 676,
+        "truncated": 10,
+        "error": 4,
+        "round_limit": 3
+      },
+      "output_sha256": "c5da592d4f5a45310933908e4208b43cfd365b9956f23856e6e5adbb42552fb6",
+      "normalization_calls": {
+        "unit_01": 4016,
+        "native_1000": 5882
+      },
+      "mean_crops": 4.482789855072464
+    },
+    "norm_token_uncapped": {
+      "file": "traj_B3_native_norm_token_uncapped_1031.jsonl",
+      "n": 2208,
+      "acc": 0.4488,
+      "fmt": 0.6798,
+      "first": 0.9995,
+      "later": 3.4832,
+      "tokens": 12138.2006,
+      "gen": 510.5349,
+      "truncated": 0.0045,
+      "error": 0.0018,
+      "by_source": {
+        "mme_realworld": 0.4617,
+        "mmmu_pro": 0.25,
+        "vstar": 0.5647,
+        "worldbench": 0.2944
+      },
+      "correct": 991,
+      "end_counts": {
+        "answer": 1515,
+        "crop_budget": 676,
+        "truncated": 10,
+        "error": 4,
+        "round_limit": 3
+      },
+      "output_sha256": "d958deb06dc801612686848acdf80ded98a89e8c8da28c36aeda5f501812b8a8",
+      "normalization_calls": {
+        "unit_01": 4016,
+        "native_1000": 5882
+      },
+      "mean_crops": 4.482789855072464
+    }
+  },
+  "paired": {
+    "norm8_vs_old": {
+      "both_correct": 665,
+      "both_wrong": 1172,
+      "gained": 326,
+      "lost": 45
+    },
+    "norm_token_uncapped_vs_norm8": {
+      "both_correct": 991,
+      "both_wrong": 1217,
+      "gained": 0,
+      "lost": 0
+    }
+  },
+  "scorer_sha256": "95caa9979e785bad38f9602eb21795f9062f8a38dcce01cbe3ff4b2db7a4d985",
+  "visual_audit": "4 targeted trajectories / 2 questions reviewed with limits",
+  "e1_independent_blind": false
+}

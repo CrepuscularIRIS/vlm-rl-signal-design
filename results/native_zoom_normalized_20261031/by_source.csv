@@ -1,0 +1,13 @@
+arm,source,n,correct
+old,mme_realworld,1356,413
+old,mmmu_pro,156,25
+old,vstar,448,221
+old,worldbench,248,51
+norm8,mme_realworld,1356,626
+norm8,mmmu_pro,156,39
+norm8,vstar,448,253
+norm8,worldbench,248,73
+norm_token_uncapped,mme_realworld,1356,626
+norm_token_uncapped,mmmu_pro,156,39
+norm_token_uncapped,vstar,448,253
+norm_token_uncapped,worldbench,248,73

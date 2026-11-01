@@ -1,0 +1,69 @@
+{
+  "status": "passed",
+  "n_per_condition": 2208,
+  "questions": 552,
+  "samples_per_question": 4,
+  "same_keys_gold_source": true,
+  "failed_rows_in_denominator": true,
+  "scorer_sha256": "95caa9979e785bad38f9602eb21795f9062f8a38dcce01cbe3ff4b2db7a4d985",
+  "coordinate_adapter": "all four coordinates in [0,1] -> multiply 1000; else native1000 unchanged; heuristic",
+  "e1_independent_blind": false,
+  "model": "original A-SFT checkpoint (unchanged)",
+  "arms": {
+    "norm8": {
+      "exit_code": 0,
+      "output_sha256": "c5da592d4f5a45310933908e4208b43cfd365b9956f23856e6e5adbb42552fb6",
+      "source_sha256": {
+        "val": "eac7c7e3a5a20a0ddf276580bc1f35f483ab780799b8ff534c33a5039524059d",
+        "vstar_holdout": "1c20b41df52e0c3f922fa5b30e67615805935af713719eab846d2bf9c0abcb70",
+        "model_config": "ce064a0e76621d06774ac37b78bca84c58543180986c5d7f8c82c92e3dfec628",
+        "script": "5cdebae8dd979fa3b6f208602b2acd2f253493792063e03f862c6f5ea9124221"
+      },
+      "weights_sha256": {
+        "model-00001-of-00002.safetensors": "db7a86c799eae632f6bc3c51807b17c4f372f04b3c8373f6d659e76e5c194e0a",
+        "model-00002-of-00002.safetensors": "ba373fbf1827d3a29c1b1c21cfdb7a8ffa24861cff4a691c13347712f097dc57"
+      },
+      "parameters": {
+        "samples": 4,
+        "seed_base": 20261017,
+        "temperature": 0.7,
+        "top_p": 1.0,
+        "max_new_tokens": "remaining",
+        "max_gen_total": 8192,
+        "max_model_len": 32768,
+        "max_crops": 8,
+        "min_px": 1024,
+        "max_px": 589824
+      },
+      "public_export_sha256": "1b9dd25271da24a71cae7a6f9a4edaf18519b52f621a154819d02c725c911482"
+    },
+    "norm_token_uncapped": {
+      "exit_code": 0,
+      "output_sha256": "d958deb06dc801612686848acdf80ded98a89e8c8da28c36aeda5f501812b8a8",
+      "source_sha256": {
+        "val": "eac7c7e3a5a20a0ddf276580bc1f35f483ab780799b8ff534c33a5039524059d",
+        "vstar_holdout": "1c20b41df52e0c3f922fa5b30e67615805935af713719eab846d2bf9c0abcb70",
+        "model_config": "ce064a0e76621d06774ac37b78bca84c58543180986c5d7f8c82c92e3dfec628",
+        "script": "77dd49b4e13339c24e1f122667fc345485b23ca9195a442f91b2406a3eea2363"
+      },
+      "weights_sha256": {
+        "model-00001-of-00002.safetensors": "db7a86c799eae632f6bc3c51807b17c4f372f04b3c8373f6d659e76e5c194e0a",
+        "model-00002-of-00002.safetensors": "ba373fbf1827d3a29c1b1c21cfdb7a8ffa24861cff4a691c13347712f097dc57"
+      },
+      "parameters": {
+        "samples": 4,
+        "seed_base": 20261017,
+        "temperature": 0.7,
+        "top_p": 1.0,
+        "max_new_tokens": "remaining_context_only",
+        "max_gen_total": null,
+        "max_model_len": 32768,
+        "max_crops": 8,
+        "min_px": 1024,
+        "max_px": 589824
+      },
+      "public_export_sha256": "8101b6c3fe9cab89ba21f27b6ed92cc3e78fc956c7484fda7036c49cdbf70235"
+    }
+  },
+  "visual_audit": "4 targeted trajectories, 2 questions; local original/crops viewed, public images omitted"
+}
