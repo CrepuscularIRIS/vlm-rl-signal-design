@@ -1,4 +1,4 @@
-# 文献包：13篇来源，3份详细阅读稿
+# 文献包：14篇来源，4份详细阅读稿
 
 来源为reading_20261028已有归档。本次是整理发布，不是重新精读或复现。完整PDF不重发；链接与原归档SHA在SOURCES.json。未钉版本的链接可能指向更新版本，应以归档SHA区分。
 
@@ -17,6 +17,7 @@
 | [dr-grpo](https://arxiv.org/abs/2503.20783v1) | std、长度归一化与训练偏差 | 仅来源索引；未提供本批精读稿 |
 | [dapo](https://arxiv.org/abs/2503.14476v1) | 动态采样、clip与实际预算 | 仅来源索引；未提供本批精读稿 |
 | [gspo](https://arxiv.org/abs/2507.18071v2) | sequence ratio和更新稳定性 | 仅来源索引；未提供本批精读稿 |
+| visual-primitives（DeepSeek-AI，2026，无 arXiv 号） | Reference Gap、思考中的框和点、迷宫与路径的过程奖励 | [阅读稿](readings/visual_primitives/精读.zh.md) / [来源](readings/visual_primitives/SOURCE.md)；2026-10-31 通读，未复现 |
 
 ## 状态与使用
 

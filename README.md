@@ -1,5 +1,14 @@
 # VLM RL Signal Design
 
+## 最新：Visual Primitives 桥接与 Reward 建模（2026-10-31）
+
+研究者读了 DeepSeek 的 *Thinking with Visual Primitives*，把论文发现的问题和方法逐条对照到我们的 caption 协议下：论文“在思考里写框”，对应我们“会被执行的裁图框 + 视图引用”；不改 SFT、不在 caption 里写坐标。导师建议补归一化 bbox，在保留任务奖励的前提下加“目标逼近 / 探索程度 + gate”的过程信号。本节全部是讨论稿，**没有新实验**。
+
+- [协议 v5.1 完整定义](protocol/CAPTION_V51.md)：SYSTEM 原文、每轮模板、13 类 hint 原文与选取规则、环境步骤、硬检查、奖励与 advantage。hint 只在教师生成 SFT 轨迹时使用，RL 和 E1 的 prompt 里都没有。
+- [论文 → 协议逐条对照与导师信号公式化](design/VISUAL_PRIMITIVES_BRIDGE.md)：已测风险，例如整图裁剪的覆盖项也接近 1、小目标 IoU 有上限；难标注题的代理信号候选（未验证）。
+- [13 类 hint 能否转成奖励](design/HINTS_AS_REWARD.md)：RL 题池 4,096 题的 hint 覆盖统计（近似）；三种用法比较；逐类拆解。
+- [导师 10-31 要求（匿名技术整理）](context/MENTOR_20261031_PROCESS_SIGNAL.md) · [论文精读](literature/readings/visual_primitives/精读.zh.md) · [网页 Pro 提示词](prompts/PRO_VISUAL_PRIMITIVES.md)
+
 ## 最新安排与三类基础baseline（2026-10-31）
 
 用户已停止DAPO-LOO两组训练与监控：L0完整24步、L01完整28步，未完成32步，未派发E1；checkpoint与日志保留。下一阶段转向Reward部分，提升幅度目前是研究者预期，尚无新实验结果。
