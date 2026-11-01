@@ -1,5 +1,16 @@
 # VLM RL Signal Design
 
+## 最新安排与三类基础baseline（2026-10-31）
+
+用户已停止DAPO-LOO两组训练与监控：L0完整24步、L01完整28步，未完成32步，未派发E1；checkpoint与日志保留。下一阶段转向Reward部分，提升幅度目前是研究者预期，尚无新实验结果。
+
+**第一、二类baseline之前已经完成，现在单独展示。** 原模型和A-SFT分别比较direct answer / CoT / 模型原生zoom工具提示；第三类列outcome-only标准GRPO，并区分caption与无工具接口及32/47步预算。
+
+[三类baseline完整结果、协议和来源](results/baseline_classes_20261031/REPORT.md) · [精确分母与成本](results/baseline_classes_20261031/summary.csv) · [多数据集](results/baseline_classes_20261031/by_source.csv)
+
+![三类baseline](results/baseline_classes_20261031/baseline_classes.png)
+
+
 **算法／建模讨论的证据入口。** 围绕多轮视觉裁图模型，先比较实际成败和过程证据，再讨论 advantage、credit assignment 与必要时的 reward shaping。这个仓库保存截至 **2026-10-31（America/New_York）** 的实验快照、匿名导师要求、文献阅读和待验证理解，不宣称已经找到统一瓶颈或新方法。
 
 面向研究者及通过 GitHub MCP 访问的网页 Pro。先读 [START_HERE](START_HERE.md)；可直接复制 [Pro 开场提示词](prompts/PRO_START.md)。

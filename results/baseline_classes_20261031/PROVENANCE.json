@@ -1,0 +1,29 @@
+{
+  "input_sha256": {
+    "B0-ans": "58c2aceee1b1d36b63a668e94fe3b3c3e7b3e92ac0f7bb6263b8787d0edb7670",
+    "B0": "b52bc60226181acf06aa1787d1cc6637e5caaaabe8d065f48cb48b2489ace5b3",
+    "B1": "6e796721e354267f1fd29d7a0418b65a6db11b0a8253f00fa1351fb935c2f617",
+    "B3-ans": "b177cc95478063dd9f1115d5c2c6d4923501c82bf0c7f75cdd9c42edf5bfc559",
+    "B3-cot": "d03b36fecdaaa07288b35f6f59af929a0c74c6622355091f92d84429f6c499a0",
+    "B3-zoom": "7809e8717d434bb4a8c234388ef617fa9b52cdc7f56e7a5e0f9f6ef704d33850",
+    "K-GRPO": "959279f5cf30c09c67f26afbc13675e98a19c22745502a525afb2ffea1963524",
+    "K-base": "abe9b8a1d90005ad6cf28aea0715bb1e10623b8157cf556eb6cbd6f8211e706b",
+    "B3": "1f2979f9c8539d3b34a48050827c9f5d79b67e434af63c0db1bfe2fdfec68489",
+    "B2": "108f36bcf23dffd7296defa16e3239a4d35f23985bcae98c2474a7cfc0d8eadd",
+    "B4": "ccd2ed95896f402b21d9c3bd6ecb08784407582f8ad32fa587a2bc0d34e7a65d",
+    "B5": "5df35ae0ca091ee359a12a705cf941d237d2b2e7b845ff126414a7439969d0e4",
+    "B6": "acfc41fd35d1dfb8a7afc474b2a9c442d1a7b9ea5303f1d78fcaf42af073bc91"
+  },
+  "rows_per_condition": 2208,
+  "questions": 552,
+  "samples_per_question": 4,
+  "same_keys_gold_source": true,
+  "operation": "reaggregation of frozen correct fields; no inference",
+  "scorer_reference": "scripts/scorer_reference.py",
+  "scorer_sha256": "95caa9979e785bad38f9602eb21795f9062f8a38dcce01cbe3ff4b2db7a4d985",
+  "notes": [
+    "All failed rows retain their denominator.",
+    "E1 is not an independent blind test.",
+    "Prompt/tool interfaces and historical RL budgets are explicitly separated."
+  ]
+}
