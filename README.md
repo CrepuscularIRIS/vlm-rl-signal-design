@@ -7,6 +7,10 @@
 [完整结果、成本与轨迹核对](results/native_zoom_normalized_20261031/REPORT.md) · [数据与SHA](results/native_zoom_normalized_20261031/PROVENANCE.json)。本次仅评测，完成后由用户决定下一步。
 
 
+## 最新：RL 题池证据标注规范（2026-11-01）
+
+逐题看图标注“回答本题所需的视觉证据框”，供后续过程信号使用。规范借鉴了 DeepSeek 的数据构建做法：紧框但不截断目标、禁止整图大框、多个实例必须标全、记录被排除的负候选、入库前强制复核和校验。共 9 种标注单位，坐标相对原图归一化到 [0,1]。先试标第一轮已人工审查过的 163 题，再标全量。[标注规范](design/ANNOTATION_SPEC.md) · [校验与叠框脚本](scripts/validate_annotations.py)
+
 ## 最新：A 路线方案与 primitives 的理解（2026-11-01）
 
 研究者已选定 **A 路线**：保留 A-SFT，在 RL 中把 hint 转成可验证的过程信号。研究问题是：缺少逐步真值时，构造与视觉推理正确性稳定相关、又不易被钻空子的过程信号。新增两项实测：V\* 上 4B 的裁图命中率为 76–88%，命中时准确率约 0.9、未命中时约 0.55；只用终答奖励时，RL 放大了 fallback 和多次裁图，但 HOLD、REVISE、abstain、记录已排除区域这些接近 0 的行为没有长出来。RL 题池标注类型的工作进行中。[完整方案](design/PRIMITIVES_ROUTE_A.md)
