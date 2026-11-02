@@ -1,0 +1,296 @@
+{
+  "SAPO": {
+    "total": {
+      "n": 2208,
+      "correct": 1274,
+      "crops": 2347,
+      "with_first": 1360,
+      "later": 987,
+      "generated": 377486,
+      "processed": 11685582,
+      "flagged": 16,
+      "errors": 0,
+      "truncated": 2
+    },
+    "original": {
+      "file": "traj_sapo_s32_1102.jsonl",
+      "n": 2208,
+      "acc": 0.577,
+      "fmt": 0.9882,
+      "first": 0.6159,
+      "later": 0.447,
+      "tokens": 5292.3832,
+      "gen": 170.9629,
+      "truncated": 0.0009,
+      "error": 0.0,
+      "by_source": {
+        "mme_realworld": 0.5819,
+        "mmmu_pro": 0.3077,
+        "vstar": 0.8125,
+        "worldbench": 0.2944
+      }
+    },
+    "sources": {
+      "mme_realworld": {
+        "n": 1356,
+        "correct": 789,
+        "crops": 1478,
+        "with_first": 852,
+        "later": 626,
+        "generated": 228177,
+        "processed": 7385499,
+        "flagged": 9,
+        "errors": 0,
+        "truncated": 1
+      },
+      "mmmu_pro": {
+        "n": 156,
+        "correct": 48,
+        "crops": 31,
+        "with_first": 14,
+        "later": 17,
+        "generated": 29714,
+        "processed": 393405,
+        "flagged": 3,
+        "errors": 0,
+        "truncated": 1
+      },
+      "vstar": {
+        "n": 448,
+        "correct": 364,
+        "crops": 559,
+        "with_first": 373,
+        "later": 186,
+        "generated": 74715,
+        "processed": 2522071,
+        "flagged": 3,
+        "errors": 0,
+        "truncated": 0
+      },
+      "worldbench": {
+        "n": 248,
+        "correct": 73,
+        "crops": 279,
+        "with_first": 121,
+        "later": 158,
+        "generated": 44880,
+        "processed": 1384607,
+        "flagged": 1,
+        "errors": 0,
+        "truncated": 0
+      }
+    },
+    "crop_strata": {
+      "0": {
+        "n": 848,
+        "correct": 423,
+        "crops": 0,
+        "with_first": 0,
+        "later": 0,
+        "generated": 77768,
+        "processed": 1655568,
+        "flagged": 4,
+        "errors": 0,
+        "truncated": 2
+      },
+      "1": {
+        "n": 868,
+        "correct": 634,
+        "crops": 868,
+        "with_first": 868,
+        "later": 0,
+        "generated": 128665,
+        "processed": 3892729,
+        "flagged": 2,
+        "errors": 0,
+        "truncated": 0
+      },
+      "2": {
+        "n": 306,
+        "correct": 141,
+        "crops": 612,
+        "with_first": 306,
+        "later": 306,
+        "generated": 79001,
+        "processed": 2372358,
+        "flagged": 1,
+        "errors": 0,
+        "truncated": 0
+      },
+      "3": {
+        "n": 80,
+        "correct": 40,
+        "crops": 240,
+        "with_first": 80,
+        "later": 160,
+        "generated": 28537,
+        "processed": 942205,
+        "flagged": 1,
+        "errors": 0,
+        "truncated": 0
+      },
+      "4+": {
+        "n": 106,
+        "correct": 36,
+        "crops": 627,
+        "with_first": 106,
+        "later": 521,
+        "generated": 63515,
+        "processed": 2822722,
+        "flagged": 8,
+        "errors": 0,
+        "truncated": 0
+      }
+    }
+  },
+  "DAPO": {
+    "total": {
+      "n": 2208,
+      "correct": 1465,
+      "crops": 4620,
+      "with_first": 2186,
+      "later": 2434,
+      "generated": 633622,
+      "processed": 19717104,
+      "flagged": 14,
+      "errors": 0,
+      "truncated": 5
+    },
+    "original": {
+      "file": "review_k8_dapo.jsonl",
+      "n": 2208,
+      "acc": 0.6635,
+      "fmt": 0.9905,
+      "first": 0.99,
+      "later": 1.1024,
+      "tokens": 8929.8478,
+      "gen": 286.9665,
+      "truncated": 0.0023,
+      "error": 0.0,
+      "by_source": {
+        "mme_realworld": 0.6881,
+        "mmmu_pro": 0.3526,
+        "vstar": 0.8728,
+        "worldbench": 0.3468
+      }
+    },
+    "sources": {
+      "mme_realworld": {
+        "n": 1356,
+        "correct": 933,
+        "crops": 2781,
+        "with_first": 1347,
+        "later": 1434,
+        "generated": 354383,
+        "processed": 11953540,
+        "flagged": 0,
+        "errors": 0,
+        "truncated": 0
+      },
+      "mmmu_pro": {
+        "n": 156,
+        "correct": 55,
+        "crops": 316,
+        "with_first": 146,
+        "later": 170,
+        "generated": 85195,
+        "processed": 1294896,
+        "flagged": 6,
+        "errors": 0,
+        "truncated": 4
+      },
+      "vstar": {
+        "n": 448,
+        "correct": 391,
+        "crops": 812,
+        "with_first": 447,
+        "later": 365,
+        "generated": 99162,
+        "processed": 3428568,
+        "flagged": 1,
+        "errors": 0,
+        "truncated": 0
+      },
+      "worldbench": {
+        "n": 248,
+        "correct": 86,
+        "crops": 711,
+        "with_first": 246,
+        "later": 465,
+        "generated": 94882,
+        "processed": 3040100,
+        "flagged": 7,
+        "errors": 0,
+        "truncated": 1
+      }
+    },
+    "crop_strata": {
+      "0": {
+        "n": 22,
+        "correct": 13,
+        "crops": 0,
+        "with_first": 0,
+        "later": 0,
+        "generated": 1730,
+        "processed": 42792,
+        "flagged": 2,
+        "errors": 0,
+        "truncated": 0
+      },
+      "1": {
+        "n": 1024,
+        "correct": 825,
+        "crops": 1024,
+        "with_first": 1024,
+        "later": 0,
+        "generated": 165456,
+        "processed": 4600505,
+        "flagged": 2,
+        "errors": 0,
+        "truncated": 1
+      },
+      "2": {
+        "n": 563,
+        "correct": 321,
+        "crops": 1126,
+        "with_first": 563,
+        "later": 563,
+        "generated": 176362,
+        "processed": 4428105,
+        "flagged": 4,
+        "errors": 0,
+        "truncated": 3
+      },
+      "3": {
+        "n": 310,
+        "correct": 155,
+        "crops": 930,
+        "with_first": 310,
+        "later": 620,
+        "generated": 123636,
+        "processed": 3704027,
+        "flagged": 1,
+        "errors": 0,
+        "truncated": 1
+      },
+      "4+": {
+        "n": 289,
+        "correct": 151,
+        "crops": 1540,
+        "with_first": 289,
+        "later": 1251,
+        "generated": 166438,
+        "processed": 6941675,
+        "flagged": 5,
+        "errors": 0,
+        "truncated": 0
+      }
+    }
+  },
+  "paired_vs_DAPO": {
+    "gained": 192,
+    "lost": 383,
+    "both_correct": 1082,
+    "both_wrong": 551
+  }
+}

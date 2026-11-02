@@ -1,0 +1,15 @@
+{
+  "tag": "sapo_s32_1102",
+  "checkpoint_step": 32,
+  "rows": 2208,
+  "qids": 552,
+  "per_question": 4,
+  "header_sha256": "57c4fe384cab444ed6ab1b3b85f937e6de737c5aab69df555910959d45655cd2",
+  "output_sha256": {
+    "SAPO": "95002c5215d8faafd248a5ce3ae591aa19d29f6a77ceddfd06177fe57e799c3b",
+    "DAPO": "8a0dbb9a43e814bcb04fa73b4296cf418cd7756e514c53f8d6d6eb06e7345ffe"
+  },
+  "scorer_sha256": "95caa9979e785bad38f9602eb21795f9062f8a38dcce01cbe3ff4b2db7a4d985",
+  "runner_sha256": "6d890e8e23b599f9336ca1d3059ded7a4fef16db47121513ded951c71559679a",
+  "pool_gt_source_keys_matched": true
+}
