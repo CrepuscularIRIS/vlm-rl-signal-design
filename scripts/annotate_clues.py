@@ -223,7 +223,7 @@ def main():
         for x in open(out / "LC/batch.jsonl"):
             rec = json.loads(x)
             if rec.get("class") == "disagree":
-                err = [] if rec.get("reading_answer") in list("ABCDEFGHIJ") else ["bad_reading_answer"]
+                err = [] if rec.get("reading_answer") in list("ABCDEFGHIJ") + ["none"] else ["bad_reading_answer"]
             else:
                 err = check(rec)
             n += 1
