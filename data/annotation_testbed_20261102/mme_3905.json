@@ -1,0 +1,41 @@
+{
+  "uid": "mme_3905",
+  "annotation_role": "testbed_addendum",
+  "source_wh": [
+    1600,
+    900
+  ],
+  "source_sha256": "bf4923a009876f00a81477aa69682a9a9e62604b2e0edbc23a1a52b2f44b1d5c",
+  "coordinates": "source xyxy in pixels, origin top left, right and bottom exclusive",
+  "clues": [
+    {
+      "id": "b1",
+      "bbox": [
+        638,
+        408,
+        695,
+        490
+      ],
+      "observation": "黄底黑色向右指向标",
+      "supports": "前方道路右弯"
+    },
+    {
+      "id": "b2",
+      "bbox": [
+        1096,
+        519,
+        1220,
+        536
+      ],
+      "observation": "路面 SLOW 字样",
+      "supports": "该处提示车辆减速"
+    }
+  ],
+  "context": "道路边界和车道线在远处向右弯，与 b1 相互印证。",
+  "inference": "车辆若沿当前道路继续行驶，向右行进有图像线索。",
+  "unresolved": [
+    "自车此刻实际转向及转角",
+    "自车实际速度，尤其是否非常快"
+  ],
+  "annotation_policy": "观察范围和推测分开记录，框可用作审计参照，未指定必须执行的动作。"
+}

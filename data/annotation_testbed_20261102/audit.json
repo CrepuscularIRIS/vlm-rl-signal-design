@@ -1,0 +1,16 @@
+{
+  "date_ny": "2026-11-02",
+  "parent_pool": "RL4K train",
+  "pool_parquet_sha256": "26964fafff7ce89486d018ec2a01572ca24d6e2eb08e6b9339c3f34ea2dd84a8",
+  "dataset_file_dimensions_read": 4096,
+  "matched_manifest_dimensions_and_relative_path": 4096,
+  "reviewed_image_sha256_matches": 23,
+  "reviewed_origin_checks": {
+    "mme_dataset_file": 15,
+    "benchmark_parquet_byte_match": 8
+  },
+  "input_path": "B3_sft archived header; v5.1 crop environment -> EasyR1 process_image(min_pixels=1024,max_pixels=589824) -> A-SFT image processor, CPU",
+  "processor_patch_size": 16,
+  "cpu_replay_env_sha256": "4f5865dbde0cf457ceafc7e6cfb8a917b67143d885cffc937cfbd55f98e31d35",
+  "scope": "First view reconstructed from source pixels. No inference or historical per-rollout tensor capture. Dataset source resolution only; camera masters outside benchmark not verified."
+}
