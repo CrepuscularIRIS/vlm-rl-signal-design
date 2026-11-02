@@ -121,7 +121,7 @@ def vision_item(item, l0, image_dir, out, model):
         parts2 += [{"type": "text", "text": f"Crop {bid}, region {r}:"}, A.img_part(c)]
     res = A.call(model, msgs + [{"role": "assistant", "content": json.dumps(res, ensure_ascii=False)},
                                 {"role": "user", "content": parts2}], log, "pass2")
-    rec = dict(res, uid=uid, spec_version="v2c", tier="C", cls=None)
+    rec = dict(res, uid=uid, spec_version="v2c", tier="C")
     rec["class"] = cls
     for k in range(2):
         err = check(rec)
@@ -131,7 +131,8 @@ def vision_item(item, l0, image_dir, out, model):
                                     {"role": "user", "content": [{"type": "text", "text":
                                      "Validator errors; return corrected full JSON: " + json.dumps(err)}]}],
                      log, f"repair{k+1}")
-        rec = dict(res, uid=uid, spec_version="v2c", tier="C", class=cls)
+        rec = dict(res, uid=uid, spec_version="v2c", tier="C")
+        rec["class"] = cls
     err = check(rec)
     sec = round(__import__("time").time() - t0, 1)
     tok = sum((x.get("usage") or {}).get("total_tokens", 0) for x in log)
@@ -177,13 +178,14 @@ def main():
     ap.add_argument("out")
     ap.add_argument("--workers", type=int, default=24)
     ap.add_argument("--model", default="gpt-6-astra")
+    ap.add_argument("--v2dir", default="/home/lingxufeng/icml/obs/notes/rl_pool_annotation_20261101/out/final/rl4k")
     a = ap.parse_args()
     out = Path(a.out)
     (out / "LC").mkdir(parents=True, exist_ok=True)
     (out / "raw").mkdir(exist_ok=True)
     items = {json.loads(x)["uid"]: json.loads(x) for x in open(a.manifest)}
     if a.mode == "vision":
-        l0, _ = load_v0(a.dir2_or_imagedir)
+        l0, _ = load_v0(a.v2dir)
         done = set()
         p = out / "LC/batch.jsonl"
         if p.exists():
