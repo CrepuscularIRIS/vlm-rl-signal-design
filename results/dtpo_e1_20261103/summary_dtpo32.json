@@ -1,0 +1,20 @@
+[
+ {
+  "file": "traj_dtpo32.jsonl",
+  "n": 2208,
+  "acc": 0.6553,
+  "fmt": 0.9805,
+  "first": 0.9986,
+  "later": 2.3587,
+  "tokens": 15578.6187,
+  "gen": 394.9918,
+  "truncated": 0.0014,
+  "error": 0.0,
+  "by_source": {
+   "mme_realworld": 0.6799,
+   "mmmu_pro": 0.3205,
+   "vstar": 0.8638,
+   "worldbench": 0.3548
+  }
+ }
+]
