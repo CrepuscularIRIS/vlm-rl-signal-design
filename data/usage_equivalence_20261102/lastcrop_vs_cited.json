@@ -1,0 +1,32 @@
+{
+ "B3_sft": {
+  "n": 444,
+  "last_in_cited": 0.716,
+  "cited_eq_last": 0.669,
+  "cited_none": 0.27,
+  "cover_last": 0.595,
+  "cover_cited": 0.596,
+  "mean_delta": -0.001,
+  "allsrc_last_in_cited": 0.524
+ },
+ "k8_grpo": {
+  "n": 448,
+  "last_in_cited": 0.929,
+  "cited_eq_last": 0.83,
+  "cited_none": 0.049,
+  "cover_last": 0.805,
+  "cover_cited": 0.814,
+  "mean_delta": -0.008,
+  "allsrc_last_in_cited": 0.856
+ },
+ "k8_dapo": {
+  "n": 447,
+  "last_in_cited": 0.924,
+  "cited_eq_last": 0.846,
+  "cited_none": 0.043,
+  "cover_last": 0.808,
+  "cover_cited": 0.832,
+  "mean_delta": -0.024,
+  "allsrc_last_in_cited": 0.891
+ }
+}

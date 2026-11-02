@@ -16,6 +16,10 @@ SAPO-VLM 第 32 步 E1 为 57.70%，历史 DAPO 为 66.35%。[分源结果、成
 
 D1-B 失败的引用关由新增引用项修复：同样的引用替换对照，D1 同分，D2 变分率 0.51（Δ中位 −1.0）。引用=使用为显式冻结假设，cite-all 余量 0.16–0.19 预登记为后置 hacking 观察项。[D2 协议](results/d2_offline_20261102/PROTOCOL.zh.md) · [D2 结果](results/d2_offline_20261102/RESULTS.zh.md)
 
+## 末裁=使用：假设验证与算法方向（2026-11-02，GPU 已停）
+
+实测：RL 后模型的最后一张裁图与 commit 引用一致率 92–93%，覆盖信号损失 ≤0.024——"最后裁图 ≈ 使用"冻结为工作假设，替代文本引用（免疫"写引用不裁图"）。配套算法方向文档给出等效视角（势能差分 ≡ 集合边际贡献 ≡ 事件级过程 GRPO，三者同一对象）与 A/B/C/D/E 五个候选，供 Pro 设计。[方向文档](design/USAGE_EQUIVALENCE_AND_ALGORITHM_DIRECTIONS.md) · [数据](data/usage_equivalence_20261102/lastcrop_vs_cited.json)
+
 ## 当前方向
 
 **2026-11-02 · 标注作为 testbed。** 已核对 4,096 张数据集源图的尺寸，在 23 张抽查图上重放首轮预处理，并补标路牌和减速字样。Hint 用于构造 SFT 示范、学生无提示迁移、模型直接用原图或自由裁图的差异，分别留作实验对照。[主线看板](design/ANNOTATION_TESTBED.md)
