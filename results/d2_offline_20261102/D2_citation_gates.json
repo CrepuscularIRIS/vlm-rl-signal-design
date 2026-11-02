@@ -1,0 +1,53 @@
+{
+ "k8_dapo": {
+  "gate1": {
+   "cover-only": 0.609,
+   "cite-grad": 0.542,
+   "half+half": 0.568
+  },
+  "gate2": {
+   "n": 169,
+   "changed_wrong": 87,
+   "changed_right": 37
+  },
+  "gate3": {
+   "n": 169,
+   "gainable": 47,
+   "mean_headroom": 0.19174460129037915
+  }
+ },
+ "k8_grpo": {
+  "gate1": {
+   "cover-only": 0.64,
+   "cite-grad": 0.648,
+   "half+half": 0.64
+  },
+  "gate2": {
+   "n": 168,
+   "changed_wrong": 85,
+   "changed_right": 36
+  },
+  "gate3": {
+   "n": 168,
+   "gainable": 44,
+   "mean_headroom": 0.15950422024101116
+  }
+ },
+ "B3_sft": {
+  "gate1": {
+   "cover-only": 0.743,
+   "cite-grad": 0.739,
+   "half+half": 0.764
+  },
+  "gate2": {
+   "n": 93,
+   "changed_wrong": 32,
+   "changed_right": 21
+  },
+  "gate3": {
+   "n": 93,
+   "gainable": 25,
+   "mean_headroom": 0.18371874123336512
+  }
+ }
+}

@@ -12,6 +12,10 @@ SAPO-VLM 第 32 步 E1 为 57.70%，历史 DAPO 为 66.35%。[分源结果、成
 
 537 道止于 L0 的题与 152 道 gt 存疑题补一层 **LC 线索记录**（可见→可推测→未解决；歧义题记多解；disagree 题记按读数推出的选项，不改 gt），与 v2 终稿分开存放。配套五个对照实验：E2 线索覆盖离线审计、E3 gt 噪声上限复算（都用已有 k8 训练 rollouts，零 GPU）→ E1 hint 探针（两张空闲卡）→ E4 过程信号训练臂（后置）。[设计与实验矩阵](design/CLUE_ANNOTATION_AND_CONTROLLED_RUNS.md) · [testbed 主线](design/ANNOTATION_TESTBED.md)
 
+## D2：覆盖+引用过程奖励通过离线判据（2026-11-02）
+
+D1-B 失败的引用关由新增引用项修复：同样的引用替换对照，D1 同分，D2 变分率 0.51（Δ中位 −1.0）。引用=使用为显式冻结假设，cite-all 余量 0.16–0.19 预登记为后置 hacking 观察项。[D2 协议](results/d2_offline_20261102/PROTOCOL.zh.md) · [D2 结果](results/d2_offline_20261102/RESULTS.zh.md)
+
 ## 当前方向
 
 **2026-11-02 · 标注作为 testbed。** 已核对 4,096 张数据集源图的尺寸，在 23 张抽查图上重放首轮预处理，并补标路牌和减速字样。Hint 用于构造 SFT 示范、学生无提示迁移、模型直接用原图或自由裁图的差异，分别留作实验对照。[主线看板](design/ANNOTATION_TESTBED.md)
