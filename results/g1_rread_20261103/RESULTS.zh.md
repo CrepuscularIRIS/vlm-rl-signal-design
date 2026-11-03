@@ -48,7 +48,7 @@
 
 ## 三、训练 log 曲线
 
-图：`curves/g1_curves.png`（四联：train accuracy / mean reward / policy entropy / Φ_read+crops）
+主图：`g1_main.png`（四面板：奖励曲线 / Φ_read 上升 / 同题探针 Δ / E1 谱系）；辅助 `g1_curves.png`（含 entropy）
 - reward 均值 0.666 → ~0.75（含 Φ 加成；G0 同期 ~0.60）
 - Φ_read（m=1）step1-8 均值 ~0.55 → step25-32 ~0.65（明确上升）
 - entropy（−entropy_loss）与 G0 同降趋势，无异常塌缩
