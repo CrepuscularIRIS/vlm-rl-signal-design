@@ -1,0 +1,13 @@
+{
+ "A-SFT_phi": 0.5518,
+ "G1_32_phi": 0.6911,
+ "paired_delta": 0.1392,
+ "paired_up": 750,
+ "paired_down": 140,
+ "paired_same": 1158,
+ "stated_asft": 0.811,
+ "stated_g1": 0.881,
+ "pool_acc_asft": 0.79,
+ "pool_acc_g1": 0.7983,
+ "note": "同题同设置(含选项,训练池题); 去选项内容变化测试未跑"
+}

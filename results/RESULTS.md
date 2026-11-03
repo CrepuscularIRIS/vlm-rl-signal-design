@@ -1,5 +1,7 @@
 # 当前结果
 
+新增入口（2026-11-03 晚）：**[G1 (R-read) 训练结果](g1_rread_20261103/RESULTS.zh.md)**——E1 .6395 vs G0 .6390 持平；训练池同题读取一致性 .5518→.6911（配对 +0.139）但未转化到端到端；曲线与全家福图（vs DAPO/DTPO/GSPO/GIGPO/GRPO）。**[bsftc（因果 SFT+GRPO）](bsftc_grpo_20261103/RESULTS.zh.md)**——E1 .6033（起点 .4543 +14.9pp）；两种 SFT 协议差距 11.3pp 被 RL 收窄至 3.6pp，A-SFT+GRPO 仍占优。
+
 新增入口：[R-read 离线准入（2026-11-03）](rread_admission_20261103/RESULTS.zh.md)——读取一致性奖励的评分器 16/16 反例通过、2,048 条真实轨迹双路径零偏差、有效读取差异率 0.509 ≫ 10% 准入线，G1 进入完整训练。
 
 其余新增入口：[三类基础baseline：Base / A-SFT / outcome-only GRPO](baseline_classes_20261031/REPORT.md)。原先的八方法表保留为历史算法对照；不再代替第一、二类展示。
