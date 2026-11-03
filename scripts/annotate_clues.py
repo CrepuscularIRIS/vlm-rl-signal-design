@@ -178,7 +178,7 @@ def main():
     ap.add_argument("out")
     ap.add_argument("--workers", type=int, default=24)
     ap.add_argument("--model", default="gpt-6-astra")
-    ap.add_argument("--v2dir", default="/home/lingxufeng/icml/obs/notes/rl_pool_annotation_20261101/out/final/rl4k")
+    ap.add_argument("--v2dir", default=str(Path.home() / "icml/obs/notes/rl_pool_annotation_20261101/out/final/rl4k"))
     a = ap.parse_args()
     out = Path(a.out)
     (out / "LC").mkdir(parents=True, exist_ok=True)

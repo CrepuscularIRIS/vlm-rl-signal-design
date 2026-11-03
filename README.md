@@ -4,7 +4,7 @@ SAPO-VLM 第 32 步 E1 为 57.70%，历史 DAPO 为 66.35%。[分源结果、成
 
 多轮视觉工具模型的实验记录与算法设计讨论。我们从模型的回答、实际裁图和失败实例出发，逐步讨论：**模型应该学到什么行为，以及怎样给出相应的训练信号。**
 
-本仓库面向研究者、导师，以及通过 GitHub MCP 阅读材料的网页 Pro。保存实验结果、设计公式、研究者猜测和文献笔记；最新整理于 **2026-11-01（America/New_York）**。
+本仓库面向研究者、导师，以及通过 GitHub MCP 阅读材料的网页 Pro。保存实验结果、设计公式、研究者猜测和文献笔记；最新整理于 **2026-11-02（America/New_York）**。
 
 [从这里开始](START_HERE.md) · [给导师的阶段汇报](context/MENTOR_UPDATE_20261031.md) · [当前协议](protocol/CURRENT_PROTOCOL.md) · [文献](literature/README.md)
 
@@ -24,9 +24,11 @@ D1-B 失败的引用关由新增引用项修复：同样的引用替换对照，
 
 按设计评审矩阵：Aτ 离线判据出局（判别率 ≤0.53 且压攻击的 τ 清零过半正确轨迹），**Hτ（τ=0.005 精度门控集合覆盖）**通过并已在 GPU 0/1 启动 32 步对照；D0 用既有 k8 DAPO（E1 66.35%）。[冻结协议与 τ 定标](results/htau_training_20261102/PROTOCOL.zh.md)
 
-## DTPO step32 E1：0.6553（2026-11-03）
+## DTPO 固定终点评测
 
-另一条线的 DTPO 固定 step32：acc .6553（fmt .9805；vstar .8638 各条件最高），未超 DAPO（.6635），高于 GRPO/GSPO/GiGPO。[结果](results/dtpo_e1_20261103/RESULTS.zh.md)
+DTPO 答对 1,447/2,208，DAPO 答对 1,465/2,208；两者相差 18 条。V* 分别为 387/448、391/448。[设定、两条同题分歧与训练日志](results/dtpo_e1_20261103/RESULTS.zh.md) · [全阶段交付规范](protocol/EXPERIMENT_LIFECYCLE.zh.md)
+
+![固定 E1 准确率与每条轨迹的处理成本](results/dtpo_e1_20261103/e1_cost.png)
 
 ## 当前方向
 

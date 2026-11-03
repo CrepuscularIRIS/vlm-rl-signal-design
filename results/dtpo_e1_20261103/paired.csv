@@ -1,0 +1,6 @@
+source,n,both_correct,dtpo_only,dapo_only,both_wrong,dtpo_correct,dapo_correct
+All,2208,1222,225,243,518,1447,1465
+mme_realworld,1356,784,138,149,285,922,933
+mmmu_pro,156,38,12,17,89,50,55
+vstar,448,354,33,37,24,387,391
+worldbench,248,46,42,40,120,88,86

@@ -1,0 +1,11 @@
+{
+  "scorer_sha256": "95caa9979e785bad38f9602eb21795f9062f8a38dcce01cbe3ff4b2db7a4d985",
+  "dtpo_rows_sha256": "54b7a2ec70526023e28a98aa7886c0bf7e04f1cb02437076951f90062dc39dd4",
+  "dapo_review_sha256": "8a0dbb9a43e814bcb04fa73b4296cf418cd7756e514c53f8d6d6eb06e7345ffe",
+  "training_receipt_sha256": "829edecdb9fd0adf83d2b98cac122e67712f79e897d11a90f731140ce91c2f4d",
+  "baseline_curves_sha256": "765b30b1ab3b3e2faff66cefada40bac48f05f70bf019f11e11111163d3c70a5",
+  "sapo_curves_sha256": "d3dcafd0decff08a1b699d66a0436c08a86041c47c619738d984589e395bbebe",
+  "original_header_sha256": "0711d2bcbf05c34dd83f7276366c289f856bad07a578d712d1dbb3cc5010042e",
+  "matched_keys": 2208,
+  "pooled_training_metric": "Observed batch accuracy. Sampling and filtering differ by method."
+}

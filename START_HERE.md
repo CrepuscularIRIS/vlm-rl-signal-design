@@ -1,5 +1,7 @@
 # 从这里开始
 
+**实验执行与交付**：[从立项到双仓发布的 14 阶段清单](protocol/EXPERIMENT_LIFECYCLE.zh.md)。已完成实例见 [DTPO 的设置、配对结果与曲线](results/dtpo_e1_20261103/RESULTS.zh.md)。
+
 D1-B 的按题几何奖励已完成离线检查。V* 组内分差主要来自目标覆盖率；两次只换引用的对照均同分。正式训练尚未启动。[四关结果与冻结协议](results/d1_b_offline_20261102/RESULTS.zh.md)
 
 SAPO-VLM 第 32 步 E1 为 57.70%，历史 DAPO 为 66.35%。[分源结果、成本、训练曲线与同题轨迹](results/sapo_vlm_20261102/REPORT.md)。

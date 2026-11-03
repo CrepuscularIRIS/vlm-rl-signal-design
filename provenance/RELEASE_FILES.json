@@ -16,13 +16,13 @@
   },
   {
     "path": "README.md",
-    "bytes": 4599,
-    "sha256": "4d6e248ed6136de2baae58fb4e35a6b9bb51911b59cd46ed773e3a4d6eef84db"
+    "bytes": 13112,
+    "sha256": "8ef6ce533e31bfb0169210f13e99ceaefe12a5d1247f231d03dc5b0d829824c4"
   },
   {
     "path": "REPRODUCIBILITY.md",
-    "bytes": 1309,
-    "sha256": "7030559f35be9cb7f483797890de37eb4e086cfe6958f73a7dadfc23005d1970"
+    "bytes": 1754,
+    "sha256": "a496cdcdc087645e09a427a67042be1e574f3d368563d001d0d02cf1067084c0"
   },
   {
     "path": "RIGHTS.md",
@@ -31,8 +31,8 @@
   },
   {
     "path": "START_HERE.md",
-    "bytes": 2248,
-    "sha256": "5646759d7590f9327517f3a693a029c98caf9e5ca2673b2cbbbbc356b7489627"
+    "bytes": 4847,
+    "sha256": "67cadf879579d3bcf551be09830dfb773257b5360a16592697d7d18baa10eed5"
   },
   {
     "path": "cards/PC-F1-08-frozen-model-necessity-label.md",
@@ -236,8 +236,8 @@
   },
   {
     "path": "design/CREDIT_ASSIGNMENT_FOCUS.md",
-    "bytes": 6685,
-    "sha256": "f2e75403dcd393bb0b6146be220c146650aeceb698023134ba27a83de6dc41af"
+    "bytes": 7225,
+    "sha256": "12d490996593d3823cc4e5f4da10d5517ab9a803cd99819bcc09d76f7956d803"
   },
   {
     "path": "design/DISCUSSION.md",
@@ -331,8 +331,8 @@
   },
   {
     "path": "literature/README.md",
-    "bytes": 3216,
-    "sha256": "c769d1f4d9bb650960a6c0316358d70f43e59cd1783f1381dade3454f2682e49"
+    "bytes": 3487,
+    "sha256": "c1bd18388b17ec08e89404b3d4366d23d7e52cd1069ef68ef19f834c2f16286a"
   },
   {
     "path": "literature/REASONING_GUIDE.md",
@@ -475,6 +475,11 @@
     "sha256": "b231de60ccce2afb52153453d4ba4972499ba6a9caeba8afa91a85fc0f39fc91"
   },
   {
+    "path": "protocol/EXPERIMENT_LIFECYCLE.zh.md",
+    "bytes": 11715,
+    "sha256": "eb4b913cac61b35f774db489b9c84afdd571c8916e3451aaff6b541661bc22ed"
+  },
+  {
     "path": "protocol/EXTERNAL_PROTOCOLS.md",
     "bytes": 1834,
     "sha256": "2a2d0e82eb006b1cc8bf204c59d3ea781d3fe60ee0a3209e1508e22ca00ab6c2"
@@ -541,8 +546,8 @@
   },
   {
     "path": "results/RESULTS.md",
-    "bytes": 1942,
-    "sha256": "e5e97b0c9f8fcd3db55c96c3a7fd3924e3721377cfa5fd09fcb0e01d64a3fffc"
+    "bytes": 2143,
+    "sha256": "f550226eb63038621ed70be76e4aed258603a8052ab60af759afd8bb0a190882"
   },
   {
     "path": "results/TRAINING_SIGNALS.md",
@@ -570,6 +575,116 @@
     "sha256": "05ca1480ea1a6ade350097391c41246f171f1c17c8ccf8abdd374cbc01d920b0"
   },
   {
+    "path": "results/dtpo_e1_20261103/AGGREGATE_SOURCES.json",
+    "bytes": 774,
+    "sha256": "9cc9f5d17517e28f7d3997a60289a61b3b5942e4530e1513f696b7c6375b06ef"
+  },
+  {
+    "path": "results/dtpo_e1_20261103/RESULTS.zh.md",
+    "bytes": 4101,
+    "sha256": "8bd81a3d7262294586f74173ba9c20ea7aab0476389d489836e3bdf9dd674d86"
+  },
+  {
+    "path": "results/dtpo_e1_20261103/actor_logs.pdf",
+    "bytes": 19600,
+    "sha256": "a75bf37508c445581b925256a1fc6bf099e7254322fe9e3f8faea5a5746206bf"
+  },
+  {
+    "path": "results/dtpo_e1_20261103/actor_logs.png",
+    "bytes": 127654,
+    "sha256": "006e1bed462f2d189d92ad16f37f804099c5594cdefad6e0ff2fee7c6aa83000"
+  },
+  {
+    "path": "results/dtpo_e1_20261103/all_conditions.csv",
+    "bytes": 2040,
+    "sha256": "2d65114531b077d8f46a30e65472d871a5929ed3a230feffab61b8eec174286e"
+  },
+  {
+    "path": "results/dtpo_e1_20261103/all_conditions.pdf",
+    "bytes": 42435,
+    "sha256": "9103b4833d4f90e72116a4c6d7b867097a0ef173d507e1e609a50bb0f8ce576d"
+  },
+  {
+    "path": "results/dtpo_e1_20261103/all_conditions.png",
+    "bytes": 122635,
+    "sha256": "aaf01e55f4a8b821d3a40a33f4235dff40327280dfc7311c869b0c401cd839fc"
+  },
+  {
+    "path": "results/dtpo_e1_20261103/diagnostics.csv",
+    "bytes": 1680,
+    "sha256": "25409467957015154a273ae47293f71c0de497c89798d2d59a4bba3d3fcd6721"
+  },
+  {
+    "path": "results/dtpo_e1_20261103/dtpo_signals.csv",
+    "bytes": 1677,
+    "sha256": "4af02e2f2ed6de0d2ebd18571ec93fcd2c3c784f83336027f9590ead2355156f"
+  },
+  {
+    "path": "results/dtpo_e1_20261103/dtpo_signals.pdf",
+    "bytes": 19169,
+    "sha256": "57ebedcceb7ea711d6c8a4bf4a4834cc648be0005f7cccbe61677f8f2da41977"
+  },
+  {
+    "path": "results/dtpo_e1_20261103/dtpo_signals.png",
+    "bytes": 110117,
+    "sha256": "61bc45967e1c5a5d8cbf1e1486c432064a80f1ced7030a2a0ef3410a11b21968"
+  },
+  {
+    "path": "results/dtpo_e1_20261103/e1_cost.pdf",
+    "bytes": 22307,
+    "sha256": "577852c2226774c160457ee8b4290654e39c6f864bcb52abbd0698e96eb33ab4"
+  },
+  {
+    "path": "results/dtpo_e1_20261103/e1_cost.png",
+    "bytes": 78860,
+    "sha256": "e889f81ce63017e82a533bc115924a596f7148d301b92248106ba64d2d2866bf"
+  },
+  {
+    "path": "results/dtpo_e1_20261103/fixed_e1.csv",
+    "bytes": 582,
+    "sha256": "c7a946e302bedbd5c1fc70ef3f3bea4d39e926fc46318a6ea4667b43914c2da6"
+  },
+  {
+    "path": "results/dtpo_e1_20261103/header_dtpo32.json",
+    "bytes": 1210,
+    "sha256": "3f9b27544a21f3a803dad7a8dd5009094a56437408421e42ab0cb58789c3cdbc"
+  },
+  {
+    "path": "results/dtpo_e1_20261103/paired.csv",
+    "bytes": 254,
+    "sha256": "b9911dd7beaf5f1f771ba02c965454dbd526eb0003ac71d76053569156adefcd"
+  },
+  {
+    "path": "results/dtpo_e1_20261103/plot.py",
+    "bytes": 5000,
+    "sha256": "617f6257014e7f9f0487d550f093a485f77845f474c3ac06cb7b3c3446e8f7d6"
+  },
+  {
+    "path": "results/dtpo_e1_20261103/summary_dtpo32.json",
+    "bytes": 324,
+    "sha256": "460e5ee5fe861600b32cd9f083fcdcc43ef913c229568c5b8e931d4594cc8c7a"
+  },
+  {
+    "path": "results/dtpo_e1_20261103/training_curves.pdf",
+    "bytes": 28680,
+    "sha256": "83758a82e9a5b92e94a49a00ef095c4f1053701461e3a626b5b8193120555726"
+  },
+  {
+    "path": "results/dtpo_e1_20261103/training_curves.png",
+    "bytes": 235544,
+    "sha256": "317fbc3488890e360c7d451cefb3a46f2ee1e60a965abcdcb8eaf3e0f39b2c13"
+  },
+  {
+    "path": "results/dtpo_e1_20261103/training_points.csv",
+    "bytes": 6755,
+    "sha256": "4cfcb03e502f89bb948f750fe3dfa7a5f5392343ea33b80746ed17c387d74434"
+  },
+  {
+    "path": "results/htau_training_20261102/PROTOCOL.zh.md",
+    "bytes": 2222,
+    "sha256": "cc934bdeec4241a1c745a33510acee0eabbe744306d83617099f4a2ec8b03413"
+  },
+  {
     "path": "results/paired/question_deltas.csv",
     "bytes": 469506,
     "sha256": "864f4aa6a395882212aa0f8d74937909f15b7baa5678272f0aa95f77b5809ca6"
@@ -588,6 +703,11 @@
     "path": "results/paired/training_signals.json",
     "bytes": 1460,
     "sha256": "cb50742cac86f3896065cdaf454b44d7852a05085594e1dc8d4f0a121b7fa71e"
+  },
+  {
+    "path": "scripts/annotate_clues.py",
+    "bytes": 12331,
+    "sha256": "1423686b19ae5d6cdf7ec47ccd2064fb641f2787dc03fc1830f5748c7be1748d"
   },
   {
     "path": "scripts/plot_algorithm_curves.py",

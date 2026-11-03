@@ -1,6 +1,6 @@
 # Hτ 训练臂冻结与启动（2026-11-02）
 
-依据 [papers/Design.md 设计评审](../../icml/papers/Design.md)（云端 Pro）的第一轮矩阵：D0 vs Hτ vs Aτ；GPU 只容一组训练，D0 已有（k8 DAPO E1 66.35%），故本组为 **Hτ**。Aτ 按离线判据出局。
+依据 内部设计评审（相关公开材料见[使用代理与几何定义](../../design/USAGE_EQUIVALENCE_AND_ALGORITHM_DIRECTIONS.md)）（云端 Pro）的第一轮矩阵：D0 vs Hτ vs Aτ；GPU 只容一组训练，D0 已有（k8 DAPO E1 66.35%），故本组为 **Hτ**。Aτ 按离线判据出局。
 
 ## Aτ 出局记录（V* 112 × DAPO 447 条，全部 τ 扫描）
 
@@ -29,6 +29,6 @@
 
 ## 启动配置
 
-A-SFT 起点、4k 池、32 步、128×8、mini 32、lr 1e-6、seed 42、λ=0.25、R=V·(Y+0.25·m·Φ)、**filter_key=accuracy**（.01/.99）、clip .2/.28、GPU 0,1（GPU 2/3 为另一条线 DTPO，不受影响）。代码 `obs/src/grpo_d2/`（reward_d2.py sha 前缀 dc8fbbb4…），服务器 `/root/autodl-tmp/myproject/grpo_d2`，输出 `outputs/d2_ht5`，日志 `outputs/d2_ht5.log`。换引用不变分（A 类判据反向）由构造保证：奖励不读文本引用。
+A-SFT 起点、4k 池、32 步、128×8、mini 32、lr 1e-6、seed 42、λ=0.25、R=V·(Y+0.25·m·Φ)、**filter_key=accuracy**（.01/.99）、clip .2/.28、GPU 0,1（GPU 2/3 为另一条线 DTPO，不受影响）。代码 `obs/src/grpo_d2/`（reward_d2.py sha 前缀 dc8fbbb4…），部署目录标识 `grpo_d2`，输出 `outputs/d2_ht5`，日志 `outputs/d2_ht5.log`。换引用不变分（A 类判据反向）由构造保证：奖励不读文本引用。
 
 已知边界：Hτ 不含"末裁=使用"锚定（Aτ 出局）；语义绑定（D3）后置；GT 存疑 152 题沿用 m 判定（index.json 已含）。
