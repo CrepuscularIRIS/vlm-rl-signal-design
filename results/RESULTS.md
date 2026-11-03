@@ -1,6 +1,8 @@
 # 当前结果
 
-新增入口：[三类基础baseline：Base / A-SFT / outcome-only GRPO](baseline_classes_20261031/REPORT.md)。原先的八方法表保留为历史算法对照；不再代替第一、二类展示。
+新增入口：[R-read 离线准入（2026-11-03）](rread_admission_20261103/RESULTS.zh.md)——读取一致性奖励的评分器 16/16 反例通过、2,048 条真实轨迹双路径零偏差、有效读取差异率 0.509 ≫ 10% 准入线，G1 进入完整训练。
+
+其余新增入口：[三类基础baseline：Base / A-SFT / outcome-only GRPO](baseline_classes_20261031/REPORT.md)。原先的八方法表保留为历史算法对照；不再代替第一、二类展示。
 
 事实快照；本次没有新增GPU评测。每方法2208条，失败保留分母。上游已发布25条件均快照到data/rollouts；完整目录见 [catalog](CONDITIONS.md)。
 
