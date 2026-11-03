@@ -121,7 +121,9 @@ Native Zoom 是模型输出工具文本、由本地执行器裁图的接口；�
 
 相对 DAPO，SP 新增答对 214 条、失去 269 条；CA 新增 223 条、失去 243 条。下面的曲线来自实际日志，开发验证只有真实记录的检查点。
 
-![七方法训练与开发验证曲线](results/po_final32_20261031/algorithm_comparison.png)
+![我们的方法 vs 优化器基线训练曲线](results/g1_rread_20261103/ours_vs_optimizers.png)
+
+（2026-11-03 起按指示移除 PO/SP/CA 与 RLOO 家族曲线；历史七方法图存档于 [po_final32_20261031](results/po_final32_20261031/algorithm_comparison.png)。G1 的 advantage-nonzero token share .75–.82 vs 优化器 ~.6：读取过程奖励使全对/全错组仍可学习。）
 
 [SP／CA 设计与实跑公式](design/PO_METHODS.md) · [最终结果、成本与多源分层](results/po_final32_20261031/REPORT.md) · [局部信用诊断](results/po_diagnostic_20261031/RESULTS.md) · [历史算法配置与曲线核对](results/ALGORITHM_CURVE_AUDIT.md)
 
