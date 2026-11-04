@@ -12,7 +12,7 @@ from pathlib import Path
 
 HERE = Path(__file__).parent
 RUNS = HERE.parents[1]
-sys.path.insert(0, str(RUNS.parent / "notes" / "rereview_20261104"))
+sys.path.insert(0, str(HERE.parents[1] / "rereview_20261104" / "scripts"))  # public layout
 from vstar_recheck import cover, find_item  # noqa: E402
 
 OUT = {}
