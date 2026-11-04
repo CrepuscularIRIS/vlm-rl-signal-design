@@ -34,7 +34,17 @@ DTPO 答对 1,447/2,208，DAPO 答对 1,465/2,208；两者相差 18 条。V* 分
 
 B-SFT 线放弃（.4543 vs A-SFT .5670）。Hτ-on-DAPO 失败机制定位：DAPO 动态过滤恰好丢弃全错组——过程分唯一有增量信息的地方。本轮在 **GRPO（无过滤）**上跑 **E1-GRPO（纯终答对照）与 E2-GRPO（+τ 门控覆盖过程分，唯一变量）**；候选 E3（边际增益）/E4（末裁锚定）待批。含变体总表（Aτ/Hτ/B-event/D2-set 及各自离线关结果）。[冻结文档](design/E_SERIES_GRPO.md)
 
-## Oracle 诊断：43% 错答是感知层瓶颈（2026-11-03）
+## GRPO vs A+B vs A+B+C：Design_New 的两种改动（2026-11-04）
+
+A = 尺度门控证据获取分 S（L1 框 + L2 evidence_sets，进 reward，λ=0.1）；B = advantage 按 std(y) 归一；C = 384 行证据续答行（GT 视图注入，仅任务奖励）。同起点、同题序、32 步。E1：GRPO .6390、**A+B .6472**（配对净增 +18）、A+B+C .6395（+1）。A+B 的裁图从 1.905 增至 2.404 张/条。[三部分报告](results/sg_20261104/RESULTS.zh.md) · 曲线 `results/sg_20261104/sg_curves.png` · 代码 `results/sg_20261104/code/`。
+
+![sg curves](results/sg_20261104/sg_curves.png)
+
+## 重审（2026-11-04）：Probe A 计分错误，读取层 43% 作废
+
+Probe A 不给题面，正则把描述中的冠词 “A” 当选项字母（DAPO 15/15、G1 14/14 命中均如此）；Probe B 167/180 复述模型原错答。V* 覆盖判据数值复现，但答错组物体在命中裁图中的尺度中位数为 0.038–0.066（答对组 0.167–0.193）。24 条错答人工逐图核对的分类、复核命令和仍成立的测量见 [results/rereview_20261104](results/rereview_20261104/RESULTS.zh.md)；新的 Pro 提示词见 [prompts/PRO_REREVIEW_20261104.md](prompts/PRO_REREVIEW_20261104.md)。
+
+## ~~Oracle 诊断：43% 错答是感知层瓶颈（2026-11-03）~~（已作废，见上）
 
 lm_understand-logs 方法论（给中间结果测下一步）分解 DAPO 743 条错答：搜索 46% + **读取 43%** + 推理 8%（V* 空间方向反转）+ 绑定 3%。给了模型自己的证据裁图（probe A 8.3%）或自己的读数描述（probe B 1.7%）几乎无法答对——**4B 看到了证据图也读不对**，几何过程奖励对此零触及。各来源瓶颈不同：V* 是推理（方向反转），MME/WB 是读取（值本身读错）。[完整结果](results/oracle_probes_20261103/RESULTS.zh.md)
 
