@@ -1,0 +1,136 @@
+{
+ "htau_flips_steps1-4_lam0.25": {
+  "mixed_groups": 296,
+  "correct": 1192.0,
+  "wrong": 1176.0,
+  "correct_with_nonpos_adv": 0,
+  "wrong_with_nonneg_adv": 2,
+  "groups_with_any_flip": 2,
+  "phi_mean_correct": 0.154,
+  "phi_mean_wrong": 0.078
+ },
+ "htau_flips_all_lam0.25": {
+  "mixed_groups": 2292,
+  "correct": 9156.0,
+  "wrong": 9180.0,
+  "correct_with_nonpos_adv": 8,
+  "wrong_with_nonneg_adv": 11,
+  "groups_with_any_flip": 14,
+  "phi_mean_correct": 0.261,
+  "phi_mean_wrong": 0.192
+ },
+ "htau_flips_all_lam0.1": {
+  "mixed_groups": 2292,
+  "correct": 9156.0,
+  "wrong": 9180.0,
+  "correct_with_nonpos_adv": 0,
+  "wrong_with_nonneg_adv": 0,
+  "groups_with_any_flip": 0,
+  "phi_mean_correct": 0.261,
+  "phi_mean_wrong": 0.192
+ },
+ "paired_DAPO_vs_Htau": {
+  "mme_realworld": {
+   "only_DAPO": 144,
+   "only_Htau": 132,
+   "net_Htau": -12
+  },
+  "mmmu_pro": {
+   "only_DAPO": 18,
+   "only_Htau": 13,
+   "net_Htau": -5
+  },
+  "vstar": {
+   "only_DAPO": 32,
+   "only_Htau": 25,
+   "net_Htau": -7
+  },
+  "worldbench": {
+   "only_DAPO": 45,
+   "only_Htau": 41,
+   "net_Htau": -4
+  }
+ },
+ "crops_on_lost_keys(DAPO right, Htau wrong)": {
+  "n": 239,
+  "DAPO": 2.67,
+  "Htau": 3.39,
+  "Htau_more_crops": 109,
+  "Htau_fewer_crops": 38
+ },
+ "crops_on_gained_keys(Htau right, DAPO wrong)": {
+  "n": 211,
+  "DAPO": 2.57,
+  "Htau": 3.0,
+  "Htau_more_crops": 81,
+  "Htau_fewer_crops": 47
+ },
+ "crops_all": {
+  "DAPO": 2.09,
+  "Htau": 2.55,
+  "GRPO": 1.91
+ },
+ "acc_by_correctness_crops": {
+  "DAPO": {
+   "crops_when_right": 1.86,
+   "crops_when_wrong": 2.55
+  },
+  "Htau": {
+   "crops_when_right": 2.21,
+   "crops_when_wrong": 3.17
+  },
+  "GRPO": {
+   "crops_when_right": 1.71,
+   "crops_when_wrong": 2.25
+  }
+ },
+ "absent_target_questions": {
+  "DAPO": {
+   "n": 72,
+   "acc": 0.361
+  },
+  "Htau": {
+   "n": 72,
+   "acc": 0.319
+  },
+  "GRPO": {
+   "n": 72,
+   "acc": 0.403
+  }
+ },
+ "vstar_after_cover": {
+  "DAPO": {
+   "crops_after_first_cover": 0.53,
+   "stop_at_cover": [
+    271,
+    0.963
+   ],
+   "more_after_cover": [
+    88,
+    0.773
+   ]
+  },
+  "Htau": {
+   "crops_after_first_cover": 0.84,
+   "stop_at_cover": [
+    209,
+    0.952
+   ],
+   "more_after_cover": [
+    158,
+    0.842
+   ]
+  },
+  "GRPO": {
+   "crops_after_first_cover": 0.44,
+   "stop_at_cover": [
+    264,
+    0.955
+   ],
+   "more_after_cover": [
+    83,
+    0.771
+   ]
+  }
+ }
+}
