@@ -1,177 +1,283 @@
-# VLM RL Signal Design
+# VLM 多轮裁图 RL：阶段性汇报（2026-11-04）
 
-SAPO-VLM 第 32 步 E1 为 57.70%，历史 DAPO 为 66.35%。[分源结果、成本、训练曲线与同题轨迹](results/sapo_vlm_20261102/REPORT.md)。
+Qwen3-VL-4B 在 caption v5.1 协议下多轮裁图后作答选择题。本页汇总到目前为止**同一起点、同一题池、同一评测**下的全部 RL 训练，按三部分组织：① 设定 ② 定性 + 定量 ③ 训练 Log。
 
-多轮视觉工具模型的实验记录与算法设计讨论。我们从模型的回答、实际裁图和失败实例出发，逐步讨论：**模型应该学到什么行为，以及怎样给出相应的训练信号。**
+> 旧版 README（含各阶段过程记录）已移到 [docs/README_before_stage_20261104.md](docs/README_before_stage_20261104.md)。11-03 发布的“读取层 43%”诊断已撤回，见 [results/rereview_20261104](results/rereview_20261104/RESULTS.zh.md)。
 
-本仓库面向研究者、导师，以及通过 GitHub MCP 阅读材料的网页 Pro。保存实验结果、设计公式、研究者猜测和文献笔记；最新整理于 **2026-11-02（America/New_York）**。
+## 阶段小结：结果与预估是否一致
 
-[从这里开始](START_HERE.md) · [给导师的阶段汇报](context/MENTOR_UPDATE_20261031.md) · [当前协议](protocol/CURRENT_PROTOCOL.md) · [文献](literature/README.md)
+| 预估（来源） | 观测 | 是否一致 |
+|---|---|---|
+| 尺度门控获取分 S 在训练中能被抬高（离线准入：无任务信号组 40.4% 有 S 方差） | S 从 0.11（第 1 步）升到 0.27（第 25–32 步均值）；门控开启率 0.86 → 0.93 | 一致 |
+| 预登记风险：S 可以靠多裁图抬高（8 格平铺离线 ΔS +0.164） | 训练后期裁图数 2.18 张/条，GRPO 为 1.65；E1 裁图 2.40 张/条，GRPO 为 1.91 | 一致（风险兑现） |
+| V\* 上答错时“覆盖了但目标太小”的情况会减少（尺度门的设计目的） | 答错且单裁覆盖 GT 的轨迹中，目标 <5% 裁图边长的条数：GRPO 14 → A+B 7；A+B+C 15 | A+B 一致，A+B+C 不一致 |
+| 端到端门槛：总体 E1 ≥ +1pp（R-bind 草案沿用的预登记线） | A+B +0.82pp（配对净增 +18/2,208）；A+B+C +0.05pp（净增 +1） | 均未达到 |
+| 证据续答行（C）提升“看到之后”的读取与推理 | 续答行训练正确率约 0.8，同步原题行约 0.6；E1 上 A+B+C 对 A+B 净增 −17：V\* +16、WorldBench −14、MME −13 | 未观测到整体迁移；第 31–32 步题目构成有偏差（见 §1.6） |
 
-## 补充：剩余题线索层标注与对照实验（2026-11-02）
+Design_New 给出的定位是：A 改变的是取证偏好，不证明感知能力提高。分层探针（给 GT 证据图、控制尺度、单独统计选项匹配错误）还没有跑。
 
-537 道止于 L0 的题与 152 道 gt 存疑题补一层 **LC 线索记录**（可见→可推测→未解决；歧义题记多解；disagree 题记按读数推出的选项，不改 gt），与 v2 终稿分开存放。配套五个对照实验：E2 线索覆盖离线审计、E3 gt 噪声上限复算（都用已有 k8 训练 rollouts，零 GPU）→ E1 hint 探针（两张空闲卡）→ E4 过程信号训练臂（后置）。[设计与实验矩阵](design/CLUE_ANNOTATION_AND_CONTROLLED_RUNS.md) · [testbed 主线](design/ANNOTATION_TESTBED.md)
+---
 
-## D2：覆盖+引用过程奖励通过离线判据（2026-11-02）
+## 一、设定
 
-D1-B 失败的引用关由新增引用项修复：同样的引用替换对照，D1 同分，D2 变分率 0.51（Δ中位 −1.0）。引用=使用为显式冻结假设，cite-all 余量 0.16–0.19 预登记为后置 hacking 观察项。[D2 协议](results/d2_offline_20261102/PROTOCOL.zh.md) · [D2 结果](results/d2_offline_20261102/RESULTS.zh.md)
+### 1.1 SFT
 
-## 末裁=使用：假设验证与算法方向（2026-11-02，GPU 已停）
+- **A-SFT**（所有 RL 的起点）：4,040 条 caption 轨迹，turnwise 格式，mask_history；E1 .5670。**本阶段无 SFT 语料改动。**
+- 因果叙事格式的新 SFT（B-SFT causal）：同样 4,040 条，改写成因果叙事、不做 mask_history。E1 只有 .4543；在其上再做 GRPO 得 .6033，仍低于 A-SFT 起点的 GRPO（.6390）。该线已停。
 
-实测：RL 后模型的最后一张裁图与 commit 引用一致率 92–93%，覆盖信号损失 ≤0.024——"最后裁图 ≈ 使用"冻结为工作假设，替代文本引用（免疫"写引用不裁图"）。配套算法方向文档给出等效视角（势能差分 ≡ 集合边际贡献 ≡ 事件级过程 GRPO，三者同一对象）与 A/B/C/D/E 五个候选，供 Pro 设计。[方向文档](design/USAGE_EQUIVALENCE_AND_ALGORITHM_DIRECTIONS.md) · [数据](data/usage_equivalence_20261102/lastcrop_vs_cited.json)
+### 1.2 协议（caption v5.1，训练与评测相同）
 
-## Hτ 训练臂启动（2026-11-02）
+- 每轮输出一个 `<think>`（首行 `Step N | WORD`，WORD ∈ locate / re_examine / fallback / commit / abstain），后接**恰好一个**动作：
+  - `<grounding>{"bbox_2d":[x1,y1,x2,y2],"source":"VIEW_ID"}</grounding>`：坐标是所选源视图上的 [0,1] 相对值；
+  - 或 `<answer>X</answer>`。
+- 每题最多 8 次裁图，外加 1 次最终作答回合。裁图从全分辨率原图重新切；任一边小于 56 px 时，绕中心扩到 56 px。
+- 呈现尺寸规则：
+  - 短边小于 448 时放大到 448，放大倍数最多 4×；
+  - 面积超过 1400² 时等比缩小；
+  - 边长对齐到 28 的倍数；
+  - 之后再经 `max_pixels = 589,824` 缩放。
+- **奖励 V·Y**：
+  - V = 1 当且仅当轨迹以合法 answer 结束（无硬协议错误、未截断）；
+  - Y = 1 当且仅当输出恰好一个 `<answer>X</answer>` 且 X 等于 gt；
+  - 奖励放在最后一个 assistant token 上；回执和图像 token 的 loss mask 为 0。
+- 模型的思考文本里**不写坐标**。下文凡是用到 bbox 的地方，都只在**奖励计算一侧**使用 L1 标注框。
 
-按设计评审矩阵：Aτ 离线判据出局（判别率 ≤0.53 且压攻击的 τ 清零过半正确轨迹），**Hτ（τ=0.005 精度门控集合覆盖）**通过并已在 GPU 0/1 启动 32 步对照；D0 用既有 k8 DAPO（E1 66.35%）。[冻结协议与 τ 定标](results/htau_training_20261102/PROTOCOL.zh.md)
+### 1.3 公共 RL 设置（所有 run 以此为准，差异在 §1.4 逐条列出）
 
-## DTPO 固定终点评测
-
-DTPO 答对 1,447/2,208，DAPO 答对 1,465/2,208；两者相差 18 条。V* 分别为 387/448、391/448。[设定、两条同题分歧与训练日志](results/dtpo_e1_20261103/RESULTS.zh.md) · [全阶段交付规范](protocol/EXPERIMENT_LIFECYCLE.zh.md)
-
-![固定 E1 准确率与每条轨迹的处理成本](results/dtpo_e1_20261103/e1_cost.png)
-
-## E 系列：GRPO 基座过程奖励（2026-11-03 冻结）
-
-B-SFT 线放弃（.4543 vs A-SFT .5670）。Hτ-on-DAPO 失败机制定位：DAPO 动态过滤恰好丢弃全错组——过程分唯一有增量信息的地方。本轮在 **GRPO（无过滤）**上跑 **E1-GRPO（纯终答对照）与 E2-GRPO（+τ 门控覆盖过程分，唯一变量）**；候选 E3（边际增益）/E4（末裁锚定）待批。含变体总表（Aτ/Hτ/B-event/D2-set 及各自离线关结果）。[冻结文档](design/E_SERIES_GRPO.md)
-
-## GRPO vs A+B vs A+B+C：Design_New 的两种改动（2026-11-04）
-
-A = 尺度门控证据获取分 S（L1 框 + L2 evidence_sets，进 reward，λ=0.1）；B = advantage 按 std(y) 归一；C = 384 行证据续答行（GT 视图注入，仅任务奖励）。同起点、同题序、32 步。E1：GRPO .6390、**A+B .6472**（配对净增 +18）、A+B+C .6395（+1）。A+B 的裁图从 1.905 增至 2.404 张/条。[三部分报告](results/sg_20261104/RESULTS.zh.md) · 曲线 `results/sg_20261104/sg_curves.png` · 代码 `results/sg_20261104/code/`。
-
-![sg curves](results/sg_20261104/sg_curves.png)
-
-## 重审（2026-11-04）：Probe A 计分错误，读取层 43% 作废
-
-Probe A 不给题面，正则把描述中的冠词 “A” 当选项字母（DAPO 15/15、G1 14/14 命中均如此）；Probe B 167/180 复述模型原错答。V* 覆盖判据数值复现，但答错组物体在命中裁图中的尺度中位数为 0.038–0.066（答对组 0.167–0.193）。24 条错答人工逐图核对的分类、复核命令和仍成立的测量见 [results/rereview_20261104](results/rereview_20261104/RESULTS.zh.md)；新的 Pro 提示词见 [prompts/PRO_REREVIEW_20261104.md](prompts/PRO_REREVIEW_20261104.md)。
-
-## ~~Oracle 诊断：43% 错答是感知层瓶颈（2026-11-03）~~（已作废，见上）
-
-lm_understand-logs 方法论（给中间结果测下一步）分解 DAPO 743 条错答：搜索 46% + **读取 43%** + 推理 8%（V* 空间方向反转）+ 绑定 3%。给了模型自己的证据裁图（probe A 8.3%）或自己的读数描述（probe B 1.7%）几乎无法答对——**4B 看到了证据图也读不对**，几何过程奖励对此零触及。各来源瓶颈不同：V* 是推理（方向反转），MME/WB 是读取（值本身读错）。[完整结果](results/oracle_probes_20261103/RESULTS.zh.md)
-
-## 感知差距设计简报（2026-11-03，给 Pro）
-
-诊断完成后交付云端 Pro 的设计简报：核心问题是**如何让过程奖励触及 43% 的读取层**（几何信号已证明零触及）。四个候选方案（转录一致性/绑定正确性/感知对比/末裁+读取联合）+ 4B vs 7B 对比 + 导师框架映射 + 可用资产清单。等待 Pro 的奖励公式与实验矩阵。[简报全文](design/PERCEPTION_GAP_BRIEF.zh.md)
-
-## R-read 冻结：L2 读取一致性奖励 + 无过滤 GRPO（2026-11-03）
-
-基于 Pro 的完整设计回复（papers/Design.md 全部追加内容），冻结 **R-read**：从 L2 编译 1–4 个关键读数字段，commit 中的明确读数经规则抽取+规范化精确匹配后计分，R = V·[Y + 0.25·m·Φ_read]。含离线准入（评分器 300 正/300 负例 + 成对反例 + 信号准入 ν 统计量）、G0–G3 训练矩阵（先跑 G1）、推翻条件（预登记）、hacking 防线和独立评测设计。[冻结协议](design/R_READ_FREEZE.zh.md) · [Pro 设计原文](../../../icml/papers/Design.md)
-
-## 当前方向
-
-**2026-11-02 · 标注作为 testbed。** 已核对 4,096 张数据集源图的尺寸，在 23 张抽查图上重放首轮预处理，并补标路牌和减速字样。Hint 用于构造 SFT 示范、学生无提示迁移、模型直接用原图或自由裁图的差异，分别留作实验对照。[主线看板](design/ANNOTATION_TESTBED.md)
-
-
-研究者已选择 **A 路线：保留 A-SFT，在 RL 阶段构造可验证的视觉过程信号**。希望把已有 hint 和行为卡片中的要求，转成与视觉推理正确性有关的奖励。方案与标注规范已有记录，尚无这一轮 Reward 训练结果。
-
-| 材料 | 记录的内容 |
+| 项 | 值 |
 |---|---|
-| [A 路线方案](design/PRIMITIVES_ROUTE_A.md) | 目标、现有区域命中与行为统计、待验证的过程信号 |
-| [Visual Primitives 对照](design/VISUAL_PRIMITIVES_BRIDGE.md) | 论文方法与 caption 协议的对应、目标逼近／探索信号 |
-| [13 类 hint 与奖励](design/HINTS_AS_REWARD.md) | hint 覆盖、候选用法及逐类讨论 |
-| [A 路线设计 v1](design/ROUTE_A_DESIGN_V1.md) | 最终取舍：hint 先作为条件输入，用于探针与课程；证据状态审计 M_t=(F,D,U)；审计通过后再加过程信号；事件级信用分配后置 |
-| [证据标注规范 v2（分级）](design/ANNOTATION_SPEC.md) | L0 定性 / L1 证据框 / L2 转录值、绑定元组、充分证据组合；覆盖 RL 4,096 题与开发探针 1,399 题；先试标 163 题 |
-| [导师过程信号要求](context/MENTOR_20261031_PROCESS_SIGNAL.md) | 匿名技术整理；与已测结果分开记录 |
+| 起点 | A-SFT（Qwen3-VL-4B） |
+| 题池 | rl4k：4,096 道题，原图互不相同；**每题只跑一遍**（32 步 × 128 题 = 4,096） |
+| rollout | 每题 n = 8；temperature 0.7；top_p 1.0 |
+| 更新 | 每步 128 题，actor mini-batch 32 题（每步 4 次更新）；ppo_epochs 1 |
+| 优化 | lr 1e-6，constant，warmup ratio 0.05；grad norm 1.0；无 KL |
+| clip | low 0.2 / high 0.3（dual clip 3.0）；token 平均 |
+| seed | 42；RandomSampler 题序（各 run 第 1 步的题目集合相同） |
+| 评测 E1 | 552 题 × 4 次采样 = 2,208；step 32 终点权重；统一评分器；截断、错误、无答案都保留在分母里 |
 
-DAPO-LOO 两组已按用户要求停止：L0 完整 24 步、L01 完整 28 步，未完成 32 步，未做 E1。checkpoint 和日志保留。下面的 Native Zoom 对照已经结束，监控已关闭。
+### 1.4 各方法：公式与取值
 
-## 最新结果：Native Zoom 坐标与 token 上限对照
+| 方法 | advantage / loss | 奖励 | 与 GRPO 的差异 |
+|---|---|---|---|
+| **GRPO** | Aᵢ = (rᵢ − mean_g r)/(std_g r + 1e-6)，铺到该轨迹的全部 assistant token；8 条全对或全错时 A = 0 | V·Y | — |
+| **DAPO** | 同 GRPO 的 advantage；**动态采样过滤**：只保留组均值 ∈ (0.01, 0.99) 的题组，不够 128 组就继续补采（max_try 100） | V·Y | ① 过滤：本 run 共生成 7,872 个题组，进入更新的是 4,096 组；② clip high 0.28；③ update micro 1 |
+| GSPO | 序列级 ratio sᵢ = mean_t(log π_θ − log π_old)，同一序列所有 token 共用 exp(sᵢ)；clip 到 [ln(1−3e-4), ln(1+4e-4)]；loss 先在序列内平均 | V·Y | loss 类型、平均方式、clip |
+| GiGPO | A = A_episode + 1.0·A_step。A_step：同题中“已收视图、已执行裁图框、已用裁图数、步序号”都相同的回合组成一组，在组内对终奖励做 z-score | V·Y | 多出 step 级 advantage |
+| RLOO | Aᵢ = rᵢ − 其余 n−1 条的均值（不除 std） | Y·(1 − 0.01·N)，N = 裁图数 | advantage；奖励含裁图成本；训练协议 v5.2i（Step 1 可以直接作答）；warmup 1 步 |
+| RLOO + 首动作分叉 | 在 RLOO 之上，于首个动作前分叉：强制 answer 4 条、强制 crop 4 条，用 D = mean R_answer − mean R_crop 监督首动作（\|D\|·BCE，β = 1/256） | 同 RLOO | 对 RLOO：多出首动作辅助损失（额外分叉 32,744 条） |
+| DTPO | 同 GRPO 的 advantage；loss 分段：L = 0.5·中间回合段 + 最终回合段，clip [0.8, 1.24] | V·Y | 分段 loss；clip high 0.24；warmup 1 步 |
+| SAPO | n = 1；共享 LM head 读 V/Q（无新 value head）；turn 级 GAE，γ = λ = 0.95；clip 0.2/0.2 | Y | n = 1；用 V/Q + GAE 代替组内比较 |
+| **Hτ**：加 bbox 覆盖奖励 | DAPO 式过滤（accuracy ∈ (0.01, 0.99)），clip high 0.28 | V·(Y + 0.25·m·Φ_τ)。Φ_τ = mean_j min(1, 0.5·(maxIoU_j + 并集覆盖_j))，只计“裁图中该 L1 框占比 ≥ τ = 0.005”的裁图；原图不计入 | 过程项 Φ_τ（L1 框）+ DAPO 过滤 |
+| **G1**：加读值一致性奖励 | 同 GRPO（无过滤） | V·(Y + 0.25·m·Φ_read)。Φ_read = 最后一次 `</grounding>` 之后的作答文本中，与 L2 读值精确一致的字段比例；枚举、否定、并列都记 0；m = 1 的题共 2,699 道 | 过程项 Φ_read（L2 读值，文本侧） |
+| **A+B**：尺度门控证据奖励 + 任务尺度归一的 advantage | **B**：Aᵢ = ((yᵢ − ȳ) + (s′ᵢ − s̄′)) / max(std(y), 1/√G)，其中 y = 1[R ≥ 1]，s′ = R − y，G = 8。全错或全对组中 \|A\| ≤ λ·√8 | **A**：R = V·(Y + 0.1·m·S)，S 的定义见下 | 奖励多 S 项；advantage 的分母只用任务部分 |
+| **A+B+C**：再加证据续答行 | 同 A+B | 同 A+B；续答行只用 V·Y，前缀不得过程分 | 384 行续答行（第 1–8 步每步 32 行，第 9–16 步每步 16 行，之后 0 行），每道题仍只出现一次 |
 
-同一个 A-SFT、同一 E1 题池与评分器。先对原生 Zoom 坐标做尺度适配，再只取消累计生成 token 上限。**三组都保留最多 8 次裁图和 32,768 上下文。**
+**S（尺度门控证据获取分）的计算**，对每个 L1 证据框 b 和模型看到的每个视图 v（含原图 v₀）：
 
-| 条件 | 正确／总数 | 准确率 | 裁图／条 | 生成 token／条 | 累计处理 token／条 |
+```
+c(b,v)  = |b ∩ v| / |b|                                  覆盖率
+p_b(v)  = 细节尺寸 × 视图缩放到最终模型输入的倍率        文字：框高 / 行数；物体：框短边
+a_b(v)  = 1[c ≥ 0.9] · h(p_b(v))                         h：文字 6→14 px、物体 16→48 px 线性升到 1（未校准）
+z_b     = max_v a_b(v)
+Φ       = max_{S ∈ L2 evidence_sets} mean_{b ∈ S} z_b
+门 g    = 1 当任一关键框（cell / answer_text / value_label / instance / target / data_mark / subject）的 a_b ≥ 0.5
+Ψ       = 0.25 · E′                  若 g = 0，E′ = 放大 ≥ 2× 的裁图并集面积占比（探索分，上限 0.25）
+        = 0.25 + 0.75 · Φ            若 g = 1（目标进度）
+S       = Ψ_T − Ψ_0                  Ψ_0 只用原图；原图上已能看清的题 S = 0
+```
+
+- 资格 m = 1 的条件：可回答、无 GT 分歧、L1 不是 absent/region_global、L1 置信度不为 low、至少一组 evidence_set 成员齐全且没有 `readable = false`。共 3,014/4,096 题。
+- 离线准入（A-SFT 真实轨迹 256 题 × 8）：无任务信号组中 S 有方差的占 40.4%（准入线 10%）；追加一张整图裁剪 ΔS = 0；8 格平铺 ΔS +0.164。
+- **C 的续答行**：取该题第一组 evidence_set 的并集框，每边外扩 10%，作为合成的第 1 步 locate 回合注入 prompt（不进 loss）；模型从第 2 步接着答。若并集框中有框达不到可用尺度，就改为每个框一个视图（最多 3 个）。
+
+### 1.5 rl4k 标注
+
+**思路**：对 RL 题池的每道题逐级回答三个问题。
+- L0：这题能不能答、gt 对不对。
+- L1：答题要看图里哪里。
+- L2：那里写的或画的是什么，以及它们怎样组合成答案。
+
+做不到常规框的题，另走线索层 LC。原则：逐题看图，不参考模型轨迹，不改 gt。
+
+| 层 | 内容 | 规模 |
+|---|---|---|
+| L0 定性 | 标注单位（single_box / keyed_set / multi_set / pair_relation / region_global / absent / unanswerable …）、可回答性、gt 核对（agree 3,369 / cannot_tell 575 / disagree 152）、task_tags | 4,096 |
+| L1 证据框 | 带 id 和 role 的框（cell 1,794、answer_text 1,433、row_header 1,279、col_header 1,121、instance 918 …），原图归一化 [x1,y1,x2,y2]；负候选框；`target_too_small`（主目标短边 < 56 px）；置信度 | 3,559 题，10,142 个框 |
+| L2 事实与绑定 | 每个框的读值（text / unit / readable）；绑定元组（table 1,685、entity 671、chart 429、compare 220、count 200、relation 135、chain 13）；**evidence_sets**（充分证据组合，3,212 题只有 1 组）；区分条件（为什么负候选不对） | 3,255 题 |
+| LC 线索层 | 没有常规证据框的题：可见线索 → 可推测 → 未解决。类别：needs_temporal 406、disagree 152、ambiguous 38、external 36、not_found 31、low_res 26 | 681 题 |
+
+- relation 绑定中 `computable_from_boxes = true` 的有 48 条：表示该关系是图像坐标系下的左右、上下，能直接由两框坐标算出。11-04 已把它们规范成 L/R/U/D：看图核对 18 条，其中 2 条标注方向错误，5 条不是方向关系。
+- 流程：
+  - gpt-6-astra 两轮标注：先出草稿，再叠框并对照原图裁图核对后写 L2；校验报错时回灌重做，最多 2 次。
+  - Claude Opus 5.5 审查 1,857 题：pass 1,499、小改 90、大改 268。
+  - needs_external_knowledge 的 215 题重标。
+  - 全量校验 0 error。
+
+### 1.6 hint 的构造与使用
+
+- **13 类 hint**：count、table、chart、map、instance、text、relation、color、search、aerial、screen、compute、puzzle。每类是一句操作指引，例如 table 类提示先确认行键和列路径再读单元格。原文见 [protocol/CAPTION_V51.md](protocol/CAPTION_V51.md)。
+- **生成规则 `task_hints`**：按题目元数据（material、category）、题面正则关键词、图像长边 ≥ 3000（触发 search）依次判断，每题最多 2 条，**不使用 gold**。
+- **在哪里出现**：
+  - 教师生成 SFT 轨迹时，按题在首轮 `Question:` 后加 `Hint: …`；
+  - 导出给学生的 SFT 数据去掉了 hint；
+  - RL 题池和 E1 的 prompt 中都**没有** hint。学生模型在 SFT、RL、评测中都没见过 hint 原文。
+- **标注阶段怎么用**：
+  - 规则 `task_hints` 用于生成单位草案；
+  - L0 的 task_tags 沿用 13 类名称，但按看图结果选，不按题面关键词选；
+  - 外部知识题重标时，以 compute hint 原文作为“该找什么证据”的指引。
+- 本阶段的 A / B / C 都没有把 hint 放进 prompt。C 的续答行也只注入证据视图，不注入 hint 或答案事实。
+
+### 1.7 本阶段的记录事项
+
+- A+B+C 第 31–32 步的原题集合与其他 run 不同：构造续答行时从题序尾部挑题，跳过的不合格题积在了最后两步。m = 0 的题分别占 49/128 和 109/128；GRPO 在同一批题上的正确率为 .566 / .318，A+B+C 为 .560 / .311。
+- 11-03 的 oracle 探针计分有误（正则把冠词 “A” 当成选项），依赖它的“读取层 43%”结论已撤回。
+
+---
+
+## 二、定性 + 定量
+
+### 2.1 E1 总分与成本（step 32；按 E1 降序）
+
+| 方法 | E1 | 正确 / 2,208 | 裁图 / 条 | 生成 token / 条 | 总处理 token / 条 |
 |---|---:|---:|---:|---:|---:|
-| 原 SFT Native Zoom | 710 / 2208 | 32.16% | 5.56 | 454.22 | 14,955.83 |
-| 坐标归一化，累计生成上限 8192 | 991 / 2208 | **44.88%** | 4.48 | 406.94 | 12,034.60 |
-| 坐标归一化，仅受剩余上下文限制 | 991 / 2208 | **44.88%** | 4.48 | 510.53 | 12,138.20 |
+| DAPO | **.6635** | 1465 | 2.092 | 287 | 8,930 |
+| DTPO | .6553 | 1447 | 3.357 | 395 | 15,579 |
+| Hτ（bbox 覆盖奖励） | .6508 | 1437 | 2.546 | 305 | 10,872 |
+| **A+B** | **.6472** | 1429 | 2.404 | 342 | 10,047 |
+| GSPO | .6395 | 1412 | 2.263 | 278 | 9,756 |
+| G1（读值一致性） | .6395 | 1412 | 2.308 | 374 | 10,063 |
+| **A+B+C** | .6395 | 1412 | 2.337 | 326 | 10,181 |
+| **GRPO** | .6390 | 1411 | 1.905 | 261 | 8,125 |
+| RLOO | .6318 | 1395 | 1.992 | 278 | 8,535 |
+| GiGPO | .6209 | 1371 | 1.998 | 275 | 8,506 |
+| RLOO + 首动作分叉 | .5919 | 1307 | 1.372 | 203 | 6,266 |
+| SAPO | .5770 | 1274 | 1.063 | 171 | 5,292 |
+| A-SFT 起点（无 RL） | .5670 | — | 0.994 | — | 5,015 |
 
-![Native Zoom 总体准确率、裁图与 token 成本](results/native_zoom_normalized_20261031/comparison.png)
+### 2.2 分源
 
-**本次观察：**归一化相对原条件新增答对 326 条、失去 45 条，净增 281 条（+12.73 个百分点）。取消累计生成上限后，逐条正确性完全相同；2,198 条逐轮记录不变，10 条长输出合计多生成 228,741 tokens，没有新增工具调用，最终仍以 length 截断。
+| 方法 | MME-RealWorld (1,356) | V\* (448) | WorldBench (248) | MMMU-Pro (156) |
+|---|---:|---:|---:|---:|
+| GRPO | .6645 | .8438 | .3347 | .3141 |
+| DAPO | .6881 | .8728 | .3468 | .3526 |
+| **A+B** | .6659 | .8371 | **.3952** | .3397 |
+| **A+B+C** | .6563 | **.8728** | .3387 | .3013 |
+| Hτ | .6792 | .8571 | .3306 | .3205 |
+| G1 | .6645 | .8527 | .3266 | .3077 |
+| GSPO | .6622 | .8348 | .3508 | .3397 |
+| GiGPO | .6342 | .8304 | .3750 | .2949 |
+| DTPO | .6799 | .8638 | .3548 | .3205 |
 
-实际看图核对了 2 题 4 条轨迹：时间轴例中，同样的工具请求在旧坐标解释下得到亚像素黑图，适配后读到日期并答对；几何例中，延长输出继续重复错误推导，两组均未完成有效终答。记录与重建限制见[完整报告](results/native_zoom_normalized_20261031/REPORT.md)。
+### 2.3 同题配对（uid + sample_idx，2,208 对）
 
-![Native Zoom 四个数据来源的准确率与分母](results/native_zoom_normalized_20261031/source_comparison.png)
+| 对比 | 两者都对 | 仅前者对 | 仅后者对 | 都错 | 后者净增 |
+|---|---:|---:|---:|---:|---:|
+| GRPO vs A+B | 1157 | 254 | 272 | 525 | **+18**（WorldBench 39 / 54） |
+| GRPO vs A+B+C | 1152 | 259 | 260 | 537 | +1（V\* 33 / 46） |
+| A+B vs A+B+C | 1146 | 283 | 266 | 513 | −17 |
 
-坐标适配规则是“四值均在 [0,1] 时乘 1000，否则保留 native 0–1000”，是范围启发式。**44.88% 是新适配条件的结果，原始 32.16% 保留。**取消累计生成限制仍受上下文约束。处理 token 包括跨轮重复的 prompt、图像和生成，不等于单条输出长度。
+本阶段未做显著性检验。
 
-[完整结果与轨迹](results/native_zoom_normalized_20261031/REPORT.md) · [汇总 CSV](results/native_zoom_normalized_20261031/summary.csv) · [分数据集计数](results/native_zoom_normalized_20261031/by_source.csv) · [验收与 SHA](results/native_zoom_normalized_20261031/PROVENANCE.json) · [绘图脚本](results/native_zoom_normalized_20261031/plot.py)
+### 2.4 案例（同题 4 次采样；V\* 原图不在公开库中，以下用文字描述）
 
-## 三类基础 baseline
+**案例 1：vstar_82“汽水罐是什么颜色”（GT 绿色，目标仅 8×12 px）。** GRPO 1/4，A+B 4/4，A+B+C 3/4。
+- GRPO s2：执行了 7 张裁图，覆盖目标的裁图中，目标都不到裁图边长的 2%。最后一张宽 1011 px，作答 “The soda can has a reddish tint” → B，错。
+- A+B s0：第 2 张裁图 56×56 px，目标约占裁图边长的 1/5，作答 “The enlarged view of the soda can shows it is a distinct green” → D，对。
 
-这些条件此前已经评测。第一、二类分别使用原模型与 A-SFT；第三类使用 outcome-only 标准 GRPO。每个条件均为 E1 的 552 题 × 4 次采样。
+**案例 2：vstar_15“行李箱是什么颜色”（GT 棕色，被栏杆部分遮挡，由一名穿黑裤的人拖着）。** GRPO 3/4，A+B 0/4。
+- A+B 有 2 条采样的裁图都没覆盖到这只行李箱，作答 “clearly black”。
+- A+B s0：第 4 张裁图紧框覆盖 GT（目标占裁图边长 0.73），仍答 “clearly dark, consistent with black” → C，错。
+- GRPO s0：68×56 px 裁图覆盖 GT，答 “brown suitcase carried by the person” → D，对。
 
-| 类别 | 模型与条件 | E1 准确率 |
-|---|---|---:|
-| I · 原模型 | Direct answer | 40.94% |
-| I · 原模型 | CoT | 52.17% |
-| I · 原模型 | Native Zoom prompt | 58.88% |
-| II · A-SFT | Direct answer | 38.63% |
-| II · A-SFT | CoT | 53.80% |
-| II · A-SFT | Native Zoom prompt（原始条件） | 32.16% |
-| III · 标准 GRPO | A-SFT + GRPO，caption，32 步 | 63.90% |
-| III · 标准 GRPO | Base + GRPO，caption，32 步 | 0.54% |
+### 2.5 V\* 答错轨迹的尺度复算
 
-Native Zoom 是模型输出工具文本、由本地执行器裁图的接口；与 caption 协议分别列示。SFT Native Zoom 的坐标适配结果见上一节。旧 6k×16／47 步和无工具 GRPO 条件在完整报告单列。
+口径：目标框长边 / 覆盖它的最小裁图长边。
 
-[三类 baseline 报告](results/baseline_classes_20261031/REPORT.md) · [精确分母与成本](results/baseline_classes_20261031/summary.csv) · [多数据集结果](results/baseline_classes_20261031/by_source.csv)
+| | V\* 错答 | 其中单裁覆盖 GT | 覆盖时尺度中位数 | 尺度 <5% 的条数 | 答对且覆盖时尺度中位数 |
+|---|---:|---:|---:|---:|---:|
+| GRPO | 70 | 38 | 0.066 | 14 | 0.193 |
+| A+B | 73 | 29 | 0.087 | 7 | 0.218 |
+| A+B+C | 57 | 30 | 0.053 | 15 | 0.153 |
 
-## RL 对比与局部信用实验
+---
 
-我们以 DAPO 为工作基线，尝试通过更细的中间信用改善学习。SP 和 CA 完成了 32 步训练及最终 E1，**本次均未超过 DAPO**。
+## 三、训练 Log
 
-| 方法 | 正确／2208 | E1 准确率 |
-|---|---:|---:|
-| DAPO | 1465 | **66.35%** |
-| PO-CA | 1445 | 65.44% |
-| GSPO | 1412 | 63.95% |
-| GRPO | 1411 | 63.90% |
-| PO-SP | 1410 | 63.86% |
-| RLOO control | 1395 | 63.18% |
-| GiGPO | 1371 | 62.09% |
+- 每张图只画一个指标。A+B、A+B+C 用粗线；GRPO、DAPO 用中等线；其余同协议 run 用淡线，作背景参照。
+- 线为 3 步滑动平均，圆点是重点 run 的逐步原始值。
+- 紫色阴影标出 A+B+C 第 31–32 步，这两步的题目构成不同（见 §1.7）。
+- 未记录某个指标的 run 写在图右下角，不补画。
+- 数据：[stage_report_20261104/family_long.csv](results/stage_report_20261104/family_long.csv)；脚本：[build_family.py](results/stage_report_20261104/scripts/build_family.py)、[plot_family.py](results/stage_report_20261104/scripts/plot_family.py)。
 
-相对 DAPO，SP 新增答对 214 条、失去 269 条；CA 新增 223 条、失去 243 条。下面的曲线来自实际日志，开发验证只有真实记录的检查点。
+**Reward**（日志里的 rollout 平均奖励；A+B 系列含 0.1·m·S，G1 含 0.25·m·Φ）
 
-![我们的方法 vs 优化器基线训练曲线](results/g1_rread_20261103/ours_vs_optimizers.png)
+![reward](results/stage_report_20261104/figs/fig02_reward.png)
 
-（2026-11-03 起按指示移除 PO/SP/CA 与 RLOO 家族曲线；历史七方法图存档于 [po_final32_20261031](results/po_final32_20261031/algorithm_comparison.png)。G1 的 advantage-nonzero token share .75–.82 vs 优化器 ~.6：读取过程奖励使全对/全错组仍可学习。）
+**训练正确率 Y**（不含续答行）。第 25–32 步均值：A+B .608、GRPO .613、DAPO .626、A+B+C .625（取第 25–30 步，避开构成偏差）
 
-[SP／CA 设计与实跑公式](design/PO_METHODS.md) · [最终结果、成本与多源分层](results/po_final32_20261031/REPORT.md) · [局部信用诊断](results/po_diagnostic_20261031/RESULTS.md) · [历史算法配置与曲线核对](results/ALGORITHM_CURVE_AUDIT.md)
+![acc](results/stage_report_20261104/figs/fig01_train_accuracy.png)
 
-各方法的样本供给、计算成本和部分训练设置不同，等 32 步不等于等计算；RLOO control 还使用不同训练协议与奖励。外部 Mini-o3-7B **63.95%**、DeepEyes-7B **55.89%** 为原生工具接口加 E1 采样／预算适配结果，未完成官方原生评测复现，详见[外部协议差异](protocol/EXTERNAL_PROTOCOLS.md)。
+**Entropy**（平均 token 熵）。第 25–32 步均值：A+B .469、GRPO .448、DAPO .447、A+B+C .417；G1 为 .471
 
-## 我们的思路与已经记录的失败
+![entropy](results/stage_report_20261104/figs/fig03_entropy.png)
 
-此前把问题分成三类，完整推导保存在 [CREDIT_ASSIGNMENT_FOCUS](design/CREDIT_ASSIGNMENT_FOCUS.md)：
+**Diff**（actor/ppo_kl，更新策略相对 rollout 策略，逐步原始值，×1e-4）。除 A+B 第 5 步的 1.0e-3 外，各 run 都在 ±1e-4 以内
 
-1. **信用分配**：成功轨迹中，关键裁图与不必要裁图可能得到同一个终答信号。
-2. **能力／状态表示**：即使观察到目标，仍可能认错属性、混淆对象，或在跨轮记忆与推理中出错。
-3. **奖励目标不完整**：只奖励最终答对，没有单独表达论据真实、视图引用正确、观察必要等目标。
+![kl](results/stage_report_20261104/figs/fig04_policy_diff.png)
 
-我们的尝试是先建模信用分配，希望 RL 同时学到更好的视觉推理能力，再用 Reward 信号补充目标。目前局部信用实验尚未跑过 DAPO；这些问题之间的关系仍是研究者的猜测，新的过程奖励方案见顶部 A 路线。
+**梯度范数**（裁剪前）。第 25–32 步均值：GRPO 5.99、DAPO 7.34、A+B 6.65、A+B+C 4.91
 
-已记录的现象包括：裁图排除了目标却仍引用该视图、声称读到了不存在的数字、混淆人物或物体身份、为匹配选项更换算式，以及答对但论据不对应。Native Zoom 对照还记录了坐标尺度错配和延长错误推导的实例。
+![grad](results/stage_report_20261104/figs/fig05_grad_norm.png)
 
-| 轨迹材料 | 范围 |
+**非零 advantage 的 token 占比**。全程均值：GRPO .64、A+B .75、A+B+C .73、DAPO 1.00（DAPO 在更新前丢掉了全对、全错的组）
+
+![adv](results/stage_report_20261104/figs/fig08_adv_nonzero.png)
+
+**裁图数 / 条**。第 25–32 步均值：A+B 2.18、A+B+C 2.04、DAPO 2.04、GRPO 1.65
+
+![crops](results/stage_report_20261104/figs/fig06_crops.png)
+
+**生成 token / 条**
+
+![gen](results/stage_report_20261104/figs/fig07_gen_tokens.png)
+
+**S 与门控开启率**（只有 A+B 系列计算这两项）
+
+![S](results/stage_report_20261104/figs/fig09_S.png)
+![gate](results/stage_report_20261104/figs/fig10_gate.png)
+
+**E1 汇总图**
+
+![e1](results/stage_report_20261104/figs/fig11_e1_scores.png)
+![cost](results/stage_report_20261104/figs/fig12_e1_cost.png)
+![src](results/stage_report_20261104/figs/fig13_e1_by_source.png)
+
+### GRPO 与 DAPO 的差异
+
+两者的 advantage 公式相同，差别在下面三点：
+- **过滤**：DAPO 丢掉全对和全错的题组，不足 128 组就补采。本 run 共生成 7,872 组，GRPO 是 4,096 组。所以 DAPO 进入更新的 token 全部带非零 advantage（GRPO 约 .64），代价是多出约 92% 的 rollout。
+- **clip high**：DAPO 0.28，GRPO 0.3。
+- **update micro batch**：DAPO 为 1，GRPO 为 2，属于显存工程差异。
+
+E1 上 DAPO 比 GRPO 高 2.45pp。A+B 是在 GRPO（无过滤）上做的改动，目前处在两者之间（.6472）。
+
+---
+
+## 后续实验（已列入但未开始）
+
+1. Design_New §3 的分层探针：同一批错题，依次给“模型自己尺度最合适的裁图”“GT 证据图”“GT 三档尺度”“正确转录”“正确绑定”，按选项计分；同时用来校准尺度函数 h。
+2. 修正 A+B+C 的题序构造，让每一步的原题集合与 GRPO 一致后重跑，单独得到 C 相对 A+B 的增量。
+3. 拆分 A+B 多出的约 0.5 张裁图 / 条、约 80 个生成 token / 条分别落在哪类题上；逐图审查 A+B 在 WorldBench 上的 +15 题。
+4. 7B 阶段（Qwen3-VL-8B、Qwen2.5-VL-7B）：模型规模、轨迹、RL 方法不同时更换。
+
+## 目录
+
+| 路径 | 内容 |
 |---|---|
-| [八方法同题页面](observations/CASE_INDEX.md)／[现象索引](observations/PHENOMENA.md) | 12 题 × 8 方法，96 条定向逐图审查 |
-| [PO 最终 E1 审查](results/po_final32_20261031/audit_findings.jsonl) | 四来源各三题 × SP／CA，共 24 条 |
-| [PO 同题诊断](results/po_diagnostic_20261031/RESULTS.md) | 18 条轨迹对照与局部信用记录 |
-| [Native Zoom 审查](results/native_zoom_normalized_20261031/audit_findings.jsonl) | 2 题 4 条，原条件／坐标适配／放宽生成上限 |
-| [既有 corpus 卡片](cards/README.md) | 与已见现象核对的候选模式，保留适用边界 |
-
-这些是定向样本，不能用来估算总体错误率。专业判断、小目标身份和无法核实的视觉事实保留“未判定”；不同审查批次不简单合并为独立样本总数。
-
-## 阅读与复核
-
-| 目的 | 入口 |
-|---|---|
-| 了解协议和终答评分 | [当前协议](protocol/CURRENT_PROTOCOL.md) · [caption v5.1 完整定义](protocol/CAPTION_V51.md) |
-| 看各方法多答对／少答对什么 | [同题得失](results/PAIRED_RESULTS.md) · [训练信号](results/TRAINING_SIGNALS.md) |
-| 了解导师要求与我们的汇报 | [要求整理](context/MENTOR_REQUIREMENTS.md) · [阶段汇报](context/MENTOR_UPDATE_20261031.md) |
-| 学习论文的问题构造与推导 | [文献目录](literature/README.md) · [阅读方式](literature/REASONING_GUIDE.md) · [Visual Primitives 精读](literature/readings/visual_primitives/精读.zh.md) |
-| 与网页 Pro 讨论 | [通用开场](prompts/PRO_START.md) · [Visual Primitives 讨论提示词](prompts/PRO_VISUAL_PRIMITIVES.md) |
-| 复算与核对来源 | [复现说明](REPRODUCIBILITY.md) · [来源记录](provenance/README.md) |
-
-E1 每个条件为 552 题 × 4 次采样，失败保留分母；E1 与部分开发／训练来源有交叉，**不是独立盲测**。公开内容包括脱敏结果、模型输出、图表和审查记录，不含原图、完整题面或机器信息；公开范围见 [RIGHTS](RIGHTS.md)。
-
-上游实验快照固定于[实验仓库 2c5155d](https://github.com/CrepuscularIRIS/vlm-caption-trajectories/tree/2c5155d7e629e6eadb043bb8c751035f9132fca9)。本仓库保存建模讨论与证据，不调度训练，也不自动执行文档中的提案。
+| [results/stage_report_20261104/](results/stage_report_20261104/) | 本页全部图（png / pdf）、长表、脚本 |
+| [results/sg_20261104/](results/sg_20261104/) | A+B / A+B+C 冻结记录、三部分报告、代码 |
+| [results/rereview_20261104/](results/rereview_20261104/) | Probe A/B 撤回与重审 |
+| [protocol/CAPTION_V51.md](protocol/CAPTION_V51.md) | 协议全文、13 类 hint |
+| [design/ANNOTATION_SPEC.md](design/ANNOTATION_SPEC.md) | L0 / L1 / L2 标注规范 |
+| [results/RESULTS.md](results/RESULTS.md) | 结果入口 |
+| [docs/README_before_stage_20261104.md](docs/README_before_stage_20261104.md) | 旧版 README |
