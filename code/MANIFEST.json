@@ -1,0 +1,792 @@
+{
+ "common_grpo_v52m_c": {
+  "description": "GRPO / DAPO / GSPO / K-base: shared adapter; algorithm switches are launcher overrides",
+  "files": [
+   {
+    "file": "caption_contracts.py",
+    "sha256_original": "d186998e304399fa33334e219e3c1b1727b0fcb8bd41847c6de2afa07dc5debe",
+    "source": "$PROJECT/grpo_v52m_c/caption_contracts.py"
+   },
+   {
+    "file": "caption_env.py",
+    "sha256_original": "e99c161bf200b6cdb0419c140939f96e5c98bd54d68dc526312c6d7a50fe52b5",
+    "source": "$PROJECT/grpo_v52m_c/caption_env.py"
+   },
+   {
+    "file": "easyr1_caption.py",
+    "sha256_original": "1831222c7661de2d9cd65a021c02d73d24a616e0e9d79dbf285a1e67903dc66f",
+    "source": "$PROJECT/grpo_v52m_c/easyr1_caption.py"
+   },
+   {
+    "file": "easyr1_patches.py",
+    "sha256_original": "2152d09475a498cea5c732143ffb6732b984a082e871215e77e41c5c85627788",
+    "source": "$PROJECT/grpo_v52m_c/easyr1_patches.py"
+   },
+   {
+    "file": "grpo_v52m_c.sh",
+    "sha256_original": "8cafdb7df93bfa8f614a002e43c33ed448857c6a9b5e74f3f014c6f6bd200c50",
+    "source": "$PROJECT/grpo_v52m_c/grpo_v52m_c.sh"
+   },
+   {
+    "file": "mem_watch.sh",
+    "sha256_original": "b482729fc81e67d7984c1484f06dfe773d8d75fde68b6a8085f15127139a6a7d",
+    "source": "$PROJECT/grpo_v52m_c/mem_watch.sh"
+   },
+   {
+    "file": "reward_caption.py",
+    "sha256_original": "d58f2e19c41945909731173be3ed412449637b8410288a23d7f6a1bbeab3e935",
+    "source": "$PROJECT/grpo_v52m_c/reward_caption.py"
+   },
+   {
+    "file": "reward_direct.py",
+    "sha256_original": "2c72010e97000cf7a136dcca2bd54ff2362e154c37fe88563d69bf8850691938",
+    "source": "$PROJECT/grpo_v52m_c/reward_direct.py"
+   },
+   {
+    "file": "update_ledger.py",
+    "sha256_original": "6b5ed810933d887da00e485e338792b831a562f3a560f15e71d1d468001057f2",
+    "source": "$PROJECT/grpo_v52m_c/update_ledger.py"
+   },
+   {
+    "file": "common.sh",
+    "sha256_original": "90822c477dbdb435d1b9c257a342646217a9deb7ed1055e8af1aa5a70e46c61d",
+    "source": "$OBS/runs/k8_20261028/common.sh"
+   },
+   {
+    "file": "slot1.sh",
+    "sha256_original": "d02596c0798d5bf819d58ddc2bbdc1263b7690e40a217c465c93d6739278670a",
+    "source": "$OBS/runs/k8_20261028/slot1.sh"
+   },
+   {
+    "file": "slot2.sh",
+    "sha256_original": "b208fb850a823b8f446f02b155cd8587649205420e2b09b749401b74f214395d",
+    "source": "$OBS/runs/k8_20261028/slot2.sh"
+   },
+   {
+    "file": "eval_k8.sh",
+    "sha256_original": "acf2598993c52909e4ef640f0b9698bfc4a2d215b3b27bbe0929668cccf0e927",
+    "source": "$OBS/runs/k8_20261028/eval_k8.sh"
+   }
+  ]
+ },
+ "easyr1_runtime": {
+  "description": "EasyR1 trainer sources used at runtime (Apache-2.0): GRPO/RLOO advantage, DAPO filtering, GSPO loss, PPO clip",
+  "files": [
+   {
+    "file": "config.py",
+    "sha256_original": "8ecc0fed698059932375ee19f44c47fa163ec5498766a34ce0c9a3abf23d2b8e",
+    "source": "$OBS/runs/dapo_loo_20261031/runtime_sources/verl/trainer/config.py"
+   },
+   {
+    "file": "core_algos.py",
+    "sha256_original": "871cadc71a8b04295ebdc8ff516ba242697e49cb27680920d4870a8431023d71",
+    "source": "$OBS/runs/dapo_loo_20261031/runtime_sources/verl/trainer/core_algos.py"
+   },
+   {
+    "file": "ray_trainer.py",
+    "sha256_original": "83b69c8f908c8ba5e21e6b71cd72209ec12831675dbe247a925bf22a8f01e7c1",
+    "source": "$OBS/runs/dapo_loo_20261031/runtime_sources/verl/trainer/ray_trainer.py"
+   }
+  ]
+ },
+ "gigpo": {
+  "description": "GiGPO: episode + step-anchor advantage",
+  "files": [
+   {
+    "file": "caption_contracts.py",
+    "sha256_original": "d186998e304399fa33334e219e3c1b1727b0fcb8bd41847c6de2afa07dc5debe",
+    "source": "$PROJECT/grpo_gigpo/caption_contracts.py"
+   },
+   {
+    "file": "caption_env.py",
+    "sha256_original": "e99c161bf200b6cdb0419c140939f96e5c98bd54d68dc526312c6d7a50fe52b5",
+    "source": "$PROJECT/grpo_gigpo/caption_env.py"
+   },
+   {
+    "file": "easyr1_caption.py",
+    "sha256_original": "11ecd02b9cd95bc7c5e8319e10c7e29c3e87b7644691ce00717c534ee14da22a",
+    "source": "$PROJECT/grpo_gigpo/easyr1_caption.py"
+   },
+   {
+    "file": "easyr1_patches.py",
+    "sha256_original": "2152d09475a498cea5c732143ffb6732b984a082e871215e77e41c5c85627788",
+    "source": "$PROJECT/grpo_gigpo/easyr1_patches.py"
+   },
+   {
+    "file": "gigpo.py",
+    "sha256_original": "114c4a55f8b1999f5d6535eb49a9d9751f4dea55f2b05ecfafb87442e7964385",
+    "source": "$PROJECT/grpo_gigpo/gigpo.py"
+   },
+   {
+    "file": "grpo_gigpo.sh",
+    "sha256_original": "92f3da1ca474b84ec7123ebe721d78eb6f399bb5f5e71d30ca22b5ca467d736a",
+    "source": "$PROJECT/grpo_gigpo/grpo_gigpo.sh"
+   },
+   {
+    "file": "mem_watch.sh",
+    "sha256_original": "b482729fc81e67d7984c1484f06dfe773d8d75fde68b6a8085f15127139a6a7d",
+    "source": "$PROJECT/grpo_gigpo/mem_watch.sh"
+   },
+   {
+    "file": "reward_caption.py",
+    "sha256_original": "d58f2e19c41945909731173be3ed412449637b8410288a23d7f6a1bbeab3e935",
+    "source": "$PROJECT/grpo_gigpo/reward_caption.py"
+   },
+   {
+    "file": "reward_direct.py",
+    "sha256_original": "2c72010e97000cf7a136dcca2bd54ff2362e154c37fe88563d69bf8850691938",
+    "source": "$PROJECT/grpo_gigpo/reward_direct.py"
+   },
+   {
+    "file": "test_gigpo.py",
+    "sha256_original": "ba1f6c035d7236795f761629d5cb540d5c9c5db7e300ef6a8f8da3e248db930c",
+    "source": "$PROJECT/grpo_gigpo/test_gigpo.py"
+   },
+   {
+    "file": "update_ledger.py",
+    "sha256_original": "6b5ed810933d887da00e485e338792b831a562f3a560f15e71d1d468001057f2",
+    "source": "$PROJECT/grpo_gigpo/update_ledger.py"
+   }
+  ]
+ },
+ "rloo_v53": {
+  "description": "RLOO control / RLOO + first-action fork (v53)",
+  "files": [
+   {
+    "file": ".pytest_cache/.gitignore",
+    "sha256_original": "3ed731b65d06150c138e2dadb0be0697550888a6b47eb8c45ecc9adba8b8e9bd",
+    "source": "$OBS/src/grpo_v53_dl/.pytest_cache/.gitignore"
+   },
+   {
+    "file": ".pytest_cache/README.md",
+    "sha256_original": "73fd6fccdd802c419a6b2d983d6c3173b7da97558ac4b589edec2dfe443db9ad",
+    "source": "$OBS/src/grpo_v53_dl/.pytest_cache/README.md"
+   },
+   {
+    "file": ".pytest_cache/v/cache/nodeids",
+    "sha256_original": "026532b506faebdeed7c7107d3b984aa6692002e32c2bba0722e7f2062ee5009",
+    "source": "$OBS/src/grpo_v53_dl/.pytest_cache/v/cache/nodeids"
+   },
+   {
+    "file": "SHA256.txt",
+    "sha256_original": "87eb918da9ab447a36884c38adbb04343754da459d7dcaa1660471e0d80d7801",
+    "source": "$OBS/src/grpo_v53_dl/SHA256.txt"
+   },
+   {
+    "file": "caption_contracts.py",
+    "sha256_original": "f64ad1b96cb30a10aec30f0b484108bdf62e5f24a82bf9fa4ed2230630d926f5",
+    "source": "$OBS/src/grpo_v53_dl/caption_contracts.py"
+   },
+   {
+    "file": "caption_env.py",
+    "sha256_original": "697e64f1f625a80159ca8d2d5a28f3aec1b89389816bd2f356e11c95c5d9a080",
+    "source": "$OBS/src/grpo_v53_dl/caption_env.py"
+   },
+   {
+    "file": "caption_v52i.py",
+    "sha256_original": "9992a057cc2722880223b55f99ba3573f4903ee26d70ec9481063c7107b12bb7",
+    "source": "$OBS/src/grpo_v53_dl/caption_v52i.py"
+   },
+   {
+    "file": "decision_loss.py",
+    "sha256_original": "85ed7ee7093e473d277105fdd90d69ed017a4d85241aa3addbdb789bdfd66075",
+    "source": "$OBS/src/grpo_v53_dl/decision_loss.py"
+   },
+   {
+    "file": "easyr1_caption.py",
+    "sha256_original": "7b57ac0fca8087fd6e74ac22b002a870571858cdd2b79b1690f08c2f3ee217bf",
+    "source": "$OBS/src/grpo_v53_dl/easyr1_caption.py"
+   },
+   {
+    "file": "grpo_v53_dl.sh",
+    "sha256_original": "7f0450fdd48b37c04c1961df0d3c2a3c3cb9abb3afe9264eec70a5f6594f3535",
+    "source": "$OBS/src/grpo_v53_dl/grpo_v53_dl.sh"
+   },
+   {
+    "file": "reward_caption.py",
+    "sha256_original": "c962c6dccfe18a47a68da3a24882f4d902fa9ee877887b60a83d4f8c3b99cc93",
+    "source": "$OBS/src/grpo_v53_dl/reward_caption.py"
+   },
+   {
+    "file": "signal_check.py",
+    "sha256_original": "6c0c016b926b5f7984b673f0350e7fd27075ead2b3d625e074b307395c4e0c82",
+    "source": "$OBS/src/grpo_v53_dl/signal_check.py"
+   },
+   {
+    "file": "test_decision_loss.py",
+    "sha256_original": "0b5c1c70227523285a5d77e7525c84b343b8ac86a70ab3b24770e5fc72c812e2",
+    "source": "$OBS/src/grpo_v53_dl/test_decision_loss.py"
+   },
+   {
+    "file": "test_review_regressions.py",
+    "sha256_original": "1f087d359692808bc8222c70502d999dcc2e36bfea31daec7ffd43704c0a8e34",
+    "source": "$OBS/src/grpo_v53_dl/test_review_regressions.py"
+   },
+   {
+    "file": "launch_formal.py",
+    "sha256_original": "45ae53eb4757181b466d9007c1a06947aedf621d554bcc8583dc69f795d1f711",
+    "source": "$OBS/runs/method_v53_20261029/launch_formal.py"
+   }
+  ]
+ },
+ "dtpo": {
+  "description": "DTPO: segmented loss (intermediate 0.5 + final)",
+  "files": [
+   {
+    "file": "OFFICIAL_LICENSE",
+    "sha256_original": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "source": "$OBS/runs/dtpo_vlm_20261101/code/OFFICIAL_LICENSE"
+   },
+   {
+    "file": "caption_contracts.py",
+    "sha256_original": "d186998e304399fa33334e219e3c1b1727b0fcb8bd41847c6de2afa07dc5debe",
+    "source": "$OBS/runs/dtpo_vlm_20261101/code/caption_contracts.py"
+   },
+   {
+    "file": "caption_env.py",
+    "sha256_original": "e99c161bf200b6cdb0419c140939f96e5c98bd54d68dc526312c6d7a50fe52b5",
+    "source": "$OBS/runs/dtpo_vlm_20261101/code/caption_env.py"
+   },
+   {
+    "file": "dtpo_adapter.py",
+    "sha256_original": "7bb9b442852b446ed7b0c97fb5094df127ae5dc3adea84ac84514b435b081c33",
+    "source": "$OBS/runs/dtpo_vlm_20261101/code/dtpo_adapter.py"
+   },
+   {
+    "file": "dtpo_official.py",
+    "sha256_original": "d5092909ac1d5ce7974a005abb599c0d7b0af5bc02f54633bae8a1b68f35df7b",
+    "source": "$OBS/runs/dtpo_vlm_20261101/code/dtpo_official.py"
+   },
+   {
+    "file": "easyr1_caption.py",
+    "sha256_original": "f81b5296f6f41c226d6b075f69fe98850931bae4babce1f54b515998082e8214",
+    "source": "$OBS/runs/dtpo_vlm_20261101/code/easyr1_caption.py"
+   },
+   {
+    "file": "easyr1_patches.py",
+    "sha256_original": "2152d09475a498cea5c732143ffb6732b984a082e871215e77e41c5c85627788",
+    "source": "$OBS/runs/dtpo_vlm_20261101/code/easyr1_patches.py"
+   },
+   {
+    "file": "launch.py",
+    "sha256_original": "4e12ab6297f9ea61fdb264170a0c8ccd2a65d2f8f1da7caccda00bcde3b67805",
+    "source": "$OBS/runs/dtpo_vlm_20261101/code/launch.py"
+   },
+   {
+    "file": "preflight.py",
+    "sha256_original": "807a197ab8a2eefb71668f17cc87e4f69baea58abb342640c5193173d8417c1b",
+    "source": "$OBS/runs/dtpo_vlm_20261101/code/preflight.py"
+   },
+   {
+    "file": "reward_caption.py",
+    "sha256_original": "d58f2e19c41945909731173be3ed412449637b8410288a23d7f6a1bbeab3e935",
+    "source": "$OBS/runs/dtpo_vlm_20261101/code/reward_caption.py"
+   },
+   {
+    "file": "reward_direct.py",
+    "sha256_original": "2c72010e97000cf7a136dcca2bd54ff2362e154c37fe88563d69bf8850691938",
+    "source": "$OBS/runs/dtpo_vlm_20261101/code/reward_direct.py"
+   },
+   {
+    "file": "run.sh",
+    "sha256_original": "3b73fa73c37d6be29c40d7b7e61df557146b49526ba445e93abf26670604b75d",
+    "source": "$OBS/runs/dtpo_vlm_20261101/code/run.sh"
+   },
+   {
+    "file": "test_adapter.py",
+    "sha256_original": "579a140b58d2d43a32f2e77eb3aa347ff78a3428b5a3e2ef9db624edcac815fc",
+    "source": "$OBS/runs/dtpo_vlm_20261101/code/test_adapter.py"
+   },
+   {
+    "file": "test_official.py",
+    "sha256_original": "2ffa286c609dad48af7e7e3f47a7607e7c9731a198912e8297c10e57530c3ec2",
+    "source": "$OBS/runs/dtpo_vlm_20261101/code/test_official.py"
+   },
+   {
+    "file": "update_ledger.py",
+    "sha256_original": "6b5ed810933d887da00e485e338792b831a562f3a560f15e71d1d468001057f2",
+    "source": "$OBS/runs/dtpo_vlm_20261101/code/update_ledger.py"
+   }
+  ]
+ },
+ "sapo": {
+  "description": "SAPO: n=1, shared-head V/Q, turn-level GAE",
+  "files": [
+   {
+    "file": "OFFICIAL_LICENSE",
+    "sha256_original": "58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd",
+    "source": "$OBS/runs/sapo_vlm_20261101/code/OFFICIAL_LICENSE"
+   },
+   {
+    "file": "caption_contracts.py",
+    "sha256_original": "d186998e304399fa33334e219e3c1b1727b0fcb8bd41847c6de2afa07dc5debe",
+    "source": "$OBS/runs/sapo_vlm_20261101/code/caption_contracts.py"
+   },
+   {
+    "file": "caption_env.py",
+    "sha256_original": "e99c161bf200b6cdb0419c140939f96e5c98bd54d68dc526312c6d7a50fe52b5",
+    "source": "$OBS/runs/sapo_vlm_20261101/code/caption_env.py"
+   },
+   {
+    "file": "easyr1_caption.py",
+    "sha256_original": "9f0e78b935a1cba93ae9e1af730a6d3eb43d1aa996911b6266a0d171d5df1ec9",
+    "source": "$OBS/runs/sapo_vlm_20261101/code/easyr1_caption.py"
+   },
+   {
+    "file": "easyr1_patches.py",
+    "sha256_original": "2152d09475a498cea5c732143ffb6732b984a082e871215e77e41c5c85627788",
+    "source": "$OBS/runs/sapo_vlm_20261101/code/easyr1_patches.py"
+   },
+   {
+    "file": "launch.py",
+    "sha256_original": "db2e84f6fa208dce8fe749a551093b1d9e89a129cc7a0851e1e024bcb184b9b6",
+    "source": "$OBS/runs/sapo_vlm_20261101/code/launch.py"
+   },
+   {
+    "file": "preflight.py",
+    "sha256_original": "19a979976b7d4a9efc49dd135c971da31ac8f048672dc4a63c7ce79e4815e75f",
+    "source": "$OBS/runs/sapo_vlm_20261101/code/preflight.py"
+   },
+   {
+    "file": "reward_caption.py",
+    "sha256_original": "d58f2e19c41945909731173be3ed412449637b8410288a23d7f6a1bbeab3e935",
+    "source": "$OBS/runs/sapo_vlm_20261101/code/reward_caption.py"
+   },
+   {
+    "file": "reward_direct.py",
+    "sha256_original": "2c72010e97000cf7a136dcca2bd54ff2362e154c37fe88563d69bf8850691938",
+    "source": "$OBS/runs/sapo_vlm_20261101/code/reward_direct.py"
+   },
+   {
+    "file": "run.sh",
+    "sha256_original": "d47c77f705d60d5e2cafbad000aa7ff6773e0b29e09c2f9be41769f962d317a7",
+    "source": "$OBS/runs/sapo_vlm_20261101/code/run.sh"
+   },
+   {
+    "file": "sapo_adapter.py",
+    "sha256_original": "531640c2eb970056309f6a5442b03701dd92f7a9502de95fd0d8877bd3c5c19e",
+    "source": "$OBS/runs/sapo_vlm_20261101/code/sapo_adapter.py"
+   },
+   {
+    "file": "sapo_official.py",
+    "sha256_original": "24472f17788ecad49382f8e5cc25f8bdb88db39cff5d6a451b7a112ba296ab92",
+    "source": "$OBS/runs/sapo_vlm_20261101/code/sapo_official.py"
+   },
+   {
+    "file": "test_sapo.py",
+    "sha256_original": "36668d8f774b5decd3de5d3e5102a6f3e4954cb68e735212bed4db5d8fe07604",
+    "source": "$OBS/runs/sapo_vlm_20261101/code/test_sapo.py"
+   },
+   {
+    "file": "update_ledger.py",
+    "sha256_original": "6b5ed810933d887da00e485e338792b831a562f3a560f15e71d1d468001057f2",
+    "source": "$OBS/runs/sapo_vlm_20261101/code/update_ledger.py"
+   }
+  ]
+ },
+ "htau_box_coverage": {
+  "description": "Htau: DAPO filter + tau-gated L1 box-coverage process reward (deployed reward_d2.py)",
+  "files": [
+   {
+    "file": "caption_contracts.py",
+    "sha256_original": "6f19fb3cf08129a78282dfa74e461d94023353d2638dcd1ab247cc209b02444b",
+    "source": "$PROJECT/grpo_d2/caption_contracts.py"
+   },
+   {
+    "file": "caption_env.py",
+    "sha256_original": "e99c161bf200b6cdb0419c140939f96e5c98bd54d68dc526312c6d7a50fe52b5",
+    "source": "$PROJECT/grpo_d2/caption_env.py"
+   },
+   {
+    "file": "easyr1_caption.py",
+    "sha256_original": "4c9b09b91e8f37477e840d03fc425e3d86992e4dfa854d2ed16d7c903e348686",
+    "source": "$PROJECT/grpo_d2/easyr1_caption.py"
+   },
+   {
+    "file": "easyr1_patches.py",
+    "sha256_original": "2152d09475a498cea5c732143ffb6732b984a082e871215e77e41c5c85627788",
+    "source": "$PROJECT/grpo_d2/easyr1_patches.py"
+   },
+   {
+    "file": "grpo_d2.sh",
+    "sha256_original": "05d6a69a01fa7aa408a52806f4c71fe7b083dba720ec43eb5c48dc2332bdc778",
+    "source": "$PROJECT/grpo_d2/grpo_d2.sh"
+   },
+   {
+    "file": "grpo_v52m_c.sh",
+    "sha256_original": "8cafdb7df93bfa8f614a002e43c33ed448857c6a9b5e74f3f014c6f6bd200c50",
+    "source": "$PROJECT/grpo_d2/grpo_v52m_c.sh"
+   },
+   {
+    "file": "mem_watch.sh",
+    "sha256_original": "b482729fc81e67d7984c1484f06dfe773d8d75fde68b6a8085f15127139a6a7d",
+    "source": "$PROJECT/grpo_d2/mem_watch.sh"
+   },
+   {
+    "file": "reward_caption.py",
+    "sha256_original": "d58f2e19c41945909731173be3ed412449637b8410288a23d7f6a1bbeab3e935",
+    "source": "$PROJECT/grpo_d2/reward_caption.py"
+   },
+   {
+    "file": "reward_d2.py",
+    "sha256_original": "dc8fbbb4ffaa34a2b2bb2d036623101686c8187abb596f8f3676577caeef7813",
+    "source": "$PROJECT/grpo_d2/reward_d2.py"
+   },
+   {
+    "file": "reward_direct.py",
+    "sha256_original": "2c72010e97000cf7a136dcca2bd54ff2362e154c37fe88563d69bf8850691938",
+    "source": "$PROJECT/grpo_d2/reward_direct.py"
+   },
+   {
+    "file": "update_ledger.py",
+    "sha256_original": "6b5ed810933d887da00e485e338792b831a562f3a560f15e71d1d468001057f2",
+    "source": "$PROJECT/grpo_d2/update_ledger.py"
+   }
+  ]
+ },
+ "g1_reading_consistency": {
+  "description": "G1: L2 reading-consistency process reward (deployed grpo_r1 + scorer)",
+  "files": [
+   {
+    "file": "caption_contracts.py",
+    "sha256_original": "39157c1057b3e3cb342a89049ad14a723ba9be99ebba129703f702e7bf608edd",
+    "source": "$PROJECT/grpo_r1/caption_contracts.py"
+   },
+   {
+    "file": "caption_env.py",
+    "sha256_original": "e99c161bf200b6cdb0419c140939f96e5c98bd54d68dc526312c6d7a50fe52b5",
+    "source": "$PROJECT/grpo_r1/caption_env.py"
+   },
+   {
+    "file": "easyr1_caption.py",
+    "sha256_original": "4c9b09b91e8f37477e840d03fc425e3d86992e4dfa854d2ed16d7c903e348686",
+    "source": "$PROJECT/grpo_r1/easyr1_caption.py"
+   },
+   {
+    "file": "easyr1_patches.py",
+    "sha256_original": "2152d09475a498cea5c732143ffb6732b984a082e871215e77e41c5c85627788",
+    "source": "$PROJECT/grpo_r1/easyr1_patches.py"
+   },
+   {
+    "file": "grpo_r1.sh",
+    "sha256_original": "1fa99f92da1cdfbd4a404368b0bf6fab063c54a9f7ee73912bc54e9115bda82d",
+    "source": "$PROJECT/grpo_r1/grpo_r1.sh"
+   },
+   {
+    "file": "grpo_v52m_c.sh",
+    "sha256_original": "8cafdb7df93bfa8f614a002e43c33ed448857c6a9b5e74f3f014c6f6bd200c50",
+    "source": "$PROJECT/grpo_r1/grpo_v52m_c.sh"
+   },
+   {
+    "file": "mem_watch.sh",
+    "sha256_original": "b482729fc81e67d7984c1484f06dfe773d8d75fde68b6a8085f15127139a6a7d",
+    "source": "$PROJECT/grpo_r1/mem_watch.sh"
+   },
+   {
+    "file": "reward_caption.py",
+    "sha256_original": "d58f2e19c41945909731173be3ed412449637b8410288a23d7f6a1bbeab3e935",
+    "source": "$PROJECT/grpo_r1/reward_caption.py"
+   },
+   {
+    "file": "reward_direct.py",
+    "sha256_original": "2c72010e97000cf7a136dcca2bd54ff2362e154c37fe88563d69bf8850691938",
+    "source": "$PROJECT/grpo_r1/reward_direct.py"
+   },
+   {
+    "file": "reward_rread.py",
+    "sha256_original": "22b28fc3def6ebc1e2c1964f1d2a338b1a9eb2888424d3a618240a7f2d24d99d",
+    "source": "$PROJECT/grpo_r1/reward_rread.py"
+   },
+   {
+    "file": "update_ledger.py",
+    "sha256_original": "6b5ed810933d887da00e485e338792b831a562f3a560f15e71d1d468001057f2",
+    "source": "$PROJECT/grpo_r1/update_ledger.py"
+   },
+   {
+    "file": "admission_stats.py",
+    "sha256_original": "ffdba32c2576849fa62428b8b035636208b68b623912750e691c39c247867e8d",
+    "source": "$OBS/src/rread/admission_stats.py"
+   },
+   {
+    "file": "reward_rread.py",
+    "sha256_original": "22b28fc3def6ebc1e2c1964f1d2a338b1a9eb2888424d3a618240a7f2d24d99d",
+    "source": "$OBS/src/rread/reward_rread.py"
+   },
+   {
+    "file": "rread_scorer.py",
+    "sha256_original": "6d5cd5525182d13c4a867addedfc047fcc1eab418631f14502988d6bc7c8ed29",
+    "source": "$OBS/src/rread/rread_scorer.py"
+   },
+   {
+    "file": "run_admission.py",
+    "sha256_original": "5f6bef34a4b380fc041b796483fac14db084244b33c88b382fcc1734604869e2",
+    "source": "$OBS/src/rread/run_admission.py"
+   }
+  ]
+ },
+ "sg_scale_gated": {
+  "description": "A+B / A+B+C: scale-gated evidence reward, task-scaled advantage, evidence-continuation rows",
+  "files": [
+   {
+    "file": "build_cont_pool.py",
+    "sha256_original": "604399cdd75e80b39139adbc8ec6f59eb46ecc8a1b7319268db6de0388c95498",
+    "source": "$OBS/src/grpo_sg/build_cont_pool.py"
+   },
+   {
+    "file": "build_sg_index.py",
+    "sha256_original": "44cf86042692b7e2809b0ab1a155683fdf8e33e3b13806513d405c7b3bd78bf0",
+    "source": "$OBS/src/grpo_sg/build_sg_index.py"
+   },
+   {
+    "file": "caption_contracts.py",
+    "sha256_original": "2c039c519d2b2314450ab6b321e0201ef3a16f76532488723f1bf2e15dfcb9d9",
+    "source": "$OBS/src/grpo_sg/caption_contracts.py"
+   },
+   {
+    "file": "caption_env.py",
+    "sha256_original": "e99c161bf200b6cdb0419c140939f96e5c98bd54d68dc526312c6d7a50fe52b5",
+    "source": "$OBS/src/grpo_sg/caption_env.py"
+   },
+   {
+    "file": "easyr1_caption.py",
+    "sha256_original": "81284bdf6922b75bf9399fc4e2e659f5a5fcefcbef773c94f83791a2c74641db",
+    "source": "$OBS/src/grpo_sg/easyr1_caption.py"
+   },
+   {
+    "file": "easyr1_patches.py",
+    "sha256_original": "2152d09475a498cea5c732143ffb6732b984a082e871215e77e41c5c85627788",
+    "source": "$OBS/src/grpo_sg/easyr1_patches.py"
+   },
+   {
+    "file": "grpo_sg.sh",
+    "sha256_original": "2fe2173096f5dcf3de94e4025cf0c41225dc334e6ec52ccb338b85dc5a6b6114",
+    "source": "$OBS/src/grpo_sg/grpo_sg.sh"
+   },
+   {
+    "file": "grpo_v52m_c.sh",
+    "sha256_original": "8cafdb7df93bfa8f614a002e43c33ed448857c6a9b5e74f3f014c6f6bd200c50",
+    "source": "$OBS/src/grpo_sg/grpo_v52m_c.sh"
+   },
+   {
+    "file": "mem_watch.sh",
+    "sha256_original": "b482729fc81e67d7984c1484f06dfe773d8d75fde68b6a8085f15127139a6a7d",
+    "source": "$OBS/src/grpo_sg/mem_watch.sh"
+   },
+   {
+    "file": "reward_caption.py",
+    "sha256_original": "d58f2e19c41945909731173be3ed412449637b8410288a23d7f6a1bbeab3e935",
+    "source": "$OBS/src/grpo_sg/reward_caption.py"
+   },
+   {
+    "file": "reward_direct.py",
+    "sha256_original": "2c72010e97000cf7a136dcca2bd54ff2362e154c37fe88563d69bf8850691938",
+    "source": "$OBS/src/grpo_sg/reward_direct.py"
+   },
+   {
+    "file": "reward_sg.py",
+    "sha256_original": "022b900a88c721fd421198870496c012b2898cc98ff33c6e83f3c0b1ac46fef8",
+    "source": "$OBS/src/grpo_sg/reward_sg.py"
+   },
+   {
+    "file": "smoke_cpu.py",
+    "sha256_original": "28128a8415ac0a030e8e1b042aaa98d5a0f5c3a2f4c24011b64e96ce61b6e692",
+    "source": "$OBS/src/grpo_sg/smoke_cpu.py"
+   },
+   {
+    "file": "update_ledger.py",
+    "sha256_original": "6b5ed810933d887da00e485e338792b831a562f3a560f15e71d1d468001057f2",
+    "source": "$OBS/src/grpo_sg/update_ledger.py"
+   },
+   {
+    "file": "sg_admission.py",
+    "sha256_original": "83a65dfc559d1a0c7b40dbaec06439bf7c232558d3e724abf5dd200b38ed65d8",
+    "source": "$OBS/runs/sg_20261104/sg_admission.py"
+   },
+   {
+    "file": "step_stats.py",
+    "sha256_original": "923393ea30b5aecea38e94544b41f62b04513a1389a71b14b1f3afab2bac9969",
+    "source": "$OBS/runs/sg_20261104/step_stats.py"
+   }
+  ]
+ },
+ "protocol": {
+  "description": "caption v5.1 reference module (SYSTEM, parse_step, check_step, receipts, task_hints)",
+  "files": [
+   {
+    "file": "caption_v51.py",
+    "sha256_original": "af0a4a7b6b92813f0685a9894996e2df6e43e58a954c6636ee5acbb87ea3a099",
+    "source": "$OBS/src/caption_v51.py"
+   }
+  ]
+ },
+ "eval_e1": {
+  "description": "E1 runners and the unified scorer (summarize.py)",
+  "files": [
+   {
+    "file": "eval_base.py",
+    "sha256_original": "9c6aa4cd398d59289657a8c73ebcbc0bf33386d680b57f0a07219b767e04735e",
+    "source": "$PROJECT/evidence/baselines_v52_20261024/code_v2/eval_base.py"
+   },
+   {
+    "file": "eval_deepeyes.py",
+    "sha256_original": "e850c5666c48dd4eca835eae653d0091023be5012e270ce5e060fbeb6945bd9c",
+    "source": "$PROJECT/evidence/baselines_v52_20261024/code_v2/eval_deepeyes.py"
+   },
+   {
+    "file": "eval_minio3.py",
+    "sha256_original": "25a6f78e44c34c0e2d5f329918ecd20febbe47d47fe5b8db3718d267a2b1b288",
+    "source": "$PROJECT/evidence/baselines_v52_20261024/code_v2/eval_minio3.py"
+   },
+   {
+    "file": "eval_v4.py",
+    "sha256_original": "edd936cec1f419d1d1195ad3901e554d595066cdebc664cdaa6c99517d31e918",
+    "source": "$PROJECT/evidence/baselines_v52_20261024/code_v2/eval_v4.py"
+   },
+   {
+    "file": "full_question.py",
+    "sha256_original": "1e1a0e532cd80ea40a7949ee7fb7d41007a342afac473140a37b6b34328fd343",
+    "source": "$PROJECT/evidence/baselines_v52_20261024/code_v2/full_question.py"
+   },
+   {
+    "file": "plateau_stop.py",
+    "sha256_original": "6e89d6b7c74a52aaede092310ee2c7c566f62a6fbaebe5a03779bd0ff9311c42",
+    "source": "$PROJECT/evidence/baselines_v52_20261024/code_v2/plateau_stop.py"
+   },
+   {
+    "file": "queue_1027.sh",
+    "sha256_original": "c1746c9973459a573520ac248622221c935b2cb0414ab43ce64b915445218766",
+    "source": "$PROJECT/evidence/baselines_v52_20261024/code_v2/queue_1027.sh"
+   },
+   {
+    "file": "queue_gpu0.sh",
+    "sha256_original": "c537b916d28344052b90850ef533dd0489ce9a823e2018cf988bac3bc9bec3d5",
+    "source": "$PROJECT/evidence/baselines_v52_20261024/code_v2/queue_gpu0.sh"
+   },
+   {
+    "file": "run_eval.sh",
+    "sha256_original": "a832309470f203b8132d14ebe212df2d5cb62ccdccff456dad90e047ce8ddd37",
+    "source": "$PROJECT/evidence/baselines_v52_20261024/code_v2/run_eval.sh"
+   },
+   {
+    "file": "summarize.py",
+    "sha256_original": "95caa9979e785bad38f9602eb21795f9062f8a38dcce01cbe3ff4b2db7a4d985",
+    "source": "$PROJECT/evidence/baselines_v52_20261024/code_v2/summarize.py"
+   },
+   {
+    "file": "traj_utils.py",
+    "sha256_original": "88b54d95b3ef1fbf1d3afa952a55726b2ba62ef3ddf0f127b414caeb6f31b46c",
+    "source": "$PROJECT/evidence/baselines_v52_20261024/code_v2/traj_utils.py"
+   },
+   {
+    "file": "caption_contracts.py",
+    "sha256_original": "5e7d68fba2fd160b3ff16a82b93def9490ca0327add047957950e6cfba4ed892",
+    "source": "$PROJECT/grpo_v51fix_codex/caption_contracts.py"
+   },
+   {
+    "file": "caption_env.py",
+    "sha256_original": "4f5865dbde0cf457ceafc7e6cfb8a917b67143d885cffc937cfbd55f98e31d35",
+    "source": "$PROJECT/grpo_v51fix_codex/caption_env.py"
+   },
+   {
+    "file": "easyr1_caption.py",
+    "sha256_original": "5de10d16507a683bb3ac7956f571ad5b80ec6e5131a33b6a934895f63789dbac",
+    "source": "$PROJECT/grpo_v51fix_codex/easyr1_caption.py"
+   },
+   {
+    "file": "resume_state.py",
+    "sha256_original": "bcd5d46eb1a905306595d71ac313c4b1aa0b7e5b3065b9fe337e06fc1a697ca1",
+    "source": "$PROJECT/grpo_v51fix_codex/resume_state.py"
+   },
+   {
+    "file": "reward_caption.py",
+    "sha256_original": "d58f2e19c41945909731173be3ed412449637b8410288a23d7f6a1bbeab3e935",
+    "source": "$PROJECT/grpo_v51fix_codex/reward_caption.py"
+   },
+   {
+    "file": "reward_direct.py",
+    "sha256_original": "2c72010e97000cf7a136dcca2bd54ff2362e154c37fe88563d69bf8850691938",
+    "source": "$PROJECT/grpo_v51fix_codex/reward_direct.py"
+   },
+   {
+    "file": "training_ledger.py",
+    "sha256_original": "8b13b222398f9e1afebea2d328d11d7a97d82db2bc3eeb301d15122e7bb1aa40",
+    "source": "$PROJECT/grpo_v51fix_codex/training_ledger.py"
+   }
+  ]
+ },
+ "annotation_rl4k": {
+  "description": "rl4k L0/L1/L2 + LC annotation pipeline, briefs and validator",
+  "files": [
+   {
+    "file": "annotate_api.py",
+    "sha256_original": "3c6758cb810abe1d5e6f092bd420f3176f866b517229366a85c92366c5c173ff",
+    "source": "$OBS/notes/rl_pool_annotation_20261101/annotation_task/annotate_api.py"
+   },
+   {
+    "file": "annotate_clues.py",
+    "sha256_original": "2cd3c1ff0e02ee34fb97475a1f36ef9ab2dcd40511e8d9064359798a98418da9",
+    "source": "$OBS/notes/rl_pool_annotation_20261101/annotation_task/annotate_clues.py"
+   },
+   {
+    "file": "validate_annotations.py",
+    "sha256_original": "3b1c01acf61df79ee87f994e957190e6578028b587119787eafd42f4a68c978f",
+    "source": "$OBS/notes/rl_pool_annotation_20261101/annotation_task/validate_annotations.py"
+   },
+   {
+    "file": "merge_fixes.py",
+    "sha256_original": "eb88c96e14e65d5934b476b635891b331842e99c99dc0bac06ea8cf96d8d84c8",
+    "source": "$OBS/notes/rl_pool_annotation_20261101/annotation_task/merge_fixes.py"
+   },
+   {
+    "file": "make_review_sheets.py",
+    "sha256_original": "0579a42ee3e710e959105c2482d181e72e0e6123e0adca8e8da887098ff5183b",
+    "source": "$OBS/notes/rl_pool_annotation_20261101/annotation_task/make_review_sheets.py"
+   },
+   {
+    "file": "prep_review.py",
+    "sha256_original": "7fc47ad96fbf69ecc5463423c3ad99745e1b196c1935991f059cf9e440ff98c1",
+    "source": "$OBS/notes/rl_pool_annotation_20261101/annotation_task/prep_review.py"
+   },
+   {
+    "file": "AGENT_PROMPT.md",
+    "sha256_original": "d752891c514fb256a0258565a7e535252341754d7de55bf6226769c5e29ee070",
+    "source": "$OBS/notes/rl_pool_annotation_20261101/annotation_task/AGENT_PROMPT.md"
+   },
+   {
+    "file": "L0_BRIEF.md",
+    "sha256_original": "2c7e5fc84cbd63dbc679b33b30e9ad996d46852a7a3ddf7c1b91a777e362b87f",
+    "source": "$OBS/notes/rl_pool_annotation_20261101/annotation_task/L0_BRIEF.md"
+   },
+   {
+    "file": "REANNO_BRIEF.md",
+    "sha256_original": "214eeeb7adeeccd22e6504609b81d131cf4d50e093c1e87bee9f99df0ebc9bbf",
+    "source": "$OBS/notes/rl_pool_annotation_20261101/annotation_task/REANNO_BRIEF.md"
+   },
+   {
+    "file": "REVIEWER_BRIEF.md",
+    "sha256_original": "a34fa4d88d2996f9aa1e4174fee93fd39cfee9f3bdbf744c8123398bd09f184e",
+    "source": "$OBS/notes/rl_pool_annotation_20261101/annotation_task/REVIEWER_BRIEF.md"
+   },
+   {
+    "file": "REVIEWER_SAMPLE_BRIEF.md",
+    "sha256_original": "332535d8821db348e4bef947c29f76eb9b4fbc9e47d0e1741bf1046a7b5f4331",
+    "source": "$OBS/notes/rl_pool_annotation_20261101/annotation_task/REVIEWER_SAMPLE_BRIEF.md"
+   },
+   {
+    "file": "SUBAGENT_BRIEF.md",
+    "sha256_original": "b28e1d78763bc7fd73ec5413e5f02e85b61034f12b36a102c2357f1025605848",
+    "source": "$OBS/notes/rl_pool_annotation_20261101/annotation_task/SUBAGENT_BRIEF.md"
+   },
+   {
+    "file": "build_types.py",
+    "sha256_original": "5d96372b7519e2060c5debb3b599c4f62892d305dc9f194a27b2a5c3343702be",
+    "source": "$OBS/notes/rl_pool_annotation_20261101/build_types.py"
+   },
+   {
+    "file": "build_canonical.py",
+    "sha256_original": "a6f8f7883c13ab22185364b40f42309c34945babab237b9ff025fc6ec1327deb",
+    "source": "$OBS/notes/rereview_20261104/relation_canonical/build_canonical.py"
+   }
+  ]
+ }
+}

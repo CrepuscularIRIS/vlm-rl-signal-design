@@ -57,38 +57,173 @@ Design_New 给出的定位是：A 改变的是取证偏好，不证明感知能�
 
 ### 1.4 各方法：公式与取值
 
-| 方法 | advantage / loss | 奖励 | 与 GRPO 的差异 |
-|---|---|---|---|
-| **GRPO** | Aᵢ = (rᵢ − mean_g r)/(std_g r + 1e-6)，铺到该轨迹的全部 assistant token；8 条全对或全错时 A = 0 | V·Y | — |
-| **DAPO** | 同 GRPO 的 advantage；**动态采样过滤**：只保留组均值 ∈ (0.01, 0.99) 的题组，不够 128 组就继续补采（max_try 100） | V·Y | ① 过滤：本 run 共生成 7,872 个题组，进入更新的是 4,096 组；② clip high 0.28；③ update micro 1 |
-| GSPO | 序列级 ratio sᵢ = mean_t(log π_θ − log π_old)，同一序列所有 token 共用 exp(sᵢ)；clip 到 [ln(1−3e-4), ln(1+4e-4)]；loss 先在序列内平均 | V·Y | loss 类型、平均方式、clip |
-| GiGPO | A = A_episode + 1.0·A_step。A_step：同题中“已收视图、已执行裁图框、已用裁图数、步序号”都相同的回合组成一组，在组内对终奖励做 z-score | V·Y | 多出 step 级 advantage |
-| RLOO | Aᵢ = rᵢ − 其余 n−1 条的均值（不除 std） | Y·(1 − 0.01·N)，N = 裁图数 | advantage；奖励含裁图成本；训练协议 v5.2i（Step 1 可以直接作答）；warmup 1 步 |
-| RLOO + 首动作分叉 | 在 RLOO 之上，于首个动作前分叉：强制 answer 4 条、强制 crop 4 条，用 D = mean R_answer − mean R_crop 监督首动作（\|D\|·BCE，β = 1/256） | 同 RLOO | 对 RLOO：多出首动作辅助损失（额外分叉 32,744 条） |
-| DTPO | 同 GRPO 的 advantage；loss 分段：L = 0.5·中间回合段 + 最终回合段，clip [0.8, 1.24] | V·Y | 分段 loss；clip high 0.24；warmup 1 步 |
-| SAPO | n = 1；共享 LM head 读 V/Q（无新 value head）；turn 级 GAE，γ = λ = 0.95；clip 0.2/0.2 | Y | n = 1；用 V/Q + GAE 代替组内比较 |
-| **Hτ**：加 bbox 覆盖奖励 | DAPO 式过滤（accuracy ∈ (0.01, 0.99)），clip high 0.28 | V·(Y + 0.25·m·Φ_τ)。Φ_τ = mean_j min(1, 0.5·(maxIoU_j + 并集覆盖_j))，只计“裁图中该 L1 框占比 ≥ τ = 0.005”的裁图；原图不计入 | 过程项 Φ_τ（L1 框）+ DAPO 过滤 |
-| **G1**：加读值一致性奖励 | 同 GRPO（无过滤） | V·(Y + 0.25·m·Φ_read)。Φ_read = 最后一次 `</grounding>` 之后的作答文本中，与 L2 读值精确一致的字段比例；枚举、否定、并列都记 0；m = 1 的题共 2,699 道 | 过程项 Φ_read（L2 读值，文本侧） |
-| **A+B**：尺度门控证据奖励 + 任务尺度归一的 advantage | **B**：Aᵢ = ((yᵢ − ȳ) + (s′ᵢ − s̄′)) / max(std(y), 1/√G)，其中 y = 1[R ≥ 1]，s′ = R − y，G = 8。全错或全对组中 \|A\| ≤ λ·√8 | **A**：R = V·(Y + 0.1·m·S)，S 的定义见下 | 奖励多 S 项；advantage 的分母只用任务部分 |
-| **A+B+C**：再加证据续答行 | 同 A+B | 同 A+B；续答行只用 V·Y，前缀不得过程分 | 384 行续答行（第 1–8 步每步 32 行，第 9–16 步每步 16 行，之后 0 行），每道题仍只出现一次 |
+记号：每题 $G=8$ 条 rollout，组记作 $g$。第 $i$ 条轨迹的奖励为 $r_i$；$V_i, Y_i\in\{0,1\}$ 的定义见 §1.2；$N_i$ 为裁图次数；$\rho_{i,t}=\pi_\theta/\pi_{\text{old}}$ 为 token 级重要性比。
 
-**S（尺度门控证据获取分）的计算**，对每个 L1 证据框 b 和模型看到的每个视图 v（含原图 v₀）：
+**参数一览**（未列出的项都与 §1.3 相同；各方法的源码见 [code/](code/README.md)）
 
-```
-c(b,v)  = |b ∩ v| / |b|                                  覆盖率
-p_b(v)  = 细节尺寸 × 视图缩放到最终模型输入的倍率        文字：框高 / 行数；物体：框短边
-a_b(v)  = 1[c ≥ 0.9] · h(p_b(v))                         h：文字 6→14 px、物体 16→48 px 线性升到 1（未校准）
-z_b     = max_v a_b(v)
-Φ       = max_{S ∈ L2 evidence_sets} mean_{b ∈ S} z_b
-门 g    = 1 当任一关键框（cell / answer_text / value_label / instance / target / data_mark / subject）的 a_b ≥ 0.5
-Ψ       = 0.25 · E′                  若 g = 0，E′ = 放大 ≥ 2× 的裁图并集面积占比（探索分，上限 0.25）
-        = 0.25 + 0.75 · Φ            若 g = 1（目标进度）
-S       = Ψ_T − Ψ_0                  Ψ_0 只用原图；原图上已能看清的题 S = 0
-```
+| 方法 | advantage | 奖励 | clip (low / high) | 过滤 | 其他差异 |
+|---|---|---|---|---|---|
+| GRPO | 组内 z-score | V·Y | 0.2 / 0.3 | 无 | — |
+| DAPO | 组内 z-score | V·Y | 0.2 / 0.28 | 组均值 ∈ (0.01, 0.99)，补采上限 100 | update micro 1 |
+| GSPO | 组内 z-score | V·Y | 3e-4 / 4e-4（序列级） | 无 | 序列内先平均 |
+| GiGPO | episode + 1.0 × step | V·Y | 0.2 / 0.3 | 无 | 锚点分组 |
+| RLOO | 留一基线 | Y(1 − 0.01N) | 0.2 / 0.3 | 无 | 训练协议 v5.2i，warmup 1 步 |
+| RLOO + 首动作分叉 | 同 RLOO | 同 RLOO | 0.2 / 0.3 | 无 | β = 1/256，每边 K = 4 分叉 |
+| DTPO | 组内 z-score | V·Y | 0.2 / 0.24 | 无 | 中间段权重 0.5 |
+| SAPO | turn 级 GAE（γ = λ = 0.95） | Y | 0.2 / 0.2 | 无 | n = 1；V/Q 损失系数各 0.1 |
+| Hτ | 组内 z-score | V·(Y + 0.25·m·Φ_τ) | 0.2 / 0.28 | 同 DAPO（filter_key = accuracy） | τ = 0.005 |
+| G1 | 组内 z-score | V·(Y + 0.25·m·Φ_read) | 0.2 / 0.3 | 无 | m = 1 的题共 2,699 道 |
+| **A+B** | 任务尺度归一 | V·(Y + 0.1·m·S) | 0.2 / 0.3 | 无 | m = 1 的题共 3,014 道 |
+| **A+B+C** | 任务尺度归一 | 同 A+B；续答行 V·Y | 0.2 / 0.3 | 无 | 384 行续答行 |
 
-- 资格 m = 1 的条件：可回答、无 GT 分歧、L1 不是 absent/region_global、L1 置信度不为 low、至少一组 evidence_set 成员齐全且没有 `readable = false`。共 3,014/4,096 题。
-- 离线准入（A-SFT 真实轨迹 256 题 × 8）：无任务信号组中 S 有方差的占 40.4%（准入线 10%）；追加一张整图裁剪 ΔS = 0；8 格平铺 ΔS +0.164。
-- **C 的续答行**：取该题第一组 evidence_set 的并集框，每边外扩 10%，作为合成的第 1 步 locate 回合注入 prompt（不进 loss）；模型从第 2 步接着答。若并集框中有框达不到可用尺度，就改为每个框一个视图（最多 3 个）。
+#### GRPO（对照）
+
+$$
+A_i=\frac{r_i-\operatorname{mean}_{g}(r)}{\operatorname{std}_{g}(r)+10^{-6}},\qquad r_i=V_iY_i
+$$
+
+$$
+\mathcal{L}=-\frac{1}{T}\sum_{i,t}\min\Big(\rho_{i,t}A_i,\ \operatorname{clip}(\rho_{i,t},\,1-0.2,\,1+0.3)\,A_i\Big)
+$$
+
+$A_i$ 铺到该轨迹的全部 assistant token；8 条全对或全错时 $A_i=0$。$A<0$ 时另有 dual clip $3.0$。
+
+#### DAPO
+
+advantage 与 GRPO 相同，差别在进入更新的题组：
+
+$$
+\text{keep group } g \iff 0.01<\operatorname{mean}_g(Y)<0.99
+$$
+
+保留的组不足 128 个时继续补采（最多 100 次）。本 run 共生成 7,872 个题组，进入更新 4,096 组。clip high 为 0.28。
+
+#### GSPO
+
+$$
+s_i=\frac{1}{\lvert y_i\rvert}\sum_t\big(\log\pi_\theta(y_{i,t})-\log\pi_{\text{old}}(y_{i,t})\big),\qquad
+\mathcal{L}_i=-\min\Big(e^{s_i}A_i,\ \operatorname{clip}(e^{s_i},\,1-3\times10^{-4},\,1+4\times10^{-4})\,A_i\Big)
+$$
+
+同一序列的所有 token 共用 $e^{s_i}$；loss 先在序列内平均，再跨序列平均。
+
+#### GiGPO
+
+$$
+A_{i,k}=A^{\text{episode}}_i+1.0\cdot\frac{r_i-\operatorname{mean}_{a}(r)}{\operatorname{std}_{a}(r)+10^{-6}}
+$$
+
+$a$ 是第 $k$ 个回合的锚点组。同一题中“已收视图、已执行裁图框、已用裁图数、步序号”都相同的回合属于同一个锚点组；单成员组的 step 项为 0。step 项只加在该回合的生成 token 上。
+
+#### RLOO 与 RLOO + 首动作分叉
+
+$$
+A_i=r_i-\frac{1}{G-1}\sum_{j\ne i}r_j,\qquad r_i=Y_i\,(1-0.01\,N_i)
+$$
+
+分叉监督：在首个动作之前的前缀 $h$ 处，强制 answer 续写 4 条、强制 crop 续写 4 条，各自续到终止。
+
+$$
+D=\operatorname{sg}\big(\bar R_{\text{answer}}-\bar R_{\text{crop}}\big),\qquad
+z=\log\pi(\text{answer tag}\mid h)-\log\pi(\text{grounding tag}\mid h)
+$$
+
+$$
+\ell=\operatorname{relu}(D)\,\operatorname{softplus}(-z)+\operatorname{relu}(-D)\,\operatorname{softplus}(z),\qquad
+\mathcal{L}=\mathcal{L}_{\text{RLOO}}+\frac{\beta}{H_0}\sum_q\ell_q,\quad \beta=\tfrac{1}{256},\ H_0=32
+$$
+
+#### DTPO
+
+advantage 同 GRPO。把非最终回合的 assistant token 合并为中间段 $I$，最终回合为 $F$：
+
+$$
+\mathcal{L}=0.5\cdot\frac{1}{\lvert I\rvert}\sum_{t\in I}\ell_t+\frac{1}{\lvert F\rvert}\sum_{t\in F}\ell_t,\qquad
+\ell_t=-\min\big(\rho_tA,\ \operatorname{clip}(\rho_t,0.8,1.24)\,A\big)
+$$
+
+#### SAPO
+
+$n=1$。用共享 LM head 读出每轮的 $V$（动作前）和 $Q$（本轮末），不新增 value head。
+
+$$
+\delta_k=r_k+\gamma\,c_k\,V_{k+1}-V_k,\qquad \hat A_k=\delta_k+\gamma\lambda\,c_k\,\hat A_{k+1},\qquad \gamma=\lambda=0.95
+$$
+
+$\hat A_k$ 在有效 turn 之间做方差归一，再广播到该轮生成 token。总损失为 PPO 损失（clip 0.2 / 0.2）加 $0.1\,\mathcal{L}_V+0.1\,\mathcal{L}_Q$。
+
+#### Hτ：bbox 覆盖过程奖励（DAPO 基座）
+
+$$
+r_i=V_i\Big(Y_i+0.25\,m_q\,\Phi_\tau\Big),\qquad
+\Phi_\tau=\frac{1}{J}\sum_{j=1}^{J}\min\Big(1,\ \tfrac12\big(\max_{v\in\mathcal{C}_j}\operatorname{IoU}(b_j,v)+\operatorname{cover}(b_j,\textstyle\bigcup\mathcal{C}_j)\big)\Big)
+$$
+
+$b_j$ 为第 $j$ 个 L1 证据框。$\mathcal{C}_j=\{v:\lvert b_j\cap v\rvert/\lvert v\rvert\ge\tau\}$，$\tau=0.005$，即只计入目标框在裁图中占比足够的裁图。原图不计入。
+
+#### G1：读值一致性过程奖励（GRPO 基座）
+
+$$
+r_i=V_i\Big(Y_i+0.25\,m_q\,\Phi_{\text{read}}\Big),\qquad
+\Phi_{\text{read}}=\frac{1}{K_q}\sum_{k=1}^{K_q}\mathbb{1}\big[\text{作答文本中字段 }k\text{ 的读数}=\text{L2 值}_k\big]
+$$
+
+作答文本 = 最后一次 `</grounding>` 之后的文本。读数经规范化后要求精确相等；枚举多个值、否定、并列都记 0；每个字段只算一次。
+
+#### A+B：尺度门控证据奖励 + 任务尺度归一的 advantage（GRPO 基座）
+
+**A（奖励）**
+
+$$
+r_i=V_i\big(Y_i+\lambda\,m_q\,S_i\big),\qquad \lambda=0.1
+$$
+
+对每个 L1 证据框 $b$ 和模型看到的每个视图 $v$（含原图 $v_0$）：
+
+$$
+c(b,v)=\frac{\lvert b\cap v\rvert}{\lvert b\rvert},\qquad
+p_b(v)=d_b\cdot s(v),\qquad
+a_b(v)=\mathbb{1}\big[c(b,v)\ge0.9\big]\cdot h\big(p_b(v)\big)
+$$
+
+- $d_b$：细节尺寸。文字取框高 / 行数，物体取框的短边。
+- $s(v)$：原图像素到最终模型输入像素的倍率（依次经过呈现规则和 `max_pixels`）。
+- $h$：线性上升后饱和于 1，文字 $6\to14$ px，物体 $16\to48$ px（**未校准**）。
+
+$$
+z_b=\max_{v}\,a_b(v),\qquad
+\Phi=\max_{\mathcal{S}\in\mathcal{E}_q}\ \frac{1}{\lvert\mathcal{S}\rvert}\sum_{b\in\mathcal{S}}z_b
+$$
+
+$\mathcal{E}_q$ 为 L2 的 evidence_sets（合法的充分证据组合）。
+
+$$
+\Psi=\begin{cases}0.25\,E' & g=0\\[2pt] 0.25+0.75\,\Phi & g=1\end{cases},\qquad
+S_i=\Psi_T-\Psi_0\in[0,1]
+$$
+
+- 门 $g=1$ 的条件：任一关键框（cell / answer_text / value_label / instance / target / data_mark / subject）满足 $a_b\ge0.5$。
+- $E'$：放大倍率 $\ge2$ 倍原图倍率的裁图，其并集面积占全图的比例（探索分，上限 0.25）。
+- $\Psi_0$ 只用原图计算，所以原图上已能看清的题 $S=0$。
+
+**B（advantage）**
+
+$$
+y_i=\mathbb{1}[r_i\ge1],\qquad s'_i=r_i-y_i,\qquad
+A_i=\frac{(y_i-\bar y)+(s'_i-\bar s')}{\max\big(\operatorname{std}(y),\ 1/\sqrt{G}\big)}
+$$
+
+因为 $\lambda S\le0.1<1$，$r$ 可以精确拆成 $y$ 和 $s'$。全错或全对组中 $\lvert A_i\rvert\le\lambda\sqrt{G}=0.28$；混合组里，过程项不会翻转任务项的符号（$\lambda<1/(G-1)$）。
+
+**资格 $m_q=1$**：可回答、无 GT 分歧、L1 不是 absent / region_global、L1 置信度不为 low、至少一组 evidence_set 成员齐全且没有 `readable=false`。共 3,014/4,096 题。
+
+**离线准入**（A-SFT 真实轨迹 256 题 × 8）：无任务信号组中 S 有方差的占 40.4%（准入线 10%）；追加一张整图裁剪 ΔS = 0；8 格平铺 ΔS +0.164。
+
+#### A+B+C：再加证据续答行
+
+- 在 A+B 基础上，把 384 行训练题换成续答行：第 1–8 步每步 32 行，第 9–16 步每步 16 行，之后为 0。每道题仍只出现一次。
+- 续答行把该题第一组 evidence_set 的并集框（每边外扩 10%）作为合成的第 1 步 locate 回合注入 prompt；这部分是 prompt token，不进 loss。若并集框中有框达不到可用尺度，就改为每个框一个视图（最多 3 个）。模型从第 2 步接着答。
+- 续答行只拿 $r=V\cdot Y$，注入的前缀不得过程分；它们与普通行同在一个 batch，但各自按题组计算 advantage。
 
 ### 1.5 rl4k 标注
 
@@ -272,8 +407,11 @@ E1 上 DAPO 比 GRPO 高 2.45pp。A+B 是在 GRPO（无过滤）上做的改动�
 
 ## 目录
 
+完整源码（每个方法一个目录，含公式所在函数与行号）见 [code/README.md](code/README.md)。
+
 | 路径 | 内容 |
 |---|---|
+| [code/](code/README.md) | 12 个方法、E1 评测、rl4k 标注的实际运行代码快照 + MANIFEST（原始 sha256） |
 | [results/stage_report_20261104/](results/stage_report_20261104/) | 本页全部图（png / pdf）、长表、脚本 |
 | [results/sg_20261104/](results/sg_20261104/) | A+B / A+B+C 冻结记录、三部分报告、代码 |
 | [results/rereview_20261104/](results/rereview_20261104/) | Probe A/B 撤回与重审 |
