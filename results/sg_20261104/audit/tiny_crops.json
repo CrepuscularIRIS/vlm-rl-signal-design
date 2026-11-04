@@ -1,0 +1,174 @@
+{
+ "GRPO": {
+  "crops": 4207,
+  "share_crops_tiny(<=128px)": 0.032,
+  "share_crops_at_min(<=64px)": 0.008,
+  "trajs_with_any_tiny": 114,
+  "acc_trajs_with_any_tiny": 0.605,
+  "last_crop_bucket": {
+   "<=128px": [
+    86,
+    0.686
+   ],
+   "129-256": [
+    314,
+    0.713
+   ],
+   "257-512": [
+    522,
+    0.648
+   ],
+   ">512": [
+    1190,
+    0.621
+   ]
+  },
+  "last_crop_tiny_by_source": {
+   "mme_realworld": [
+    38,
+    0.632
+   ],
+   "mmmu_pro": [
+    3,
+    0.667
+   ],
+   "vstar": [
+    30,
+    0.8
+   ],
+   "worldbench": [
+    15,
+    0.6
+   ]
+  }
+ },
+ "DAPO": {
+  "crops": 4620,
+  "share_crops_tiny(<=128px)": 0.018,
+  "share_crops_at_min(<=64px)": 0.004,
+  "trajs_with_any_tiny": 71,
+  "acc_trajs_with_any_tiny": 0.69,
+  "last_crop_bucket": {
+   "<=128px": [
+    53,
+    0.774
+   ],
+   "129-256": [
+    267,
+    0.779
+   ],
+   "257-512": [
+    568,
+    0.665
+   ],
+   ">512": [
+    1298,
+    0.636
+   ]
+  },
+  "last_crop_tiny_by_source": {
+   "mme_realworld": [
+    15,
+    0.8
+   ],
+   "mmmu_pro": [
+    7,
+    0.571
+   ],
+   "vstar": [
+    21,
+    0.905
+   ],
+   "worldbench": [
+    10,
+    0.6
+   ]
+  }
+ },
+ "A+B": {
+  "crops": 5308,
+  "share_crops_tiny(<=128px)": 0.039,
+  "share_crops_at_min(<=64px)": 0.01,
+  "trajs_with_any_tiny": 174,
+  "acc_trajs_with_any_tiny": 0.736,
+  "last_crop_bucket": {
+   "<=128px": [
+    140,
+    0.786
+   ],
+   "129-256": [
+    328,
+    0.704
+   ],
+   "257-512": [
+    600,
+    0.63
+   ],
+   ">512": [
+    1133,
+    0.626
+   ]
+  },
+  "last_crop_tiny_by_source": {
+   "mme_realworld": [
+    58,
+    0.759
+   ],
+   "mmmu_pro": [
+    9,
+    0.667
+   ],
+   "vstar": [
+    59,
+    0.898
+   ],
+   "worldbench": [
+    14,
+    0.5
+   ]
+  }
+ },
+ "A+B+C": {
+  "crops": 5159,
+  "share_crops_tiny(<=128px)": 0.021,
+  "share_crops_at_min(<=64px)": 0.003,
+  "trajs_with_any_tiny": 78,
+  "acc_trajs_with_any_tiny": 0.692,
+  "last_crop_bucket": {
+   "<=128px": [
+    63,
+    0.762
+   ],
+   "129-256": [
+    240,
+    0.696
+   ],
+   "257-512": [
+    568,
+    0.637
+   ],
+   ">512": [
+    1294,
+    0.631
+   ]
+  },
+  "last_crop_tiny_by_source": {
+   "mme_realworld": [
+    25,
+    0.64
+   ],
+   "mmmu_pro": [
+    7,
+    0.571
+   ],
+   "vstar": [
+    24,
+    0.958
+   ],
+   "worldbench": [
+    7,
+    0.714
+   ]
+  }
+ }
+}
