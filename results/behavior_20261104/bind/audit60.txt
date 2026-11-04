@@ -1,0 +1,238 @@
+[00] phi>0_right mme_10391 gt=B pred=B phi=1.00 crops=1
+     slot row='Total Non-Current Assets' col=[['Mar-23']] val=13,197,610.00 stated=True supported=True
+     TEXT: In the Total Non-Current Assets row, the Mar-23 column shows 13,197,610.00, while Jan-23 = 12,850,000.00 and Apr-23 = 13,352,665.00 . This matches option B.
+[01] phi>0_right mme_5702 gt=B pred=B phi=1.00 crops=2
+     slot row='COGS Margin %' col=[['2027']] val=62% stated=True supported=True
+     TEXT: In , the Financial Ratios table's COGS Margin % row and 2027 column intersect at 62%. This matches option B.
+[02] phi>0_right mme_7441 gt=B pred=B phi=1.00 crops=1
+     slot row='Revenue' col=[['Actual'], ['YTD']] val=900,000 stated=True supported=True
+     TEXT: In the Profit from Operation table, the Revenue row under the Actual column shows 900,000 . This matches option B.
+[03] phi>0_right mme_8356 gt=C pred=C phi=1.00 crops=2
+     slot row='Name 1' col=[['Landscaping']] val=$250 stated=True supported=True
+     TEXT: In , the Landscaping column’s first data cell is $250, and its row is Name 1. That matches option C.
+[04] phi>0_right mme_10286 gt=A pred=A phi=1.00 crops=1
+     slot row='Total Revenue' col=[['Year-To-Date'], ['Actual']] val=12,768,904 stated=True supported=True
+     TEXT: In the Year-To-Date table, the Total Revenue row’s Actual value is 12,768,904, matching option A . The other numbers shown are for the September 2021 table.
+[05] phi>0_right mme_7853 gt=C pred=C phi=1.00 crops=1
+     slot row='Fund 6' col=[['Cash Required'], ['GP']] val=($307,608) stated=True supported=True
+     TEXT: In , the Fund 6 row under the Cash Required > GP column shows ($307,608). This matches option C ($307608).
+[06] phi>0_right mme_5798 gt=A pred=A phi=1.00 crops=1
+     slot row='Furniture and Fixtures' col=[['Forecasted'], ['2024']] val=10,000.00 stated=True supported=True
+     TEXT: In , the Capital Expenditure (CAPEX) table's Furniture and Fixtures row intersects the 2024 Forecasted column at $10,000.00, matching option A.
+[07] phi>0_right mme_10102 gt=B pred=B phi=1.00 crops=3
+     slot row='FY21B Budgeted' col=[['Sep']] val=16.6 stated=True supported=True
+     TEXT: In , the Sep column under FY21B Budgeted reads 16.6. confirms that September is the Sep-18 column and FY21B is the fifth row, while the FY20 and FY21 Actual values are the preceding rows. The FY21B Budgeted September value is therefore 16.6 million, option B.
+[08] phi>0_right mme_5697 gt=B pred=B phi=1.00 crops=2
+     slot row='Management Case' col=[['2022']] val=60.0% stated=True supported=True
+     TEXT: In the Chargers and Capacity table, the Management Case row under 2022 shows 60.0% , while 55.0% is the Base Case value for 2022 [same view]. This matches option B.
+[09] phi>0_right mme_10351 gt=C pred=C phi=1.00 crops=1
+     slot row='Lease Expense' col=[['FY 2025']] val=699,539 stated=True supported=True
+     TEXT: The FY 2025 column is the third data year, and the Lease Expense row reads 699,539 at that column . That matches option C.
+[10] phi>0_right mme_10762 gt=D pred=D phi=0.17 crops=1
+     slot row='Preventive and Diagnostic Services' col=[['2024']] val=541,333 stated=True supported=True
+     slot row='Restorative Services' col=[['2024']] val=317,333 stated=False supported=True
+     slot row='Prosthodontics' col=[['2024']] val=360,267 stated=False supported=True
+     slot row='Orthodontic Services' col=[['2024']] val=164,267 stated=False supported=True
+     slot row='Cosmetic Dentistry' col=[['2024']] val=126,000 stated=False supported=True
+     slot row='Others - Services' col=[['2024']] val=56,000 stated=False supported=True
+     TEXT: The Income Statement shows Preventive and Diagnostic Services revenue at 541,333 USD in 2024, the highest among the listed categories . Orthodontic Services (164,267 USD) and Restorative Services (317,333 USD) are lower, while Prosthodontics and Cosmetic Dentistry are even lower .
+[11] phi>0_right mme_5211 gt=B pred=B phi=1.00 crops=3
+     slot row='Permits' col=[['Labor']] val=500.00 stated=True supported=True
+     TEXT: Permits is the second row, and places it under the Labor column, giving 500.00 in the Preparation block, distinct from the Materials 500.00. The Labor value is $500.00, matching option B.
+[12] phi>0_right mme_10248 gt=D pred=D phi=1.00 crops=2
+     slot row='Cost of Goods Sold' col=[['Feb-21']] val=(399.00) stated=True supported=True
+     TEXT: In , the "Cost of Goods Sold" row shows the Feb-21 value as (399.00), while Jan-21 is (361.00) and Mar-21 is (436.00). The negative sign is part of the value, so the cost is 399.00, matching option D. CALC: (399.00) in Feb-21 → cost = 399.00.
+[13] phi>0_right mme_8474 gt=B pred=B phi=1.00 crops=1
+     slot row='Min Funding Required' col=[['Levered']] val=66,940 stated=True supported=True
+     TEXT: In , the Financial Metrics table reads "Min Funding Required" → Unlevered 131,396 USD and Levered 66,940 USD. The Levered value is 66,940, matching option B.
+[14] phi>0_right mme_5389 gt=D pred=D phi=1.00 crops=2
+     slot row='Vehicle 2' col=[['Monthly Depreciation']] val=111.11 stated=True supported=True
+     TEXT: In , Vehicle 2 is at the top, and its Monthly Depreciation value is 111.11, matching option D.
+[15] phi>0_wrong mme_10930 gt=C pred=B phi=0.11 crops=0
+     slot row='Cash Flow to Equity' col=[['Year 0']] val=(7,839,548) stated=False supported=True
+     slot row='Cash Flow to Equity' col=[['Year 1']] val=307,460 stated=False supported=True
+     slot row='Cash Flow to Equity' col=[['Year 2']] val=500,201 stated=False supported=True
+     slot row='Cash Flow to Equity' col=[['Year 3']] val=754,039 stated=True supported=True
+     slot row='Cash Flow to Equity' col=[['Year 4']] val=1,391,325 stated=False supported=True
+     slot row='Cash Flow to Equity' col=[['Year 5']] val=11,685,831 stated=False supported=True
+     slot row='Cash Flow to Equity' col=[['Year 6']] val=544,199 stated=False supported=True
+     slot row='Cash Flow to Equity' col=[['Year 7']] val=433,657 stated=False supported=True
+     slot row='Cash Flow to Equity' col=[['Year 8']] val=11,623,166 stated=False supported=True
+     TEXT: The Cash Flow to Equity row shows 0 in Year 0, 754,039 in Year 3, and 0 in Year 5 and Year 8 . The highest value is 754,039 in Year 3.
+[16] phi>0_wrong test_Accounting_201 gt=A pred=D phi=0.33 crops=2
+     slot row='Portfolio A' col=[['β₁']] val=.85 stated=False supported=True
+     slot row='Portfolio A' col=[['β₂']] val=1.15 stated=False supported=True
+     slot row='Portfolio B' col=[['β₁']] val=1.45 stated=True supported=True
+     TEXT: The table gives Portfolio A: β₁ = .85, β₂ = 1.15, E(R) = 16%; Portfolio B: β₁ = 1.45, β₂ = −.25, E(R) = 12%. The question gives R_f = 4% and a two-factor model, so the portfolio equations are E(R) = 4% + F₁β₁ + F₂β₂. CALC: Portfolio A: 16% = 4% + .85F₁ + 1.15F₂ → .85F₁ + 1.15F₂ = 12%. CALC: Portfolio B: 12% = 4% + 1.45F₁ − .25F₂ → 1.45F₁ − .25F₂ = 8%. CALC: Solve: F₁ = 5.87% and F₂ = 7.20%, matching option D.
+[17] phi>0_wrong test_Math_11 gt=I pred=E phi=0.50 crops=2
+     slot row='Test +' col=[['HIV+']] val=378 stated=True supported=True
+     slot row='Test -' col=[['HIV+']] val=2 stated=False supported=True
+     TEXT: The table's HIV+ column values are Test + = 378 and Test − = 2, which lie under the Test + and Test − rows, respectively . The row totals 380, and the HIV− column is 99,220 . RULE: Sensitivity = true-positive / all true-positives, so CALC: 378 / (378 + 2) = 0.990.
+[18] phi>0_wrong mme_5707 gt=C pred=B phi=1.00 crops=2
+     slot row='Gross Profit' col=[['2027 F'], ['Year 5']] val=886,946 stated=True supported=True
+     TEXT: In , the year headers read 2023 F/Year 1, 2024 F/Year 2, ..., 2027 F/Year 5, and so on. In , the Gross Profit USD row is 467,833, 570,776, 674,919, 780,297, 886,946, ..., with Year 5 as the fourth column, so its value is 780,297.
+[19] phi>0_wrong mme_7252 gt=C pred=A phi=1.00 crops=2
+     slot row='Balance bf' col=[['2025']] val=93,869 stated=True supported=True
+     TEXT: In , the Balance bf row shows 0 in the first data column, while Balance cf shows 93,869. In , the 2025 Forecast column (01-Jan-25) binds to the first value, so Balance bf in 2025 is 0. Among the options, that matches option A, 93,899, only if 93,899 is the Balance cf value. RULE: Balance bf is the opening balance before net cash flow, and the first data column is 2025 Forecast under 01-Jan-25. CALC: Balance bf (2025)
+[20] phi>0_wrong test_Accounting_201 gt=A pred=I phi=0.67 crops=0
+     slot row='Portfolio A' col=[['β₁']] val=.85 stated=True supported=True
+     slot row='Portfolio A' col=[['β₂']] val=1.15 stated=True supported=True
+     slot row='Portfolio B' col=[['β₁']] val=1.45 stated=False supported=True
+     TEXT: The table gives β₁=0.85, β₂=1.15, E(R)=16% for Portfolio A and β₁=1.45, β₂=−0.25, E(R)=12% for Portfolio B . The risk-free rate is 4%. RULE: In the two-factor model, E(R)=rF+β₁×F1+β₂×F2, so the risk premiums F1 and F2 are solved from the two portfolios. CALC: Using Portfolio B, F1=(12%−4%)−1.45×F2, and Portfolio A, F1=16%−4%−0.85×F2; solving gives F1=6.75% and F2=5.50%.
+[21] phi>0_wrong mme_10752 gt=C pred=A phi=0.17 crops=1
+     slot row='Bulldozers' col=[['Initial Balance'], ['fev', '23']] val=395,833 stated=True supported=True
+     slot row='Excavators' col=[['Initial Balance'], ['fev', '23']] val=296,875 stated=False supported=True
+     slot row='Backhoes' col=[['Initial Balance'], ['fev', '23']] val=118,750 stated=False supported=True
+     slot row='Loaders' col=[['Initial Balance'], ['fev', '23']] val=197,917 stated=False supported=True
+     slot row='Cranes' col=[['Initial Balance'], ['fev', '23']] val=494,792 stated=False supported=True
+     slot row='Forklifts' col=[['Initial Balance'], ['fev', '23']] val=59,375 stated=False supported=True
+     TEXT: In the Initial Balance table, the fev/23 column shows Bulldozers at 395,833 USD, Excavators at 296,875 USD, Backhoes at 118,750 USD, and Loaders at 197,917 USD . Buldozers has the highest value, so the answer is option A.
+[22] phi>0_wrong mme_6948 gt=C pred=A phi=1.00 crops=3
+     slot row='Ethanol' col=[['Aug'], ['Month 8']] val=1,260,000 stated=True supported=True
+     TEXT: In , the Ethanol row under the Aug Month 8 column reads 1,260,000 USD. This matches option A.
+[23] phi>0_wrong mme_7514 gt=D pred=C phi=1.00 crops=2
+     slot row='Total Revenue' col=[['Month 6']] val=2,490 stated=True supported=True
+     TEXT: In the P&L Mths table, the Net Interest Revenue row reads 2,490 in Month 6, while the Total Revenue row reads 3,860 under the same Month 6 column . The Total Revenue column value 3,860 is option C; 2,490 belongs to the Net Interest Revenue row and is a distractor.
+[24] phi>0_wrong mme_6490 gt=B pred=A phi=1.00 crops=1
+     slot row='Avg monthly revenue per patient, $' col=[['2019']] val=81 stated=True supported=True
+     TEXT: In , the "Avg monthly revenue per patient, $" row shows 500 under Industry and 81 under 2019. That matches option A.
+[25] phi>0_wrong test_Accounting_201 gt=A pred=F phi=1.00 crops=1
+     slot row='Portfolio A' col=[['β₁']] val=.85 stated=True supported=True
+     slot row='Portfolio A' col=[['β₂']] val=1.15 stated=True supported=True
+     slot row='Portfolio B' col=[['β₁']] val=1.45 stated=True supported=True
+     TEXT: The table in confirms Portfolio A: β₁=0.85, β₂=1.15, E(R)=16%; Portfolio B: β₁=1.45, β₂=−0.25, E(R)=12%. The risk-free rate is 4%. RULE: In a two-factor model, E(R) = Rf + F₁β₁ + F₂β₂. CALC: Portfolio A: 16 = 4 + F₁(0.85) + F₂(1.15); Portfolio B: 12 = 4 + F₁(1.45) + F₂(−0.25). Solving gives F₁=6.89% and F₂=5.32%.
+[26] phi>0_wrong mme_9824 gt=B pred=A phi=1.00 crops=1
+     slot row='Investor 2' col=[['Investment']] val=14,695,664 stated=True supported=True
+     TEXT: In , the Shareholders' Financial Metrics table clearly shows the row "Investor 2" with its Investment value as 14,695,664 USD. This matches option A.
+[27] phi>0_wrong mme_10874 gt=D pred=C phi=0.25 crops=0
+     slot row='Payment Number 1' col=[['TOTAL INTEREST']] val=$3,000 stated=True supported=True
+     slot row='Payment Number 2' col=[['TOTAL INTEREST']] val=$5,996 stated=False supported=True
+     slot row='Payment Number 3' col=[['TOTAL INTEREST']] val=$8,988 stated=False supported=True
+     slot row='Payment Number 4' col=[['TOTAL INTEREST']] val=$11,976 stated=False supported=True
+     TEXT: In the Debt Schedule, the TOTAL INTEREST column shows $3,000 for Payment Number 1 and $5,996 for Payment Number 2 . At Payment Number 3, it is $8,988, and at Payment Number 4, it is $11,976, which is the first value exceeding $10,000.
+[28] phi>0_wrong test_Marketing_87 gt=D pred=B phi=0.33 crops=2
+     slot row='Fredo' col=[['Batting average']] val=0.158 stated=True supported=True
+     slot row='Fredo' col=[['Team batting average']] val=0.166 stated=False supported=True
+     slot row='Fredo' col=[['Team standard deviation']] val=0.012 stated=False supported=True
+     slot row='Karl' col=[['Batting average']] val=0.177 stated=True supported=True
+     slot row='Karl' col=[['Team batting average']] val=0.189 stated=False supported=True
+     slot row='Karl' col=[['Team standard deviation']] val=0.015 stated=False supported=True
+     TEXT: The table gives Fredo: batting average 0.158, team average 0.166, SD 0.012; Karl: batting average 0.177, team average 0.189, SD 0.015. RULE: compare z-scores; a higher z-score means better than team average. CALC: Fredo's z = (0.158–0.166)/0.012 ≈ –0.67, Karl's z = (0.177–0.189)/0.015 ≈ –0.80; Karl's z-score is lower, so he has a worse team-comparison batting average.
+[29] phi>0_wrong validation_Public_Health_8 gt=B pred=D phi=1.00 crops=1
+     slot row='All EV71 related diseases' col=[['Vaccination group'], ['New cases']] val=13 stated=True supported=True
+     slot row='All EV71 related diseases' col=[['Placebo group'], ['New cases']] val=106 stated=True supported=True
+     TEXT: The table row "All EV71 related diseases" gives 13 new cases in the vaccination group and 106 in the placebo group . RULE: protective rate = (placebo cases − vaccination cases) ÷ placebo cases × 100%. CALC: (106 − 13) ÷ 106 × 100% = 94.6%.
+[30] phi=0_right mme_7369 gt=B pred=B phi=0.00 crops=4
+     slot row='Total Other Income' col=[['Total']] val=3,200,508 stated=False supported=True
+     TEXT: In , the "Total Other Income" row ends at 441,416 under Year 9, with the Total column on the far right reading 3,200,508. The annual values align left of the Total column (367,860; 369,679; 380,769; 392,192; 403,958; 416,077; 428,559; 441,416), and confirms that Total column carries 3,200,508 at the end. The matching option is 3,200,508.
+[31] phi=0_right mme_9029 gt=D pred=D phi=0.00 crops=5
+     slot row='OPEX' col=[['2031'], ['Year 7']] val=643,630 stated=False supported=False
+     TEXT: In , the Operating Expenses table shows the OPEX row (USD) with values 370,000, 568,875, 583,097, 597,741, 627,932, 643,630, 659,721, 676,214, 693,119 across Year 1–Year 10. The Year 7 column is the seventh value, 643,630, matching option D.
+[32] phi=0_right mme_7079 gt=A pred=A phi=0.00 crops=4
+     slot row='Investor Cash Flows / Contributions' col=[['Feb-23']] val=(907,200) stated=False supported=True
+     TEXT: In , the Investor(LP) Cash Flows table's Contributions row shows (907,200) under the Feb-23 (Month 2) column. That matches option A.
+[33] phi=0_right mme_5166 gt=D pred=D phi=0.00 crops=1
+     slot row='2.75' col=[['Industrial Natural Gas Consumption'], ['165.00']] val=27.0% stated=False supported=True
+     TEXT: In the "Industrial Natural Gas Consumption" table, the row labeled 2.75 (MW/Ton H2) and the column labeled 165.00 intersect at 27.0% . This matches option D.
+[34] phi=0_right mme_10436 gt=A pred=A phi=0.00 crops=1
+     slot row='Apr-24' col=[['Beginning Balance']] val=$4,226,300 stated=True supported=False
+     TEXT: In , the Apr-24 row under the Beginning Balance column shows $4,226,300, matching option A.
+[35] phi=0_right mme_5325 gt=A pred=A phi=0.00 crops=1
+     slot row='Total Assets' col=[['FY 2024']] val=$459,847 stated=False supported=True
+     TEXT: In , the Total Assets row is the last row of the Assets table, and the FY2024 column is its first value: $459,847. This matches option A.
+[36] phi=0_right mme_5489 gt=B pred=B phi=0.00 crops=2
+     slot row='Revenue' col=[['Q2 2020'], ['Jun-20']] val=$21,121 stated=False supported=True
+     TEXT: The Jun-20 column header is in the second position of the May–Jul–Aug–Sep row . Its Revenue value is $21,121, which corresponds to option B .
+[37] phi=0_right mme_8857 gt=D pred=D phi=0.00 crops=3
+     slot row='Profit Margin / $46.00' col=[['Price of 5500']] val=-15% stated=False supported=True
+     TEXT: In , the Profit Margin row labeled $46.00 aligns with the Price of 5500 column at the far right, where the percentage is -15%. identifies the $46.00 row, and confirms the Price of 5500 column; the bottom edge of cuts off the final percentage cell, but the preceding -5% and -15% values are still visible and bound to the same Price of 5500 column. CALC: Price of 5500 column, $46.00 row → -15%, matching option D.
+[38] phi=0_right test_Marketing_44 gt=J pred=J phi=0.00 crops=0
+     slot row='1–33' col=[['≤ 210']] val=21 stated=False supported=True
+     slot row='second data row' col=[['≤ 210']] val=6 stated=False supported=True
+     slot row='third data row' col=[['≤ 210']] val=6 stated=False supported=True
+     TEXT: The table gives counts of players in shirt-number and weight categories . The conditional probability is P(shirt # 1–33 | ≤210) = 21/(21+6+6) = 21/33, which is 7/11. RULE: Use conditional probability: P(A|B) = P(A and B)/P(B) for equally likely outcomes; count cells in the joint category over the category of the condition. CALC: 21 + 6 + 6 = 33, so 21/33 = 7/11.
+[39] phi=0_right mme_9527 gt=C pred=C phi=0.00 crops=3
+     slot row='Total Non-Current Assets' col=[['01-Jan-25'], ['31-Dec-25']] val=6,042 stated=False supported=True
+     TEXT: In , the fifth annual column is “01-Jan-25 to 31-Dec-25” (column index 5). The “Total Non-Current Assets” row in the same column reads 6,042 USD, matching option C. The earlier crop confirmed that row and column order, and bound the fifth annual period.
+[40] phi=0_right mme_9624 gt=C pred=C phi=0.00 crops=3
+     slot row='LS2 - Lease B' col=[['2022'], ['Lease Payments']] val=(23,333) stated=False supported=True
+     TEXT: shows Lease B as the second row, and its 2022 Lease Payments value is (23,333). confirms the 2022 Payments column and red negative values, so Lease B’s 2022 total lease payment is 23,333.
+[41] phi=0_right test_Chemistry_102 gt=B pred=B phi=0.00 crops=1
+     slot row='Time = 0 Hours' col=[['[A] M']] val=0.40 stated=False supported=True
+     slot row='Time = 1 Hours' col=[['[A] M']] val=0.20 stated=False supported=True
+     slot row='Time = 2 Hours' col=[['[A] M']] val=0.10 stated=False supported=True
+     slot row='Time = 3 Hours' col=[['[A] M']] val=0.05 stated=False supported=True
+     TEXT: The table reads: at t=0, [A]=0.40 M; t=1, [A]=0.20 M; t=2, [A]=0.10 M; t=3, [A]=0.05 M . Over one hour, [A] drops 0.20 M, or 0.20 M/h. Over another hour, it drops 0.10 M, or 0.10 M/h. Over the third hour, it drops 0.05 M, or 0.05 M/h. The successive rate reductions (0.20 M/h, 0.10 M/h, 0.05 M/h) confirm that the rate is proportional to [A]; therefore the rate law is Rate = k[A].
+[42] phi=0_right mme_7661 gt=D pred=D phi=0.00 crops=2
+     slot row='10010 - Petty Cash' col=[['01-jun']] val=18 stated=False supported=True
+     TEXT: The table's row 10010 is Petty Cash; its 01-jun value is 18, while 01-feb is 14, 01-mar is 15, and 01-apr is 16 . This matches option D.
+[43] phi=0_right mme_6045 gt=C pred=C phi=0.00 crops=3
+     slot row='% Occupancy' col=[['2026']] val=65% stated=False supported=True
+     TEXT: In the Occupancy Rate table, the 2026 column (Forecast 01-Jan-26 to 31-Dec-26) shows 65% under the % Occupancy row. This matches option C.
+[44] phi=0_right mme_7708 gt=B pred=B phi=0.00 crops=1
+     slot row='Net Oper. Income' col=[['1-Jan-23'], ['31-Dec-23'], ['2.0'], ['2023']] val=$4,423 stated=False supported=True
+     TEXT: In , the Net Oper. Income row under the 1-Jan-23 / 31-Dec-23 / 2.0 / 2023 annual header shows $4,423. That matches option B.
+[45] phi=0_wrong mme_7758 gt=B pred=C phi=0.00 crops=4
+     slot row='Maintenance Costs' col=[['Project 1']] val=450 stated=False supported=True
+     slot row='Maintenance Costs' col=[['Project 2']] val=400 stated=False supported=True
+     slot row='Maintenance Costs' col=[['Project 3']] val=500 stated=False supported=True
+     slot row='Maintenance Costs' col=[['Project 4']] val=370 stated=False supported=True
+     slot row='Maintenance Costs' col=[['Project 5']] val=550 stated=False supported=True
+     slot row='Maintenance Costs' col=[['Project 6']] val=430 stated=False supported=True
+     slot row='Maintenance Costs' col=[['Project 7']] val=450 stated=False supported=True
+     slot row='Maintenance Costs' col=[['Project 8']] val=370 stated=False supported=True
+     slot row='Maintenance Costs' col=[['Project 9']] val=350 stated=False supported=True
+     slot row='Maintenance Costs' col=[['Project 10']] val=470 stated=False supported=True
+     TEXT: The top row binds columns Project 3, Project 5, Project 6, and Project 2 to the fourth, sixth, seventh, and second columns, respectively . The Maintenance Costs (Trees & Bushes) row reads 450, 400, 500, 370, 550, 430, 450, 370, 350, 470, and 300, so Project 6 at 500 has the highest value .
+[46] phi=0_wrong mme_9578 gt=A pred=C phi=0.00 crops=1
+     slot row='AC3 - Stocks Emerging Markets' col=[['01-Jan-25'], ['31-Dec-25']] val=24,436 stated=False supported=False
+     TEXT: In , the "AC3 - Stocks Emerging Markets" row (GBP) under the 01-Jan-25 to 31-Dec-25 column shows 27,338. That matches option C.
+[47] phi=0_wrong mme_7798 gt=D pred=B phi=0.00 crops=3
+     slot row='Cash from operating activities' col=[['Forecast'], ['31-Dec-21']] val=54,965.6 stated=False supported=True
+     TEXT: In , row 207 "Cash from operating activities" under the Forecast columns shows 52,821.4 in the 31-Dec-21 column, which matches option B. The header and row labels are consistent with this binding.
+[48] phi=0_wrong mme_8925 gt=A pred=E phi=0.00 crops=4
+     slot row='Proceeds' col=[['2023']] val=81,288,353 stated=False supported=False
+     TEXT: The Pay & Hold table's Proceeds row reads 15,824,679 USD, and in , its column header is 2023, Year 1, directly under the Proceeds row. This value is not among the answer choices, so the correct choice is (E).
+[49] phi=0_wrong mme_7615 gt=B pred=A phi=0.00 crops=3
+     slot row='OPEX as % of Revenues' col=[['2027'], ['Year 4']] val=4.1% stated=False supported=False
+     TEXT: binds the year 0–15 headers to the years shown and confirms that the 2027 column is Year 4. places the operating expense rows below the year headers, and shows the OPEX row values: under Year 4 the value is 1,364,610 USD, with the percentage footer row reading 4.3%. Therefore, the percentage is 4.3%.
+[50] phi=0_wrong mme_9787 gt=B pred=C phi=0.00 crops=1
+     slot row='SC7 - Gents Cut - Senior Stylist / Direc' col=[['2024'], ['Forecast']] val=(3,927) stated=False supported=True
+     TEXT: In , the row "SC7 - Gents Cut - Senior Stylist" and the "Direct Staff Costs" cell intersect at 4,079 USD in the 2024 "Forecast USD" column. This matches option C.
+[51] phi=0_wrong mme_6083 gt=A pred=C phi=0.00 crops=1
+     slot row='France' col=[['October'], ['ΔFC%']] val=-35 stated=False supported=True
+     TEXT: In the October panel, the France row intersects the ΔFC% column at -47, with a red mark indicating negative percentage change. That matches option C.
+[52] phi=0_wrong mme_8446 gt=A pred=D phi=0.00 crops=2
+     slot row='VP Engineering' col=[['Year 5']] val=$500 stated=False supported=True
+     TEXT: HOLD: Year 5 is the FY 2027 column, the sixth data column. In , the VP Engineering row intersects that sixth column at $550, so the monthly cost is $550. CALC: Year 5 column = FY 2027; VP Engineering row value = $550 → answer = (D)
+[53] phi=0_wrong test_Manage_239 gt=B pred=A phi=0.00 crops=3
+     slot row='Transportation and public utilities' col=[['1941']] val=6,326 stated=False supported=True
+     slot row='Retail trade and automobile services' col=[['1941']] val=6,838 stated=False supported=True
+     slot row='Manufacturing' col=[['1941']] val=22,774 stated=False supported=True
+     slot row='Government' col=[['1941']] val=10,552 stated=False supported=True
+     TEXT: The full rows show Government as the largest, Manufacturing next, then Transportation, followed by Retail trade and automobile services, Services, Wholesale trade, Finance, Contract construction, and Agriculture through 1948 . Transportation ranks third each year, behind Manufacturing and Government, so the statement is true.
+[54] phi=0_wrong mme_5692 gt=C pred=A phi=0.00 crops=3
+     slot row='Offset Reference for Equity IRR' col=[['1-Aug-22', '31-Aug-22']] val=11.00 stated=False supported=True
+     TEXT: In , the "Offset Reference for Equity IRR" row hits 9.00 under the 31-Aug-22 column, which is the Aug 1–31, 2022 period. That corresponds to option A.
+[55] phi=0_wrong mme_5610 gt=C pred=D phi=0.00 crops=2
+     slot row='EBITDA Margin %' col=[['2023 F']] val=26.6% stated=False supported=True
+     TEXT: The year headers confirm the second data column is 2023 F / Year 2, and the EBITDA Margin % row reads 26.9% in that column .
+[56] phi=0_wrong mme_8411 gt=B pred=C phi=0.00 crops=3
+     slot row='Designer 1' col=[['Year 1'], ['Monthly Fixed Costs by Year']] val=$700 stated=False supported=False
+     TEXT: The Designer 1 row is in the table and its Monthly Fixed Costs in Year 1 is $7,001, which matches option C.
+[57] phi=0_wrong test_Architecture_and_Engineering_113 gt=B pred=A phi=0.00 crops=0
+     slot row='AB' col=[['Length']] val=335 stated=False supported=True
+     slot row='CD' col=[['Length']] val=408 stated=False supported=True
+     slot row='DA' col=[['Length']] val=828 stated=False supported=True
+     TEXT: The table lists AB = 335 m, BC bearing 90°00', CD = 408 m, and DA = 828 m . RULE: For a closed traverse, the sum of meridian departures equals zero and the sum of meridian distances equals zero. CALC: Bearing 90°00' > 90°00', so BC carries a negative departure and positive distance; BC length = 246.636 m (negative departure from AB; 335 × cos 181°18' + 408 × cos 357°36' = 0). CALC: BC bearing = 90°00' + 180° = 270°00
+[58] phi=0_wrong mme_9585 gt=C pred=B phi=0.00 crops=2
+     slot row='CR2 - Founder 2' col=[['CE6 - Conversion 1'], ['06-Jun-21']] val=14.1% stated=False supported=True
+     TEXT: In , the CE6 - Conversion 1 06-Jun-21 column is the sixth data column. In , the Voting Percentage row "CR2 - Founder 2" aligns with 18.9% in that column, matching option B.
+[59] phi=0_wrong mme_10748 gt=B pred=C phi=0.00 crops=2
+     slot row='RC1 - Partner / Revenue' col=[['2020'], ['Forecast']] val=182,000 stated=False supported=True
+     slot row='RC2 - Director / Revenue' col=[['2020'], ['Forecast']] val=218,400 stated=False supported=True
+     slot row='RC3 - Project Manager / Revenue' col=[['2020'], ['Forecast']] val=62,730 stated=False supported=True
+     slot row='RC4 - Senior Associate / Revenue' col=[['2020'], ['Forecast']] val=120,130 stated=False supported=True
+     slot row='RC5 - Associate / Revenue' col=[['2020'], ['Forecast']] val=60,065 stated=False supported=True
+     slot row='RC6 - Business Analyst / Revenue' col=[['2020'], ['Forecast']] val=45,049 stated=False supported=True
+     TEXT: The Revenue Category Performance table shows 2020 Revenue: RC1 - Partner 182,000 EUR, RC2 - Director 218,400 EUR, RC3 - Project Manager 218,400 EUR, RC4 - Senior Associate 120,130 EUR . RC4 is the lowest, and RC2 and RC3 tie for the highest, but the tied categories are RC2 and RC3.

@@ -39,6 +39,8 @@ sys.path.insert(0, str(OBS / "src/evfact"))
 sys.path.insert(0, str(OBS / "src/grpo_sg"))
 sys.path.insert(0, str(OBS / "src/rread"))
 import evfact as EF  # noqa: E402
+sys.path.insert(0, str(OBS / "src/bind"))
+from bind_scorer import strip_meta  # noqa: E402  (Design_PH §1: protocol ids are not readings)
 import reward_sg as RS  # noqa: E402
 from rread_scorer import match_num, match_txt, norm_num  # noqa: E402
 
@@ -95,6 +97,7 @@ def a1(r, ft):
         return None
     W, H = r["image_wh"]
     views = RS._views(W, H, crops(r))
+    ft = EF.commit_text(full(r))  # view ids are needed here: use the unstripped final turn
     cited = {0 if a == "original_image" else int(k) for a, k in re.findall(r"\[(original_image|observation_(\d+))\]", ft) if a}
     cited = {int(k) for k in re.findall(r"\[observation_(\d+)\]", ft)} | ({0} if "[original_image]" in ft else set())
     cited = {c for c in cited if c < len(views)} or {len(views) - 1}
@@ -190,8 +193,8 @@ def c1(r, ft):
 
 
 def c2(r, ft):
-    body = ft.split("<answer>")[0]
-    return bool(re.search(r"\[(original_image|observation_\d+)\]", body)) and bool(re.search(r"\d|\"[^\"]+\"|“[^”]+”", body))
+    raw = EF.commit_text(full(r))
+    return bool(re.search(r"\[(original_image|observation_\d+)\]", raw)) and bool(re.search(r"\d|\"[^\"]+\"|“[^”]+”", ft))
 
 
 def c3(r, ft):
@@ -210,9 +213,9 @@ def c3b(r, ft):
     return r.get("pred") not in nf
 
 
-BEH = [("A1 cited views make an evidence set legible", a1), ("A2 no crop when original suffices", a2),
-       ("A3 headers + cell legible before reporting", a3), ("A4 no distractor value stated instead of target", a4),
-       ("B1 fact stated with correct binding (evfact)", b1), ("B2 count total stated", b2),
+BEH = [("A1 cited views make an evidence set legible", a1), ("A2 0 crops when >=1 key node legible in original", a2),
+       ("A3 first table binding boxes legible in any view", a3), ("A4 not (distractor value stated & no target value)", a4),
+       ("B1 evfact v0 E>0 (table+entity)", b1), ("B2 count total stated", b2),
        ("B3 direction word consistent with boxes", b3), ("B4 uses REVISE (usage)", b4),
        ("C1 chosen letter = option whose text is stated", c1), ("C2 final turn cites view + states value", c2),
        ("C3 says 'not featured' when target absent", c3), ("C3b no false 'not featured'", c3b)]
@@ -227,7 +230,7 @@ def main(out, paths):
     for name, fn in BEH:
         per_q = defaultdict(list)
         for r in rows:
-            ft = EF.commit_text(full(r))
+            ft = strip_meta(EF.commit_text(full(r)))
             v = fn(r, ft)
             if v is not None:
                 per_q[r["uid"]].append((bool(v), r["ok"]))
