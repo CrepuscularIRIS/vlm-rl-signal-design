@@ -16,8 +16,8 @@
   },
   {
     "path": "README.md",
-    "bytes": 13112,
-    "sha256": "8ef6ce533e31bfb0169210f13e99ceaefe12a5d1247f231d03dc5b0d829824c4"
+    "bytes": 38966,
+    "sha256": "caa2c70eac8b3824a709a18941cedc2d7b73dd6cf0f9543119b707d0969fa39d"
   },
   {
     "path": "REPRODUCIBILITY.md",
@@ -56,31 +56,31 @@
   },
   {
     "path": "code/README.md",
-    "bytes": 583,
-    "sha256": "ad5fc1bee96929496db23b499466ef67921e1f8776fdacd62127b86638777eb2"
+    "bytes": 1910,
+    "sha256": "1a4b45e478d130af9c84bac270e4cca1bd97ef9c8e14a957c42f708eec6672d9"
   },
   {
-    "path": "code/v53/caption_contracts.py",
+    "path": "code/methods/rloo/v1/caption_contracts.py",
     "bytes": 13784,
     "sha256": "f64ad1b96cb30a10aec30f0b484108bdf62e5f24a82bf9fa4ed2230630d926f5"
   },
   {
-    "path": "code/v53/caption_v52i.py",
+    "path": "code/methods/rloo/v1/caption_v52i.py",
     "bytes": 1936,
     "sha256": "9992a057cc2722880223b55f99ba3573f4903ee26d70ec9481063c7107b12bb7"
   },
   {
-    "path": "code/v53/decision_loss.py",
+    "path": "code/methods/rloo/v1/decision_loss.py",
     "bytes": 14246,
     "sha256": "85ed7ee7093e473d277105fdd90d69ed017a4d85241aa3addbdb789bdfd66075"
   },
   {
-    "path": "code/v53/easyr1_caption.py",
+    "path": "code/methods/rloo/v1/easyr1_caption.py",
     "bytes": 28439,
     "sha256": "7b57ac0fca8087fd6e74ac22b002a870571858cdd2b79b1690f08c2f3ee217bf"
   },
   {
-    "path": "code/v53/reward_caption.py",
+    "path": "code/methods/rloo/v1/reward_caption.py",
     "bytes": 1527,
     "sha256": "c962c6dccfe18a47a68da3a24882f4d902fa9ee877887b60a83d4f8c3b99cc93"
   },
@@ -501,8 +501,8 @@
   },
   {
     "path": "provenance/CODE_HASHES.json",
-    "bytes": 858,
-    "sha256": "5f3e3f28e7e44defb000bf64ef3a5e23d4440e41d586aa70556e784707522613"
+    "bytes": 918,
+    "sha256": "ec8bef1a136339d46a66abfeeaa4a69f7362d6f581eb8b4bd1b0183e6fac9421"
   },
   {
     "path": "provenance/CURVE_AUDIT.json",
@@ -546,8 +546,8 @@
   },
   {
     "path": "results/RESULTS.md",
-    "bytes": 2143,
-    "sha256": "f550226eb63038621ed70be76e4aed258603a8052ab60af759afd8bb0a190882"
+    "bytes": 5363,
+    "sha256": "d7e8f1271fe64055f47c88b9a74a543acda7335c0a91f30e2134f933ec4f1405"
   },
   {
     "path": "results/TRAINING_SIGNALS.md",
@@ -726,7 +726,7 @@
   },
   {
     "path": "scripts/verify_bundle.py",
-    "bytes": 4559,
-    "sha256": "11b2e1f157a33cccdb5e9dcfce176684c38bfc55eb413ab6ef82e8d664da5016"
+    "bytes": 4577,
+    "sha256": "bdfdf49a0176b6b3e623fff179d465973ba8ac8bb8a28231b46da529b7c7e65d"
   }
 ]

@@ -8,7 +8,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-BASE = "/home/lingxufeng/icml/obs/runs"
+BASE = "$OBS/runs"
 G1C, G0C = "#d62728", "#1f77b4"
 
 g1 = json.load(open(f"{BASE}/rread_adm_20261103/data/curves/g1_curves.json"))["g1_rread"]

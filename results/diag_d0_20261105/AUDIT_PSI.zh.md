@@ -2,7 +2,7 @@
 
 适用对象：A+B、A+B+C、GRPO+A 的过程奖励 S，即 R = V·(Y + 0.1·m·S)。DAPO-SB、Hτ 不用这个 S。只列事实。
 
-## 1. v1 实现（`code/sg_scale_gated/reward_sg.py::_psi`，A+B / A+B+C / GRPO+A 实际训练用的版本）
+## 1. v1 实现（`code/methods/sg/v1/reward_sg.py::_psi`，A+B / A+B+C / GRPO+A 实际训练用的版本）
 ```
 z_b   = max_v 1[cover(b,v) ≥ 0.9] · h_kind(detail_b · s(v))     视图 v 含原图；h 为未校准的像素尺度坡
 phi   = max_{S∈evidence_sets} mean_{b∈S} z_b
@@ -32,7 +32,7 @@ S     = clip(psi_T − psi_0, 0, 1)
 - proximity：对每个目标 bbox，取“历史最大 IoU + 历史裁图并集对目标的覆盖率”，归一化到 [0, 1]。
 - 用户补充：保留 S = psi_t − psi_0；分别记录 explore、proximity、gate；原图不算执行过的裁图，初始的裁图集合是空集。
 
-## 4. v2 实现（`code/sg_scale_gated_v2/reward_sg.py`，从 grpo_sg 复制，只改这一个文件）
+## 4. v2 实现（`code/methods/sg/v2/reward_sg.py`，从 grpo_sg 复制，只改这一个文件）
 ```
 C        = 执行过的裁图（不含原图）；psi_0 时 C = ∅
 prox_b   = 0.5 · ( max_{c∈C} IoU(b, c) + |b ∩ ∪C| / |b| )          ∈ [0, 1]

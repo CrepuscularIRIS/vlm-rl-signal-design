@@ -1,6 +1,6 @@
 # DAPO-SB 设计原文（外部评审 Pro，2026-11-04）
 
-> 原样收录，供复盘。实现见 [code/dapo_sb/stop_relative_advantage.py](../code/dapo_sb/stop_relative_advantage.py)（原样使用）与 [stop_baseline.py](../code/dapo_sb/stop_baseline.py)；训练结果见 [results/sb_20261104/REPORT.zh.md](../results/sb_20261104/REPORT.zh.md)。第七节的离线验收没有执行。
+> 原样收录，供复盘。实现见 [code/methods/dapo_sb/v1/stop_relative_advantage.py](../code/methods/dapo_sb/v1/stop_relative_advantage.py)（原样使用）与 [stop_baseline.py](../code/methods/dapo_sb/v1/stop_baseline.py)；训练结果见 [results/sb_20261104/REPORT.zh.md](../results/sb_20261104/REPORT.zh.md)。第七节的离线验收没有执行。
 
 ---
 
@@ -424,7 +424,7 @@ COMA 可以借鉴“与参考选择比较”的思想，但 COMA 的原始基线
 
 我已经写了一个不依赖训练框架的优势计算参考实现，包含完整终答残差、\(\lambda\) 两个端点、组标准差和 token 映射，并完成了七类 CPU 检查：
 
-:chatgpt-content-reference{index="13"}[下载优势计算与单测代码](../code/dapo_sb/stop_relative_advantage.py)
+:chatgpt-content-reference{index="13"}[下载优势计算与单测代码](../code/methods/dapo_sb/v1/stop_relative_advantage.py)
 
 它不包含视觉模型打分或训练接线；本次也没有执行真实轨迹的模型前向或启动训练。
 

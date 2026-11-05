@@ -7,8 +7,8 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-BASE = "/home/lingxufeng/icml/obs/runs"
-REPO = "/home/lingxufeng/vlm-rl-signal-design"
+BASE = "$OBS/runs"
+REPO = "$DESIGN_REPO"
 
 # baselines from frozen curves.csv
 brows = list(csv.DictReader(open(f"{REPO}/data/algorithm_curves/curves.csv")))

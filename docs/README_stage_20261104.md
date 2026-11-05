@@ -434,7 +434,7 @@ Design_PH 执行结果见 [BIND_AUDIT.zh.md](../results/behavior_20261104/BIND_A
 
 ## DAPO-SB 与单 A 的训练结果（2026-11-05）
 
-两组都以 A-SFT 为起点，在 4k 池上训练 32 步，单 seed。三部分报告见 [results/sb_20261104/REPORT.zh.md](../results/sb_20261104/REPORT.zh.md) 和 [results/sg_20261104/REPORT_sg_a.zh.md](../results/sg_20261104/REPORT_sg_a.zh.md)，代码见 [code/dapo_sb](../code/dapo_sb/)。
+两组都以 A-SFT 为起点，在 4k 池上训练 32 步，单 seed。三部分报告见 [results/sb_20261104/REPORT.zh.md](../results/sb_20261104/REPORT.zh.md) 和 [results/sg_20261104/REPORT_sg_a.zh.md](../results/sg_20261104/REPORT_sg_a.zh.md)，代码见 [code/dapo_sb](../code/methods/dapo_sb/v1/)。
 
 - **DAPO-SB（停止相对 advantage）**：DAPO 的其余设置不变，只把组均值基线换成每回合之前的停止探针 $b_{i,k}$，即 $A_{i,t}=(Y_i-b_{i,k(t)})/(\sigma_q+\epsilon)$，λ=1。$b_{i,k}$ 是用 rollout 权重、只看题面和该回合前已呈现的图像、强制作答时的 P(gt 字母)。
 - **GRPO+A（单 A）**：GRPO 的奖励加上尺度门控获取分 S，即 R = V·(Y+0.1·m·S)；advantage 用标准 GRPO。

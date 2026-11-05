@@ -1,26 +1,26 @@
 [
   {
-    "file": "code/v53/decision_loss.py",
+    "file": "code/methods/rloo/v1/decision_loss.py",
     "sha256": "85ed7ee7093e473d277105fdd90d69ed017a4d85241aa3addbdb789bdfd66075",
     "formal_start_hash_matched": true
   },
   {
-    "file": "code/v53/reward_caption.py",
+    "file": "code/methods/rloo/v1/reward_caption.py",
     "sha256": "c962c6dccfe18a47a68da3a24882f4d902fa9ee877887b60a83d4f8c3b99cc93",
     "formal_start_hash_matched": true
   },
   {
-    "file": "code/v53/caption_v52i.py",
+    "file": "code/methods/rloo/v1/caption_v52i.py",
     "sha256": "9992a057cc2722880223b55f99ba3573f4903ee26d70ec9481063c7107b12bb7",
     "formal_start_hash_matched": true
   },
   {
-    "file": "code/v53/caption_contracts.py",
+    "file": "code/methods/rloo/v1/caption_contracts.py",
     "sha256": "f64ad1b96cb30a10aec30f0b484108bdf62e5f24a82bf9fa4ed2230630d926f5",
     "formal_start_hash_matched": true
   },
   {
-    "file": "code/v53/easyr1_caption.py",
+    "file": "code/methods/rloo/v1/easyr1_caption.py",
     "sha256": "7b57ac0fca8087fd6e74ac22b002a870571858cdd2b79b1690f08c2f3ee217bf",
     "formal_start_hash_matched": true
   }

@@ -1,6 +1,6 @@
 # R-read 冻结协议：L2 读取一致性奖励 + 无过滤 GRPO（2026-11-03）
 
-依据 [Pro 设计回复](../../../icml/papers/Design.md)（读取 Design.md `0085bd1` 后的全部追加内容）和 [感知差距简报](PERCEPTION_GAP_BRIEF.zh.md)。编号 **R-read**，不覆盖 E 系列（E=E 系列已停）。
+依据 Pro 设计回复（本地设计稿 Design.md，未公开）（读取 Design.md `0085bd1` 后的全部追加内容）和 [感知差距简报](PERCEPTION_GAP_BRIEF.zh.md)。编号 **R-read**，不覆盖 E 系列（E=E 系列已停）。
 
 ## 冻结的奖励公式
 

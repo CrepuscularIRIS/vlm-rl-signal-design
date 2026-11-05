@@ -26,7 +26,7 @@ Qwen3-VL-4B，从 A-SFT 起点做 RL，在 caption v5.1 协议下多轮裁图后
 2. [`results/sb_20261104/REPORT.zh.md`](https://github.com/CrepuscularIRIS/vlm-rl-signal-design/blob/main/results/sb_20261104/REPORT.zh.md) 与同目录的 `FREEZE.zh.md`：DAPO-SB 的三部分报告与冻结记录。
 3. [`results/sb_20261104/CREDIT_FACTS.zh.md`](https://github.com/CrepuscularIRIS/vlm-rl-signal-design/blob/main/results/sb_20261104/CREDIT_FACTS.zh.md)：从训练账本离线复算的 advantage 实际分配，包括正负总量、按对错和是否裁图分组、裁图前后 b 的变化。脚本与 json 在 `data/`。
 4. [`design/ADVANTAGE_DAPO_SB_PRO.zh.md`](https://github.com/CrepuscularIRIS/vlm-rl-signal-design/blob/main/design/ADVANTAGE_DAPO_SB_PRO.zh.md)：你上一轮的原文，含推导、四种信用情况、第七节的离线验收要求。
-5. 代码 [`code/dapo_sb/`](https://github.com/CrepuscularIRIS/vlm-rl-signal-design/tree/main/code/dapo_sb)：
+5. 代码 [`code/methods/dapo_sb/v1/`](https://github.com/CrepuscularIRIS/vlm-rl-signal-design/tree/main/code/methods/dapo_sb/v1)：
    - `stop_relative_advantage.py`：你的参考实现，原样使用；
    - `stop_baseline.py`：探针请求的构造、读出与合并，以及如何替换 DAPO 的 advantage；
    - 接线见 `easyr1_caption.py` L378–414。

@@ -54,7 +54,7 @@ lm_understand-logs 方法论（给中间结果测下一步）分解 DAPO 743 条
 
 ## R-read 冻结：L2 读取一致性奖励 + 无过滤 GRPO（2026-11-03）
 
-基于 Pro 的完整设计回复（papers/Design.md 全部追加内容），冻结 **R-read**：从 L2 编译 1–4 个关键读数字段，commit 中的明确读数经规则抽取+规范化精确匹配后计分，R = V·[Y + 0.25·m·Φ_read]。含离线准入（评分器 300 正/300 负例 + 成对反例 + 信号准入 ν 统计量）、G0–G3 训练矩阵（先跑 G1）、推翻条件（预登记）、hacking 防线和独立评测设计。[冻结协议](../design/R_READ_FREEZE.zh.md) · [Pro 设计原文](../../../icml/papers/Design.md)
+基于 Pro 的完整设计回复（papers/Design.md 全部追加内容），冻结 **R-read**：从 L2 编译 1–4 个关键读数字段，commit 中的明确读数经规则抽取+规范化精确匹配后计分，R = V·[Y + 0.25·m·Φ_read]。含离线准入（评分器 300 正/300 负例 + 成对反例 + 信号准入 ν 统计量）、G0–G3 训练矩阵（先跑 G1）、推翻条件（预登记）、hacking 防线和独立评测设计。[冻结协议](../design/R_READ_FREEZE.zh.md) · Pro 设计原文（本地设计稿 Design.md，未公开）
 
 ## 当前方向
 

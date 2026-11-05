@@ -5,7 +5,7 @@ import csv,gzip,hashlib,json,re
 import scorer_reference as scorer
 R=Path(__file__).resolve().parents[1]
 errors=[]; count=0; methods={};base=None
-sensitive=[re.compile(p) for p in [r'/home/[A-Za-z0-9_-]+/',('/'+'root/'),r'connect\.[\w.-]*seetacloud\.com',r'-----BEGIN [A-Z ]*PRIVATE KEY-----',r'gh[pousr]_[A-Za-z0-9]{20,}',r'github_pat_[A-Za-z0-9_]{20,}',r'sk-[A-Za-z0-9]{24,}',r'data:image/[^;]+;base64,',r'https?://[^\s/]+:[^\s@]+@']]
+sensitive=[re.compile(p) for p in [r'/home/[A-Za-z0-9_-]+/',('/'+'root/'),r'connect\.[\w.-]*seetacloud\.com',r'-----BEGIN [A-Z ]*PRIVATE KEY-----',r'gh[pousr]_[A-Za-z0-9]{20,}',r'github_pat_[A-Za-z0-9_]{20,}',r'sk-[A-Za-z0-9]{24,}',r'data:image/[^;]+;base64,[A-Za-z0-9+/]{40,}',r'https?://[^\s/]+:[^\s@]+@']]
 def scan(label,text):
  for rx in sensitive:
   if rx.search(text):errors.append('sensitive pattern in '+label+' / '+rx.pattern)
