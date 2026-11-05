@@ -1,0 +1,641 @@
+run,step,metric,value,source
+DAPO-SB,1,score,0.482,train log
+DAPO-SB,1,entropy,0.448,train log
+DAPO-SB,1,ppo_kl,0.0,train log
+DAPO-SB,1,grad_norm,11.059,train log
+DAPO-SB,2,score,0.498,train log
+DAPO-SB,2,entropy,0.446,train log
+DAPO-SB,2,ppo_kl,0.0,train log
+DAPO-SB,2,grad_norm,22.329,train log
+DAPO-SB,3,score,0.521,train log
+DAPO-SB,3,entropy,0.441,train log
+DAPO-SB,3,ppo_kl,-0.0,train log
+DAPO-SB,3,grad_norm,43.872,train log
+DAPO-SB,4,score,0.476,train log
+DAPO-SB,4,entropy,0.44,train log
+DAPO-SB,4,ppo_kl,0.0,train log
+DAPO-SB,4,grad_norm,16.085,train log
+DAPO-SB,5,score,0.5,train log
+DAPO-SB,5,entropy,0.449,train log
+DAPO-SB,5,ppo_kl,0.0,train log
+DAPO-SB,5,grad_norm,12.952,train log
+DAPO-SB,6,score,0.477,train log
+DAPO-SB,6,entropy,0.443,train log
+DAPO-SB,6,ppo_kl,4.856502521961683e-05,train log
+DAPO-SB,6,grad_norm,14.977,train log
+DAPO-SB,7,score,0.507,train log
+DAPO-SB,7,entropy,0.444,train log
+DAPO-SB,7,ppo_kl,0.0,train log
+DAPO-SB,7,grad_norm,10.279,train log
+DAPO-SB,8,score,0.502,train log
+DAPO-SB,8,entropy,0.443,train log
+DAPO-SB,8,ppo_kl,0.0,train log
+DAPO-SB,8,grad_norm,13.957,train log
+DAPO-SB,9,score,0.514,train log
+DAPO-SB,9,entropy,0.438,train log
+DAPO-SB,9,ppo_kl,-0.0,train log
+DAPO-SB,9,grad_norm,9.076,train log
+DAPO-SB,10,score,0.457,train log
+DAPO-SB,10,entropy,0.428,train log
+DAPO-SB,10,ppo_kl,0.0,train log
+DAPO-SB,10,grad_norm,8.83,train log
+DAPO-SB,11,score,0.491,train log
+DAPO-SB,11,entropy,0.436,train log
+DAPO-SB,11,ppo_kl,0.0,train log
+DAPO-SB,11,grad_norm,8.993,train log
+DAPO-SB,12,score,0.523,train log
+DAPO-SB,12,entropy,0.422,train log
+DAPO-SB,12,ppo_kl,0.0,train log
+DAPO-SB,12,grad_norm,10.195,train log
+DAPO-SB,13,score,0.482,train log
+DAPO-SB,13,entropy,0.424,train log
+DAPO-SB,13,ppo_kl,5.639977061946411e-05,train log
+DAPO-SB,13,grad_norm,10.841,train log
+DAPO-SB,14,score,0.499,train log
+DAPO-SB,14,entropy,0.417,train log
+DAPO-SB,14,ppo_kl,2.1772534133725054e-05,train log
+DAPO-SB,14,grad_norm,12.488,train log
+DAPO-SB,15,score,0.551,train log
+DAPO-SB,15,entropy,0.409,train log
+DAPO-SB,15,ppo_kl,-4.5728032914885464e-05,train log
+DAPO-SB,15,grad_norm,9.464,train log
+DAPO-SB,16,score,0.509,train log
+DAPO-SB,16,entropy,0.398,train log
+DAPO-SB,16,ppo_kl,0.0,train log
+DAPO-SB,16,grad_norm,11.018,train log
+DAPO-SB,17,score,0.512,train log
+DAPO-SB,17,entropy,0.399,train log
+DAPO-SB,17,ppo_kl,-0.0,train log
+DAPO-SB,17,grad_norm,9.286,train log
+DAPO-SB,18,score,0.485,train log
+DAPO-SB,18,entropy,0.402,train log
+DAPO-SB,18,ppo_kl,0.0,train log
+DAPO-SB,18,grad_norm,10.271,train log
+DAPO-SB,19,score,0.497,train log
+DAPO-SB,19,entropy,0.4,train log
+DAPO-SB,19,ppo_kl,0.0,train log
+DAPO-SB,19,grad_norm,22.098,train log
+DAPO-SB,20,score,0.543,train log
+DAPO-SB,20,entropy,0.398,train log
+DAPO-SB,20,ppo_kl,0.0,train log
+DAPO-SB,20,grad_norm,8.055,train log
+DAPO-SB,21,score,0.472,train log
+DAPO-SB,21,entropy,0.383,train log
+DAPO-SB,21,ppo_kl,4.284605724933499e-05,train log
+DAPO-SB,21,grad_norm,7.836,train log
+DAPO-SB,22,score,0.548,train log
+DAPO-SB,22,entropy,0.38,train log
+DAPO-SB,22,ppo_kl,8.64012123571456e-05,train log
+DAPO-SB,22,grad_norm,6.145,train log
+DAPO-SB,23,score,0.531,train log
+DAPO-SB,23,entropy,0.378,train log
+DAPO-SB,23,ppo_kl,0.0,train log
+DAPO-SB,23,grad_norm,12.311,train log
+DAPO-SB,24,score,0.518,train log
+DAPO-SB,24,entropy,0.375,train log
+DAPO-SB,24,ppo_kl,0.0,train log
+DAPO-SB,24,grad_norm,8.622,train log
+DAPO-SB,25,score,0.493,train log
+DAPO-SB,25,entropy,0.376,train log
+DAPO-SB,25,ppo_kl,0.0,train log
+DAPO-SB,25,grad_norm,15.479,train log
+DAPO-SB,26,score,0.516,train log
+DAPO-SB,26,entropy,0.35,train log
+DAPO-SB,26,ppo_kl,6.161841004025002e-05,train log
+DAPO-SB,26,grad_norm,12.615,train log
+DAPO-SB,27,score,0.47,train log
+DAPO-SB,27,entropy,0.373,train log
+DAPO-SB,27,ppo_kl,-3.0974626981951348e-06,train log
+DAPO-SB,27,grad_norm,12.818,train log
+DAPO-SB,28,score,0.514,train log
+DAPO-SB,28,entropy,0.358,train log
+DAPO-SB,28,ppo_kl,8.93837178599469e-05,train log
+DAPO-SB,28,grad_norm,8.589,train log
+DAPO-SB,29,score,0.525,train log
+DAPO-SB,29,entropy,0.365,train log
+DAPO-SB,29,ppo_kl,5.0535162367148755e-05,train log
+DAPO-SB,29,grad_norm,10.16,train log
+DAPO-SB,30,score,0.522,train log
+DAPO-SB,30,entropy,0.356,train log
+DAPO-SB,30,ppo_kl,0.0,train log
+DAPO-SB,30,grad_norm,13.664,train log
+DAPO-SB,31,score,0.541,train log
+DAPO-SB,31,entropy,0.353,train log
+DAPO-SB,31,ppo_kl,0.0,train log
+DAPO-SB,31,grad_norm,11.277,train log
+DAPO-SB,32,score,0.542,train log
+DAPO-SB,32,entropy,0.341,train log
+DAPO-SB,32,ppo_kl,0.0,train log
+DAPO-SB,32,grad_norm,11.709,train log
+DAPO,1,score,0.482,train log
+DAPO,1,entropy,0.448,train log
+DAPO,1,ppo_kl,0.0,train log
+DAPO,1,grad_norm,8.225,train log
+DAPO,2,score,0.5,train log
+DAPO,2,entropy,0.448,train log
+DAPO,2,ppo_kl,-0.0,train log
+DAPO,2,grad_norm,12.205,train log
+DAPO,3,score,0.51,train log
+DAPO,3,entropy,0.443,train log
+DAPO,3,ppo_kl,2.318574930325405e-05,train log
+DAPO,3,grad_norm,40.26,train log
+DAPO,4,score,0.467,train log
+DAPO,4,entropy,0.448,train log
+DAPO,4,ppo_kl,0.0,train log
+DAPO,4,grad_norm,11.695,train log
+DAPO,5,score,0.529,train log
+DAPO,5,entropy,0.447,train log
+DAPO,5,ppo_kl,-0.0,train log
+DAPO,5,grad_norm,8.383,train log
+DAPO,6,score,0.5,train log
+DAPO,6,entropy,0.459,train log
+DAPO,6,ppo_kl,0.0,train log
+DAPO,6,grad_norm,10.425,train log
+DAPO,7,score,0.554,train log
+DAPO,7,entropy,0.451,train log
+DAPO,7,ppo_kl,0.0,train log
+DAPO,7,grad_norm,9.247,train log
+DAPO,8,score,0.519,train log
+DAPO,8,entropy,0.441,train log
+DAPO,8,ppo_kl,0.0,train log
+DAPO,8,grad_norm,9.555,train log
+DAPO,9,score,0.481,train log
+DAPO,9,entropy,0.447,train log
+DAPO,9,ppo_kl,3.6322589559566333e-06,train log
+DAPO,9,grad_norm,13.24,train log
+DAPO,10,score,0.505,train log
+DAPO,10,entropy,0.438,train log
+DAPO,10,ppo_kl,0.0,train log
+DAPO,10,grad_norm,9.851,train log
+DAPO,11,score,0.449,train log
+DAPO,11,entropy,0.452,train log
+DAPO,11,ppo_kl,9.618618964304324e-05,train log
+DAPO,11,grad_norm,7.165,train log
+DAPO,12,score,0.508,train log
+DAPO,12,entropy,0.442,train log
+DAPO,12,ppo_kl,0.0,train log
+DAPO,12,grad_norm,11.673,train log
+DAPO,13,score,0.526,train log
+DAPO,13,entropy,0.437,train log
+DAPO,13,ppo_kl,4.3167651250039196e-05,train log
+DAPO,13,grad_norm,10.89,train log
+DAPO,14,score,0.515,train log
+DAPO,14,entropy,0.438,train log
+DAPO,14,ppo_kl,0.0,train log
+DAPO,14,grad_norm,11.091,train log
+DAPO,15,score,0.532,train log
+DAPO,15,entropy,0.436,train log
+DAPO,15,ppo_kl,0.0,train log
+DAPO,15,grad_norm,6.535,train log
+DAPO,16,score,0.529,train log
+DAPO,16,entropy,0.431,train log
+DAPO,16,ppo_kl,0.0,train log
+DAPO,16,grad_norm,6.335,train log
+DAPO,17,score,0.503,train log
+DAPO,17,entropy,0.446,train log
+DAPO,17,ppo_kl,0.0,train log
+DAPO,17,grad_norm,8.462,train log
+DAPO,18,score,0.499,train log
+DAPO,18,entropy,0.446,train log
+DAPO,18,ppo_kl,0.0,train log
+DAPO,18,grad_norm,11.735,train log
+DAPO,19,score,0.494,train log
+DAPO,19,entropy,0.454,train log
+DAPO,19,ppo_kl,0.0,train log
+DAPO,19,grad_norm,6.692,train log
+DAPO,20,score,0.553,train log
+DAPO,20,entropy,0.443,train log
+DAPO,20,ppo_kl,-9.09932142754572e-05,train log
+DAPO,20,grad_norm,8.305,train log
+DAPO,21,score,0.528,train log
+DAPO,21,entropy,0.441,train log
+DAPO,21,ppo_kl,0.0,train log
+DAPO,21,grad_norm,7.54,train log
+DAPO,22,score,0.536,train log
+DAPO,22,entropy,0.445,train log
+DAPO,22,ppo_kl,0.0,train log
+DAPO,22,grad_norm,5.972,train log
+DAPO,23,score,0.56,train log
+DAPO,23,entropy,0.441,train log
+DAPO,23,ppo_kl,0.0,train log
+DAPO,23,grad_norm,8.098,train log
+DAPO,24,score,0.499,train log
+DAPO,24,entropy,0.446,train log
+DAPO,24,ppo_kl,0.0,train log
+DAPO,24,grad_norm,5.768,train log
+DAPO,25,score,0.446,train log
+DAPO,25,entropy,0.458,train log
+DAPO,25,ppo_kl,0.0,train log
+DAPO,25,grad_norm,5.991,train log
+DAPO,26,score,0.483,train log
+DAPO,26,entropy,0.439,train log
+DAPO,26,ppo_kl,0.0,train log
+DAPO,26,grad_norm,8.657,train log
+DAPO,27,score,0.498,train log
+DAPO,27,entropy,0.444,train log
+DAPO,27,ppo_kl,0.0,train log
+DAPO,27,grad_norm,6.672,train log
+DAPO,28,score,0.521,train log
+DAPO,28,entropy,0.442,train log
+DAPO,28,ppo_kl,0.0,train log
+DAPO,28,grad_norm,5.175,train log
+DAPO,29,score,0.522,train log
+DAPO,29,entropy,0.444,train log
+DAPO,29,ppo_kl,0.0,train log
+DAPO,29,grad_norm,5.019,train log
+DAPO,30,score,0.481,train log
+DAPO,30,entropy,0.45,train log
+DAPO,30,ppo_kl,1.5079773064550541e-05,train log
+DAPO,30,grad_norm,8.146,train log
+DAPO,31,score,0.526,train log
+DAPO,31,entropy,0.454,train log
+DAPO,31,ppo_kl,0.0,train log
+DAPO,31,grad_norm,6.166,train log
+DAPO,32,score,0.556,train log
+DAPO,32,entropy,0.446,train log
+DAPO,32,ppo_kl,0.0,train log
+DAPO,32,grad_norm,12.908,train log
+GRPO,1,score,0.572,train log
+GRPO,1,entropy,0.424,train log
+GRPO,1,ppo_kl,0.0,train log
+GRPO,1,grad_norm,6.197,train log
+GRPO,2,score,0.576,train log
+GRPO,2,entropy,0.429,train log
+GRPO,2,ppo_kl,-0.0,train log
+GRPO,2,grad_norm,9.281,train log
+GRPO,3,score,0.621,train log
+GRPO,3,entropy,0.421,train log
+GRPO,3,ppo_kl,5.1018444732367895e-05,train log
+GRPO,3,grad_norm,15.085,train log
+GRPO,4,score,0.577,train log
+GRPO,4,entropy,0.423,train log
+GRPO,4,ppo_kl,7.781262326413222e-05,train log
+GRPO,4,grad_norm,8.038,train log
+GRPO,5,score,0.572,train log
+GRPO,5,entropy,0.431,train log
+GRPO,5,ppo_kl,-0.0,train log
+GRPO,5,grad_norm,11.146,train log
+GRPO,6,score,0.606,train log
+GRPO,6,entropy,0.424,train log
+GRPO,6,ppo_kl,0.0,train log
+GRPO,6,grad_norm,4.67,train log
+GRPO,7,score,0.535,train log
+GRPO,7,entropy,0.444,train log
+GRPO,7,ppo_kl,0.0,train log
+GRPO,7,grad_norm,7.696,train log
+GRPO,8,score,0.614,train log
+GRPO,8,entropy,0.435,train log
+GRPO,8,ppo_kl,0.0,train log
+GRPO,8,grad_norm,14.33,train log
+GRPO,9,score,0.635,train log
+GRPO,9,entropy,0.424,train log
+GRPO,9,ppo_kl,2.103781362340949e-05,train log
+GRPO,9,grad_norm,7.865,train log
+GRPO,10,score,0.632,train log
+GRPO,10,entropy,0.418,train log
+GRPO,10,ppo_kl,0.0,train log
+GRPO,10,grad_norm,7.938,train log
+GRPO,11,score,0.589,train log
+GRPO,11,entropy,0.437,train log
+GRPO,11,ppo_kl,0.0,train log
+GRPO,11,grad_norm,9.776,train log
+GRPO,12,score,0.649,train log
+GRPO,12,entropy,0.434,train log
+GRPO,12,ppo_kl,0.0,train log
+GRPO,12,grad_norm,7.947,train log
+GRPO,13,score,0.609,train log
+GRPO,13,entropy,0.438,train log
+GRPO,13,ppo_kl,1.792217647432283e-05,train log
+GRPO,13,grad_norm,5.572,train log
+GRPO,14,score,0.567,train log
+GRPO,14,entropy,0.445,train log
+GRPO,14,ppo_kl,0.0,train log
+GRPO,14,grad_norm,11.705,train log
+GRPO,15,score,0.591,train log
+GRPO,15,entropy,0.448,train log
+GRPO,15,ppo_kl,0.0,train log
+GRPO,15,grad_norm,6.203,train log
+GRPO,16,score,0.606,train log
+GRPO,16,entropy,0.44,train log
+GRPO,16,ppo_kl,0.0,train log
+GRPO,16,grad_norm,7.579,train log
+GRPO,17,score,0.586,train log
+GRPO,17,entropy,0.443,train log
+GRPO,17,ppo_kl,1.5077236745075451e-05,train log
+GRPO,17,grad_norm,5.519,train log
+GRPO,18,score,0.612,train log
+GRPO,18,entropy,0.438,train log
+GRPO,18,ppo_kl,-0.0,train log
+GRPO,18,grad_norm,6.198,train log
+GRPO,19,score,0.613,train log
+GRPO,19,entropy,0.439,train log
+GRPO,19,ppo_kl,0.0,train log
+GRPO,19,grad_norm,5.41,train log
+GRPO,20,score,0.557,train log
+GRPO,20,entropy,0.466,train log
+GRPO,20,ppo_kl,0.0,train log
+GRPO,20,grad_norm,7.541,train log
+GRPO,21,score,0.667,train log
+GRPO,21,entropy,0.438,train log
+GRPO,21,ppo_kl,0.0,train log
+GRPO,21,grad_norm,6.127,train log
+GRPO,22,score,0.59,train log
+GRPO,22,entropy,0.457,train log
+GRPO,22,ppo_kl,0.0,train log
+GRPO,22,grad_norm,8.315,train log
+GRPO,23,score,0.601,train log
+GRPO,23,entropy,0.451,train log
+GRPO,23,ppo_kl,7.373057594801575e-05,train log
+GRPO,23,grad_norm,5.219,train log
+GRPO,24,score,0.616,train log
+GRPO,24,entropy,0.448,train log
+GRPO,24,ppo_kl,-5.602685807189866e-06,train log
+GRPO,24,grad_norm,5.174,train log
+GRPO,25,score,0.615,train log
+GRPO,25,entropy,0.44,train log
+GRPO,25,ppo_kl,0.0,train log
+GRPO,25,grad_norm,6.733,train log
+GRPO,26,score,0.579,train log
+GRPO,26,entropy,0.459,train log
+GRPO,26,ppo_kl,0.0,train log
+GRPO,26,grad_norm,6.797,train log
+GRPO,27,score,0.669,train log
+GRPO,27,entropy,0.437,train log
+GRPO,27,ppo_kl,0.0,train log
+GRPO,27,grad_norm,6.058,train log
+GRPO,28,score,0.646,train log
+GRPO,28,entropy,0.438,train log
+GRPO,28,ppo_kl,8.040423708866845e-05,train log
+GRPO,28,grad_norm,4.924,train log
+GRPO,29,score,0.562,train log
+GRPO,29,entropy,0.447,train log
+GRPO,29,ppo_kl,1.4410145653733118e-05,train log
+GRPO,29,grad_norm,6.27,train log
+GRPO,30,score,0.622,train log
+GRPO,30,entropy,0.454,train log
+GRPO,30,ppo_kl,2.5132005494260983e-05,train log
+GRPO,30,grad_norm,4.759,train log
+GRPO,31,score,0.613,train log
+GRPO,31,entropy,0.457,train log
+GRPO,31,ppo_kl,0.0,train log
+GRPO,31,grad_norm,5.104,train log
+GRPO,32,score,0.601,train log
+GRPO,32,entropy,0.454,train log
+GRPO,32,ppo_kl,0.0,train log
+GRPO,32,grad_norm,7.258,train log
+DAPO-SB,1,mean_b0,0.2573029138413748,sb_log.jsonl
+DAPO-SB,1,mean_acc,0.482421875,sb_log.jsonl
+DAPO-SB,1,mean_groupacc_minus_b0,0.22511896115862526,sb_log.jsonl
+DAPO-SB,1,mean_letter_mass,0.7298572606004751,sb_log.jsonl
+DAPO-SB,1,turns_per_traj,1.76953125,sb_log.jsonl
+DAPO-SB,1,share_raw_adv_pos,0.4624724061810154,sb_log.jsonl
+DAPO-SB,1,adv_abs_mean_sb,1.0033015012741089,sb_log.jsonl
+DAPO-SB,1,adv_abs_mean_dapo,0.8091349601745605,sb_log.jsonl
+DAPO-SB,2,mean_b0,0.25693692891222547,sb_log.jsonl
+DAPO-SB,2,mean_acc,0.498046875,sb_log.jsonl
+DAPO-SB,2,mean_groupacc_minus_b0,0.24110994608777475,sb_log.jsonl
+DAPO-SB,2,mean_letter_mass,0.710957068374901,sb_log.jsonl
+DAPO-SB,2,turns_per_traj,1.78125,sb_log.jsonl
+DAPO-SB,2,share_raw_adv_pos,0.5027412280701754,sb_log.jsonl
+DAPO-SB,2,adv_abs_mean_sb,0.9861943125724792,sb_log.jsonl
+DAPO-SB,2,adv_abs_mean_dapo,0.7882719039916992,sb_log.jsonl
+DAPO-SB,3,mean_b0,0.30143955875799205,sb_log.jsonl
+DAPO-SB,3,mean_acc,0.521484375,sb_log.jsonl
+DAPO-SB,3,mean_groupacc_minus_b0,0.22004481624200722,sb_log.jsonl
+DAPO-SB,3,mean_letter_mass,0.7471780745596549,sb_log.jsonl
+DAPO-SB,3,turns_per_traj,1.8046875,sb_log.jsonl
+DAPO-SB,3,share_raw_adv_pos,0.5081168831168831,sb_log.jsonl
+DAPO-SB,3,adv_abs_mean_sb,1.0167251825332642,sb_log.jsonl
+DAPO-SB,3,adv_abs_mean_dapo,0.7903710603713989,sb_log.jsonl
+DAPO-SB,4,mean_b0,0.24870892224542154,sb_log.jsonl
+DAPO-SB,4,mean_acc,0.4755859375,sb_log.jsonl
+DAPO-SB,4,mean_groupacc_minus_b0,0.2268770152545788,sb_log.jsonl
+DAPO-SB,4,mean_letter_mass,0.7059914891342599,sb_log.jsonl
+DAPO-SB,4,turns_per_traj,1.7802734375,sb_log.jsonl
+DAPO-SB,4,share_raw_adv_pos,0.473944048272079,sb_log.jsonl
+DAPO-SB,4,adv_abs_mean_sb,0.9262182712554932,sb_log.jsonl
+DAPO-SB,4,adv_abs_mean_dapo,0.7722100019454956,sb_log.jsonl
+DAPO-SB,5,mean_b0,0.27532197122441115,sb_log.jsonl
+DAPO-SB,5,mean_acc,0.5,sb_log.jsonl
+DAPO-SB,5,mean_groupacc_minus_b0,0.2246780287755891,sb_log.jsonl
+DAPO-SB,5,mean_letter_mass,0.7279471144381592,sb_log.jsonl
+DAPO-SB,5,turns_per_traj,1.94921875,sb_log.jsonl
+DAPO-SB,5,share_raw_adv_pos,0.4724448897795591,sb_log.jsonl
+DAPO-SB,5,adv_abs_mean_sb,0.9009937047958374,sb_log.jsonl
+DAPO-SB,5,adv_abs_mean_dapo,0.7829663157463074,sb_log.jsonl
+DAPO-SB,6,mean_b0,0.2270227405008608,sb_log.jsonl
+DAPO-SB,6,mean_acc,0.4765625,sb_log.jsonl
+DAPO-SB,6,mean_groupacc_minus_b0,0.24953975949913845,sb_log.jsonl
+DAPO-SB,6,mean_letter_mass,0.7459332733603433,sb_log.jsonl
+DAPO-SB,6,turns_per_traj,1.9384765625,sb_log.jsonl
+DAPO-SB,6,share_raw_adv_pos,0.4780856423173804,sb_log.jsonl
+DAPO-SB,6,adv_abs_mean_sb,0.9547206163406372,sb_log.jsonl
+DAPO-SB,6,adv_abs_mean_dapo,0.7839526534080505,sb_log.jsonl
+DAPO-SB,7,mean_b0,0.2924124261546789,sb_log.jsonl
+DAPO-SB,7,mean_acc,0.5068359375,sb_log.jsonl
+DAPO-SB,7,mean_groupacc_minus_b0,0.21442351134532123,sb_log.jsonl
+DAPO-SB,7,mean_letter_mass,0.7677152374692764,sb_log.jsonl
+DAPO-SB,7,turns_per_traj,2.20703125,sb_log.jsonl
+DAPO-SB,7,share_raw_adv_pos,0.49557522123893805,sb_log.jsonl
+DAPO-SB,7,adv_abs_mean_sb,0.917193591594696,sb_log.jsonl
+DAPO-SB,7,adv_abs_mean_dapo,0.8273645043373108,sb_log.jsonl
+DAPO-SB,8,mean_b0,0.2795168979116364,sb_log.jsonl
+DAPO-SB,8,mean_acc,0.501953125,sb_log.jsonl
+DAPO-SB,8,mean_groupacc_minus_b0,0.2224362270883632,sb_log.jsonl
+DAPO-SB,8,mean_letter_mass,0.7453432319830806,sb_log.jsonl
+DAPO-SB,8,turns_per_traj,2.271484375,sb_log.jsonl
+DAPO-SB,8,share_raw_adv_pos,0.46775580395528804,sb_log.jsonl
+DAPO-SB,8,adv_abs_mean_sb,0.928261399269104,sb_log.jsonl
+DAPO-SB,8,adv_abs_mean_dapo,0.793410062789917,sb_log.jsonl
+DAPO-SB,9,mean_b0,0.27081214313465557,sb_log.jsonl
+DAPO-SB,9,mean_acc,0.513671875,sb_log.jsonl
+DAPO-SB,9,mean_groupacc_minus_b0,0.2428597318653439,sb_log.jsonl
+DAPO-SB,9,mean_letter_mass,0.7508477016587621,sb_log.jsonl
+DAPO-SB,9,turns_per_traj,2.46484375,sb_log.jsonl
+DAPO-SB,9,share_raw_adv_pos,0.4948494453248811,sb_log.jsonl
+DAPO-SB,9,adv_abs_mean_sb,0.9809952974319458,sb_log.jsonl
+DAPO-SB,9,adv_abs_mean_dapo,0.8183736205101013,sb_log.jsonl
+DAPO-SB,10,mean_b0,0.26201542321207455,sb_log.jsonl
+DAPO-SB,10,mean_acc,0.45703125,sb_log.jsonl
+DAPO-SB,10,mean_groupacc_minus_b0,0.19501582678792623,sb_log.jsonl
+DAPO-SB,10,mean_letter_mass,0.785786118126657,sb_log.jsonl
+DAPO-SB,10,turns_per_traj,2.474609375,sb_log.jsonl
+DAPO-SB,10,share_raw_adv_pos,0.4483030781373323,sb_log.jsonl
+DAPO-SB,10,adv_abs_mean_sb,0.9621286988258362,sb_log.jsonl
+DAPO-SB,10,adv_abs_mean_dapo,0.7955768704414368,sb_log.jsonl
+DAPO-SB,11,mean_b0,0.2798024061548224,sb_log.jsonl
+DAPO-SB,11,mean_acc,0.4912109375,sb_log.jsonl
+DAPO-SB,11,mean_groupacc_minus_b0,0.211408531345177,sb_log.jsonl
+DAPO-SB,11,mean_letter_mass,0.7717083726378867,sb_log.jsonl
+DAPO-SB,11,turns_per_traj,2.7216796875,sb_log.jsonl
+DAPO-SB,11,share_raw_adv_pos,0.4703982777179763,sb_log.jsonl
+DAPO-SB,11,adv_abs_mean_sb,0.9386817812919617,sb_log.jsonl
+DAPO-SB,11,adv_abs_mean_dapo,0.7900984287261963,sb_log.jsonl
+DAPO-SB,12,mean_b0,0.287509963641766,sb_log.jsonl
+DAPO-SB,12,mean_acc,0.5234375,sb_log.jsonl
+DAPO-SB,12,mean_groupacc_minus_b0,0.23592753635823405,sb_log.jsonl
+DAPO-SB,12,mean_letter_mass,0.7865478348797809,sb_log.jsonl
+DAPO-SB,12,turns_per_traj,2.7021484375,sb_log.jsonl
+DAPO-SB,12,share_raw_adv_pos,0.5128297795446332,sb_log.jsonl
+DAPO-SB,12,adv_abs_mean_sb,0.9978152513504028,sb_log.jsonl
+DAPO-SB,12,adv_abs_mean_dapo,0.7962938547134399,sb_log.jsonl
+DAPO-SB,13,mean_b0,0.25529452379836515,sb_log.jsonl
+DAPO-SB,13,mean_acc,0.482421875,sb_log.jsonl
+DAPO-SB,13,mean_groupacc_minus_b0,0.22712735120163416,sb_log.jsonl
+DAPO-SB,13,mean_letter_mass,0.7722810547410898,sb_log.jsonl
+DAPO-SB,13,turns_per_traj,2.673828125,sb_log.jsonl
+DAPO-SB,13,share_raw_adv_pos,0.4806428049671293,sb_log.jsonl
+DAPO-SB,13,adv_abs_mean_sb,0.9433370232582092,sb_log.jsonl
+DAPO-SB,13,adv_abs_mean_dapo,0.789566159248352,sb_log.jsonl
+DAPO-SB,14,mean_b0,0.2641684193182355,sb_log.jsonl
+DAPO-SB,14,mean_acc,0.4990234375,sb_log.jsonl
+DAPO-SB,14,mean_groupacc_minus_b0,0.23485501818176485,sb_log.jsonl
+DAPO-SB,14,mean_letter_mass,0.7731522392908488,sb_log.jsonl
+DAPO-SB,14,turns_per_traj,2.75390625,sb_log.jsonl
+DAPO-SB,14,share_raw_adv_pos,0.4773049645390071,sb_log.jsonl
+DAPO-SB,14,adv_abs_mean_sb,0.9591482877731323,sb_log.jsonl
+DAPO-SB,14,adv_abs_mean_dapo,0.8053322434425354,sb_log.jsonl
+DAPO-SB,15,mean_b0,0.28347741930231546,sb_log.jsonl
+DAPO-SB,15,mean_acc,0.55078125,sb_log.jsonl
+DAPO-SB,15,mean_groupacc_minus_b0,0.267303830697684,sb_log.jsonl
+DAPO-SB,15,mean_letter_mass,0.7972126872703242,sb_log.jsonl
+DAPO-SB,15,turns_per_traj,2.6982421875,sb_log.jsonl
+DAPO-SB,15,share_raw_adv_pos,0.5349258052841115,sb_log.jsonl
+DAPO-SB,15,adv_abs_mean_sb,0.9651587009429932,sb_log.jsonl
+DAPO-SB,15,adv_abs_mean_dapo,0.8081142902374268,sb_log.jsonl
+DAPO-SB,16,mean_b0,0.2738417490871085,sb_log.jsonl
+DAPO-SB,16,mean_acc,0.5087890625,sb_log.jsonl
+DAPO-SB,16,mean_groupacc_minus_b0,0.23494731341289146,sb_log.jsonl
+DAPO-SB,16,mean_letter_mass,0.7974224003363884,sb_log.jsonl
+DAPO-SB,16,turns_per_traj,2.7744140625,sb_log.jsonl
+DAPO-SB,16,share_raw_adv_pos,0.4871524111228441,sb_log.jsonl
+DAPO-SB,16,adv_abs_mean_sb,0.9670323729515076,sb_log.jsonl
+DAPO-SB,16,adv_abs_mean_dapo,0.7935665249824524,sb_log.jsonl
+DAPO-SB,17,mean_b0,0.32115875296316365,sb_log.jsonl
+DAPO-SB,17,mean_acc,0.51171875,sb_log.jsonl
+DAPO-SB,17,mean_groupacc_minus_b0,0.19055999703683565,sb_log.jsonl
+DAPO-SB,17,mean_letter_mass,0.8138320310937897,sb_log.jsonl
+DAPO-SB,17,turns_per_traj,2.8583984375,sb_log.jsonl
+DAPO-SB,17,share_raw_adv_pos,0.49914588315681585,sb_log.jsonl
+DAPO-SB,17,adv_abs_mean_sb,0.9716955423355103,sb_log.jsonl
+DAPO-SB,17,adv_abs_mean_dapo,0.8022714853286743,sb_log.jsonl
+DAPO-SB,18,mean_b0,0.29225484492840315,sb_log.jsonl
+DAPO-SB,18,mean_acc,0.4853515625,sb_log.jsonl
+DAPO-SB,18,mean_groupacc_minus_b0,0.19309671757159655,sb_log.jsonl
+DAPO-SB,18,mean_letter_mass,0.7966005178635887,sb_log.jsonl
+DAPO-SB,18,turns_per_traj,2.9189453125,sb_log.jsonl
+DAPO-SB,18,share_raw_adv_pos,0.4576781532285045,sb_log.jsonl
+DAPO-SB,18,adv_abs_mean_sb,0.9810659289360046,sb_log.jsonl
+DAPO-SB,18,adv_abs_mean_dapo,0.8033799529075623,sb_log.jsonl
+DAPO-SB,19,mean_b0,0.2759868174078334,sb_log.jsonl
+DAPO-SB,19,mean_acc,0.4970703125,sb_log.jsonl
+DAPO-SB,19,mean_groupacc_minus_b0,0.22108349509216657,sb_log.jsonl
+DAPO-SB,19,mean_letter_mass,0.8020452958118663,sb_log.jsonl
+DAPO-SB,19,turns_per_traj,2.876953125,sb_log.jsonl
+DAPO-SB,19,share_raw_adv_pos,0.48981670061099797,sb_log.jsonl
+DAPO-SB,19,adv_abs_mean_sb,0.9297893047332764,sb_log.jsonl
+DAPO-SB,19,adv_abs_mean_dapo,0.8128114938735962,sb_log.jsonl
+DAPO-SB,20,mean_b0,0.2881232814096088,sb_log.jsonl
+DAPO-SB,20,mean_acc,0.54296875,sb_log.jsonl
+DAPO-SB,20,mean_groupacc_minus_b0,0.2548454685903914,sb_log.jsonl
+DAPO-SB,20,mean_letter_mass,0.7972708216325842,sb_log.jsonl
+DAPO-SB,20,turns_per_traj,2.78125,sb_log.jsonl
+DAPO-SB,20,share_raw_adv_pos,0.5101825842696629,sb_log.jsonl
+DAPO-SB,20,adv_abs_mean_sb,0.980100691318512,sb_log.jsonl
+DAPO-SB,20,adv_abs_mean_dapo,0.7901341915130615,sb_log.jsonl
+DAPO-SB,21,mean_b0,0.31198450467240085,sb_log.jsonl
+DAPO-SB,21,mean_acc,0.4716796875,sb_log.jsonl
+DAPO-SB,21,mean_groupacc_minus_b0,0.15969518282759917,sb_log.jsonl
+DAPO-SB,21,mean_letter_mass,0.7913075109384541,sb_log.jsonl
+DAPO-SB,21,turns_per_traj,3.1474609375,sb_log.jsonl
+DAPO-SB,21,share_raw_adv_pos,0.4396524976729755,sb_log.jsonl
+DAPO-SB,21,adv_abs_mean_sb,0.9412485361099243,sb_log.jsonl
+DAPO-SB,21,adv_abs_mean_dapo,0.8070881962776184,sb_log.jsonl
+DAPO-SB,22,mean_b0,0.27309507979582526,sb_log.jsonl
+DAPO-SB,22,mean_acc,0.5478515625,sb_log.jsonl
+DAPO-SB,22,mean_groupacc_minus_b0,0.2747564827041744,sb_log.jsonl
+DAPO-SB,22,mean_letter_mass,0.8061328097565056,sb_log.jsonl
+DAPO-SB,22,turns_per_traj,2.900390625,sb_log.jsonl
+DAPO-SB,22,share_raw_adv_pos,0.5454545454545454,sb_log.jsonl
+DAPO-SB,22,adv_abs_mean_sb,0.9971137046813965,sb_log.jsonl
+DAPO-SB,22,adv_abs_mean_dapo,0.7989277839660645,sb_log.jsonl
+DAPO-SB,23,mean_b0,0.3442422347053784,sb_log.jsonl
+DAPO-SB,23,mean_acc,0.53125,sb_log.jsonl
+DAPO-SB,23,mean_groupacc_minus_b0,0.1870077652946221,sb_log.jsonl
+DAPO-SB,23,mean_letter_mass,0.8421078578042821,sb_log.jsonl
+DAPO-SB,23,turns_per_traj,2.7275390625,sb_log.jsonl
+DAPO-SB,23,share_raw_adv_pos,0.5170068027210885,sb_log.jsonl
+DAPO-SB,23,adv_abs_mean_sb,0.9637045860290527,sb_log.jsonl
+DAPO-SB,23,adv_abs_mean_dapo,0.7943302989006042,sb_log.jsonl
+DAPO-SB,24,mean_b0,0.32165820370588927,sb_log.jsonl
+DAPO-SB,24,mean_acc,0.517578125,sb_log.jsonl
+DAPO-SB,24,mean_groupacc_minus_b0,0.19591992129411104,sb_log.jsonl
+DAPO-SB,24,mean_letter_mass,0.829393525160335,sb_log.jsonl
+DAPO-SB,24,turns_per_traj,2.78125,sb_log.jsonl
+DAPO-SB,24,share_raw_adv_pos,0.49754213483146065,sb_log.jsonl
+DAPO-SB,24,adv_abs_mean_sb,0.9814198017120361,sb_log.jsonl
+DAPO-SB,24,adv_abs_mean_dapo,0.791725754737854,sb_log.jsonl
+DAPO-SB,25,mean_b0,0.2480926109486661,sb_log.jsonl
+DAPO-SB,25,mean_acc,0.4931640625,sb_log.jsonl
+DAPO-SB,25,mean_groupacc_minus_b0,0.24507145155133367,sb_log.jsonl
+DAPO-SB,25,mean_letter_mass,0.8050611468957699,sb_log.jsonl
+DAPO-SB,25,turns_per_traj,2.8984375,sb_log.jsonl
+DAPO-SB,25,share_raw_adv_pos,0.4855121293800539,sb_log.jsonl
+DAPO-SB,25,adv_abs_mean_sb,0.9344906210899353,sb_log.jsonl
+DAPO-SB,25,adv_abs_mean_dapo,0.7863644957542419,sb_log.jsonl
+DAPO-SB,26,mean_b0,0.3549592113845924,sb_log.jsonl
+DAPO-SB,26,mean_acc,0.515625,sb_log.jsonl
+DAPO-SB,26,mean_groupacc_minus_b0,0.16066578861540723,sb_log.jsonl
+DAPO-SB,26,mean_letter_mass,0.8560118459605489,sb_log.jsonl
+DAPO-SB,26,turns_per_traj,2.8154296875,sb_log.jsonl
+DAPO-SB,26,share_raw_adv_pos,0.4960110995490808,sb_log.jsonl
+DAPO-SB,26,adv_abs_mean_sb,0.9498718976974487,sb_log.jsonl
+DAPO-SB,26,adv_abs_mean_dapo,0.7796638011932373,sb_log.jsonl
+DAPO-SB,27,mean_b0,0.25290638055901693,sb_log.jsonl
+DAPO-SB,27,mean_acc,0.4697265625,sb_log.jsonl
+DAPO-SB,27,mean_groupacc_minus_b0,0.21682018194098238,sb_log.jsonl
+DAPO-SB,27,mean_letter_mass,0.7918664525879734,sb_log.jsonl
+DAPO-SB,27,turns_per_traj,3.0205078125,sb_log.jsonl
+DAPO-SB,27,share_raw_adv_pos,0.4555447785321694,sb_log.jsonl
+DAPO-SB,27,adv_abs_mean_sb,0.9129095077514648,sb_log.jsonl
+DAPO-SB,27,adv_abs_mean_dapo,0.7992432713508606,sb_log.jsonl
+DAPO-SB,28,mean_b0,0.28488690005327816,sb_log.jsonl
+DAPO-SB,28,mean_acc,0.513671875,sb_log.jsonl
+DAPO-SB,28,mean_groupacc_minus_b0,0.22878497494672256,sb_log.jsonl
+DAPO-SB,28,mean_letter_mass,0.8371464287386895,sb_log.jsonl
+DAPO-SB,28,turns_per_traj,2.8427734375,sb_log.jsonl
+DAPO-SB,28,share_raw_adv_pos,0.5073857780831329,sb_log.jsonl
+DAPO-SB,28,adv_abs_mean_sb,0.930168867111206,sb_log.jsonl
+DAPO-SB,28,adv_abs_mean_dapo,0.7949215173721313,sb_log.jsonl
+DAPO-SB,29,mean_b0,0.3336647730371794,sb_log.jsonl
+DAPO-SB,29,mean_acc,0.525390625,sb_log.jsonl
+DAPO-SB,29,mean_groupacc_minus_b0,0.19172585196282008,sb_log.jsonl
+DAPO-SB,29,mean_letter_mass,0.842691584351314,sb_log.jsonl
+DAPO-SB,29,turns_per_traj,2.8916015625,sb_log.jsonl
+DAPO-SB,29,share_raw_adv_pos,0.5018574805808849,sb_log.jsonl
+DAPO-SB,29,adv_abs_mean_sb,0.9853644967079163,sb_log.jsonl
+DAPO-SB,29,adv_abs_mean_dapo,0.7869343161582947,sb_log.jsonl
+DAPO-SB,30,mean_b0,0.3341867578102154,sb_log.jsonl
+DAPO-SB,30,mean_acc,0.5224609375,sb_log.jsonl
+DAPO-SB,30,mean_groupacc_minus_b0,0.18827417968978452,sb_log.jsonl
+DAPO-SB,30,mean_letter_mass,0.8563150835787721,sb_log.jsonl
+DAPO-SB,30,turns_per_traj,2.7158203125,sb_log.jsonl
+DAPO-SB,30,share_raw_adv_pos,0.49766271125494427,sb_log.jsonl
+DAPO-SB,30,adv_abs_mean_sb,0.9370455145835876,sb_log.jsonl
+DAPO-SB,30,adv_abs_mean_dapo,0.7867834568023682,sb_log.jsonl
+DAPO-SB,31,mean_b0,0.3183659647154841,sb_log.jsonl
+DAPO-SB,31,mean_acc,0.541015625,sb_log.jsonl
+DAPO-SB,31,mean_groupacc_minus_b0,0.22264966028451547,sb_log.jsonl
+DAPO-SB,31,mean_letter_mass,0.8507422364556229,sb_log.jsonl
+DAPO-SB,31,turns_per_traj,2.849609375,sb_log.jsonl
+DAPO-SB,31,share_raw_adv_pos,0.5147361206305688,sb_log.jsonl
+DAPO-SB,31,adv_abs_mean_sb,1.0101535320281982,sb_log.jsonl
+DAPO-SB,31,adv_abs_mean_dapo,0.7876983880996704,sb_log.jsonl
+DAPO-SB,32,mean_b0,0.3059496288020811,sb_log.jsonl
+DAPO-SB,32,mean_acc,0.5419921875,sb_log.jsonl
+DAPO-SB,32,mean_groupacc_minus_b0,0.23604255869791946,sb_log.jsonl
+DAPO-SB,32,mean_letter_mass,0.871535738137751,sb_log.jsonl
+DAPO-SB,32,turns_per_traj,2.8134765625,sb_log.jsonl
+DAPO-SB,32,share_raw_adv_pos,0.5293300937174592,sb_log.jsonl
+DAPO-SB,32,adv_abs_mean_sb,0.9609213471412659,sb_log.jsonl
+DAPO-SB,32,adv_abs_mean_dapo,0.7940833568572998,sb_log.jsonl

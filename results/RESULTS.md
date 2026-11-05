@@ -2,6 +2,10 @@
 
 > **更正（2026-11-04）**：本文所依据的 Probe A 计分有误——探针不给题面，正则把模型描述里的冠词 “A” 当作选项字母，DAPO 15/15、G1 14/14 命中均如此；Probe B 167/180 复述模型原错答。依赖 Probe A/B 的结论（读取层 43%、单图读不对 8.3%、G1 回填实锤）作废。复核与仍成立的测量见 [results/rereview_20261104](../results/rereview_20261104/RESULTS.zh.md)。
 
+**[DAPO vs DAPO-SB（停止相对 advantage，2026-11-05）](sb_20261104/REPORT.zh.md)**：E1 DAPO-SB .6413 vs DAPO .6635（配对净增 DAPO +49/2208；vstar 391→373、worldbench 86→72）。裁图 1.63 vs 2.09 张/条，零裁图 4.8% vs 1.0%，总处理 token 7,055 vs 8,930。训练 entropy .448→.341（DAPO .446）。Advantage.md §七的离线验收与根状态基线消融未跑；一个 seed。曲线 `data/sb_curves.png`。
+
+**[GRPO vs GRPO+A（单 A：只加 S 奖励，2026-11-05）](sg_20261104/REPORT_sg_a.zh.md)**：E1 .6436 vs GRPO .6390（配对净增 +10/2208），裁图 4.02 vs 1.91 张/条，总处理 token 18,034 vs 8,125。曲线 `data/sg_a_curves.png`。
+
 **[GRPO vs A+B vs A+B+C（Design_New，2026-11-04）](sg_20261104/RESULTS.zh.md)**：E1 GRPO .6390 / **A+B .6472**（配对净增 +18/2208，worldbench .335→.395）/ A+B+C .6395（净增 +1；vstar .844→.873）。A+B 的裁图从 1.905 增至 2.404 张/条，生成 token 从 261 增至 342。A+B+C 第 31–32 步因构造副作用，原题集合与另两臂不同。曲线 `sg_curves.png`；分层探针与尺度校准未跑。
 
 **主实验 [G1 (R-read)](g1_rread_20261103/RESULTS.zh.md)（2026-11-03）**：E1 .6395 vs G0 .6390 持平；训练池同题读取一致性 .5518→.6911（配对 +0.139，750↑/140↓）但未转化到端到端——落在冻结协议「读取改善未转化」行；去选项内容变化测试未跑。主图 `g1_main.png`，全家福曲线（vs DAPO/DTPO/GSPO/GIGPO/GRPO）`family_curves.png`。附属：因果 SFT+GRPO 对照 .6033（起点 .4543，SFT 差距 11.3pp 被 RL 收窄至 3.6pp，该线已停，见 [bsftc_grpo_20261103](bsftc_grpo_20261103/RESULTS.zh.md)）。

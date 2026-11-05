@@ -39,6 +39,8 @@
 | Hτ（bbox 覆盖过程奖励） | [htau_box_coverage](htau_box_coverage/) | `reward_d2.py:process_score`（L64）：只计“框占裁图面积 ≥ τ=0.005”的裁图，Φ = mean_j min(1, 0.5·(maxIoU_j + 并集覆盖_j))；`caption_contracts.py:assistant_reward_batch`（L147）组装 V·(Y+0.25·m·Φ) | `grpo_d2.sh` + DAPO 过滤（`filter_key=accuracy`），clip high 0.28 |
 | G1（读值一致性过程奖励） | [g1_reading_consistency](g1_reading_consistency/) | `reward_rread.py`：`commit_text`（L68）取最后一次 `</grounding>` 之后的文本；`match_num` / `match_txt`（L38 / L52）做规范化精确匹配，排除枚举和否定；`process_score`（L74）= 命中字段比例。冻结评分器 `rread_scorer.py`（成对反例自检 `_selfcheck`，L124）；离线准入 `run_admission.py`、`admission_stats.py` | `grpo_r1.sh` |
 | A+B / A+B+C（尺度门控证据奖励 + 任务尺度 advantage + 证据续答行） | [sg_scale_gated](sg_scale_gated/) | 见下一节 | `grpo_sg.sh`；A+B：`CAPTION_ADV_TS=1 CAPTION_SG_LAMBDA=0.1`；A+B+C 另加 `TRAIN=…_4k_sgc/train.parquet data.shuffle=false` |
+| GRPO+A（单 A：只加 S 奖励） | [sg_scale_gated](sg_scale_gated/) | 同 A+B 的 S（`reward_sg.py`），advantage 用标准 GRPO | `grpo_sg.sh`：`CAPTION_ADV_TS=0 CAPTION_SG_LAMBDA=0.1` |
+| DAPO-SB（停止相对 advantage） | [dapo_sb](dapo_sb/) | 探针：`stop_baseline.py:build_probe_request`（L33；以 `<answer` 结尾读 `>X`）、`combine`（L62；P(X)=P(`>X`)+P(`>`)·P(X\|`<answer>`)）、`run_probes`（L79；每个不同状态 2 次请求，max_tokens 1、temperature 0、top-20 logprob）；advantage：`stop_relative_advantage.py:build_advantages`（L31；Pro 参考实现原样，δ=b[k+1]−b[k]，终止项 Y−b[-1]，λ 递推，除以组内 Y 的样本标准差）、`broadcast_to_tokens`（L96）；`stop_baseline.py:install_advantage`（L127）在 DAPO 的 compute_advantage 之后替换 advantage；rollout 接线 `easyr1_caption.py` L378–414 | `grpo_sb.sh` + `$DAPO` 覆盖项：`CAPTION_SB=1 CAPTION_SB_LAMBDA=1 CAPTION_SG_LAMBDA=0 CAPTION_ADV_TS=0` |
 
 ## A+B / A+B+C 的实现细节（[sg_scale_gated](sg_scale_gated/)）
 

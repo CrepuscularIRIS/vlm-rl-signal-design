@@ -1,0 +1,74 @@
+[
+ {
+  "file": "traj_sg_a.jsonl",
+  "n": 2208,
+  "acc": 0.6436,
+  "fmt": 0.9905,
+  "first": 0.9982,
+  "later": 3.0217,
+  "tokens": 18033.9316,
+  "gen": 439.8591,
+  "truncated": 0.0009,
+  "error": 0.0,
+  "by_source": {
+   "mme_realworld": 0.6689,
+   "mmmu_pro": 0.3141,
+   "vstar": 0.8527,
+   "worldbench": 0.3347
+  }
+ },
+ {
+  "file": "traj_sg_ab.jsonl",
+  "n": 2208,
+  "acc": 0.6472,
+  "fmt": 0.9896,
+  "first": 0.9968,
+  "later": 1.4072,
+  "tokens": 10047.4081,
+  "gen": 342.4855,
+  "truncated": 0.0027,
+  "error": 0.0,
+  "by_source": {
+   "mme_realworld": 0.6659,
+   "mmmu_pro": 0.3397,
+   "vstar": 0.8371,
+   "worldbench": 0.3952
+  }
+ },
+ {
+  "file": "traj_k8_grpo.jsonl",
+  "n": 2208,
+  "acc": 0.639,
+  "fmt": 0.9914,
+  "first": 0.9565,
+  "later": 0.9488,
+  "tokens": 8125.38,
+  "gen": 261.1553,
+  "truncated": 0.0009,
+  "error": 0.0,
+  "by_source": {
+   "mme_realworld": 0.6645,
+   "mmmu_pro": 0.3141,
+   "vstar": 0.8438,
+   "worldbench": 0.3347
+  }
+ },
+ {
+  "file": "traj_k8_dapo.jsonl",
+  "n": 2208,
+  "acc": 0.6635,
+  "fmt": 0.9905,
+  "first": 0.99,
+  "later": 1.1024,
+  "tokens": 8929.8478,
+  "gen": 286.9665,
+  "truncated": 0.0023,
+  "error": 0.0,
+  "by_source": {
+   "mme_realworld": 0.6881,
+   "mmmu_pro": 0.3526,
+   "vstar": 0.8728,
+   "worldbench": 0.3468
+  }
+ }
+]

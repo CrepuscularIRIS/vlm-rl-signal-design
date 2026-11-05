@@ -432,6 +432,24 @@ Design_PH 执行结果见 [BIND_AUDIT.zh.md](results/behavior_20261104/BIND_AUDI
 
 同一批数据上，DAPO 失败组可核验证据辅助线的第二道关结果：可教的全错组只占可核验题的 22/1191，该线按判据停止。
 
+## DAPO-SB 与单 A 的训练结果（2026-11-05）
+
+两组都以 A-SFT 为起点，在 4k 池上训练 32 步，单 seed。三部分报告见 [results/sb_20261104/REPORT.zh.md](results/sb_20261104/REPORT.zh.md) 和 [results/sg_20261104/REPORT_sg_a.zh.md](results/sg_20261104/REPORT_sg_a.zh.md)，代码见 [code/dapo_sb](code/dapo_sb/)。
+
+- **DAPO-SB（停止相对 advantage）**：DAPO 的其余设置不变，只把组均值基线换成每回合之前的停止探针 $b_{i,k}$，即 $A_{i,t}=(Y_i-b_{i,k(t)})/(\sigma_q+\epsilon)$，λ=1。$b_{i,k}$ 是用 rollout 权重、只看题面和该回合前已呈现的图像、强制作答时的 P(gt 字母)。
+- **GRPO+A（单 A）**：GRPO 的奖励加上尺度门控获取分 S，即 R = V·(Y+0.1·m·S)；advantage 用标准 GRPO。
+
+| | E1 | 配对净增（对直接对照） | 裁图 / 条 | 零裁图 | 总处理 token / 条 | 训练末步 entropy |
+|---|---:|---:|---:|---:|---:|---:|
+| DAPO（对照） | .6635 | — | 2.092 | 1.00% | 8,930 | .446 |
+| DAPO-SB | .6413 | DAPO +49 | 1.631 | 4.80% | 7,055 | .341 |
+| GRPO（对照） | .6390 | — | 1.905 | 4.35% | 8,125 | .454 |
+| GRPO+A | .6436 | GRPO+A +10 | 4.020 | 0.18% | 18,034 | .449 |
+
+DAPO-SB 训练中，保留组的探针 b0 均值从 .257 升到 .306，组正确率减 b0 的值在 32 步内平均为 +.220，每条轨迹的回合数从 1.77 升到 2.81。探针让训练多出 ≥182,334 次单 token 前向；32 步 timing 合计 13.25 h，k8 DAPO 为 11.21 h，两者并行负载不同。未跑的检查：Advantage.md §七的三层离线验收、固定根状态基线消融、λ=0 / 0.5。
+
+![DAPO-SB curves](results/sb_20261104/data/sb_curves.png)
+
 ## 后续实验（已列入但未开始）
 
 1. Design_New §3 的分层探针：同一批错题，依次给“模型自己尺度最合适的裁图”“GT 证据图”“GT 三档尺度”“正确转录”“正确绑定”，按选项计分；同时用来校准尺度函数 h。
@@ -445,9 +463,10 @@ Design_PH 执行结果见 [BIND_AUDIT.zh.md](results/behavior_20261104/BIND_AUDI
 
 | 路径 | 内容 |
 |---|---|
-| [code/](code/README.md) | 12 个方法、E1 评测、rl4k 标注的实际运行代码快照 + MANIFEST（原始 sha256） |
+| [code/](code/README.md) | 13 个方法、E1 评测、rl4k 标注的实际运行代码快照 + MANIFEST（原始 sha256） |
 | [results/stage_report_20261104/](results/stage_report_20261104/) | 本页全部图（png / pdf）、长表、脚本 |
-| [results/sg_20261104/](results/sg_20261104/) | A+B / A+B+C 冻结记录、三部分报告、代码 |
+| [results/sb_20261104/](results/sb_20261104/) | DAPO-SB 冻结记录、三部分报告、曲线、E1 配对表 |
+| [results/sg_20261104/](results/sg_20261104/) | A+B / A+B+C / GRPO+A 冻结记录、三部分报告、代码 |
 | [results/rereview_20261104/](results/rereview_20261104/) | Probe A/B 撤回与重审 |
 | [protocol/CAPTION_V51.md](protocol/CAPTION_V51.md) | 协议全文、13 类 hint |
 | [design/ANNOTATION_SPEC.md](design/ANNOTATION_SPEC.md) | L0 / L1 / L2 标注规范 |

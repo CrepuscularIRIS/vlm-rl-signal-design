@@ -788,5 +788,70 @@
     "source": "$OBS/notes/rereview_20261104/relation_canonical/build_canonical.py"
    }
   ]
+ },
+ "dapo_sb": {
+  "description": "DAPO-SB: DAPO + stop-relative advantage (pre-turn visual stopping probe b_k, Pro reference build_advantages, lambda=1); copied from sg_scale_gated with stop_baseline.py added and probe/ledger wiring",
+  "files": [
+   {
+    "file": "caption_contracts.py",
+    "sha256_original": "1f3121f0c67973e0a49a353ff10d7d7dd1ec7d3143b991ed3ed382406ade9f00",
+    "source": "$PROJECT/grpo_sb/caption_contracts.py"
+   },
+   {
+    "file": "caption_env.py",
+    "sha256_original": "e99c161bf200b6cdb0419c140939f96e5c98bd54d68dc526312c6d7a50fe52b5",
+    "source": "$PROJECT/grpo_sb/caption_env.py"
+   },
+   {
+    "file": "easyr1_caption.py",
+    "sha256_original": "6d08dd32f3868c277f59bb1547d97f80bf0a42b149f624d1afb09d31fc58e673",
+    "source": "$PROJECT/grpo_sb/easyr1_caption.py"
+   },
+   {
+    "file": "easyr1_patches.py",
+    "sha256_original": "2152d09475a498cea5c732143ffb6732b984a082e871215e77e41c5c85627788",
+    "source": "$PROJECT/grpo_sb/easyr1_patches.py"
+   },
+   {
+    "file": "grpo_sb.sh",
+    "sha256_original": "ea5710cb30b3f2849711d710d03620fd7dcc9278a89ef232d51f4a1124ef5d40",
+    "source": "$PROJECT/grpo_sb/grpo_sb.sh"
+   },
+   {
+    "file": "probe_smoke.py",
+    "sha256_original": "2fbc87d232f1c52e1a5d62a17994476ddaf878b36461c2c5874636065018fa17",
+    "source": "$PROJECT/grpo_sb/probe_smoke.py"
+   },
+   {
+    "file": "reward_caption.py",
+    "sha256_original": "d58f2e19c41945909731173be3ed412449637b8410288a23d7f6a1bbeab3e935",
+    "source": "$PROJECT/grpo_sb/reward_caption.py"
+   },
+   {
+    "file": "reward_direct.py",
+    "sha256_original": "2c72010e97000cf7a136dcca2bd54ff2362e154c37fe88563d69bf8850691938",
+    "source": "$PROJECT/grpo_sb/reward_direct.py"
+   },
+   {
+    "file": "reward_sg.py",
+    "sha256_original": "022b900a88c721fd421198870496c012b2898cc98ff33c6e83f3c0b1ac46fef8",
+    "source": "$PROJECT/grpo_sb/reward_sg.py"
+   },
+   {
+    "file": "stop_baseline.py",
+    "sha256_original": "b294468e8a8d214d4b37c2e6bfd512e6df95e4dc0bf4625295145dc6b7f86481",
+    "source": "$PROJECT/grpo_sb/stop_baseline.py"
+   },
+   {
+    "file": "stop_relative_advantage.py",
+    "sha256_original": "a4f3374f03a2ab1b29d531fccad50190f1ddb7376d799ec26e46b895ae208b40",
+    "source": "$PROJECT/grpo_sb/stop_relative_advantage.py"
+   },
+   {
+    "file": "update_ledger.py",
+    "sha256_original": "6b5ed810933d887da00e485e338792b831a562f3a560f15e71d1d468001057f2",
+    "source": "$PROJECT/grpo_sb/update_ledger.py"
+   }
+  ]
  }
 }

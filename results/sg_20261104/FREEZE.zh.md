@@ -75,3 +75,12 @@ code_sha16 d9e6396720e75a1b（grpo_sg/*.py）；sg_index 1830cfd0；reward_sg 02
 - **sg_abc 第 31–32 步的题目构成偏差（构造副作用）**：续答题从题序尾部选，被跳过的 158 道不合格题留在尾部，挤进了最后两步。m=0 的题数：第 31 步 49/128，第 32 步 109/128（不可答 57、全图 24、GT 分歧 14 等）。同一批题上 k8 GRPO 的正确率为 .566 / .318，sg_abc 为 .560 / .311。因此这两步 sg_abc 的原题集合与 sg_ab 不同，A+B+C 对 A+B 的唯一变量在第 31–32 步不成立。E1 评测用的是 step 32 终点权重，这两步的更新已经包含在内。
 - 曲线：`data/sg_curves.{png,pdf}`、长表 `data/sg_curves_long.csv`、重画脚本 `data/plot_sg_curves.py`。日志 reward 与账本重算 reward 逐步核对，32/32 步 × 2 臂差值均 ≤0.01。
 - 附带发现：G1 v2 主图（`rread_adm_20261103/data/curves/plot_g1_v2.py`）的熵面板对 `actor/entropy_loss` 取了负号，而该字段本身就是平均 token 熵（为正值）。图的形状不变，只是符号反了，待修正。
+
+## 单 A（sg_a），2026-11-04 14:31 CST 启动，GPU 0,1
+
+- 依据：用户 11-04 指示（GRPO 补一个单 A；DAPO 主线另做）；Design_New 第二轮 §一、§六。
+- 与 A+B 的唯一差别：`CAPTION_ADV_TS=0`，即标准 GRPO 归一 A = (R − mean)/(std(R) + 1e-6)，R = V·(Y + 0.1·m·S)。S、λ、索引、题序、其余超参与 sg_ab 完全相同。
+- 代码：服务器目录 code_sha 显示为 802fd1d4，与 d9e63967 不同，原因是 10:25 上传的统计脚本 `step_stats.py` 也被计入；去掉它后拼接哈希为 d9e63967。逐文件：reward_sg 022b900a / easyr1_caption 81284bdf / caption_contracts 2c039c51 / sg_index 1830cfd0 / grpo_sg.sh 2fe21730，与 sg_ab 一致。
+- evidence_sets fallback：m=1 的 3,014 题中 0 题退回使用全部 L1 框。
+- 首步验收：第 1 步权重和采样种子与 sg_ab 相同，rollout 账本应与 sg_ab 第 1 步逐行一致（只有 advantage 不同）。
+- sg_a 首步验收（14:5x CST）：第 1 步 1,024 行 rollout 与 sg_ab 第 1 步在 qid / terminal / crops / correct / gen_tokens / s / m / boxes 上逐行一致；日志中 task-scaled 补丁安装行数为 0。
