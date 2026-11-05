@@ -2,6 +2,16 @@
 
 Qwen3-VL-4B 在 caption v5.1 协议下多轮裁图后作答选择题。本页汇总到目前为止**同一起点、同一题池、同一评测**下的全部 RL 训练，按三部分组织：① 设定 ② 定性 + 定量 ③ 训练 Log。
 
+> 11-05 最新终点 **max2（GRPO + 终点式 S v2）**：**1404/2208，63.59%**；GRPO 1411、GRPO+A 1421、A+B 1429、DAPO 1465、strat 1399。max2 首裁0.9986、后续裁图2.5417、处理token14,726.9891/条；对DAPO −2.7627pp，按题95%区间[−4.9819,−0.5435]pp。E1 exit0；原训练退出码和逐rank更新事件仍缺。**[最新三部分报告、六条件分源/配对、成本和两例审查](results/sgv2_max2_20261105/REPORT.zh.md)** · [复算数据与指纹](results/sgv2_max2_20261105/FILES.json)。相对GRPO+A同时更换psi公式与索引口径（L1 3077 vs L2 3014），不称单变量消融。两例为同题不同采样，不外推发生率。
+>
+> 最新总图：
+>
+> ![含max2的E1 family](results/sgv2_max2_20261105/family_e1.png)
+> ![首裁、后续裁图与token](results/sgv2_max2_20261105/direct_e1_cost.png)
+> ![max2训练诊断](results/sgv2_max2_20261105/max2_training_diagnostics.png)
+>
+> 下方原strat及更早表图保留为历史快照；包含max2的完整family训练图和长表见最新报告及同目录，未覆盖旧run。
+
 > 11-05 新增 **strat（同结果层中心化的过程 advantage）**：E1 **1399/2208，63.36%**；GRPO 63.90%、GRPO+A 64.36%、DAPO 66.35%。裁图2.473张/条，处理token10,792.76/条。已并入总表、分源、配对和family图；[三部分报告、两例逐图记录与复算数据](results/sgv3_20261105/REPORT.zh.md)。单训练seed；原训练独立退出码及每rank更新事件仍缺。
 
 > 11-05 较早版本新增两组训练：DAPO-SB（DAPO + 停止相对 advantage）和 GRPO+A（GRPO + 只加 S 奖励），并入下文各表与全部曲线图。11-04 版见 [docs/README_stage_20261104.md](docs/README_stage_20261104.md)，更早的过程记录见 [docs/README_before_stage_20261104.md](docs/README_before_stage_20261104.md)。11-03 发布的“读取层 43%”诊断已撤回，见 [results/rereview_20261104](results/rereview_20261104/RESULTS.zh.md)。

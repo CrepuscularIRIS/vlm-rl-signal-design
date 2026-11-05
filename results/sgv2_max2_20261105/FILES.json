@@ -1,0 +1,126 @@
+[
+  {
+    "file": "REPORT.zh.md",
+    "sha256": "4de0b3da9d0985d8e0217942b5b89877cf005eea0e4964783dfefef7a42dc9d9"
+  },
+  {
+    "file": "comparison.json",
+    "sha256": "d651a7e228a3a388df46222a729ff5fb5da5809624b2aade3fdfcbd71af137c9"
+  },
+  {
+    "file": "paired_questions.json",
+    "sha256": "cc40ef32100f96e4e0fd7d0fb1f485382fa6bd4db2600802a416795e35cc475f"
+  },
+  {
+    "file": "family_e1.json",
+    "sha256": "481e393bade633ca8b1a25bffd0aa361470e34d657a73c2b6f46ca754514562a"
+  },
+  {
+    "file": "family_long.csv",
+    "sha256": "a45aca7707390f0536d3be704d55e8b44a93fa51b8350416160b82f8d239fd7b"
+  },
+  {
+    "file": "training_summary.json",
+    "sha256": "3df50c8be8f9c4e68ebbf0a2755d3c858e553942320d34f42ef01e5aff11d287"
+  },
+  {
+    "file": "plot_results.py",
+    "sha256": "b8d1c19a9e0d5885751c02e19faf08a8dfbeb904da845f52620a62a8e537c064"
+  },
+  {
+    "file": "verify_delivery.py",
+    "sha256": "0abbe9e60cd575100cbeb34c6688d390a7b16bf830225661f113eb0ccb7719d5"
+  },
+  {
+    "file": "PROVENANCE.json",
+    "sha256": "0269bc2e9df538f5c4b0cc64f4d14576e4b60efa7654e074b350f954751c547b"
+  },
+  {
+    "file": "family_01_reward.png",
+    "sha256": "d272f362b3b3c6e01b2fe9bceec5b9285942cda722c95f67818cda07321a67f5"
+  },
+  {
+    "file": "family_01_reward.pdf",
+    "sha256": "e78316e80efbc1d3e757eada6984db38c989f96988b8a30f5c918a1081e9ba3d"
+  },
+  {
+    "file": "family_02_acc.png",
+    "sha256": "864ba031714539dcbd5a00bd3b25b76758d03506fb8d253b92f5cd750541beaf"
+  },
+  {
+    "file": "family_02_acc.pdf",
+    "sha256": "a3b952456fd9fdacc42818f276b35aaf41be8c7441bed7c635c42f2de4367069"
+  },
+  {
+    "file": "family_03_entropy.png",
+    "sha256": "18d817be4e95e4eabcb1052ab7467512802c0c9d8263a79fa4f2fa306445a31a"
+  },
+  {
+    "file": "family_03_entropy.pdf",
+    "sha256": "326eec59fe185c09987dba6dcc2386c5db6ba58fb5ff2532cb9a55298c5e7f99"
+  },
+  {
+    "file": "family_04_ppo_kl.png",
+    "sha256": "09b63f684d7128d877820a61ac513ed6c644eb26ea833c73acea6e6cb6922acb"
+  },
+  {
+    "file": "family_04_ppo_kl.pdf",
+    "sha256": "a1090b0bc6d0d14969270b9af2b48c07959314b3c45b4c2716ce5fb72651bf34"
+  },
+  {
+    "file": "family_05_grad_norm.png",
+    "sha256": "42d58bc3255af10697396812bade0ac789d700e84e1954dc8632540f9218609b"
+  },
+  {
+    "file": "family_05_grad_norm.pdf",
+    "sha256": "e07991a4e1634afec6ba93bdc7f6b8747a7c0223035149077a0fed5083fcabb6"
+  },
+  {
+    "file": "family_06_crops.png",
+    "sha256": "50834bd3a9e283e3b0f15b575d918c27c2e166dcb50731bbfb52d90a57512dfb"
+  },
+  {
+    "file": "family_06_crops.pdf",
+    "sha256": "895ae81242748cd6e7a74992524482dd7490773f1c470cb82eea8b0bf507867b"
+  },
+  {
+    "file": "family_07_gen_tok.png",
+    "sha256": "58125d240306d470bd38987eb6e6000539effb00788dcebe1c1fa43b28d0a9b8"
+  },
+  {
+    "file": "family_07_gen_tok.pdf",
+    "sha256": "e81395a7c8d7c99627057ce43a749b929913202a841efcc2f43bf0a435997b1a"
+  },
+  {
+    "file": "family_08_adv_nz.png",
+    "sha256": "c7b3b1634e4bd68e9f5e94e01fd9e66a8c473f545e00ce1cb4e3112688de3f4a"
+  },
+  {
+    "file": "family_08_adv_nz.pdf",
+    "sha256": "195d2b7ac94b45459221d81dc90c1eac2679e2def00e26f8d940b0b60dd90cfa"
+  },
+  {
+    "file": "max2_training_diagnostics.png",
+    "sha256": "9000b86540191c89c0c434f05ccfe22a33724921f924c44267bb1cf268cbe137"
+  },
+  {
+    "file": "max2_training_diagnostics.pdf",
+    "sha256": "a42ef06dae08e0e2c414b3a8faac50da85c286384a820dd6d1e617725553b11e"
+  },
+  {
+    "file": "family_e1.png",
+    "sha256": "3179e55cce696bdf4a311c3d3b236bc9e9be48fc9106e81ae486769b930764ca"
+  },
+  {
+    "file": "family_e1.pdf",
+    "sha256": "f3e297d1e490ab68cc2e738c85393f97578082dfd5170aca5c04e14591a4e7b8"
+  },
+  {
+    "file": "direct_e1_cost.png",
+    "sha256": "e33199388c2af216c1bc433177d48483eb78fbee493f1db4dd4e78e2ffd1796a"
+  },
+  {
+    "file": "direct_e1_cost.pdf",
+    "sha256": "b4bbd004473ac3cbcfb740c215268cff0b6ddef344a54facb210171adf907da2"
+  }
+]

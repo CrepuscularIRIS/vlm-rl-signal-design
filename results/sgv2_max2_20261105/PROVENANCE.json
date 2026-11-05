@@ -1,0 +1,26 @@
+{
+  "run": "sgv2_grpo_max2",
+  "training_exit_code": null,
+  "per_rank_optimizer_events": null,
+  "merge_exit_code": 0,
+  "eval_exit_code": 0,
+  "private_inputs_sha256": {
+    "sgv2_grpo_max2.log": "ef3cb262e8f7c27dbb599dbbf28e3bdbefbe6f45d533768182e415354a6a9c98",
+    "rollouts.jsonl": "e0901d006829c6d2ccc8d58d934cf7e9bf0c70c04b731c9e1b6dd58d76185226",
+    "updates.jsonl": "ab86873087cda5911a745fef13f35321c5f80c17668b9a47bbeb3df9cd6b70b0"
+  },
+  "public_scope": "匿名逐题正确性、聚合、长表及图表；不含原始图像、题面、uid、权重或机器路径",
+  "commands": [
+    "python verify_delivery.py",
+    "python plot_results.py --data ."
+  ],
+  "max2_training_rows": 355,
+  "dev_points": {
+    "0": 0.533,
+    "25": 0.602,
+    "32": 0.621
+  },
+  "replay_local_caption_env_sha256": "d827642f2b06de654afa08ec3680350d0da007e1be0426a568ab8933056ebd31",
+  "replay_remote_caption_env_sha256": "4f5865dbde0cf457ceafc7e6cfb8a917b67143d885cffc937cfbd55f98e31d35",
+  "replay_pixel_identity_verified": false
+}

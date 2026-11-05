@@ -1,5 +1,11 @@
 # 可复算范围
 
+## 11-05 max2新增范围
+
+[最新报告](results/sgv2_max2_20261105/REPORT.zh.md)。`python results/sgv2_max2_20261105/verify_delivery.py` 复核六条件各2208条匿名正确性、552题各4次、总体/分源四格、按题10000次bootstrap和文件SHA；该复用验证器保留strat256行专检，并对全部family行检查键唯一与数值有限。max2 355行及dev 0/25/32点另经私有原始日志回归测试（1 passed）；不将其写成公开原始日志复评分。`python results/sgv2_max2_20261105/plot_results.py --data results/sgv2_max2_20261105` 重画训练与E1全部图（需现有numpy/matplotlib）。
+
+公开包不含原始响应、题面、原图或权重。训练成本口径为32个step计时之和，包含计时内验证/保存，不是完整run墙钟；缺原训练退出码及逐rank更新事件。文件指纹见同目录`FILES.json`，私有输入指纹和重放边界见`PROVENANCE.json`。
+
 ## 11-05 strat新增范围
 
 `python results/sgv3_20261105/verify_delivery.py` 核对四条件各2208条匿名正确性、552题各4次、总体/分源四格及按题bootstrap（10,000次，seed20261105）、256行strat训练指标与文件SHA。`python -m pytest results/sgv3_20261105/test_compare.py -q` 检查四格函数；`python results/sgv3_20261105/plot_delivery.py` 重画全部family及E1成本图。
