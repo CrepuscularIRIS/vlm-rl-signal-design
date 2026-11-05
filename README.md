@@ -20,6 +20,11 @@ Design_New 给出的定位是：A 改变的是取证偏好，不证明感知能�
 
 ---
 
+## L2 事实落到轨迹上的准入，以及给 Astra 的设计任务（2026-11-05）
+
+- [results/l2fact_20261105/ADMISSION.zh.md](results/l2fact_20261105/ADMISSION.zh.md)：L2 成对事实比较（只覆盖数值表格：b=0 抽检 29/30、b=1 30/30；混合组里 P_i≠0 只有 2.3%）和轻量版（抽检 x=0 的样本，47% 是规则没识别的正确读数）。
+- [prompts/ASTRA_ADVANTAGE_DESIGN_20261105.md](prompts/ASTRA_ADVANTAGE_DESIGN_20261105.md)：把过程信号放进 advantage 而不是 reward 的设计任务，汇总了设置、导师构造、全部结果、审计事实、标注使用情况和审查过的轨迹。
+
 ## 组内对比诊断与 psi v2（2026-11-05）
 
 - **D0 组内对比**（[results/diag_d0_20261105/D0_REPORT.zh.md](results/diag_d0_20261105/D0_REPORT.zh.md)）：
