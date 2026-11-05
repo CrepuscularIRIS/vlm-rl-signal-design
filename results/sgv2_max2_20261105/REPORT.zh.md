@@ -34,6 +34,8 @@ psi 的参考实现见 [`psi_v2.py`](psi_v2.py)（只含 max 模式用到的部�
 | V* /448 | 383 | 378 | 382 | 375 | **391** | 370 |
 | WorldBench /248 | 81 | 83 | 83 | **98** | 86 | 79 |
 
+![六条件分源准确率](e1_by_source.png)
+
 配对四格以 max2 为新条件；区间按 552 道题重采样 10,000 次，不是新增训练 seed。粗体为区间不含 0 的行。
 
 | 对照 | 共同对 | 仅 max2 对 | 仅对照对 | 共同错 | max2−对照（百分点） | 按题95%区间 |
@@ -93,6 +95,6 @@ max2 在 0、1 档的条数不足 20，不报正确率。
 
 Step32 日志：reward/overall=0.658、reward/accuracy=0.617、actor/entropy_loss=0.477、actor/ppo_kl=0.00009618136888947243、裁剪前 grad_norm=7.171、lr=1e-6、上侧 clipping fraction=0.006、下侧=0.000016637633368135334。日志值有打印舍入；任务正确率长表另用原始账本逐条求均值。
 
-逐项 family 图为 `family_01_reward` 至 `family_08_adv_nz`（PNG/PDF），均由 `family_long.csv` 重画，不平滑、不补零。update 原始 all_correct/all_wrong/mixed 字段按复合 reward>0 分类，不是任务 Y 的全对/全错；本报告未把该分类用于任务对错统计。
+逐项 family 图为 `family_01_reward` 至 `family_08_adv_nz`（PNG/PDF），均由 `family_long.csv` 重画，不平滑、不补零。纵轴范围只由 GRPO、GRPO+A、DAPO、strat、max2 五个直接对照决定；背景条件超出范围的点不画，在图内逐条写明条件、极值与步数；完全重合的恒定序列（如 adv_nz 中 DAPO、DAPO-SB、Hτ 恒为 1）在图内注明。update 原始 all_correct/all_wrong/mixed 字段按复合 reward>0 分类，不是任务 Y 的全对/全错；本报告未把该分类用于任务对错统计。
 
 分析初版遗漏 Step0 dev，并误把计时范围写成不含验证/保存；两处已修，总秒数不变。回归检查输出 `1 passed in 2.93s`。训练逐 rank 更新事件及原训练退出码仍缺失；CPU 测试、合并 exit0 与 E1 exit0 不替代这些缺项。

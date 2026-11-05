@@ -1,7 +1,7 @@
 [
  {
   "file": "REPORT.zh.md",
-  "sha256": "7d9c9451d73864dd3c952b616bff2232d78c53c794e473eacad355bc34de939c"
+  "sha256": "715af31bc1662767483df87e0f3ab7a39151b04fd04bdb5bce557b3165e4d811"
  },
  {
   "file": "comparison.json",
@@ -25,7 +25,7 @@
  },
  {
   "file": "plot_results.py",
-  "sha256": "241c34f1dc5acc10068db383f44f89fd20214e6464c9de43d009a0221f6613a4"
+  "sha256": "46b04b39183367a9a4eafc166a52722c866681c06a8912e1ceaf7a7b0f0dff69"
  },
  {
   "file": "verify_delivery.py",
@@ -37,67 +37,67 @@
  },
  {
   "file": "family_01_reward.png",
-  "sha256": "d565c68bfb111da22b5c67f3ca8b11c1dfa3299748d936c8cc17a271bfa6fec1"
+  "sha256": "aa16e5ff8672cd661f8d3bc42d93977e215f3c4c2a32811bb084564ad22cac43"
  },
  {
   "file": "family_01_reward.pdf",
-  "sha256": "14ea5434d24a8c8c5a5a00be12b83f8b54e7fd86b2943420a6ed44a8249cade6"
+  "sha256": "981a144b8bb9f8c58718679cecbe1e1fc50dda85a541db4eced42c2912ddde94"
  },
  {
   "file": "family_02_acc.png",
-  "sha256": "23eba08be56869eb900fb0a7c9411f7f2642215ba799b861ba490001f6e0fcd1"
+  "sha256": "66fdaaf408753d5638ecc6dfbfc02e39b316e8501bc3cb893f892171e749d1e6"
  },
  {
   "file": "family_02_acc.pdf",
-  "sha256": "ec63f2a13fd49ee993693b15892ebee05c043139b784b3bb9549306cbb076c33"
+  "sha256": "eb193f68730a086de69cbea36386f1a3c60c487022106882797932b53bf90793"
  },
  {
   "file": "family_03_entropy.png",
-  "sha256": "06fd774ba695fe267bd210f4024c1d280d824557826e8be5ff314dd71140dc1b"
+  "sha256": "16863bd9ee16fb31a30f8c2b1b667921824ba890f4b12c53b2dbb9509cfe2fed"
  },
  {
   "file": "family_03_entropy.pdf",
-  "sha256": "05daef2d258fef46aeaa5bddd450b14fb82e5f0b595ed752202650133f1a2635"
+  "sha256": "6810b03b7e3f84c71902578a88e1b454a981b172f83a7693cdcda9d9816767e9"
  },
  {
   "file": "family_04_ppo_kl.png",
-  "sha256": "74f7b212d042ebea61148c0de44ee850d4e718f33ee83b00285274852bec7ff3"
+  "sha256": "86a33f4e523d0cc91561fb164890e2404c3840c435639957eace5f4c4d5a8c45"
  },
  {
   "file": "family_04_ppo_kl.pdf",
-  "sha256": "c0d5847a0a3407bd79f89e0bb466337c1bf016c022d8d63dfce42cd84de08993"
+  "sha256": "7d1a07897cc9f3f6dfe63a234d7d19e1dc92198fbad0cb61e263ee7ee7c47ee2"
  },
  {
   "file": "family_05_grad_norm.png",
-  "sha256": "8a9eb060ceb27daa405accc6236c7afad437f027b5b930ead838a5d9c35469b0"
+  "sha256": "0b16010c6c14fc59b82d3de51a014a744601ba64fc08b3a07eec325344555656"
  },
  {
   "file": "family_05_grad_norm.pdf",
-  "sha256": "330355c5bf0d2782da1b34ec4a572d1603c3f3ed7d3c57555fae791fba7149a1"
+  "sha256": "b4a0cd332ab5cd0da229fb57aeba5e904cff49ac9c22096afe388263efa1a137"
  },
  {
   "file": "family_06_crops.png",
-  "sha256": "d823a2479847613c76a055fea0f072bc6cf6028ec82915a7321d6359cb2c33b9"
+  "sha256": "650485e4520723c00e41d9be054c048def90ae6b6d3f615f46b9cfcb7fd5ce00"
  },
  {
   "file": "family_06_crops.pdf",
-  "sha256": "8460b9b368deaf507173715efd26a3b85f8c95370dea972318478b7049b454ee"
+  "sha256": "de83c4825a34a9a4f63b3fceb1c69614786ed0d01c92f18861f0bf7fb9e93ba6"
  },
  {
   "file": "family_07_gen_tok.png",
-  "sha256": "9b2ebd720395cd22d083cb450fd4b9c80be005bc1faf6bf137b6e3684c9e21d6"
+  "sha256": "8bbc1caa592788dfe6613431731ae8ab92571f7e048dd9eb888494f4fdb08c94"
  },
  {
   "file": "family_07_gen_tok.pdf",
-  "sha256": "b7d5642e8cc40e60be70641eaa08c96862663bb0a873693a5e937e7338c88db9"
+  "sha256": "63d10016c0c095e45dac02d835b4a08cb32329cf5cee7aa0eceee55f06860b43"
  },
  {
   "file": "family_08_adv_nz.png",
-  "sha256": "9c3b2d4e39ee48f83675a02590c118dc212e553376bda936bf5c59c207bae890"
+  "sha256": "3eba8860bef75be97cd28f2ed47fa939aa02824736ab5265344b85aa8fdd4a86"
  },
  {
   "file": "family_08_adv_nz.pdf",
-  "sha256": "414c1cf964c9bf1bef4413b8461c069f0702165d0c980f69883c374b764845fc"
+  "sha256": "26947b65dc95f3b58a7fdf252777bd7b8901f44b8d00ff3a614d4abab4c46279"
  },
  {
   "file": "max2_training_diagnostics.png",
@@ -105,7 +105,7 @@
  },
  {
   "file": "max2_training_diagnostics.pdf",
-  "sha256": "978aca2dfb58ec2ae04d06dcc2d47e2d4049a74801821013776f02a8c146e782"
+  "sha256": "bc25238723af2023f4f8c3cf5f85fc0df8d545efae34c85b1ecdea0fc8f45935"
  },
  {
   "file": "family_e1.png",
@@ -113,7 +113,7 @@
  },
  {
   "file": "family_e1.pdf",
-  "sha256": "122220bb07924c9b16a43d150d3d35b2d62c8af0ee6c41e27d1b031b199a0df9"
+  "sha256": "c02edaf0e77bd77a68ad9e851c09020a4040ddc9c00a4d139796f032a67a713e"
  },
  {
   "file": "direct_e1_cost.png",
@@ -121,7 +121,7 @@
  },
  {
   "file": "direct_e1_cost.pdf",
-  "sha256": "a3d1356b7759749172640926e55bb91b7833ae3c0720f367dca75ea876bf8136"
+  "sha256": "cebc48e4d249321f6595cca15c80a44e8bcd3b5c6ab3bc9f7f5d8c30b41b4a20"
  },
  {
   "file": "grpo_gap.json",
@@ -141,6 +141,14 @@
  },
  {
   "file": "max2_vs_grpo_gap.pdf",
-  "sha256": "e69754cf6e9017ad429b8faa752c5600e50c4ab5fb03232c409266d5fea22c79"
+  "sha256": "a3f39dda1fb000ed1015a5785994ed509b61a4cdfa998c1ae5df44843b9d48cd"
+ },
+ {
+  "file": "e1_by_source.png",
+  "sha256": "28a4d8d659595cca9ac6b4616c0b59a2b20ea55f9beb1b7b72f65e58fc98618f"
+ },
+ {
+  "file": "e1_by_source.pdf",
+  "sha256": "394335bd883ba167f53a474cb1563944153cea83f8aa9ce7d6ac66ac405a313f"
  }
 ]

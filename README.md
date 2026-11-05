@@ -520,9 +520,9 @@ $\lambda=1$ 时 $\hat A_{i,k}=Y_i-b_{i,k}$：第 $k$ 回合的 token 用“该�
 
 净增粗体 = 按题 95% 区间不含 0（只对附有区间的比较标注；DAPO vs DAPO-SB 的区间见[学习信号审计](results/audit_signal_20261105/AUDIT_SIGNAL.zh.md)）。
 
-max2−对照的按题 bootstrap 95% 区间（pp）：GRPO −0.32 [−2.54, +1.90]；GRPO+A −0.77 [−2.90, +1.45]；A+B −1.13 [−3.26, +1.09]；DAPO −2.76 [−4.98, −0.54]；strat +0.23 [−1.90, +2.40]。552 题整体重采样 10,000 次，seed 20261105；[匿名逐题数据]({R}/paired_questions.json)。
+max2−对照的按题 bootstrap 95% 区间（pp）：GRPO −0.32 [−2.54, +1.90]；GRPO+A −0.77 [−2.90, +1.45]；A+B −1.13 [−3.26, +1.09]；DAPO −2.76 [−4.98, −0.54]；strat +0.23 [−1.90, +2.40]。552 题整体重采样 10,000 次，seed 20261105；[匿名逐题数据](results/sgv2_max2_20261105/paired_questions.json)。
 
-**max2 与 GRPO 的差距拆分**（[grpo_gap.py]({R}/grpo_gap.py) 按 uid + sample_idx 对齐两份轨迹，只输出聚合数 [grpo_gap.json]({R}/grpo_gap.json)；分档为描述性计数，裁图数与题目难度相关，不作因果归因）：
+**max2 与 GRPO 的差距拆分**（[grpo_gap.py](results/sgv2_max2_20261105/grpo_gap.py) 按 uid + sample_idx 对齐两份轨迹，只输出聚合数 [grpo_gap.json](results/sgv2_max2_20261105/grpo_gap.json)；分档为描述性计数，裁图数与题目难度相关，不作因果归因）：
 
 | 按 GRPO 在同键上的裁图数 | 条数 | GRPO 对 | max2 对 | 净差 | MME | V\* | WorldBench | MMMU-Pro |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
@@ -538,7 +538,7 @@ max2−对照的按题 bootstrap 95% 区间（pp）：GRPO −0.32 [−2.54, +1.
 - 按题（4 次采样平均）max2 比 GRPO 多裁：≤0 的 19 题净差 +13；(0,1] 163 题 −1；(1,3] 321 题 −16；>3 49 题 −3。
 - 缺答案 max2 28 条、GRPO 19 条；max2 缺答案的 28 条中 GRPO 同键答对 11 条。
 
-![max2 vs GRPO]({R}/max2_vs_grpo_gap.png)
+![max2 vs GRPO](results/sgv2_max2_20261105/max2_vs_grpo_gap.png)
 
 strat−对照的按题bootstrap95%区间（pp）：GRPO −0.54 [−2.63,+1.49]；GRPO+A −1.00 [−3.04,+1.09]；DAPO −2.99 [−5.03,−1.04]。552题整体重采样10,000次，固定seed20261105；不是多训练seed，不含训练seed不确定性，未校正多重比较。[匿名逐题数据与完整四格](results/sgv3_20261105/comparison.json)。
 
@@ -595,7 +595,7 @@ DAPO-SB 的 V\* 错答比 DAPO 多 18 条，多出的部分落在“没有任何
 ## 三、训练 Log
 
 - 每张图一个指标；max2 红色粗线，GRPO 蓝、GRPO+A 绿、DAPO 橙、strat 紫为加粗的直接对照，其余条件为淡线背景；每个条件颜色唯一。
-- 逐步原值，无平滑、无插值；少于 10 个点的序列（如 dev）以点加虚线绘出。A+B+C 第 31–32 步题目构成不同（见 §1.7）；S/gate 与 SB 专有诊断仍为历史快照，不含 strat、max2。
+- 逐步原值，无平滑、无插值；少于 10 个点的序列（如 dev）以点加虚线绘出。纵轴范围只由 5 个直接对照决定；背景条件超出范围的点不画，图左下角逐条写明条件、极值和步数（如梯度范数图中 DTPO 第 3 步 614、SAPO 第 9 步 209；训练正确率图中 A+B+C 第 32 步 .311）；完全重合的恒定序列（adv_nz 中 DAPO、DAPO-SB、Hτ 恒为 1）在图内注明。A+B+C 第 31–32 步题目构成不同（见 §1.7）；S/gate 与 SB 专有诊断仍为历史快照，不含 strat、max2。
 - DAPO 系（DAPO、Hτ、DAPO-SB）的训练正确率、裁图、生成 token 取全部生成的 rollout（含被过滤组），按保留该组的更新步归位；reward 与采样 surprisal 取日志（只含保留组）。不同算法的奖励/归约差异保留。
 - 缺测不画并标注。max2 第 32 步：reward .658、训练正确率 .617、采样 surprisal .477、ppo_kl 9.6e-5、裁剪前 grad_norm 7.171、上侧 clip 比例 .006；dev 0.533（第 0 步）→ 0.602（25）→ 0.621（32）。
 - 数据：[family_long.csv](results/sgv2_max2_20261105/family_long.csv)（max2 355 行）；复画：[plot_results.py](results/sgv2_max2_20261105/plot_results.py)。max2 训练生成 11,126,332 token、处理 371,949,079 token；32 个 step 计时合计 43,355.981 秒，双卡 × 步时 24.09 GPU·小时（含 step 内验证与保存，不含合并与 E1）。
@@ -634,12 +634,12 @@ DAPO-SB 的 V\* 错答比 DAPO 多 18 条，多出的部分落在“没有任何
 
 ![gen](results/sgv2_max2_20261105/family_07_gen_tok.png)
 
-**S 与门控开启率**（只有 S 系列计算这两项）。第 25–32 步均值：S GRPO+A .30、A+B .27；门控开启 GRPO+A .95、A+B .94
+**S 与门控开启率**（历史图，旧配色；只有 S 系列计算这两项，不含 max2）。第 25–32 步均值：S GRPO+A .30、A+B .27；门控开启 GRPO+A .95、A+B .94
 
 ![S](results/stage_report_20261105/figs/fig09_S.png)
 ![gate](results/stage_report_20261105/figs/fig10_gate.png)
 
-**DAPO-SB 的停止探针**（只在保留的混合组上记录）。b0 均值 .257 → .306；组正确率 − b0 在 .16–.27 之间（32 步均值 +.220）；原始 advantage > 0 的回合占比 .46 → .53；探针字母概率总量 .73 → .87；保留组裁图 0.77 → 1.81
+**DAPO-SB 的停止探针**（历史图，旧配色；只在保留的混合组上记录）。b0 均值 .257 → .306；组正确率 − b0 在 .16–.27 之间（32 步均值 +.220）；原始 advantage > 0 的回合占比 .46 → .53；探针字母概率总量 .73 → .87；保留组裁图 0.77 → 1.81
 
 ![probe](results/stage_report_20261105/figs/fig14_sb_probe.png)
 
@@ -649,8 +649,10 @@ DAPO-SB 的 V\* 错答比 DAPO 多 18 条，多出的部分落在“没有任何
 ![First and later crop costs](results/sgv2_max2_20261105/direct_e1_cost.png)
 ![max2 vs GRPO](results/sgv2_max2_20261105/max2_vs_grpo_gap.png)
 
-历史分源图（不含 strat、max2；二者分源见 §2.2）：
-![src](results/stage_report_20261105/figs/fig13_e1_by_source.png)
+分源（六条件统一评分；每源最优标 best）：
+![E1 by source](results/sgv2_max2_20261105/e1_by_source.png)
+
+较早条件（Hτ、DAPO-SB、A+B+C）的分源历史图见 [fig13_e1_by_source.png](results/stage_report_20261105/figs/fig13_e1_by_source.png)（旧配色：该图中红色为 DAPO-SB，不是 max2）。
 
 ### GRPO 与 DAPO 的差异
 

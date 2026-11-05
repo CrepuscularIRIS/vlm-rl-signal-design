@@ -66,8 +66,38 @@ def plot_line(ax: plt.Axes, points: dict[int, float], name: str) -> None:
             lw=3 if name == FOCUS else 2 if key else 1.1, alpha=1 if key else .5, zorder=3 if key else 1)
 
 
+def key_range(values: dict, metric: str) -> tuple[float, float]:
+    """纵轴范围只由直接对照决定，避免背景条件的离群点把主曲线压扁。"""
+    pts = [v for name in KEY_RUNS for v in values.get((name, metric), {}).values()]
+    lo, hi = min(pts), max(pts)
+    pad = (hi - lo) * .12 or abs(hi) * .05 or 1e-6
+    return lo - pad, hi + pad
+
+
+def off_scale_notes(values: dict, metric: str, names: list[str], lo: float, hi: float) -> list[str]:
+    """背景条件超出纵轴的部分：写出条件、极值与步数，不静默截断。"""
+    notes = []
+    for name in names:
+        points = values.get((name, metric), {})
+        outside = {s: v for s, v in points.items() if v < lo or v > hi}
+        if outside:
+            step = max(outside, key=lambda s: abs(outside[s] - (lo + hi) / 2))
+            notes.append(f'{name} {outside[step]:.3g} @ step {step} ({len(outside)} pts)')
+    return notes
+
+
+def overlap_notes(values: dict, metric: str, names: list[str]) -> list[str]:
+    """完全重合的恒定序列（例如若干条恒为 1.0）合并说明。"""
+    groups = defaultdict(list)
+    for name in names:
+        points = values.get((name, metric), {})
+        if points and len(set(points.values())) == 1:
+            groups[next(iter(points.values()))].append(name)
+    return [f"{', '.join(g)} constant at {v:.3g} (lines overlap)" for v, g in groups.items() if len(g) > 1]
+
+
 def family_figures(root: Path, values: dict) -> None:
-    """每个指标一张 family 图：重点条件在前、背景条件在后。"""
+    """每个指标一张 family 图：重点条件在前、背景条件在后；纵轴按直接对照取范围。"""
     names = sorted({run for run, _ in values}, key=lambda n: (n not in KEY_RUNS, n))
     for index, (metric, title, unit) in enumerate(METRICS, 1):
         fig, ax = plt.subplots(figsize=(15, 7), layout='constrained')
@@ -75,11 +105,19 @@ def family_figures(root: Path, values: dict) -> None:
         for name in names:
             if values.get((name, metric)):
                 plot_line(ax, values[name, metric], name)
+        lo, hi = key_range(values, metric)
+        ax.set_ylim(lo, hi)
         ax.set(title=title, xlabel='RL update step; raw values, no smoothing', ylabel=unit)
         ax.legend(loc='center left', bbox_to_anchor=(1.01, .5), fontsize=8, title='bold = direct comparisons')
         ax.grid(alpha=.2)
-        if missing:
-            ax.text(.01, .02, 'Not measured: ' + ', '.join(missing), transform=ax.transAxes, fontsize=8)
+        notes = [f'Not measured: {", ".join(missing)}'] if missing else []
+        off = off_scale_notes(values, metric, names, lo, hi)
+        if off:
+            notes.append('Off-scale (y-range set by bold runs): ' + '; '.join(off))
+        notes += overlap_notes(values, metric, names)
+        if notes:
+            ax.text(.01, .02, '\n'.join(notes), transform=ax.transAxes, fontsize=8, va='bottom',
+                    bbox={'facecolor': 'white', 'alpha': .85, 'edgecolor': 'none'})
         fig.suptitle(f'max2 step 32 = {values[FOCUS, metric][32]:.6g}\n{SUBTITLE}')
         save(fig, root, f'family_{index:02d}_{metric}')
 
@@ -154,6 +192,32 @@ def cost_figure(root: Path, summaries: dict) -> None:
     save(fig, root, 'direct_e1_cost')
 
 
+def source_figure(root: Path, summaries: dict) -> None:
+    """统一评分的各条件分源准确率；每源最优值加粗并标 best。"""
+    names = list(summaries)
+    width = .8 / len(names)
+    fig, ax = plt.subplots(figsize=(16, 6.5), layout='constrained')
+    for s_i, source in enumerate(SOURCE_LABELS):
+        accs = {n: summaries[n]['by_source_counts'][source]['correct'] / summaries[n]['by_source_counts'][source]['n'] * 100
+                for n in names}
+        best = max(accs.values())
+        for n_i, name in enumerate(names):
+            x = s_i + (n_i - (len(names) - 1) / 2) * width
+            ax.bar(x, accs[name], width, color=COLORS[name], label=name if s_i == 0 else None,
+                   edgecolor='black' if name == FOCUS else 'none', lw=1.5)
+            is_best = accs[name] == best
+            ax.text(x, accs[name] + .4, f'{accs[name]:.1f}' + ('\nbest' if is_best else ''), ha='center',
+                    fontsize=7, fontweight='bold' if is_best else 'normal')
+    n_by_source = summaries[FOCUS]['by_source_counts']
+    ax.set_xticks(range(len(SOURCE_LABELS)), [f"{label} (n={n_by_source[s]['n']})" for s, label in SOURCE_LABELS.items()])
+    ax.set(ylabel='E1 accuracy (%)', ylim=(25, 95), title='E1 accuracy by source; bold "best" = highest in that source')
+    ax.legend(ncol=len(names), loc='upper right', fontsize=9)
+    ax.grid(alpha=.2, axis='y')
+    fig.suptitle('Fixed step-32 E1 by source, six conditions scored by one scorer (black edge = max2)\n'
+                 'n = trajectories per source (questions x 4); failures retained in the denominator')
+    save(fig, root, 'e1_by_source')
+
+
 def gap_figure(root: Path, comparison: dict) -> None:
     """max2 对 GRPO：裁图数分布、按自身裁图数的准确率、按 GRPO 裁图数分档的分源净差。"""
     gap = json.loads((root / 'grpo_gap.json').read_text())
@@ -216,6 +280,7 @@ def main() -> None:
     comparison = json.loads(comparison_path.read_text())
     family_e1_figure(root)
     cost_figure(root, comparison['summary'])
+    source_figure(root, comparison['summary'])
     if (root / 'grpo_gap.json').exists():
         gap_figure(root, comparison)
 
