@@ -516,6 +516,8 @@ Design_PH 执行结果见 [BIND_AUDIT.zh.md](results/behavior_20261104/BIND_AUDI
 4. 7B 阶段（Qwen3-VL-8B、Qwen2.5-VL-7B）：模型规模、轨迹、RL 方法不同时更换。
 5. DAPO-SB 未跑的检查（Advantage.md §七）：探针扰动与真实停止对照、同状态分叉的四种信用方向、固定根状态基线 $b(h_0)$ 的消融、λ = 0 / 0.5。
 
+DAPO-SB 训练中 advantage 的实际分配（正负信用总量、按对错 × 是否裁图、裁图前后 b 的变化）见 [results/sb_20261104/CREDIT_FACTS.zh.md](results/sb_20261104/CREDIT_FACTS.zh.md)；DAPO-SB 的设计原文见 [design/ADVANTAGE_DAPO_SB_PRO.zh.md](design/ADVANTAGE_DAPO_SB_PRO.zh.md)；给 Pro 的复盘与重设计提示词见 [prompts/PRO_DAPO_SB_20261105.md](prompts/PRO_DAPO_SB_20261105.md)。
+
 ## 目录
 
 完整源码（每个方法一个目录，含公式所在函数与行号）见 [code/README.md](code/README.md)。
