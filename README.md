@@ -1,8 +1,8 @@
-# VLM 多轮裁图 RL：阶段性汇报（2026-11-04）
+# VLM 多轮裁图 RL：阶段性汇报（2026-11-05）
 
 Qwen3-VL-4B 在 caption v5.1 协议下多轮裁图后作答选择题。本页汇总到目前为止**同一起点、同一题池、同一评测**下的全部 RL 训练，按三部分组织：① 设定 ② 定性 + 定量 ③ 训练 Log。
 
-> 旧版 README（含各阶段过程记录）已移到 [docs/README_before_stage_20261104.md](docs/README_before_stage_20261104.md)。11-03 发布的“读取层 43%”诊断已撤回，见 [results/rereview_20261104](results/rereview_20261104/RESULTS.zh.md)。
+> 11-05 版新增两组训练：DAPO-SB（DAPO + 停止相对 advantage）和 GRPO+A（GRPO + 只加 S 奖励），并入下文各表与全部曲线图。11-04 版见 [docs/README_stage_20261104.md](docs/README_stage_20261104.md)，更早的过程记录见 [docs/README_before_stage_20261104.md](docs/README_before_stage_20261104.md)。11-03 发布的“读取层 43%”诊断已撤回，见 [results/rereview_20261104](results/rereview_20261104/RESULTS.zh.md)。
 
 ## 阶段小结：结果与预估是否一致
 
@@ -12,6 +12,8 @@ Qwen3-VL-4B 在 caption v5.1 协议下多轮裁图后作答选择题。本页汇
 | 预登记风险：S 可以靠多裁图抬高（8 格平铺离线 ΔS +0.164） | 训练后期裁图数 2.18 张/条，GRPO 为 1.65；E1 裁图 2.40 张/条，GRPO 为 1.91 | 一致（风险兑现） |
 | V\* 上答错时“覆盖了但目标太小”的情况会减少（尺度门的设计目的） | 答错且单裁覆盖 GT 的轨迹中，目标 <5% 裁图边长的条数：GRPO 14 → A+B 7；A+B+C 15 | A+B 一致，A+B+C 不一致 |
 | 端到端门槛：总体 E1 ≥ +1pp（R-bind 草案沿用的预登记线） | A+B +0.82pp（配对净增 +18/2,208）；A+B+C +0.05pp（净增 +1） | 均未达到 |
+| DAPO-SB 在 DAPO 上带来增益（Advantage.md 把“纯 DAPO 对比 DAPO-SB”定为第一对实验，“有收益后”再做根状态基线消融） | E1 .6413 vs DAPO .6635（−2.22pp，配对净增 DAPO +49/2,208）；四个分源都低于 DAPO，V\* −4.0、WorldBench −5.6 | 不一致 |
+| 只加 A（S 奖励、标准 GRPO 归一）会改变取证偏好 | 训练后期裁图 3.39 张/条（GRPO 1.65）；E1 裁图 4.02 张/条，总处理 token 18,034（GRPO 8,125）；E1 +0.46pp（净增 +10） | 取证偏好一致；端到端未达 +1pp |
 | 证据续答行（C）提升“看到之后”的读取与推理（A+B+C 对 A+B 不只差续答行：被选作续答的 384 题没有普通探索行，第 31–32 步题目构成也不同） | 续答行训练正确率约 0.8，同步原题行约 0.6；E1 上 A+B+C 对 A+B 净增 −17：V\* +16、WorldBench −14、MME −13 | 未观测到整体迁移；第 31–32 步题目构成有偏差（见 §1.6） |
 
 Design_New 给出的定位是：A 改变的是取证偏好，不证明感知能力提高。分层探针（给 GT 证据图、控制尺度、单独统计选项匹配错误）还没有跑。
@@ -47,7 +49,7 @@ Design_New 给出的定位是：A 改变的是取证偏好，不证明感知能�
 | 项 | 值 |
 |---|---|
 | 起点 | A-SFT（Qwen3-VL-4B） |
-| 题池 | rl4k：4,096 道题，原图互不相同。进入梯度更新的始终是 32 步 × 128 组 = 4,096 组。无过滤的方法（GRPO、GSPO、GiGPO、RLOO、DTPO、G1、A+B、A+B+C）每题只采一遍；**DAPO 和 Hτ 带过滤和补采**，采样量不同，见下表 |
+| 题池 | rl4k：4,096 道题，原图互不相同。进入梯度更新的始终是 32 步 × 128 组 = 4,096 组。无过滤的方法（GRPO、GSPO、GiGPO、RLOO、DTPO、G1、A+B、A+B+C、GRPO+A）每题只采一遍；**DAPO、Hτ、DAPO-SB 带过滤和补采**，采样量不同，见下表 |
 | rollout | 每题 n = 8；temperature 0.7；top_p 1.0 |
 | 更新 | 每步 128 题，actor mini-batch 32 题（每步 4 次更新）；ppo_epochs 1 |
 | 优化 | lr 1e-6，constant，warmup ratio 0.05；grad norm 1.0；无 KL |
@@ -57,15 +59,16 @@ Design_New 给出的定位是：A 改变的是取证偏好，不证明感知能�
 
 **采样预算并不相等**：所有方法的梯度更新次数相同（32 步 × 128 组），但带过滤的方法生成的 rollout 更多。
 
-| | GRPO | DAPO |
-|---|---:|---:|
-| 实际生成的组（每组 8 条） | 4,096 | 7,872 |
-| rollout 条数 | 32,768 | 62,976 |
-| 题池遍历 | 每题 1 遍 | 4,096 题全部采过，其中 3,776 题采了 2 遍 |
-| 累计处理 token | 2.11 亿 | 4.79 亿（2.27 倍） |
-| 训练墙钟 | 6.8 h | 11.2 h |
+| | GRPO | DAPO | DAPO-SB |
+|---|---:|---:|---:|
+| 实际生成的组（每组 8 条） | 4,096 | 7,872 | 7,968 |
+| rollout 条数 | 32,768 | 62,976 | 63,744 |
+| 题池遍历 | 每题 1 遍 | 4,096 题全部采过，其中 3,776 题采了 2 遍 | 4,096 题全部采过，其中 3,872 题采了 2 遍 |
+| 进入更新的不同题 / 被更新 ≥2 次的题 | 4,096 / 0 | 2,648 / 1,447 | 2,650 / 1,446 |
+| 累计处理 token | 2.11 亿 | 4.79 亿（2.27 倍） | 4.00 亿（不含探针前向） |
+| 训练墙钟 | 6.8 h | 11.2 h | 13.25 h（与 GRPO+A 同机并行；探针每个不同状态 2 次单 token 前向，共 ≥182,334 次） |
 
-DAPO 累计生成到 4,096 组是在第 18 步，该步的权重没有保留。Hτ 用同样的过滤，同样多采了样。因此 DAPO / Hτ 与其他方法的比较属于**等更新次数、不等采样量**。
+DAPO 累计生成到 4,096 组是在第 18 步，该步的权重没有保留。Hτ、DAPO-SB 用同样的过滤，同样多采了样。因此 DAPO / Hτ / DAPO-SB 与其他方法的比较属于**等更新次数、不等采样量**；DAPO-SB 与 DAPO 之间采样量接近。
 
 ### 1.4 各方法：公式与取值
 
@@ -87,6 +90,8 @@ DAPO 累计生成到 4,096 组是在第 18 步，该步的权重没有保留。H
 | G1 | 组内 z-score | V·(Y + 0.25·m·Φ_read) | 0.2 / 0.3 | 无 | m = 1 的题共 2,699 道 |
 | **A+B** | 任务尺度归一 | V·(Y + 0.1·m·S) | 0.2 / 0.3 | 无 | m = 1 的题共 3,014 道 |
 | **A+B+C** | 任务尺度归一 | 同 A+B；续答行 V·Y | 0.2 / 0.3 | 无 | 384 行续答行 |
+| **GRPO+A** | 组内 z-score | V·(Y + 0.1·m·S) | 0.2 / 0.3 | 无 | S 与 A+B 相同 |
+| **DAPO-SB** | 停止相对：(Y − b_k)/σ_q，λ = 1 | V·Y | 0.2 / 0.28 | 同 DAPO | 每回合前的停止探针 b_k；update micro 1 |
 
 #### GRPO（对照）
 
@@ -237,6 +242,41 @@ $$
 - 续答行把该题第一组 evidence_set 的并集框（每边外扩 10%）作为合成的第 1 步 locate 回合注入 prompt；这部分是 prompt token，不进 loss。若并集框中有框达不到可用尺度，就改为每个框一个视图（最多 3 个）。模型从第 2 步接着答。
 - 续答行只拿 $r=V\cdot Y$，注入的前缀不得过程分；它们与普通行同在一个 batch，但各自按题组计算 advantage。
 
+#### GRPO+A：只加 A（GRPO 基座）
+
+$$
+r_i=V_i\big(Y_i+0.1\,m_q\,S_i\big),\qquad
+A_i=\frac{r_i-\operatorname{mean}_{g}(r)}{\operatorname{std}_{g}(r)+10^{-6}}
+$$
+
+S、资格 $m_q$ 的定义与 A+B 完全相同；advantage 为标准 GRPO（不用 B 的任务尺度归一）。对 GRPO 的唯一变量是奖励中的 $0.1\,m_q S_i$；对 A+B 的唯一变量是 advantage 归一方式。
+
+#### DAPO-SB：停止相对 advantage（DAPO 基座）
+
+**停止探针**。第 $i$ 条轨迹在第 $k$ 个 assistant 回合之前的状态 $h_{i,k}$ = 题面与选项 + 该回合前实际呈现过的图像（原图 + 前 $k$ 张裁图），**不含模型自己的文本**。用 rollout 引擎的当前权重 $\theta_{\text{old}}$ 一次前向、不采样，强制作答：
+
+$$
+b_{i,k}=P_{\theta_{\text{old}}}(\text{gt 字母}\mid h_{i,k}),\qquad
+P(X)=P(\texttt{>X}\mid\ldots\texttt{<answer})+P(\texttt{>}\mid\ldots\texttt{<answer})\cdot P(X\mid\ldots\texttt{<answer>})
+$$
+
+训练文本中 `<answer>D` 被切成 `'<' 'answer' '>D'`，所以探针停在 `<answer` 读 `>A`…`>J`，单独的 `>` 再用第二次请求（以 `<answer>` 结尾）读 `A`…`J`。top-20 logprob；system prompt 为 caption v5.1 的 SYSTEM，末尾加 “Answer with the option's letter from the given choices directly.”。GT 只在 driver 一侧用来取 $b=P(\text{gt})$。
+
+**advantage**（Pro 参考实现 `stop_relative_advantage.py`，原样使用）：
+
+$$
+\delta_{i,k}=b_{i,k+1}-b_{i,k}\ (k<K_i),\qquad \delta_{i,K_i}=Y_i-b_{i,K_i},\qquad
+\hat A_{i,k}=\sum_{j\ge k}\lambda^{\,j-k}\delta_{i,j}
+$$
+
+$$
+A_{i,t}=\frac{\hat A_{i,k(t)}}{\sigma_q+\epsilon},\qquad \sigma_q=\operatorname{std}_g(Y)
+$$
+
+$\lambda=1$ 时 $\hat A_{i,k}=Y_i-b_{i,k}$：第 $k$ 回合的 token 用“该回合之前强制作答的成功率”作基线，代替 DAPO 的组均值 $\bar Y_q$。$A_{i,t}$ 铺到第 $k(t)$ 回合的生成 token；回执和图像 token 为 0。题组仍由 DAPO 的过滤决定（只有混合组进入更新）。
+
+**探针冒烟**（A-SFT，40 道训练题，只看原图）：P(gt) 均值 .371，取最大概率选项的正确率 .525，字母概率总量均值 .778（最低 .293）；缺失的质量流向 `>` 之后的 `UNC` 或数字。Advantage.md §七要求的三层离线验收（探针扰动与真实停止对照、同状态分叉的四种信用方向、固定根状态基线的同批梯度对照）**没有做**。
+
 ### 1.5 rl4k 标注
 
 **思路**：对 RL 题池的每道题逐级回答三个问题。
@@ -278,6 +318,9 @@ $$
 
 - A+B+C 第 31–32 步的原题集合与其他 run 不同：构造续答行时从题序尾部挑题，跳过的不合格题积在了最后两步。m = 0 的题分别占 49/128 和 109/128；GRPO 在同一批题上的正确率为 .566 / .318，A+B+C 为 .560 / .311。
 - 11-03 的 oracle 探针计分有误（正则把冠词 “A” 当成选项），依赖它的“读取层 43%”结论已撤回。
+- DAPO-SB 与 GRPO+A 同机并行（GPU 2,3 / 0,1），cgroup 内存最高 347G，两者都是 32/32 步、0 Traceback。DAPO-SB 的 mm cache 设置与 k8 DAPO 不同（只影响速度与内存）。
+- DAPO-SB 的第 1 批与 k8 DAPO 逐项相同（score .482、entropy .448；训练账本正确率 .571、裁图 .677、生成 token 134.3），第 1 步两者 lr 都是 0（预热）。
+- 11-05 初稿的 DAPO-SB 报告把“保留组回合数 2.81”与 E1 裁图数并列为未弄清的问题，口径不同，已更正：同口径（全部生成的 rollout）训练裁图第 32 步 DAPO-SB 1.57、DAPO 1.99。
 
 ---
 
@@ -291,6 +334,8 @@ $$
 | DTPO | .6553 | 1447 | 3.357 | 395 | 15,579 |
 | Hτ（bbox 覆盖奖励） | .6508 | 1437 | 2.546 | 305 | 10,872 |
 | **A+B** | **.6472** | 1429 | 2.404 | 342 | 10,047 |
+| **GRPO+A** | .6436 | 1421 | 4.020 | 440 | 18,034 |
+| **DAPO-SB** | .6413 | 1416 | 1.631 | 222 | 7,055 |
 | GSPO | .6395 | 1412 | 2.263 | 278 | 9,756 |
 | G1（读值一致性） | .6395 | 1412 | 2.308 | 374 | 10,063 |
 | **A+B+C** | .6395 | 1412 | 2.337 | 326 | 10,181 |
@@ -309,6 +354,8 @@ $$
 | DAPO | .6881 | .8728 | .3468 | .3526 |
 | **A+B** | .6659 | .8371 | **.3952** | .3397 |
 | **A+B+C** | .6563 | **.8728** | .3387 | .3013 |
+| **GRPO+A** | .6689 | .8527 | .3347 | .3141 |
+| **DAPO-SB** | .6799 | .8326 | .2903 | .3141 |
 | Hτ | .6792 | .8571 | .3306 | .3205 |
 | G1 | .6645 | .8527 | .3266 | .3077 |
 | GSPO | .6622 | .8348 | .3508 | .3397 |
@@ -322,6 +369,13 @@ $$
 | GRPO vs A+B | 1157 | 254 | 272 | 525 | **+18**（WorldBench 39 / 54） |
 | GRPO vs A+B+C | 1152 | 259 | 260 | 537 | +1（V\* 33 / 46） |
 | A+B vs A+B+C | 1146 | 283 | 266 | 513 | −17 |
+| GRPO vs GRPO+A | 1143 | 268 | 278 | 519 | +10 |
+| DAPO vs DAPO-SB | 1187 | 278 | 229 | 514 | **−49**（MME 157 / 146、V\* 51 / 33、WorldBench 49 / 35、MMMU-Pro 21 / 15） |
+| A+B vs GRPO+A | 1159 | 270 | 262 | 517 | −8 |
+
+- DAPO-SB 的零裁图直答 4.80%（106 条，正确率 .500），DAPO 1.00%（22 条，.591）；有裁图时正确率 DAPO-SB .648、DAPO .664。
+- 按题计（每题 4 次采样，DAPO-SB 答对数 − DAPO 答对数）：−3：8 题，−2：34，−1：95，0：314，+1：69，+2：27，+3：5。
+- mmmu_pro 上 GRPO、GRPO+A、DAPO-SB 都是 49/156。逐键核对是不同轨迹：DAPO-SB 与 GRPO 同 pred 64/156，GRPO+A 与 GRPO 同 pred 67/156。
 
 本阶段未做显著性检验。
 
@@ -336,6 +390,18 @@ $$
 - A+B s0：第 4 张裁图紧框覆盖 GT（目标占裁图边长 0.73），仍答 “clearly dark, consistent with black” → C，错。
 - GRPO s0：68×56 px 裁图覆盖 GT，答 “brown suitcase carried by the person” → D，对。
 
+**案例 3：vstar_148“铲子在房子的哪一侧”（GT 右侧；GT 框 [1487,939,1612,1210]，图 2250×1500）。** DAPO 4/4，DAPO-SB 1/4。
+- DAPO-SB s1、s2、s3 各 1 张裁图，都在图像左下部（如 [0,900,1012,1500]），覆盖 GT 框的比例为 0.0，答 “the shovel is on the left side of the house” → 错。s0 的第 1 张裁图 [1350,750,2250,1500] 完整覆盖 GT，答右侧 → 对。
+- DAPO s1、s2、s3 都有完整覆盖 GT 的裁图（如 s2 的 [1440,840,1642,1260]），答 “leaning against the wall at the right side of the house” → 对；s0 的裁图对 GT 最多覆盖 .31，也答对。
+
+**案例 4：MMMU-Pro validation_Music_5（判断“该音符是 G♭ 大调的上主音”，GT 为“错误”）。** DAPO 3/4，DAPO-SB 0/4。
+- DAPO-SB 4/4 都没有裁图，都答“正确”。s0 写 “a note on the third line (A above middle C) … the second note of G♭ major is A♭”，随后写 “A♭ = A4” → 错。
+- DAPO s0 同样没有裁图，前半句相同，结尾 “The note shown is A, not A♭, so the claim is false” → 对。DAPO s1、s3 有裁图 → 对；s2 无裁图 → 错。
+
+**案例 5（反向）：mme_7685“2020 年 Qtr2 的 Rent Trend 数值”（GT 2.1）。** DAPO-SB 4/4，DAPO 1/4。
+- DAPO-SB 4/4 各 1 张横条裁图，读 “the Qtr2 bar labeled 2.1” → 对。
+- DAPO s1、s2、s3 读 “the 2020 Qtr2 bar is labeled 2.2” → 错；其中 s1 的裁图 [21,195,999,374] 与 DAPO-SB s3 的 [0,229,1030,348] 位置相近。
+
 ### 2.5 V\* 答错轨迹的尺度复算
 
 口径：目标框长边 / 覆盖它的最小裁图长边。
@@ -345,59 +411,69 @@ $$
 | GRPO | 70 | 38 | 0.066 | 14 | 0.193 |
 | A+B | 73 | 29 | 0.087 | 7 | 0.218 |
 | A+B+C | 57 | 30 | 0.053 | 15 | 0.153 |
+| DAPO | 57 | 31 | 0.053 | 14 | 0.171 |
+| GRPO+A | 66 | 47 | 0.064 | 18 | 0.213 |
+| DAPO-SB | 75 | 31 | 0.051 | 15 | 0.177 |
+
+DAPO-SB 的 V\* 错答比 DAPO 多 18 条，多出的部分落在“没有任何单张裁图覆盖 GT”的一类（44 vs 26）。
 
 ---
 
 ## 三、训练 Log
 
-- 每张图只画一个指标。A+B、A+B+C 用粗线；GRPO、DAPO 用中等线；其余同协议 run 用淡线，作背景参照。
+- 每张图只画一个指标。DAPO-SB、GRPO+A 用粗线；A+B 与直接对照 GRPO、DAPO 用中等线；A+B+C 和其余同协议 run 用淡线，作背景参照。
 - 线为 3 步滑动平均，圆点是重点 run 的逐步原始值。
-- 紫色阴影标出 A+B+C 第 31–32 步，这两步的题目构成不同（见 §1.7）。
+- 紫色阴影标出 A+B+C 第 31–32 步，这两步的题目构成不同（见 §1.7），只影响 A+B+C。
+- DAPO 系（DAPO、Hτ、DAPO-SB）的训练正确率、裁图、生成 token 取全部生成的 rollout（含被过滤的组），按保留该组的更新步归位；reward 与 entropy 取日志（只含保留组）。
 - 未记录某个指标的 run 写在图右下角，不补画。
-- 数据：[stage_report_20261104/family_long.csv](results/stage_report_20261104/family_long.csv)；脚本：[build_family.py](results/stage_report_20261104/scripts/build_family.py)、[plot_family.py](results/stage_report_20261104/scripts/plot_family.py)。
+- 数据：[stage_report_20261105/family_long.csv](results/stage_report_20261105/family_long.csv)；脚本：[build_family.py](results/stage_report_20261105/scripts/build_family.py)、[plot_family.py](results/stage_report_20261105/scripts/plot_family.py)。
 
-**Reward**（日志里的 rollout 平均奖励；A+B 系列含 0.1·m·S，G1 含 0.25·m·Φ）
+**Reward**（日志里的 rollout 平均奖励；S 系列含 0.1·m·S，G1 含 0.25·m·Φ；DAPO 系只含保留的混合组）。第 32 步：DAPO-SB .542、DAPO .556、GRPO+A .616、GRPO .601、A+B .618
 
-![reward](results/stage_report_20261104/figs/fig02_reward.png)
+![reward](results/stage_report_20261105/figs/fig02_reward.png)
 
-**训练正确率 Y**（不含续答行）。第 25–32 步均值：A+B .608、GRPO .613、DAPO .626、A+B+C .625（取第 25–30 步，避开构成偏差）
+**训练正确率 Y**（全部生成的 rollout，不含续答行）。第 25–32 步均值：DAPO-SB .636、DAPO .626、GRPO+A .616、GRPO .613、A+B .608、A+B+C .577
 
-![acc](results/stage_report_20261104/figs/fig01_train_accuracy.png)
+![acc](results/stage_report_20261105/figs/fig01_train_accuracy.png)
 
-**Entropy**（平均 token 熵）。第 25–32 步均值：A+B .469、GRPO .448、DAPO .447、A+B+C .417；G1 为 .471
+**Entropy**（平均 token 熵）。第 25–32 步均值：DAPO-SB .359（第 1 步 .448、第 32 步 .341）、DAPO .447、GRPO+A .436、GRPO .448、A+B .469、A+B+C .417
 
-![entropy](results/stage_report_20261104/figs/fig03_entropy.png)
+![entropy](results/stage_report_20261105/figs/fig03_entropy.png)
 
-**Diff**（actor/ppo_kl，更新策略相对 rollout 策略，逐步原始值，×1e-4）。除 A+B 第 5 步的 1.0e-3 外，各 run 都在 ±1e-4 以内
+**Diff**（actor/ppo_kl，更新策略相对 rollout 策略，逐步原始值，×1e-4）。除 A+B 第 5 步、GRPO+A 第 3 步各 1.0e-3 外，各 run 都在 ±1e-4 以内
 
-![kl](results/stage_report_20261104/figs/fig04_policy_diff.png)
+![kl](results/stage_report_20261105/figs/fig04_policy_diff.png)
 
-**梯度范数**（裁剪前）。第 25–32 步均值：GRPO 5.99、DAPO 7.34、A+B 6.65、A+B+C 4.91
+**梯度范数**（裁剪前；max_grad_norm 1.0；记录了梯度范数的 run 每步都 >1，最小 3.05）。第 25–32 步均值：DAPO-SB 12.04、DAPO 7.34、GRPO+A 5.66、GRPO 5.99、A+B 6.65、A+B+C 4.91
 
-![grad](results/stage_report_20261104/figs/fig05_grad_norm.png)
+![grad](results/stage_report_20261105/figs/fig05_grad_norm.png)
 
-**非零 advantage 的 token 占比**。全程均值：GRPO .64、A+B .75、A+B+C .73、DAPO 1.00（DAPO 在更新前丢掉了全对、全错的组）
+**非零 advantage 的 token 占比**。全程均值：DAPO-SB 1.00、DAPO 1.00、GRPO+A .74、GRPO .64、A+B .75
 
-![adv](results/stage_report_20261104/figs/fig08_adv_nonzero.png)
+![adv](results/stage_report_20261105/figs/fig08_adv_nonzero.png)
 
-**裁图数 / 条**。第 25–32 步均值：A+B 2.18、A+B+C 2.04、DAPO 2.04、GRPO 1.65
+**裁图数 / 条**。第 25–32 步均值：GRPO+A 3.39、A+B 2.18、DAPO 2.04、A+B+C 2.04、GRPO 1.65、DAPO-SB 1.59
 
-![crops](results/stage_report_20261104/figs/fig06_crops.png)
+![crops](results/stage_report_20261105/figs/fig06_crops.png)
 
-**生成 token / 条**
+**生成 token / 条**。第 25–32 步均值：GRPO+A 394、A+B 317、DAPO 282、GRPO 247、DAPO-SB 224
 
-![gen](results/stage_report_20261104/figs/fig07_gen_tokens.png)
+![gen](results/stage_report_20261105/figs/fig07_gen_tokens.png)
 
-**S 与门控开启率**（只有 A+B 系列计算这两项）
+**S 与门控开启率**（只有 S 系列计算这两项）。第 25–32 步均值：S GRPO+A .30、A+B .27；门控开启 GRPO+A .95、A+B .94
 
-![S](results/stage_report_20261104/figs/fig09_S.png)
-![gate](results/stage_report_20261104/figs/fig10_gate.png)
+![S](results/stage_report_20261105/figs/fig09_S.png)
+![gate](results/stage_report_20261105/figs/fig10_gate.png)
+
+**DAPO-SB 的停止探针**（只在保留的混合组上记录）。b0 均值 .257 → .306；组正确率 − b0 在 .16–.27 之间（32 步均值 +.220）；原始 advantage > 0 的回合占比 .46 → .53；探针字母概率总量 .73 → .87；保留组裁图 0.77 → 1.81
+
+![probe](results/stage_report_20261105/figs/fig14_sb_probe.png)
 
 **E1 汇总图**
 
-![e1](results/stage_report_20261104/figs/fig11_e1_scores.png)
-![cost](results/stage_report_20261104/figs/fig12_e1_cost.png)
-![src](results/stage_report_20261104/figs/fig13_e1_by_source.png)
+![e1](results/stage_report_20261105/figs/fig11_e1_scores.png)
+![cost](results/stage_report_20261105/figs/fig12_e1_cost.png)
+![src](results/stage_report_20261105/figs/fig13_e1_by_source.png)
 
 ### GRPO 与 DAPO 的差异
 
@@ -406,7 +482,7 @@ $$
 - **clip high**：DAPO 0.28，GRPO 0.3。
 - **update micro batch**：DAPO 为 1，GRPO 为 2，属于显存工程差异。
 
-E1 上 DAPO 比 GRPO 高 2.45pp。A+B 是在 GRPO（无过滤）上做的改动，目前处在两者之间（.6472）。
+E1 上 DAPO 比 GRPO 高 2.45pp。A+B、GRPO+A 是在 GRPO（无过滤）上做的改动，处在两者之间（.6472、.6436）；DAPO-SB 是在 DAPO 上只换 advantage 的改动，低于 DAPO（.6413）。
 
 ---
 
@@ -432,30 +508,13 @@ Design_PH 执行结果见 [BIND_AUDIT.zh.md](results/behavior_20261104/BIND_AUDI
 
 同一批数据上，DAPO 失败组可核验证据辅助线的第二道关结果：可教的全错组只占可核验题的 22/1191，该线按判据停止。
 
-## DAPO-SB 与单 A 的训练结果（2026-11-05）
-
-两组都以 A-SFT 为起点，在 4k 池上训练 32 步，单 seed。三部分报告见 [results/sb_20261104/REPORT.zh.md](results/sb_20261104/REPORT.zh.md) 和 [results/sg_20261104/REPORT_sg_a.zh.md](results/sg_20261104/REPORT_sg_a.zh.md)，代码见 [code/dapo_sb](code/dapo_sb/)。
-
-- **DAPO-SB（停止相对 advantage）**：DAPO 的其余设置不变，只把组均值基线换成每回合之前的停止探针 $b_{i,k}$，即 $A_{i,t}=(Y_i-b_{i,k(t)})/(\sigma_q+\epsilon)$，λ=1。$b_{i,k}$ 是用 rollout 权重、只看题面和该回合前已呈现的图像、强制作答时的 P(gt 字母)。
-- **GRPO+A（单 A）**：GRPO 的奖励加上尺度门控获取分 S，即 R = V·(Y+0.1·m·S)；advantage 用标准 GRPO。
-
-| | E1 | 配对净增（对直接对照） | 裁图 / 条 | 零裁图 | 总处理 token / 条 | 训练末步 entropy |
-|---|---:|---:|---:|---:|---:|---:|
-| DAPO（对照） | .6635 | — | 2.092 | 1.00% | 8,930 | .446 |
-| DAPO-SB | .6413 | DAPO +49 | 1.631 | 4.80% | 7,055 | .341 |
-| GRPO（对照） | .6390 | — | 1.905 | 4.35% | 8,125 | .454 |
-| GRPO+A | .6436 | GRPO+A +10 | 4.020 | 0.18% | 18,034 | .449 |
-
-DAPO-SB 训练中，保留组的探针 b0 均值从 .257 升到 .306，组正确率减 b0 的值在 32 步内平均为 +.220，每条轨迹的回合数从 1.77 升到 2.81。探针让训练多出 ≥182,334 次单 token 前向；32 步 timing 合计 13.25 h，k8 DAPO 为 11.21 h，两者并行负载不同。未跑的检查：Advantage.md §七的三层离线验收、固定根状态基线消融、λ=0 / 0.5。
-
-![DAPO-SB curves](results/sb_20261104/data/sb_curves.png)
-
 ## 后续实验（已列入但未开始）
 
 1. Design_New §3 的分层探针：同一批错题，依次给“模型自己尺度最合适的裁图”“GT 证据图”“GT 三档尺度”“正确转录”“正确绑定”，按选项计分；同时用来校准尺度函数 h。
 2. 修正 A+B+C 的题序构造，让每一步的原题集合与 GRPO 一致后重跑，单独得到 C 相对 A+B 的增量。
 3. 拆分 A+B 多出的约 0.5 张裁图 / 条、约 80 个生成 token / 条分别落在哪类题上；逐图审查 A+B 在 WorldBench 上的 +15 题。
 4. 7B 阶段（Qwen3-VL-8B、Qwen2.5-VL-7B）：模型规模、轨迹、RL 方法不同时更换。
+5. DAPO-SB 未跑的检查（Advantage.md §七）：探针扰动与真实停止对照、同状态分叉的四种信用方向、固定根状态基线 $b(h_0)$ 的消融、λ = 0 / 0.5。
 
 ## 目录
 
@@ -464,11 +523,13 @@ DAPO-SB 训练中，保留组的探针 b0 均值从 .257 升到 .306，组正确
 | 路径 | 内容 |
 |---|---|
 | [code/](code/README.md) | 13 个方法、E1 评测、rl4k 标注的实际运行代码快照 + MANIFEST（原始 sha256） |
-| [results/stage_report_20261104/](results/stage_report_20261104/) | 本页全部图（png / pdf）、长表、脚本 |
+| [results/stage_report_20261105/](results/stage_report_20261105/) | 本页全部图（png / pdf）、长表、脚本 |
+| [results/stage_report_20261104/](results/stage_report_20261104/) | 11-04 版的图（不含 DAPO-SB、GRPO+A） |
 | [results/sb_20261104/](results/sb_20261104/) | DAPO-SB 冻结记录、三部分报告、曲线、E1 配对表 |
 | [results/sg_20261104/](results/sg_20261104/) | A+B / A+B+C / GRPO+A 冻结记录、三部分报告、代码 |
 | [results/rereview_20261104/](results/rereview_20261104/) | Probe A/B 撤回与重审 |
 | [protocol/CAPTION_V51.md](protocol/CAPTION_V51.md) | 协议全文、13 类 hint |
 | [design/ANNOTATION_SPEC.md](design/ANNOTATION_SPEC.md) | L0 / L1 / L2 标注规范 |
 | [results/RESULTS.md](results/RESULTS.md) | 结果入口 |
-| [docs/README_before_stage_20261104.md](docs/README_before_stage_20261104.md) | 旧版 README |
+| [docs/README_stage_20261104.md](docs/README_stage_20261104.md) | 11-04 版阶段 README |
+| [docs/README_before_stage_20261104.md](docs/README_before_stage_20261104.md) | 更早的 README |
