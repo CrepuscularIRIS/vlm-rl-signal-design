@@ -454,18 +454,6 @@ DAPO-SB 的 V\* 错答比 DAPO 多 18 条，多出的部分落在“没有任何
 - 未记录某个指标的 run 写在图右下角，不补画。
 - 数据：[stage_report_20261105/family_long.csv](results/stage_report_20261105/family_long.csv)；脚本：[build_family.py](results/stage_report_20261105/scripts/build_family.py)、[plot_family.py](results/stage_report_20261105/scripts/plot_family.py)。
 
-**单独对照图**（每张图只放一个改动和它的直接对照，六个面板）
-
-GRPO+A（只加 S 奖励）对 GRPO、A+B：reward、entropy、policy diff、训练正确率、裁图数、S。三部分报告见 [REPORT_sg_a.zh.md](results/sg_20261104/REPORT_sg_a.zh.md)。
-
-![GRPO+A curves](results/sg_20261104/data/sg_a_curves.png)
-
-DAPO-SB（停止相对 advantage）对 DAPO、GRPO：训练正确率、entropy、policy diff、裁剪前 grad norm、停止探针、回合数与字母质量。三部分报告见 [REPORT.zh.md](results/sb_20261104/REPORT.zh.md)。
-
-![DAPO-SB curves](results/sb_20261104/data/sb_curves.png)
-
-**逐指标全家福**（同协议全部 run，一张图一个指标）
-
 **Reward**（日志里的 rollout 平均奖励；S 系列含 0.1·m·S，G1 含 0.25·m·Φ；DAPO 系只含保留的混合组）。第 32 步：DAPO-SB .542、DAPO .556、GRPO+A .616、GRPO .601、A+B .618
 
 ![reward](results/stage_report_20261105/figs/fig02_reward.png)
