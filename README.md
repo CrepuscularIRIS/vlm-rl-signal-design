@@ -20,6 +20,20 @@ Design_New 给出的定位是：A 改变的是取证偏好，不证明感知能�
 
 ---
 
+## 学习信号审计（2026-11-05）
+
+把全部方法按“进入更新的数据 / 奖励 / 组内 advantage / 信用分配”四列对齐，并从训练账本复算每个方法实际送进更新的组和 advantage，见 [results/audit_signal_20261105/AUDIT_SIGNAL.zh.md](results/audit_signal_20261105/AUDIT_SIGNAL.zh.md)。只列事实：
+
+- GRPO 每步 128 组中平均 72.2 组是混合组，其余 A=0；DAPO 每步 128 组都是混合组，为此每次更新平均生成 7.7 轮 × 32 组，丢掉约 80 个全对组、30 个全错组。
+- 两者混合组的难度分布（k=1…7 的占比）几乎相同；DAPO 混合组总数是 GRPO 的 1.77 倍，并且对 1,447 道题更新了两次（k 均值 3.81 → 4.16）。
+- 正 / 负 advantage 质量比（token 加权）：所有减组均值的方法在 0.91–0.97 之间，DAPO-SB 为 2.23。
+- E1 按题重采样的 95% 区间：只有 DAPO 相对 GRPO 的 +2.45 [+0.54, +4.35] 不含 0；相对 DAPO，DTPO、Hτ、A+B、GRPO+A 的区间含 0，其余在 0 以下。
+- DAPO 相对 GRPO 的净增按 A-SFT 难度分档（0/4…4/4）：+17、+5、+2、+15、+15。
+
+![update composition](results/audit_signal_20261105/figs/a1_update_composition.png)
+
+---
+
 ## 一、设定
 
 ### 1.1 SFT

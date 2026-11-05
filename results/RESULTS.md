@@ -2,6 +2,8 @@
 
 > **更正（2026-11-04）**：本文所依据的 Probe A 计分有误——探针不给题面，正则把模型描述里的冠词 “A” 当作选项字母，DAPO 15/15、G1 14/14 命中均如此；Probe B 167/180 复述模型原错答。依赖 Probe A/B 的结论（读取层 43%、单图读不对 8.3%、G1 回填实锤）作废。复核与仍成立的测量见 [results/rereview_20261104](../results/rereview_20261104/RESULTS.zh.md)。
 
+**[学习信号审计（2026-11-05）](audit_signal_20261105/AUDIT_SIGNAL.zh.md)**：全部方法按进入更新的数据 / 奖励 / 组内 advantage / 信用分配对齐，训练账本复算 advantage 平衡与 DAPO 过滤补采明细，E1 差值附按题重采样 95% 区间与 A-SFT 难度分档。
+
 **[DAPO vs DAPO-SB（停止相对 advantage，2026-11-05）](sb_20261104/REPORT.zh.md)**：E1 DAPO-SB .6413 vs DAPO .6635（配对净增 DAPO +49/2208；vstar 391→373、worldbench 86→72）。裁图 1.63 vs 2.09 张/条，零裁图 4.8% vs 1.0%，总处理 token 7,055 vs 8,930。训练 entropy .448→.341（DAPO .446）。Advantage.md §七的离线验收与根状态基线消融未跑；一个 seed。曲线 `data/sb_curves.png`。
 
 **[GRPO vs GRPO+A（单 A：只加 S 奖励，2026-11-05）](sg_20261104/REPORT_sg_a.zh.md)**：E1 .6436 vs GRPO .6390（配对净增 +10/2208），裁图 4.02 vs 1.91 张/条，总处理 token 18,034 vs 8,125。曲线 `data/sg_a_curves.png`。
