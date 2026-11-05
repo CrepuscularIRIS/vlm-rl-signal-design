@@ -2,7 +2,9 @@
 
 Qwen3-VL-4B 在 caption v5.1 协议下多轮裁图后作答选择题。本页汇总到目前为止**同一起点、同一题池、同一评测**下的全部 RL 训练，按三部分组织：① 设定 ② 定性 + 定量 ③ 训练 Log。
 
-> 11-05 版新增两组训练：DAPO-SB（DAPO + 停止相对 advantage）和 GRPO+A（GRPO + 只加 S 奖励），并入下文各表与全部曲线图。11-04 版见 [docs/README_stage_20261104.md](docs/README_stage_20261104.md)，更早的过程记录见 [docs/README_before_stage_20261104.md](docs/README_before_stage_20261104.md)。11-03 发布的“读取层 43%”诊断已撤回，见 [results/rereview_20261104](results/rereview_20261104/RESULTS.zh.md)。
+> 11-05 新增 **strat（同结果层中心化的过程 advantage）**：E1 **1399/2208，63.36%**；GRPO 63.90%、GRPO+A 64.36%、DAPO 66.35%。裁图2.473张/条，处理token10,792.76/条。已并入总表、分源、配对和family图；[三部分报告、两例逐图记录与复算数据](results/sgv3_20261105/REPORT.zh.md)。单训练seed；原训练独立退出码及每rank更新事件仍缺。
+
+> 11-05 较早版本新增两组训练：DAPO-SB（DAPO + 停止相对 advantage）和 GRPO+A（GRPO + 只加 S 奖励），并入下文各表与全部曲线图。11-04 版见 [docs/README_stage_20261104.md](docs/README_stage_20261104.md)，更早的过程记录见 [docs/README_before_stage_20261104.md](docs/README_before_stage_20261104.md)。11-03 发布的“读取层 43%”诊断已撤回，见 [results/rereview_20261104](results/rereview_20261104/RESULTS.zh.md)。
 
 ## 阶段小结：结果与预估是否一致
 
@@ -123,6 +125,9 @@ DAPO 累计生成到 4,096 组是在第 18 步，该步的权重没有保留。H
 | **A+B+C** | 任务尺度归一 | 同 A+B；续答行 V·Y | 0.2 / 0.3 | 无 | 384 行续答行 |
 | **GRPO+A** | 组内 z-score | V·(Y + 0.1·m·S) | 0.2 / 0.3 | 无 | S 与 A+B 相同 |
 | **DAPO-SB** | 停止相对：(Y − b_k)/σ_q，λ = 1 | V·Y | 0.2 / 0.28 | 同 DAPO | 每回合前的停止探针 b_k；update micro 1 |
+| **strat** | GRPO + 0.1·同结果层中心化 S | V·Y | 0.2 / 0.3 | 无 | psi v2；32步，n=8，seed42 |
+
+strat：$A_i=(r_i-\bar r_g)/(\operatorname{std}_{sample,g}(r)+10^{-6})+0.1(S_i-\operatorname{mean}_{j\in H_i}S_j)$，$H_i$ 为同题、同二值训练结果 $r=VY$、可评分的轨迹；不可评分或层内少于两条时第二项为0。第二项只中心化、不再除标准差，广播到全部有效response token。S=clip(psi_T−psi_0,0,1)，psi=max(prox,.25·explore)，prox为最大IoU与目标并集覆盖均值，explore为全部历史裁图并集面积比。原图不算crop。与GRPO只改advantage；GRPO+A使用psi v1且改奖励，二者不是单变量消融。[实现快照](results/sgv3_20261105/stratified_adv.py)与[完整设定](results/sgv3_20261105/REPORT.zh.md)。
 
 #### GRPO（对照）
 
@@ -371,6 +376,7 @@ $\lambda=1$ 时 $\hat A_{i,k}=Y_i-b_{i,k}$：第 $k$ 回合的 token 用“该�
 | G1（读值一致性） | .6395 | 1412 | 2.308 | 374 | 10,063 |
 | **A+B+C** | .6395 | 1412 | 2.337 | 326 | 10,181 |
 | **GRPO** | .6390 | 1411 | 1.905 | 261 | 8,125 |
+| **strat** | **.6336** | **1399** | **2.473** | **321** | **10,793** |
 | RLOO | .6318 | 1395 | 1.992 | 278 | 8,535 |
 | GiGPO | .6209 | 1371 | 1.998 | 275 | 8,506 |
 | RLOO + 首动作分叉 | .5919 | 1307 | 1.372 | 203 | 6,266 |
@@ -382,6 +388,7 @@ $\lambda=1$ 时 $\hat A_{i,k}=Y_i-b_{i,k}$：第 $k$ 回合的 token 用“该�
 | 方法 | MME-RealWorld (1,356) | V\* (448) | WorldBench (248) | MMMU-Pro (156) |
 |---|---:|---:|---:|---:|
 | GRPO | .6645 | .8438 | .3347 | .3141 |
+| **strat** | **.6652** | **.8259** | **.3185** | **.3077** |
 | DAPO | .6881 | .8728 | .3468 | .3526 |
 | **A+B** | .6659 | .8371 | **.3952** | .3397 |
 | **A+B+C** | .6563 | **.8728** | .3387 | .3013 |
@@ -403,12 +410,17 @@ $\lambda=1$ 时 $\hat A_{i,k}=Y_i-b_{i,k}$：第 $k$ 回合的 token 用“该�
 | GRPO vs GRPO+A | 1143 | 268 | 278 | 519 | +10 |
 | DAPO vs DAPO-SB | 1187 | 278 | 229 | 514 | **−49**（MME 157 / 146、V\* 51 / 33、WorldBench 49 / 35、MMMU-Pro 21 / 15） |
 | A+B vs GRPO+A | 1159 | 270 | 262 | 517 | −8 |
+| GRPO vs strat | 1147 | 264 | 252 | 545 | −12 |
+| GRPO+A vs strat | 1147 | 274 | 252 | 535 | −22 |
+| DAPO vs strat | 1188 | 277 | 211 | 532 | −66 |
+
+strat−对照的按题bootstrap95%区间（pp）：GRPO −0.54 [−2.63,+1.49]；GRPO+A −1.00 [−3.04,+1.09]；DAPO −2.99 [−5.03,−1.04]。552题整体重采样10,000次，固定seed20261105；不是多训练seed，不含训练seed不确定性，未校正多重比较。[匿名逐题数据与完整四格](results/sgv3_20261105/comparison.json)。
 
 - DAPO-SB 的零裁图直答 4.80%（106 条，正确率 .500），DAPO 1.00%（22 条，.591）；有裁图时正确率 DAPO-SB .648、DAPO .664。
 - 按题计（每题 4 次采样，DAPO-SB 答对数 − DAPO 答对数）：−3：8 题，−2：34，−1：95，0：314，+1：69，+2：27，+3：5。
 - mmmu_pro 上 GRPO、GRPO+A、DAPO-SB 都是 49/156。逐键核对是不同轨迹：DAPO-SB 与 GRPO 同 pred 64/156，GRPO+A 与 GRPO 同 pred 67/156。
 
-本阶段未做显著性检验。
+本次strat直接比较附按题bootstrap区间；其余历史比较的范围与统计口径保留原记录。strat零裁15条、截断3条、error0条、无答案32条（计数可重叠）；首裁指示均值.9932、后续裁图1.4796/条。[两例正反向逐图记录](results/sgv3_20261105/CASE_REVIEW.zh.md)：已审2/2对、8/8张实际crop；本地环境与远端header哈希不同，不声称远端逐像素重放。
 
 ### 2.4 案例（同题 4 次采样；V\* 原图不在公开库中，以下用文字描述）
 
@@ -452,44 +464,43 @@ DAPO-SB 的 V\* 错答比 DAPO 多 18 条，多出的部分落在“没有任何
 
 ## 三、训练 Log
 
-- 每张图只画一个指标。DAPO-SB、GRPO+A 用粗线；A+B 与直接对照 GRPO、DAPO 用中等线；A+B+C 和其余同协议 run 用淡线，作背景参照。
-- 线为 3 步滑动平均，圆点是重点 run 的逐步原始值。
-- 紫色阴影标出 A+B+C 第 31–32 步，这两步的题目构成不同（见 §1.7），只影响 A+B+C。
-- DAPO 系（DAPO、Hτ、DAPO-SB）的训练正确率、裁图、生成 token 取全部生成的 rollout（含被过滤的组），按保留该组的更新步归位；reward 与 entropy 取日志（只含保留组）。
-- 未记录某个指标的 run 写在图右下角，不补画。
-- 数据：[stage_report_20261105/family_long.csv](results/stage_report_20261105/family_long.csv)；脚本：[build_family.py](results/stage_report_20261105/scripts/build_family.py)、[plot_family.py](results/stage_report_20261105/scripts/plot_family.py)。
+- 每张图一个指标；strat红色粗线，GRPO蓝色、DAPO橙色，其余family条件淡线背景。
+- 新family图均为逐步原值，无平滑、无插值。A+B+C第31–32步题目构成不同（见§1.7）；S/gate与SB专有诊断仍为历史快照，不含strat。
+- DAPO系（DAPO、Hτ、DAPO-SB）的训练正确率、裁图、生成token取全部生成的rollout（含被过滤组），按保留该组的更新步归位；reward与采样surprisal取日志（只含保留组）。不同算法的奖励/归约差异保留。
+- 缺测不画并标注；strat第32步reward .601、采样surprisal .433、日志ppo_kl 0.0、裁剪前grad_norm7.121。ppo_kl的记录0不等于精确KL为0。
+- 数据：[family_long.csv](results/sgv3_20261105/family_long.csv)；复画：[plot_delivery.py](results/sgv3_20261105/plot_delivery.py)；新增strat256行，8指标各32步。训练处理232,486,038 token，记录步时9.3229小时；双卡×步时18.6458 GPU·小时（不含初始化/合并/E1）。
 
 **Reward**（日志里的 rollout 平均奖励；S 系列含 0.1·m·S，G1 含 0.25·m·Φ；DAPO 系只含保留的混合组）。第 32 步：DAPO-SB .542、DAPO .556、GRPO+A .616、GRPO .601、A+B .618
 
-![reward](results/stage_report_20261105/figs/fig02_reward.png)
+![reward](results/sgv3_20261105/family_01_reward.png)
 
 **训练正确率 Y**（全部生成的 rollout，不含续答行）。第 25–32 步均值：DAPO-SB .636、DAPO .626、GRPO+A .616、GRPO .613、A+B .608、A+B+C .577
 
-![acc](results/stage_report_20261105/figs/fig01_train_accuracy.png)
+![acc](results/sgv3_20261105/family_02_acc.png)
 
-**Entropy**（平均 token 熵）。第 25–32 步均值：DAPO-SB .359（第 1 步 .448、第 32 步 .341）、DAPO .447、GRPO+A .436、GRPO .448、A+B .469、A+B+C .417
+**采样 token surprisal**（actor/entropy_loss，temperature=.7；不是全词表熵）。第 25–32 步均值：DAPO-SB .359（第 1 步 .448、第 32 步 .341）、DAPO .447、GRPO+A .436、GRPO .448、A+B .469、A+B+C .417
 
-![entropy](results/stage_report_20261105/figs/fig03_entropy.png)
+![entropy](results/sgv3_20261105/family_03_entropy.png)
 
-**Diff**（actor/ppo_kl，更新策略相对 rollout 策略，逐步原始值，×1e-4）。除 A+B 第 5 步、GRPO+A 第 3 步各 1.0e-3 外，各 run 都在 ±1e-4 以内
+**Diff**（actor/ppo_kl，更新策略相对rollout策略的日志估计，允许负值，逐步原始值）。除 A+B 第 5 步、GRPO+A 第 3 步各 1.0e-3 外，各 run 都在 ±1e-4 以内
 
-![kl](results/stage_report_20261105/figs/fig04_policy_diff.png)
+![kl](results/sgv3_20261105/family_04_ppo_kl.png)
 
 **梯度范数**（裁剪前；max_grad_norm 1.0；记录了梯度范数的 run 每步都 >1，最小 3.05）。第 25–32 步均值：DAPO-SB 12.04、DAPO 7.34、GRPO+A 5.66、GRPO 5.99、A+B 6.65、A+B+C 4.91
 
-![grad](results/stage_report_20261105/figs/fig05_grad_norm.png)
+![grad](results/sgv3_20261105/family_05_grad_norm.png)
 
 **非零 advantage 的 token 占比**。全程均值：DAPO-SB 1.00、DAPO 1.00、GRPO+A .74、GRPO .64、A+B .75
 
-![adv](results/stage_report_20261105/figs/fig08_adv_nonzero.png)
+![adv](results/sgv3_20261105/family_08_adv_nz.png)
 
 **裁图数 / 条**。第 25–32 步均值：GRPO+A 3.39、A+B 2.18、DAPO 2.04、A+B+C 2.04、GRPO 1.65、DAPO-SB 1.59
 
-![crops](results/stage_report_20261105/figs/fig06_crops.png)
+![crops](results/sgv3_20261105/family_06_crops.png)
 
 **生成 token / 条**。第 25–32 步均值：GRPO+A 394、A+B 317、DAPO 282、GRPO 247、DAPO-SB 224
 
-![gen](results/stage_report_20261105/figs/fig07_gen_tokens.png)
+![gen](results/sgv3_20261105/family_07_gen_tok.png)
 
 **S 与门控开启率**（只有 S 系列计算这两项）。第 25–32 步均值：S GRPO+A .30、A+B .27；门控开启 GRPO+A .95、A+B .94
 
@@ -502,8 +513,10 @@ DAPO-SB 的 V\* 错答比 DAPO 多 18 条，多出的部分落在“没有任何
 
 **E1 汇总图**
 
-![e1](results/stage_report_20261105/figs/fig11_e1_scores.png)
-![cost](results/stage_report_20261105/figs/fig12_e1_cost.png)
+![E1 family](results/sgv3_20261105/family_e1.png)
+![First and later crop costs](results/sgv3_20261105/direct_e1_cost.png)
+
+历史分源图（不含strat；strat分源见§2.2与新报告）：
 ![src](results/stage_report_20261105/figs/fig13_e1_by_source.png)
 
 ### GRPO 与 DAPO 的差异
@@ -556,7 +569,8 @@ DAPO-SB 训练中 advantage 的实际分配（正负信用总量、按对错 × 
 | 路径 | 内容 |
 |---|---|
 | [code/](code/README.md) | 13 个方法、E1 评测、rl4k 标注的实际运行代码快照 + MANIFEST（原始 sha256） |
-| [results/stage_report_20261105/](results/stage_report_20261105/) | 本页全部图（png / pdf）、长表、脚本 |
+| [results/sgv3_20261105/](results/sgv3_20261105/REPORT.zh.md) | 含strat的新family图、三部分报告、逐题配对、两例审查与验收脚本 |
+| [results/stage_report_20261105/](results/stage_report_20261105/) | 较早family图及S/gate/SB专有诊断，保留历史快照 |
 | [results/stage_report_20261104/](results/stage_report_20261104/) | 11-04 版的图（不含 DAPO-SB、GRPO+A） |
 | [results/sb_20261104/](results/sb_20261104/) | DAPO-SB 冻结记录、三部分报告、曲线、E1 配对表 |
 | [results/sg_20261104/](results/sg_20261104/) | A+B / A+B+C / GRPO+A 冻结记录、三部分报告、代码 |

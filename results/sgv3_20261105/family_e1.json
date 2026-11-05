@@ -1,0 +1,130 @@
+[
+  {
+    "name": "A-SFT (start)",
+    "acc": 0.567,
+    "crops": 0.994,
+    "tokens": 5015,
+    "gen": null,
+    "precision": "previous published table"
+  },
+  {
+    "name": "GRPO",
+    "acc": 0.6390398550724637,
+    "crops": 1.9053442028985508,
+    "tokens": 8125.379981884058,
+    "gen": 261.15534420289856,
+    "precision": "recomputed raw paired trajectories"
+  },
+  {
+    "name": "DAPO",
+    "acc": 0.6634963768115942,
+    "crops": 2.092391304347826,
+    "tokens": 8929.847826086956,
+    "gen": 286.9664855072464,
+    "precision": "recomputed raw paired trajectories"
+  },
+  {
+    "name": "GSPO",
+    "acc": 0.6395,
+    "crops": 2.263,
+    "tokens": 9756,
+    "gen": 278,
+    "precision": "previous published table"
+  },
+  {
+    "name": "GiGPO",
+    "acc": 0.6209,
+    "crops": 1.998,
+    "tokens": 8506,
+    "gen": 275,
+    "precision": "previous published table"
+  },
+  {
+    "name": "RLOO",
+    "acc": 0.6318,
+    "crops": 1.992,
+    "tokens": 8535,
+    "gen": 278,
+    "precision": "previous published table"
+  },
+  {
+    "name": "RLOO-decision",
+    "acc": 0.5919,
+    "crops": 1.372,
+    "tokens": 6266,
+    "gen": 203,
+    "precision": "previous published table"
+  },
+  {
+    "name": "DTPO",
+    "acc": 0.6553,
+    "crops": 3.357,
+    "tokens": 15579,
+    "gen": 395,
+    "precision": "previous published table"
+  },
+  {
+    "name": "SAPO",
+    "acc": 0.577,
+    "crops": 1.063,
+    "tokens": 5292,
+    "gen": 171,
+    "precision": "previous published table"
+  },
+  {
+    "name": "G1 R-read",
+    "acc": 0.6395,
+    "crops": 2.308,
+    "tokens": 10063,
+    "gen": 374,
+    "precision": "previous published table"
+  },
+  {
+    "name": "Htau",
+    "acc": 0.6508,
+    "crops": 2.546,
+    "tokens": 10872,
+    "gen": 305,
+    "precision": "previous published table"
+  },
+  {
+    "name": "A+B",
+    "acc": 0.6472,
+    "crops": 2.404,
+    "tokens": 10047,
+    "gen": 342,
+    "precision": "previous published table"
+  },
+  {
+    "name": "A+B+C",
+    "acc": 0.6395,
+    "crops": 2.337,
+    "tokens": 10181,
+    "gen": 326,
+    "precision": "previous published table"
+  },
+  {
+    "name": "GRPO+A",
+    "acc": 0.6435688405797102,
+    "crops": 4.019927536231884,
+    "tokens": 18033.93161231884,
+    "gen": 439.8591485507246,
+    "precision": "recomputed raw paired trajectories"
+  },
+  {
+    "name": "DAPO-SB",
+    "acc": 0.6413,
+    "crops": 1.631,
+    "tokens": 7055,
+    "gen": 222,
+    "precision": "previous published table"
+  },
+  {
+    "name": "strat",
+    "acc": 0.6336050724637681,
+    "crops": 2.472826086956522,
+    "tokens": 10792.759510869566,
+    "gen": 320.5824275362319,
+    "precision": "recomputed raw paired trajectories"
+  }
+]

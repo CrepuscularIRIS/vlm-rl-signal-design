@@ -1,0 +1,42 @@
+{
+  "run": "sgv3_strat_s32",
+  "training": {
+    "initialization": "A-SFT / Qwen3-VL-4B / 4040 trajectories",
+    "pool": "rl4k / 4096 unique questions and source images",
+    "seed": 42,
+    "steps": 32,
+    "questions_per_step": 128,
+    "samples_per_question": 8,
+    "learning_rate": 1e-06,
+    "max_grad_norm": 1.0,
+    "strat_lambda": 0.1,
+    "process_reward_lambda": 0.0,
+    "generated_trajectories": 32768,
+    "processed_tokens": 232486038,
+    "generated_tokens": 7503204,
+    "summed_logged_step_seconds": 33562.447,
+    "two_gpu_logged_step_hours": 18.64580388888889,
+    "training_exit_code": null,
+    "per_rank_optimizer_events_verified": false
+  },
+  "merged_model_sha256": {
+    "model-00001-of-00002.safetensors": "f1ded8fb93c9c143a29f3f6dac331ab966ba6dbb3107cebf7c211fd60f7d991f",
+    "model-00002-of-00002.safetensors": "5c23d21858041cb968a3718fb0c33cf059c8d255bb743829a8d7222c16e49950"
+  },
+  "evaluation": {
+    "tag": "sgv3_strat_s32",
+    "exit_code": 0,
+    "started_utc": "2026-11-05T16:40:33Z",
+    "finished_utc": "2026-11-05T17:06:16Z",
+    "raw_input_fingerprints": "comparison.json",
+    "raw_input_paths": "private evidence directory; not distributed",
+    "model_config_sha256": "0a7225eb65419a7410ae5f7db9a6c9bf2eceb2398d8416b1d50823b0b819b922"
+  },
+  "scope": "Public aggregates, anonymized paired correctness, source snapshot and fingerprints. No raw prompts, images, model weights, credentials or machine paths. FILES.json records publication hashes, not independent training replay.",
+  "private_training_input_sha256": {
+    "rollouts.jsonl": "2293e630b04a48c84182bf18c69e9f18399932504af0df9a15855267d256d846",
+    "updates.jsonl": "ead699816c723ee0716e830f86c52f79e1b0a5bd4fad53081261d1d9ae6eeac6",
+    "strat_log.jsonl": "230f911ad9c56ef691f41c4d89276a5f498b40235b9c3fd4119eebf3102cb2d3",
+    "sgv3_strat.log": "308ae97d950deef3ff6ad7387e70505210a38cff6f879c2329164ac01e0b945c"
+  }
+}

@@ -1,0 +1,146 @@
+[
+  {
+    "file": "CASE_REVIEW.zh.md",
+    "sha256": "a65acff1b8a98d0fb8d36e5cf9e4eaae883905261bc97b72d9719defb0d0a7b0"
+  },
+  {
+    "file": "PROVENANCE.json",
+    "sha256": "18775adc2fa25beb1a49b513d6492a3a33809f79c61eb5a87db888370644c5fd"
+  },
+  {
+    "file": "REPORT.zh.md",
+    "sha256": "fcff30262000623c00282e5c9d2314b6fda7a52f56d123c4ba748eb260efe6d3"
+  },
+  {
+    "file": "compare.py",
+    "sha256": "3b47b8b6956360d2f699a1ef20137256b76a1dc829803daa3f5213fe10a613ba"
+  },
+  {
+    "file": "comparison.json",
+    "sha256": "712a1244fd3e475610964c764cfd216320e859a140568d5347cbeef0555576e2"
+  },
+  {
+    "file": "direct_e1_cost.pdf",
+    "sha256": "de3347d69be4838f8098769778502c5c45a06f602adcd76823bc996e28742c7f"
+  },
+  {
+    "file": "direct_e1_cost.png",
+    "sha256": "1463b7ba67c56c34bc38bfeeba28739dd0ffad831fc368c1bafdabad9096e0bf"
+  },
+  {
+    "file": "family_01_reward.pdf",
+    "sha256": "651b1a964d673dc3655fa359e54030c201a69be00fb814556fab89ae4245cd79"
+  },
+  {
+    "file": "family_01_reward.png",
+    "sha256": "418456cca6e2005c673761d720b461ad2ae8fa03b6cc79e8560b9ed822a5d9b4"
+  },
+  {
+    "file": "family_02_acc.pdf",
+    "sha256": "8cde4b10653c466688b529c973af0e1ec82d4254bb4eed6865a059b6df361838"
+  },
+  {
+    "file": "family_02_acc.png",
+    "sha256": "d84ba1e241ebfb410ef8c87c5609487c12864a354d585d24e19e325cec3bf2ec"
+  },
+  {
+    "file": "family_03_entropy.pdf",
+    "sha256": "3a1a7c80c6be385b2ac55b537dd03352cde7634446384f3e65f3046635a82180"
+  },
+  {
+    "file": "family_03_entropy.png",
+    "sha256": "74080c9fb409676f9f1d55eb3232a5a422ddfcc841ae42057e53b52855ad47c0"
+  },
+  {
+    "file": "family_04_ppo_kl.pdf",
+    "sha256": "cba324791b403af51cd95f3e98ceb96c968d7742618118bab43d2bf36095f9a7"
+  },
+  {
+    "file": "family_04_ppo_kl.png",
+    "sha256": "38c5bf770ca1f9d1f67a0b0047c312fac6db239b1609079e94827cf765936d8e"
+  },
+  {
+    "file": "family_05_grad_norm.pdf",
+    "sha256": "247caf51f74c163727560f09f7796b6bbf9fdc333d8897f0cb6d1e9852cbbbb3"
+  },
+  {
+    "file": "family_05_grad_norm.png",
+    "sha256": "fce2bcae54387feb744ad83a56ea1c4acacf0d8e1ac6d50f86fdcb24049d9a67"
+  },
+  {
+    "file": "family_06_crops.pdf",
+    "sha256": "aa0128f948503187b17d9866edcdf3b1b9b684a2b748752d21c985e8e14f61b9"
+  },
+  {
+    "file": "family_06_crops.png",
+    "sha256": "a9c7e26d09b0e6f75efab7fad4dbecf6edc9aa6c00f0656b79d10d2284e24e24"
+  },
+  {
+    "file": "family_07_gen_tok.pdf",
+    "sha256": "66a6d266f7b4e5ea2e4d8ee29c890d2daf2a21205fe381e5609921d6adb8cc40"
+  },
+  {
+    "file": "family_07_gen_tok.png",
+    "sha256": "cc1338bbe286a78313eced51c4f7ad90173cfc759d8abcb171a1b33696a96fd4"
+  },
+  {
+    "file": "family_08_adv_nz.pdf",
+    "sha256": "04b345890a2ad067abc2a049917ef68537626b4bee51e4a31a28924024d9699b"
+  },
+  {
+    "file": "family_08_adv_nz.png",
+    "sha256": "483070664891c2df39a864c6e7dc827cc1124fb3fc8b8b49f8969e2f62cebf4f"
+  },
+  {
+    "file": "family_e1.json",
+    "sha256": "f7f4a6104a4e354b78c0c8f35db2054cf0a1b8b1c5b165415162a5b1bf808ed6"
+  },
+  {
+    "file": "family_e1.pdf",
+    "sha256": "93473daafa3b9afe2f05568fc1d803c3b007138ee1b59db9313f8b93813d0600"
+  },
+  {
+    "file": "family_e1.png",
+    "sha256": "34e7ba7cbd133c1caf674b49ea31b63be389da87b3bd977c23f35ec3b8a17818"
+  },
+  {
+    "file": "family_long.csv",
+    "sha256": "6aeee1e2308a0cfb83b78b005fbd7379f4fedb1976c83fc2ec0fff70ebe1937a"
+  },
+  {
+    "file": "paired_questions.json",
+    "sha256": "eb328ee371314a55dbd8cca432c933052d0c5b5fc8a02ede8bca60f08f4ca3db"
+  },
+  {
+    "file": "plot_delivery.py",
+    "sha256": "96154a843ab43b94c06819b4b389eb83e50878e569444e4972491bb0ecb58eb6"
+  },
+  {
+    "file": "scorer_reference.py",
+    "sha256": "95caa9979e785bad38f9602eb21795f9062f8a38dcce01cbe3ff4b2db7a4d985"
+  },
+  {
+    "file": "strat_curves.pdf",
+    "sha256": "883aae679e46c8a445fedea435892bf0e8aa72b239bb343c8bdea069a9d2e196"
+  },
+  {
+    "file": "strat_curves.png",
+    "sha256": "8d84c9d3e6c081af7cda9fdfaf2af2bc546c55f13b3ac9cbf5982d1249b5a528"
+  },
+  {
+    "file": "strat_curves_long.csv",
+    "sha256": "196e92dba1de0af3bc6321417561791d97b29169406bd0bc9c8aa32ecf2cf2d6"
+  },
+  {
+    "file": "stratified_adv.py",
+    "sha256": "6c77166f0418a6469f8ce39080caf1eb35f1962d04b7eed8e22c226829b39753"
+  },
+  {
+    "file": "test_compare.py",
+    "sha256": "240ba95fe0429a7cd08e82ce82c18e5ea4c3bb88ed43e99bb5989392154e6566"
+  },
+  {
+    "file": "verify_delivery.py",
+    "sha256": "0abbe9e60cd575100cbeb34c6688d390a7b16bf830225661f113eb0ccb7719d5"
+  }
+]

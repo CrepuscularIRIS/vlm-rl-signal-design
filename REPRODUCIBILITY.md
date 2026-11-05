@@ -1,5 +1,11 @@
 # 可复算范围
 
+## 11-05 strat新增范围
+
+`python results/sgv3_20261105/verify_delivery.py` 核对四条件各2208条匿名正确性、552题各4次、总体/分源四格及按题bootstrap（10,000次，seed20261105）、256行strat训练指标与文件SHA。`python -m pytest results/sgv3_20261105/test_compare.py -q` 检查四格函数；`python results/sgv3_20261105/plot_delivery.py` 重画全部family及E1成本图。
+
+[报告](results/sgv3_20261105/REPORT.zh.md) · [指纹](results/sgv3_20261105/PROVENANCE.json)。这不替代私有原始响应重评分、训练梯度或逐图重放。下方旧25条件验证器只覆盖原冻结范围。
+
 本仓库不需要GPU、权重、SSH或模型API。
 
 ```bash

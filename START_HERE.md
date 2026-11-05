@@ -1,5 +1,7 @@
 # 从这里开始
 
+**11-05 strat固定终点：**[三部分报告与全部family图](results/sgv3_20261105/REPORT.zh.md)，E1 1399/2208（63.36%），对GRPO净差−12、对DAPO−66；[两例正反向逐图审查](results/sgv3_20261105/CASE_REVIEW.zh.md)。公开匿名配对与聚合可复算，原始响应/图像及训练权重不在包内。
+
 **实验执行与交付**：[从立项到双仓发布的 14 阶段清单](protocol/EXPERIMENT_LIFECYCLE.zh.md)。已完成实例见 [DTPO 的设置、配对结果与曲线](results/dtpo_e1_20261103/RESULTS.zh.md)。
 
 D1-B 的按题几何奖励已完成离线检查。V* 组内分差主要来自目标覆盖率；两次只换引用的对照均同分。正式训练尚未启动。[四关结果与冻结协议](results/d1_b_offline_20261102/RESULTS.zh.md)
