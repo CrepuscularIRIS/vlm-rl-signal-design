@@ -20,6 +20,18 @@ Design_New 给出的定位是：A 改变的是取证偏好，不证明感知能�
 
 ---
 
+## 组内对比诊断与 psi v2（2026-11-05）
+
+- **D0 组内对比**（[results/diag_d0_20261105/D0_REPORT.zh.md](results/diag_d0_20261105/D0_REPORT.zh.md)）：
+  - DAPO 实际更新的组里，22.7% 来自 L0 标为不可答（主要是 needs_temporal）或 GT 有问题的题，题池里这类题占 19.1%；
+  - 可判题的混合组配对中，取证差异占 14.8%（纯几何口径 23.6%），原图已足够占 34.2%；
+  - E1 V\* 上，RL 之后组内差异以“取证之后”为主（GRPO 51%、DAPO 53%）；
+  - DAPO 丢掉的全错组中，76% 取到过证据。
+- **psi 审计与 v2**（[results/diag_d0_20261105/AUDIT_PSI.zh.md](results/diag_d0_20261105/AUDIT_PSI.zh.md)，代码 [code/sg_scale_gated_v2](code/sg_scale_gated_v2/reward_sg.py)）：
+  - v1 中 gate 关的“探索分”只占 S 总量约 1%；
+  - 按导师规格改写为 proximity（最大 IoU 与裁图并集覆盖的均值）和 explore（全部历史裁图的并集面积），保留 S = psi_t − psi_0；
+  - 离线重算：S 不再随裁图数单调上升。
+
 ## 学习信号审计（2026-11-05）
 
 把全部方法按“进入更新的数据 / 奖励 / 组内 advantage / 信用分配”四列对齐，并从训练账本复算每个方法实际送进更新的组和 advantage，见 [results/audit_signal_20261105/AUDIT_SIGNAL.zh.md](results/audit_signal_20261105/AUDIT_SIGNAL.zh.md)。只列事实：
