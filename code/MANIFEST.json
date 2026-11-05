@@ -791,9 +791,9 @@
   "methods/sg/v2": [
    {
     "file": "reward_sg.py",
-    "sha256_published": "6bb01084ea865bfdc8fc161e5737cd18f0e09db897f257ddb8c04d8315e76ed6",
-    "sha256_original": null,
-    "source": null,
+    "sha256_published": "ad9b81eb02a61b698b60df590a4f3dd4e782cc5f4ba71ef628dd51737b1980d1",
+    "sha256_original": "ad9b81eb02a61b698b60df590a4f3dd4e782cc5f4ba71ef628dd51737b1980d1",
+    "source": "$PROJECT/grpo_sgv2/reward_sg.py",
     "moved_from": "code/sg_scale_gated_v2/reward_sg.py"
    },
    {

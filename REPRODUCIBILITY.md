@@ -4,6 +4,8 @@
 
 [最新报告](results/sgv2_max2_20261105/REPORT.zh.md)。`python results/sgv2_max2_20261105/verify_delivery.py` 复核六条件各2208条匿名正确性、552题各4次、总体/分源四格、按题10000次bootstrap和文件SHA；该复用验证器保留strat256行专检，并对全部family行检查键唯一与数值有限。max2 355行及dev 0/25/32点另经私有原始日志回归测试（1 passed）；不将其写成公开原始日志复评分。`python results/sgv2_max2_20261105/plot_results.py --data results/sgv2_max2_20261105` 重画训练与E1全部图（需现有numpy/matplotlib）。
 
+11-05 补充：`verify_delivery.py` 另核对 max2 长表 355 行，以及 `grpo_gap.json` 的总数、分档合计、分源净差与配对净差（−7）一致。`cd results/sgv2_max2_20261105 && python psi_v2.py` 在 2,000 个随机样例上把 psi 参考实现与训练代码 `code/methods/sg/v2/reward_sg.py`（`CAPTION_SG_PSI=max`，sha256 `ad9b81eb…`，与远端启动日志 code_sha `43b1ec2c5fd92b20` 对应的本地源码一致）逐数值对照。`grpo_gap.py` 需要两份私有 E1 轨迹（SHA 见 PROVENANCE.json），公开包只含其输出的聚合 `grpo_gap.json`。
+
 公开包不含原始响应、题面、原图或权重。训练成本口径为32个step计时之和，包含计时内验证/保存，不是完整run墙钟；缺原训练退出码及逐rank更新事件。文件指纹见同目录`FILES.json`，私有输入指纹和重放边界见`PROVENANCE.json`。
 
 ## 11-05 strat新增范围

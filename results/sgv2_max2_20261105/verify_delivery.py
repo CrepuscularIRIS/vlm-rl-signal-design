@@ -65,10 +65,22 @@ def main() -> None:
     assert len(strat) == 256
     assert all(sorted(int(r['step']) for r in strat if r['metric'] == metric) == list(range(1, 33))
                for metric in {r['metric'] for r in strat})
+    max2 = [r for r in curves if r['run'] == 'max2']
+    assert len(max2) == 355
+    gap = json.loads((root / 'grpo_gap.json').read_text())
+    ref, ctrl = gap['ref'], gap['ctrl']
+    assert gap['n'] == 2208 and all(gap['correct'][k] == result['summary'][k]['correct'] for k in (ref, ctrl))
+    assert all(sum(gap['crop_hist'][k].values()) == 2208 for k in (ref, ctrl))
+    assert sum(c['n'] for c in gap['net_by_ctrl_crops'].values()) == 2208
+    assert sum(c['net'] for c in gap['net_by_ctrl_crops'].values()) == result['paired'][ctrl]['net']
+    assert all(c['net'] == sum(c['net_by_source'].values()) for c in gap['net_by_ctrl_crops'].values())
+    assert sum(c['questions'] for c in gap['question_level_by_extra_crops'].values()) == 552
+    assert sum(c['net'] for c in gap['question_level_by_extra_crops'].values()) == result['paired'][ctrl]['net']
     for row in json.loads((root / 'FILES.json').read_text()):
         assert hashlib.sha256((root/row['file']).read_bytes()).hexdigest() == row['sha256'], row['file']
     print(json.dumps({'status': 'pass', 'paired_conditions': len(names), 'trajectories_per_condition': 2208,
                       'questions': 552, 'strat_training_metric_rows': len(strat),
+                      'max2_training_metric_rows': len(max2), 'gap_net_vs_' + ctrl: result['paired'][ctrl]['net'],
                       'scope': 'published aggregates and hashes; not raw-response or image replay'}, indent=2))
 
 

@@ -1,0 +1,157 @@
+{
+ "ref": "max2",
+ "ctrl": "GRPO",
+ "n": 2208,
+ "correct": {
+  "max2": 1404,
+  "GRPO": 1411
+ },
+ "crop_hist": {
+  "max2": {
+   "0": 3,
+   "1": 8,
+   "2": 846,
+   "3-4": 810,
+   "5+": 541
+  },
+  "GRPO": {
+   "0": 96,
+   "1": 1024,
+   "2": 574,
+   "3-4": 398,
+   "5+": 116
+  }
+ },
+ "acc_by_own_crops": {
+  "max2": {
+   "0": {
+    "n": 3,
+    "correct": 0
+   },
+   "1": {
+    "n": 8,
+    "correct": 6
+   },
+   "2": {
+    "n": 846,
+    "correct": 663
+   },
+   "3-4": {
+    "n": 810,
+    "correct": 499
+   },
+   "5+": {
+    "n": 541,
+    "correct": 236
+   }
+  },
+  "GRPO": {
+   "0": {
+    "n": 96,
+    "correct": 51
+   },
+   "1": {
+    "n": 1024,
+    "correct": 791
+   },
+   "2": {
+    "n": 574,
+    "correct": 321
+   },
+   "3-4": {
+    "n": 398,
+    "correct": 195
+   },
+   "5+": {
+    "n": 116,
+    "correct": 53
+   }
+  }
+ },
+ "net_by_ctrl_crops": {
+  "0": {
+   "n": 96,
+   "ctrl_correct": 51,
+   "ref_correct": 53,
+   "net_by_source": {
+    "mme_realworld": 1,
+    "vstar": 0,
+    "worldbench": -1,
+    "mmmu_pro": 2
+   },
+   "net": 2
+  },
+  "1": {
+   "n": 1024,
+   "ctrl_correct": 791,
+   "ref_correct": 778,
+   "net_by_source": {
+    "mme_realworld": -7,
+    "vstar": -3,
+    "worldbench": -2,
+    "mmmu_pro": -1
+   },
+   "net": -13
+  },
+  "2": {
+   "n": 574,
+   "ctrl_correct": 321,
+   "ref_correct": 314,
+   "net_by_source": {
+    "mme_realworld": 0,
+    "vstar": -3,
+    "worldbench": -2,
+    "mmmu_pro": -2
+   },
+   "net": -7
+  },
+  "3-4": {
+   "n": 398,
+   "ctrl_correct": 195,
+   "ref_correct": 198,
+   "net_by_source": {
+    "mme_realworld": -8,
+    "vstar": 7,
+    "worldbench": 1,
+    "mmmu_pro": 3
+   },
+   "net": 3
+  },
+  "5+": {
+   "n": 116,
+   "ctrl_correct": 53,
+   "ref_correct": 61,
+   "net_by_source": {
+    "mme_realworld": 2,
+    "vstar": 4,
+    "worldbench": 2,
+    "mmmu_pro": 0
+   },
+   "net": 8
+  }
+ },
+ "question_level_by_extra_crops": {
+  "<=0": {
+   "questions": 19,
+   "net": 13
+  },
+  "(0,1]": {
+   "questions": 163,
+   "net": -1
+  },
+  "(1,3]": {
+   "questions": 321,
+   "net": -16
+  },
+  ">3": {
+   "questions": 49,
+   "net": -3
+  }
+ },
+ "missing_answer": {
+  "max2": 28,
+  "GRPO": 19
+ },
+ "ref_missing_where_ctrl_correct": 11,
+ "bucket_note": "n_crops counts executed crops; the original image is not a crop"
+}

@@ -9,14 +9,19 @@ Gate (unchanged from v1): g = 1 once any key node is >= 90% covered by some pres
   Psi      = ALPHA + (1 - ALPHA) * Prox   if g == 1
            = ALPHA * explore              if g == 0
   S        = clip(Psi_T - Psi_0, 0, 1)    (Psi_0: original view only, i.e. no crops)
+CAPTION_SG_PSI=max (user 2026-11-05): Psi = max(Prox, ALPHA * explore) -- upper envelope of an approach score and an
+  explore score; the argmax switches explore -> approach automatically once crops reach the targets. Approach has no
+  ALPHA floor (with a floor, ALPHA*explore could never win). Both terms are non-decreasing in the crop history.
 v1 differences: v1 Phi used scale-gated coverage h(detail * s(v)) per view and explore counted only crops with
 s(v) >= 2 s(v0). Diagnostics keys: prox, prox0, gate, gate0, explore.
 """
 import json
 import math
+import os
 from pathlib import Path
 
 ALPHA = 0.25
+PSI_MODE = os.environ.get("CAPTION_SG_PSI", "gate")  # "gate": mentor pseudocode; "max": psi = max(prox, ALPHA*explore)
 U_GATE = 0.5
 COVER = 0.9
 RAMP = {"text": (6.0, 14.0), "object": (16.0, 48.0)}  # final-input px; uncalibrated proxy
@@ -113,7 +118,10 @@ def _psi(rec, W, H, views):
         prox[nid] = 0.5 * (max((_iou(b, c) for c in crops), default=0.0) + _union_cover(b, crops)) if crops else 0.0
     proximity = max(sum(prox[i] for i in S) / len(S) for S in rec["sets"])
     explore = min(1.0, _union_area(crops) / (W * H)) if crops else 0.0
-    psi = ALPHA + (1 - ALPHA) * proximity if gate else ALPHA * explore
+    if PSI_MODE == "max":   # automatic explore -> approach switch: upper envelope, no gate, no ALPHA floor on approach
+        psi = max(proximity, ALPHA * explore)
+    else:
+        psi = ALPHA + (1 - ALPHA) * proximity if gate else ALPHA * explore
     return psi, proximity, gate, explore
 
 
@@ -127,8 +135,9 @@ def process_score(qid, wh, executed_boxes):
     psi_t, prox_t, g_t, e_t = _psi(rec, W, H, views)
     psi_0, prox_0, g_0, _ = _psi(rec, W, H, views[:1])
     S = max(0.0, min(1.0, psi_t - psi_0))
+    state = "approach" if prox_t > 0 and prox_t >= ALPHA * e_t else ("explore" if e_t > 0 else "none")
     return 1, S, {"prox": round(prox_t, 4), "prox0": round(prox_0, 4), "gate": int(g_t), "gate0": int(g_0),
-                  "explore": round(e_t, 4), "psi": round(psi_t, 4)}
+                  "explore": round(e_t, 4), "psi": round(psi_t, 4), "state": state}
 
 
 def _selfcheck():
@@ -163,6 +172,14 @@ def _selfcheck():
     assert abs(process_score("t", (W, H), overlap)[2]["explore"] - (1000 * 750 * 2 - 500 * 375) / (W * H)) < 1e-4; ok += 1
     assert process_score("off", (W, H), tight) == (0, 0.0, {}); ok += 1
     assert process_score("missing", (W, H), tight)[0] == 0; ok += 1
+    global PSI_MODE
+    keep, PSI_MODE = PSI_MODE, "max"
+    s_wm, d_wm = process_score("t", (W, H), wander)[1:]
+    assert d_wm["state"] == "explore" and abs(s_wm - ALPHA * 0.125) < 1e-9, (s_wm, d_wm); ok += 1     # far crops: explore
+    s_tm, d_tm = process_score("t", (W, H), wander + tight)[1:]
+    assert d_tm["state"] == "approach" and s_tm > s_wm, (s_tm, d_tm); ok += 1                       # reaching target switches
+    full_max = process_score("t", (W, H), [(0, 0, W, H)])
+    PSI_MODE = keep
     # behaviour changes vs v1, reported for the record
     full = process_score("t", (W, H), [(0, 0, W, H)])
     _INDEX = {"s": {"m": 1, "sets": [["c"]], "nodes": {
@@ -171,6 +188,8 @@ def _selfcheck():
     _INDEX = None
     print(f"reward_sg v2 selfcheck: {ok}/{ok} ok")
     print(f"  [v1->v2] full-image 'crop', gate closed: S={full[1]:.4f} explore={full[2]['explore']} (v1: 0, filtered)")
+    print(f"  [max mode] full-image 'crop': S={full_max[1]:.4f} prox={full_max[2]['prox']} state={full_max[2]['state']}"
+          " (union-coverage term = 1 for any crop containing the box)")
     print(f"  [v1->v2] original already legible (gate0=1), crop on target: S={leg[1]:.4f} prox={leg[2]['prox']} (v1: 0)")
 
 
