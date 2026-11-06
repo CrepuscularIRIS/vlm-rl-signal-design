@@ -33,3 +33,7 @@ GitHub MCP读取可用Markdown病例与CSV，不必运行脚本。public仓库�
 ## DTPO 与全条件总览
 
 从仓库根执行 `python results/dtpo_e1_20261103/plot.py`。九组训练曲线、全条件取舍和 DTPO 逐步诊断均从同目录 CSV 重画。私有逐轨评分的输入指纹与公开聚合表分列；基线原始验证器的 25 条件、96 条审查计数只管其原有范围。[结果与全部图表](results/dtpo_e1_20261103/RESULTS.zh.md) · [流程与发布验收](protocol/EXPERIMENT_LIFECYCLE.zh.md)
+
+## 11-06 README 总表
+
+`cd results/main_table && python make_main_table.py ../entry_ab_20261106/e1_by_bench_RP.json costs.csv > main_table.md` 生成 README §2 的总表。准确率与配对区间来自 `e1_by_bench_RP.json`（统一评分器重算、来源内按题 bootstrap 10,000 次、seed 20261105）；成本列来自 `costs.csv`（各 run 报告中的 E1 裁图与 token 均值，source 列注明出处）。

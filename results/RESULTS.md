@@ -1,51 +1,61 @@
-# 当前结果
+# 结果索引
 
-**[strat：同结果层中心化过程advantage（2026-11-05）](sgv3_20261105/REPORT.zh.md)**：E1 1399/2208（63.36%），GRPO1411、GRPO+A1421、DAPO1465。裁图2.473/条、处理token10,792.76/条；三对配对四格与按题区间、两例正反向审查、含strat的全family训练图及匿名复算包一并收录。单训练seed；原训练退出码和每rank更新事件未取得。
+每个实验一个目录。E1 分数与相对底座的配对差集中在 [README §2 总表](../README.md#2-结果总表e1step-32)；本页只说明每个目录是什么、主文件在哪。行按类别排列，类内按时间。
 
-> **更正（2026-11-04）**：本文所依据的 Probe A 计分有误——探针不给题面，正则把模型描述里的冠词 “A” 当作选项字母，DAPO 15/15、G1 14/14 命中均如此；Probe B 167/180 复述模型原错答。依赖 Probe A/B 的结论（读取层 43%、单图读不对 8.3%、G1 回填实锤）作废。复核与仍成立的测量见 [results/rereview_20261104](../results/rereview_20261104/RESULTS.zh.md)。
+> **更正（2026-11-04）**：11-03 的 oracle Probe A 计分有误（正则把冠词 “A” 当作选项字母），依赖 Probe A/B 的结论（读取层 43%、单图读不对 8.3%、G1 回填实锤）作废；复核见 [rereview_20261104](rereview_20261104/RESULTS.zh.md)。相关报告正文已移至 [`_superseded_20261106/`](_superseded_20261106/)，原始探针数据仍在原目录。
 
-**[学习信号审计（2026-11-05）](audit_signal_20261105/AUDIT_SIGNAL.zh.md)**：全部方法按进入更新的数据 / 奖励 / 组内 advantage / 信用分配对齐，训练账本复算 advantage 平衡与 DAPO 过滤补采明细，E1 差值附按题重采样 95% 区间与 A-SFT 难度分档。
+## 基线与评测协议
 
-**[DAPO vs DAPO-SB（停止相对 advantage，2026-11-05）](sb_20261104/REPORT.zh.md)**：E1 DAPO-SB .6413 vs DAPO .6635（配对净增 DAPO +49/2208；vstar 391→373、worldbench 86→72）。裁图 1.63 vs 2.09 张/条，零裁图 4.8% vs 1.0%，总处理 token 7,055 vs 8,930。训练 entropy .448→.341（DAPO .446）。Advantage.md §七的离线验收与根状态基线消融未跑；一个 seed。曲线 `data/sb_curves.png`。
+| 目录 | 内容 |
+|---|---|
+| [baseline_classes_20261031](baseline_classes_20261031/REPORT.md) | 三类基础 baseline：Base / A-SFT（直答、CoT、原生工具）/ outcome-only GRPO |
+| [native_zoom_normalized_20261031](native_zoom_normalized_20261031/REPORT.md) | A-SFT 走原生 zoom 工具：坐标换算修正后 32.16% → 44.88%；取消累计生成上限后不变 |
+| [CONDITIONS.md](CONDITIONS.md) · [PAIRED_RESULTS.md](PAIRED_RESULTS.md) · [paired/](paired/) · [data/](data/) | 25 个已发布条件的目录、同题得失表与原始汇总数据 |
+| [TRAINING_SIGNALS.md](TRAINING_SIGNALS.md) · [ALGORITHM_CURVE_AUDIT.md](ALGORITHM_CURVE_AUDIT.md) | 早期训练信号与六算法曲线核对 |
 
-**[GRPO vs GRPO+A（单 A：只加 S 奖励，2026-11-05）](sg_20261104/REPORT_sg_a.zh.md)**：E1 .6436 vs GRPO .6390（配对净增 +10/2208），裁图 4.02 vs 1.91 张/条，总处理 token 18,034 vs 8,125。曲线 `data/sg_a_curves.png`。
+## 优化器对照
 
-**[GRPO vs A+B vs A+B+C（Design_New，2026-11-04）](sg_20261104/RESULTS.zh.md)**：E1 GRPO .6390 / **A+B .6472**（配对净增 +18/2208，worldbench .335→.395）/ A+B+C .6395（净增 +1；vstar .844→.873）。A+B 的裁图从 1.905 增至 2.404 张/条，生成 token 从 261 增至 342。A+B+C 第 31–32 步因构造副作用，原题集合与另两臂不同。曲线 `sg_curves.png`；分层探针与尺度校准未跑。
+| 目录 | 内容 |
+|---|---|
+| [po_review_20261030](po_review_20261030/REPORT.md) · [po_diagnostic_20261031](po_diagnostic_20261031/RESULTS.md) · [po_final32_20261031](po_final32_20261031/REPORT.md) | PO 两方法（SP / CA）：中期审查、轨迹对照、32 步终点 E1 与逐图审查 |
+| [dtpo_e1_20261103](dtpo_e1_20261103/RESULTS.zh.md) | DTPO（中间 / 最终回合 loss 权重 .5:1）32 步 E1、配对与训练记录 |
+| [sapo_vlm_20261102](sapo_vlm_20261102/REPORT.md) | SAPO（单 rollout、turn 级 GAE）32 步 E1 57.70% |
 
-**主实验 [G1 (R-read)](g1_rread_20261103/RESULTS.zh.md)（2026-11-03）**：E1 .6395 vs G0 .6390 持平；训练池同题读取一致性 .5518→.6911（配对 +0.139，750↑/140↓）但未转化到端到端——落在冻结协议「读取改善未转化」行；去选项内容变化测试未跑。主图 `g1_main.png`，全家福曲线（vs DAPO/DTPO/GSPO/GIGPO/GRPO）`family_curves.png`。附属：因果 SFT+GRPO 对照 .6033（起点 .4543，SFT 差距 11.3pp 被 RL 收窄至 3.6pp，该线已停，见 [bsftc_grpo_20261103](bsftc_grpo_20261103/RESULTS.zh.md)）。
+## GRPO 底座的方法
 
-**[G1 后 audit（2026-11-04）](oracle_g1_20261103/RESULTS.zh.md)**：判别链闭合——Φ .55→.69 但 Probe A 7.8%≈8.3% 不动 = 表达适配/答案回填实锤，感知与推理两层未移动；on-policy 奖励必须接到不可回填侧（看见什么/看哪里）。**[R-bind 方向冻结草案](../design/R_BIND_DIRECTION.zh.md)**：L1+L2+LC 三层标注 → primitives 信号位（空间基元/绑定关系/线索框），可行性判据已实测（未饱和 11.5%、真方差 19.1%、几何端不可回填），探索行为搁置。
+| 目录 | 内容 |
+|---|---|
+| [rread_admission_20261103](rread_admission_20261103/RESULTS.zh.md) → [g1_rread_20261103](g1_rread_20261103/RESULTS.zh.md) | G1 读值一致性奖励：离线准入与训练报告（E1 .6395，与 GRPO 持平） |
+| [bsftc_grpo_20261103](bsftc_grpo_20261103/RESULTS.zh.md) | 因果叙事 SFT + GRPO（起点 .4543 → .6033；该线已停） |
+| [sg_20261104](sg_20261104/RESULTS.zh.md) | A+B、A+B+C（[结果](sg_20261104/RESULTS.zh.md)）与 GRPO+A（[报告](sg_20261104/REPORT_sg_a.zh.md)）；冻结记录 [FREEZE](sg_20261104/FREEZE.zh.md) |
+| [sgv3_20261105](sgv3_20261105/REPORT.zh.md) | strat：同结果层中心化的过程 advantage；[两例逐图审查](sgv3_20261105/CASE_REVIEW.zh.md) |
+| [sgv2_max2_20261105](sgv2_max2_20261105/REPORT.zh.md) | max2：奖励中加 psi v2 的 S；含 psi 参考实现与对 GRPO 的差距拆分 |
+| [entry_ab_20261106](entry_ab_20261106/REPORT.zh.md) | 进入更新拆解：R（回放补满，1× rollout）与 P（混合题追加一组，1.56×）；[设计与预登记](entry_ab_20261106/DESIGN.zh.md) |
 
-前置准入 [R-read 离线准入（2026-11-03）](rread_admission_20261103/RESULTS.zh.md)——评分器 16/16 反例通过、2,048 条真实轨迹双路径零偏差、有效读取差异率 0.509 ≫ 10% 准入线。
+## DAPO 底座的方法
 
-其余新增入口：[三类基础baseline：Base / A-SFT / outcome-only GRPO](baseline_classes_20261031/REPORT.md)。原先的八方法表保留为历史算法对照；不再代替第一、二类展示。
+| 目录 | 内容 |
+|---|---|
+| [htau_training_20261102](htau_training_20261102/PROTOCOL.zh.md) | Hτ：DAPO + τ 门控的 bbox 覆盖奖励（冻结与启动记录） |
+| [sb_20261104](sb_20261104/REPORT.zh.md) | DAPO-SB：停止相对 advantage；[冻结](sb_20261104/FREEZE.zh.md)、[advantage 实际分配](sb_20261104/CREDIT_FACTS.zh.md) |
 
-事实快照；本次没有新增GPU评测。每方法2208条，失败保留分母。上游已发布25条件均快照到data/rollouts；完整目录见 [catalog](CONDITIONS.md)。
+## 离线准入、诊断与审计
 
-| 方法 | E1 | 裁图/条 | 总处理token/条 | 生成token/条 |
-|---|---:|---:|---:|---:|
-| grpo | 0.6390 | 1.905 | 8125.4 | 261.2 |
-| dapo | 0.6635 | 2.092 | 8929.8 | 287.0 |
-| gspo | 0.6395 | 2.263 | 9756.2 | 277.8 |
-| gigpo | 0.6209 | 1.998 | 8506.3 | 275.3 |
-| rloo | 0.6318 | 1.992 | 8535.4 | 278.0 |
-| rloo_decision | 0.5919 | 1.372 | 6266.1 | 203.3 |
-| minio3 | 0.6395 | 2.703 | 17279.8 | 679.7 |
-| deepeyes | 0.5589 | 0.852 | 13799.6 | 3291.5 |
+| 目录 | 内容 |
+|---|---|
+| [d1_b_offline_20261102](d1_b_offline_20261102/RESULTS.zh.md) · [d2_offline_20261102](d2_offline_20261102/RESULTS.zh.md) | 按题几何奖励（D1-B）与覆盖 + 引用（D2）的冻结协议与离线结果 |
+| [rereview_20261104](rereview_20261104/RESULTS.zh.md) | 11-03 oracle 探针 / V\* 分解 / G1 audit 链的重审（含更正） |
+| [behavior_20261104](behavior_20261104/BEHAVIOR_TABLE.zh.md) | 期待行为清单实测表（DAPO step 32，rl4k）；[绑定审计](behavior_20261104/BIND_AUDIT.zh.md) |
+| [audit_signal_20261105](audit_signal_20261105/AUDIT_SIGNAL.zh.md) | 各方法学习信号审计：进入更新的数据 / 奖励 / 组内 advantage / 信用分配 |
+| [diag_d0_20261105](diag_d0_20261105/D0_REPORT.zh.md) | 组内对比诊断（D0）与 [psi 审计及 v2 改写](diag_d0_20261105/AUDIT_PSI.zh.md) |
+| [l2fact_20261105](l2fact_20261105/ADMISSION.zh.md) | L2 事实抽取器离线准入 |
+| oracle_g1_20261103 · oracle_probes_20261103 | 11-03 oracle 探针原始数据（报告正文已撤回，见顶部更正） |
 
-相同总分可能来自不同题目，见 [同题得失](PAIRED_RESULTS.md)。条件裁图数下的题目组成不同，不能把层间准确率解释成多裁一次的因果收益。没有参考状态/区域标签，暂不报告“必要观察”或“有效裁图”的precision/recall；pass@4也不是区域召回率。
+## 跨实验汇总
 
-## 图表与数据
-
-![八组性能成本](../figures/eight_method_comparison.png)
-![分来源](../figures/source_accuracy.png)
-![按实际裁图数分层](../figures/crop_stratified_accuracy.png)
-![训练验证](../figures/six_training_curves.png)
-
-每张图有同名PDF。数据在data/summary_eight.json、data/strata.csv、data/validation_points.json和data/training_summary.json。GSPO step25 .600>DAPO .595；step32 .621<.637；这里只能记录已观测点的交叉，不能定位具体反超时刻或原因。
-
-## v53结果与预算
-
-control墙钟9h42m09，decision11h32m34；主rollout各32768条。decision额外分叉32744条，成本单列。开发验证末步 .595/.585是422题开发结果，不能与E1 .6318/.5919混用。
-
-E1 decision少裁图、少token同时掉分；协议标记390/2208，其中160条仍按E1答对。标记不是评分器自动判错，不能将分差直接归给协议。外部模型caption标记必须N/A，不能填0。
+| 目录 | 内容 |
+|---|---|
+| [main_table](main_table/main_table.md) | README 总表：生成脚本 [make_main_table.py](main_table/make_main_table.py) 与成本表 [costs.csv](main_table/costs.csv) |
+| [e1_by_bench_20261106](e1_by_bench_20261106/table.md) | E1 按 benchmark 与四 bench 不加权平均、相对各自底座的配对差（脚本与图） |
+| stage_report_20261104 · stage_report_20261105 | 阶段报告用图（family 曲线、S / gate、DAPO-SB 探针、分源） |
+| [_superseded_20261106](_superseded_20261106/) | 已撤回的报告正文（G1 后 audit、oracle probes、感知差距简报） |

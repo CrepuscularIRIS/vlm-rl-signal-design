@@ -1,0 +1,20 @@
+key,label,layer,rollout,crops,gen,proc,source
+A-SFT,A-SFT 起点（无 RL）,—（SFT）,—,0.994,—,"5,015",baseline_classes_20261031
+GRPO,GRPO,优化器（对照）,1×,1.905,261,"8,125",baselines_v52 k8
+R-replay,**R：回放补满**,GRPO 底座 · 进入更新,1×,2.161,264,"9,100",entry_ab_20261106
+P-pilot,P：混合题追加一组,GRPO 底座 · 进入更新,1.56×,1.927,248,"8,136",entry_ab_20261106
+DTPO,DTPO,GRPO 底座 · 信用分配,1×,3.357,395,"15,579",dtpo_e1_20261103
+A+B,A+B,GRPO 底座 · 奖励 + advantage 归一,1×,2.404,342,"10,047",sg_20261104
+A+B+C,A+B+C,GRPO 底座 · A+B + 续答行,1×,2.337,326,"10,181",sg_20261104
+GRPO+A,GRPO+A,GRPO 底座 · 奖励,1×,4.020,440,"18,034",sg_20261104
+G1,G1（读值一致性）,GRPO 底座 · 奖励,1×,2.308,374,"10,063",g1_rread_20261103
+strat,strat,GRPO 底座 · advantage,1×,2.473,321,"10,793",sgv3_20261105
+max2,max2,GRPO 底座 · 奖励（psi v2）,1×,3.540,431,"14,727",sgv2_max2_20261105
+DAPO,DAPO,优化器（动态采样）,1.92×,2.092,287,"8,930",baselines_v52 k8
+Htau,Hτ（bbox 覆盖奖励）,DAPO 底座 · 奖励,DAPO 式补采,2.546,305,"10,872",htau_training_20261102
+DAPO-SB,DAPO-SB,DAPO 底座 · advantage,1.95×,1.631,222,"7,055",sb_20261104
+GSPO,GSPO,优化器,1×,2.263,278,"9,756",baselines_v52 k8
+GiGPO,GiGPO,优化器,1×,1.998,275,"8,506",baselines_v52 k8
+RLOO,RLOO,优化器,1×,1.992,278,"8,535",method_v53
+RLOO+first-action,RLOO + 首动作分叉,RLOO 底座 · 辅助损失,约 2×,1.372,203,"6,266",method_v53
+SAPO,SAPO（单 rollout）,优化器,n=1,1.063,171,"5,292",sapo_vlm_20261102
