@@ -1,0 +1,1180 @@
+{
+ "sources": [
+  "mme_realworld",
+  "vstar",
+  "worldbench",
+  "mmmu_pro"
+ ],
+ "questions_per_source": {
+  "mme_realworld": 339,
+  "vstar": 112,
+  "worldbench": 62,
+  "mmmu_pro": 39
+ },
+ "bootstrap": {
+  "draws": 10000,
+  "seed": 20261105,
+  "unit": "question, stratified by source"
+ },
+ "conditions": [
+  {
+   "name": "A-SFT",
+   "base": null,
+   "family": "start",
+   "by_source": {
+    "mme_realworld": 0.5707964601769911,
+    "vstar": 0.8125,
+    "worldbench": 0.2782258064516129,
+    "mmmu_pro": 0.28846153846153844
+   },
+   "counts": {
+    "mme_realworld": {
+     "correct": 774,
+     "n": 1356
+    },
+    "vstar": {
+     "correct": 364,
+     "n": 448
+    },
+    "worldbench": {
+     "correct": 69,
+     "n": 248
+    },
+    "mmmu_pro": {
+     "correct": 45,
+     "n": 156
+    }
+   },
+   "macro_mean": 0.48749595127253564,
+   "pooled_correct": 1252,
+   "n": 2208
+  },
+  {
+   "name": "GRPO",
+   "base": null,
+   "family": "optimizer",
+   "by_source": {
+    "mme_realworld": 0.6644542772861357,
+    "vstar": 0.84375,
+    "worldbench": 0.3346774193548387,
+    "mmmu_pro": 0.3141025641025641
+   },
+   "counts": {
+    "mme_realworld": {
+     "correct": 901,
+     "n": 1356
+    },
+    "vstar": {
+     "correct": 378,
+     "n": 448
+    },
+    "worldbench": {
+     "correct": 83,
+     "n": 248
+    },
+    "mmmu_pro": {
+     "correct": 49,
+     "n": 156
+    }
+   },
+   "macro_mean": 0.5392460651858846,
+   "pooled_correct": 1411,
+   "n": 2208
+  },
+  {
+   "name": "DAPO",
+   "base": "GRPO",
+   "family": "optimizer",
+   "by_source": {
+    "mme_realworld": 0.6880530973451328,
+    "vstar": 0.8727678571428571,
+    "worldbench": 0.3467741935483871,
+    "mmmu_pro": 0.3525641025641026
+   },
+   "counts": {
+    "mme_realworld": {
+     "correct": 933,
+     "n": 1356
+    },
+    "vstar": {
+     "correct": 391,
+     "n": 448
+    },
+    "worldbench": {
+     "correct": 86,
+     "n": 248
+    },
+    "mmmu_pro": {
+     "correct": 55,
+     "n": 156
+    }
+   },
+   "macro_mean": 0.5650398126501199,
+   "pooled_correct": 1465,
+   "n": 2208,
+   "vs_base": {
+    "mme_realworld": {
+     "delta_pp": 2.359882005899705,
+     "ci95": [
+      -0.07374631268436578,
+      4.793510324483776
+     ],
+     "questions": 339
+    },
+    "vstar": {
+     "delta_pp": 2.9017857142857144,
+     "ci95": [
+      -0.44642857142857145,
+      6.473214285714286
+     ],
+     "questions": 112
+    },
+    "worldbench": {
+     "delta_pp": 1.2096774193548387,
+     "ci95": [
+      -6.451612903225806,
+      8.870967741935484
+     ],
+     "questions": 62
+    },
+    "mmmu_pro": {
+     "delta_pp": 3.8461538461538463,
+     "ci95": [
+      -3.2051282051282053,
+      12.179487179487179
+     ],
+     "questions": 39
+    },
+    "macro": {
+     "delta_pp": 2.579374746423526,
+     "ci95": [
+      -0.32878923515910974,
+      5.516002891441688
+     ]
+    }
+   }
+  },
+  {
+   "name": "GSPO",
+   "base": "GRPO",
+   "family": "optimizer",
+   "by_source": {
+    "mme_realworld": 0.6622418879056047,
+    "vstar": 0.8348214285714286,
+    "worldbench": 0.35080645161290325,
+    "mmmu_pro": 0.33974358974358976
+   },
+   "counts": {
+    "mme_realworld": {
+     "correct": 898,
+     "n": 1356
+    },
+    "vstar": {
+     "correct": 374,
+     "n": 448
+    },
+    "worldbench": {
+     "correct": 87,
+     "n": 248
+    },
+    "mmmu_pro": {
+     "correct": 53,
+     "n": 156
+    }
+   },
+   "macro_mean": 0.5469033394583815,
+   "pooled_correct": 1412,
+   "n": 2208,
+   "vs_base": {
+    "mme_realworld": {
+     "delta_pp": -0.22123893805309736,
+     "ci95": [
+      -2.8023598820059,
+      2.359882005899705
+     ],
+     "questions": 339
+    },
+    "vstar": {
+     "delta_pp": -0.8928571428571429,
+     "ci95": [
+      -4.910714285714286,
+      3.3482142857142856
+     ],
+     "questions": 112
+    },
+    "worldbench": {
+     "delta_pp": 1.6129032258064515,
+     "ci95": [
+      -5.645161290322581,
+      8.870967741935484
+     ],
+     "questions": 62
+    },
+    "mmmu_pro": {
+     "delta_pp": 2.5641025641025643,
+     "ci95": [
+      -4.487179487179487,
+      10.256410256410257
+     ],
+     "questions": 39
+    },
+    "macro": {
+     "delta_pp": 0.7657274272496939,
+     "ci95": [
+      -2.0353885902611992,
+      3.6778841864939937
+     ]
+    }
+   }
+  },
+  {
+   "name": "GiGPO",
+   "base": "GRPO",
+   "family": "optimizer",
+   "by_source": {
+    "mme_realworld": 0.6342182890855457,
+    "vstar": 0.8303571428571429,
+    "worldbench": 0.375,
+    "mmmu_pro": 0.2948717948717949
+   },
+   "counts": {
+    "mme_realworld": {
+     "correct": 860,
+     "n": 1356
+    },
+    "vstar": {
+     "correct": 372,
+     "n": 448
+    },
+    "worldbench": {
+     "correct": 93,
+     "n": 248
+    },
+    "mmmu_pro": {
+     "correct": 46,
+     "n": 156
+    }
+   },
+   "macro_mean": 0.5336118067036209,
+   "pooled_correct": 1371,
+   "n": 2208,
+   "vs_base": {
+    "mme_realworld": {
+     "delta_pp": -3.023598820058997,
+     "ci95": [
+      -5.825958702064897,
+      -0.22123893805309736
+     ],
+     "questions": 339
+    },
+    "vstar": {
+     "delta_pp": -1.3392857142857142,
+     "ci95": [
+      -5.803571428571429,
+      3.125
+     ],
+     "questions": 112
+    },
+    "worldbench": {
+     "delta_pp": 4.032258064516129,
+     "ci95": [
+      -2.4193548387096775,
+      10.483870967741936
+     ],
+     "questions": 62
+    },
+    "mmmu_pro": {
+     "delta_pp": -1.9230769230769231,
+     "ci95": [
+      -7.6923076923076925,
+      3.8461538461538463
+     ],
+     "questions": 39
+    },
+    "macro": {
+     "delta_pp": -0.5634258482263763,
+     "ci95": [
+      -3.1982149069929853,
+      1.9974606284945187
+     ]
+    }
+   }
+  },
+  {
+   "name": "RLOO",
+   "base": "GRPO",
+   "family": "optimizer",
+   "by_source": {
+    "mme_realworld": 0.6556047197640118,
+    "vstar": 0.8459821428571429,
+    "worldbench": 0.3024193548387097,
+    "mmmu_pro": 0.3333333333333333
+   },
+   "counts": {
+    "mme_realworld": {
+     "correct": 889,
+     "n": 1356
+    },
+    "vstar": {
+     "correct": 379,
+     "n": 448
+    },
+    "worldbench": {
+     "correct": 75,
+     "n": 248
+    },
+    "mmmu_pro": {
+     "correct": 52,
+     "n": 156
+    }
+   },
+   "macro_mean": 0.5343348876982994,
+   "pooled_correct": 1395,
+   "n": 2208,
+   "vs_base": {
+    "mme_realworld": {
+     "delta_pp": -0.8849557522123894,
+     "ci95": [
+      -3.6135693215339235,
+      1.7699115044247788
+     ],
+     "questions": 339
+    },
+    "vstar": {
+     "delta_pp": 0.22321428571428573,
+     "ci95": [
+      -3.5714285714285716,
+      4.017857142857143
+     ],
+     "questions": 112
+    },
+    "worldbench": {
+     "delta_pp": -3.225806451612903,
+     "ci95": [
+      -10.887096774193548,
+      4.4455645161288855
+     ],
+     "questions": 62
+    },
+    "mmmu_pro": {
+     "delta_pp": 1.9230769230769231,
+     "ci95": [
+      -5.128205128205129,
+      10.256410256410257
+     ],
+     "questions": 39
+    },
+    "macro": {
+     "delta_pp": -0.49111774875852093,
+     "ci95": [
+      -3.3945149582834024,
+      2.5148088068514536
+     ]
+    }
+   }
+  },
+  {
+   "name": "SAPO",
+   "base": "GRPO",
+   "family": "optimizer",
+   "by_source": {
+    "mme_realworld": 0.581858407079646,
+    "vstar": 0.8125,
+    "worldbench": 0.29435483870967744,
+    "mmmu_pro": 0.3076923076923077
+   },
+   "counts": {
+    "mme_realworld": {
+     "correct": 789,
+     "n": 1356
+    },
+    "vstar": {
+     "correct": 364,
+     "n": 448
+    },
+    "worldbench": {
+     "correct": 73,
+     "n": 248
+    },
+    "mmmu_pro": {
+     "correct": 48,
+     "n": 156
+    }
+   },
+   "macro_mean": 0.4991013883704078,
+   "pooled_correct": 1274,
+   "n": 2208,
+   "vs_base": {
+    "mme_realworld": {
+     "delta_pp": -8.259587020648967,
+     "ci95": [
+      -11.2094395280236,
+      -5.455383480825986
+     ],
+     "questions": 339
+    },
+    "vstar": {
+     "delta_pp": -3.125,
+     "ci95": [
+      -7.8125,
+      1.5625
+     ],
+     "questions": 112
+    },
+    "worldbench": {
+     "delta_pp": -4.032258064516129,
+     "ci95": [
+      -11.693548387096774,
+      3.629032258064516
+     ],
+     "questions": 62
+    },
+    "mmmu_pro": {
+     "delta_pp": -0.6410256410256411,
+     "ci95": [
+      -9.615384615384615,
+      7.6923076923076925
+     ],
+     "questions": 39
+    },
+    "macro": {
+     "delta_pp": -4.014467681547685,
+     "ci95": [
+      -7.2929299231447615,
+      -0.8437729905796345
+     ]
+    }
+   }
+  },
+  {
+   "name": "DTPO",
+   "base": "GRPO",
+   "family": "grpo_based",
+   "by_source": {
+    "mme_realworld": 0.6799410029498525,
+    "vstar": 0.8638392857142857,
+    "worldbench": 0.3548387096774194,
+    "mmmu_pro": 0.32051282051282054
+   },
+   "counts": {
+    "mme_realworld": {
+     "correct": 922,
+     "n": 1356
+    },
+    "vstar": {
+     "correct": 387,
+     "n": 448
+    },
+    "worldbench": {
+     "correct": 88,
+     "n": 248
+    },
+    "mmmu_pro": {
+     "correct": 50,
+     "n": 156
+    }
+   },
+   "macro_mean": 0.5547829547135946,
+   "pooled_correct": 1447,
+   "n": 2208,
+   "vs_base": {
+    "mme_realworld": {
+     "delta_pp": 1.5486725663716814,
+     "ci95": [
+      -1.1061946902654867,
+      4.20353982300885
+     ],
+     "questions": 339
+    },
+    "vstar": {
+     "delta_pp": 2.0089285714285716,
+     "ci95": [
+      -1.7857142857142858,
+      5.803571428571429
+     ],
+     "questions": 112
+    },
+    "worldbench": {
+     "delta_pp": 2.0161290322580645,
+     "ci95": [
+      -6.048387096774194,
+      10.080645161290322
+     ],
+     "questions": 62
+    },
+    "mmmu_pro": {
+     "delta_pp": 0.6410256410256411,
+     "ci95": [
+      -7.051282051282051,
+      8.974358974358974
+     ],
+     "questions": 39
+    },
+    "macro": {
+     "delta_pp": 1.5536889527709896,
+     "ci95": [
+      -1.4827070750090972,
+      4.56740079220754
+     ]
+    }
+   }
+  },
+  {
+   "name": "G1",
+   "base": "GRPO",
+   "family": "grpo_based",
+   "by_source": {
+    "mme_realworld": 0.6644542772861357,
+    "vstar": 0.8526785714285714,
+    "worldbench": 0.32661290322580644,
+    "mmmu_pro": 0.3076923076923077
+   },
+   "counts": {
+    "mme_realworld": {
+     "correct": 901,
+     "n": 1356
+    },
+    "vstar": {
+     "correct": 382,
+     "n": 448
+    },
+    "worldbench": {
+     "correct": 81,
+     "n": 248
+    },
+    "mmmu_pro": {
+     "correct": 48,
+     "n": 156
+    }
+   },
+   "macro_mean": 0.5378595149082053,
+   "pooled_correct": 1412,
+   "n": 2208,
+   "vs_base": {
+    "mme_realworld": {
+     "delta_pp": 0.0,
+     "ci95": [
+      -2.8023598820059,
+      2.8761061946902653
+     ],
+     "questions": 339
+    },
+    "vstar": {
+     "delta_pp": 0.8928571428571429,
+     "ci95": [
+      -2.9017857142857144,
+      4.910714285714286
+     ],
+     "questions": 112
+    },
+    "worldbench": {
+     "delta_pp": -0.8064516129032258,
+     "ci95": [
+      -7.661290322580645,
+      5.645161290322581
+     ],
+     "questions": 62
+    },
+    "mmmu_pro": {
+     "delta_pp": -0.6410256410256411,
+     "ci95": [
+      -8.333333333333334,
+      7.6923076923076925
+     ],
+     "questions": 39
+    },
+    "macro": {
+     "delta_pp": -0.13865502776793098,
+     "ci95": [
+      -3.0632100039154038,
+      2.8413097165243753
+     ]
+    }
+   }
+  },
+  {
+   "name": "A+B",
+   "base": "GRPO",
+   "family": "grpo_based",
+   "by_source": {
+    "mme_realworld": 0.665929203539823,
+    "vstar": 0.8370535714285714,
+    "worldbench": 0.3951612903225806,
+    "mmmu_pro": 0.33974358974358976
+   },
+   "counts": {
+    "mme_realworld": {
+     "correct": 903,
+     "n": 1356
+    },
+    "vstar": {
+     "correct": 375,
+     "n": 448
+    },
+    "worldbench": {
+     "correct": 98,
+     "n": 248
+    },
+    "mmmu_pro": {
+     "correct": 53,
+     "n": 156
+    }
+   },
+   "macro_mean": 0.5594719137586412,
+   "pooled_correct": 1429,
+   "n": 2208,
+   "vs_base": {
+    "mme_realworld": {
+     "delta_pp": 0.14749262536873156,
+     "ci95": [
+      -2.6548672566371683,
+      3.023598820058997
+     ],
+     "questions": 339
+    },
+    "vstar": {
+     "delta_pp": -0.6696428571428571,
+     "ci95": [
+      -4.910714285714286,
+      3.5714285714285716
+     ],
+     "questions": 112
+    },
+    "worldbench": {
+     "delta_pp": 6.048387096774194,
+     "ci95": [
+      -1.6129032258064515,
+      13.709677419354838
+     ],
+     "questions": 62
+    },
+    "mmmu_pro": {
+     "delta_pp": 2.5641025641025643,
+     "ci95": [
+      -3.8461538461538463,
+      8.974358974358974
+     ],
+     "questions": 39
+    },
+    "macro": {
+     "delta_pp": 2.022584857275658,
+     "ci95": [
+      -0.8353200159609399,
+      4.810440240537545
+     ]
+    }
+   }
+  },
+  {
+   "name": "A+B+C",
+   "base": "GRPO",
+   "family": "grpo_based",
+   "by_source": {
+    "mme_realworld": 0.6563421828908554,
+    "vstar": 0.8727678571428571,
+    "worldbench": 0.3387096774193548,
+    "mmmu_pro": 0.30128205128205127
+   },
+   "counts": {
+    "mme_realworld": {
+     "correct": 890,
+     "n": 1356
+    },
+    "vstar": {
+     "correct": 391,
+     "n": 448
+    },
+    "worldbench": {
+     "correct": 84,
+     "n": 248
+    },
+    "mmmu_pro": {
+     "correct": 47,
+     "n": 156
+    }
+   },
+   "macro_mean": 0.5422754421837797,
+   "pooled_correct": 1412,
+   "n": 2208,
+   "vs_base": {
+    "mme_realworld": {
+     "delta_pp": -0.8112094395280236,
+     "ci95": [
+      -3.687315634218289,
+      1.991150442477876
+     ],
+     "questions": 339
+    },
+    "vstar": {
+     "delta_pp": 2.9017857142857144,
+     "ci95": [
+      -1.3392857142857142,
+      7.142857142857143
+     ],
+     "questions": 112
+    },
+    "worldbench": {
+     "delta_pp": 0.4032258064516129,
+     "ci95": [
+      -6.854838709677419,
+      7.661290322580645
+     ],
+     "questions": 62
+    },
+    "mmmu_pro": {
+     "delta_pp": -1.2820512820512822,
+     "ci95": [
+      -7.6923076923076925,
+      5.128205128205129
+     ],
+     "questions": 39
+    },
+    "macro": {
+     "delta_pp": 0.3029376997895054,
+     "ci95": [
+      -2.4639595347989265,
+      3.040456805028576
+     ]
+    }
+   }
+  },
+  {
+   "name": "GRPO+A",
+   "base": "GRPO",
+   "family": "grpo_based",
+   "by_source": {
+    "mme_realworld": 0.6688790560471977,
+    "vstar": 0.8526785714285714,
+    "worldbench": 0.3346774193548387,
+    "mmmu_pro": 0.3141025641025641
+   },
+   "counts": {
+    "mme_realworld": {
+     "correct": 907,
+     "n": 1356
+    },
+    "vstar": {
+     "correct": 382,
+     "n": 448
+    },
+    "worldbench": {
+     "correct": 83,
+     "n": 248
+    },
+    "mmmu_pro": {
+     "correct": 49,
+     "n": 156
+    }
+   },
+   "macro_mean": 0.542584402733293,
+   "pooled_correct": 1421,
+   "n": 2208,
+   "vs_base": {
+    "mme_realworld": {
+     "delta_pp": 0.4424778761061947,
+     "ci95": [
+      -2.286135693215339,
+      3.0973451327433628
+     ],
+     "questions": 339
+    },
+    "vstar": {
+     "delta_pp": 0.8928571428571429,
+     "ci95": [
+      -2.9017857142857144,
+      4.6875
+     ],
+     "questions": 112
+    },
+    "worldbench": {
+     "delta_pp": 0.0,
+     "ci95": [
+      -8.064516129032258,
+      8.064516129032258
+     ],
+     "questions": 62
+    },
+    "mmmu_pro": {
+     "delta_pp": 0.0,
+     "ci95": [
+      -5.769230769230769,
+      5.769230769230769
+     ],
+     "questions": 39
+    },
+    "macro": {
+     "delta_pp": 0.33383375474083443,
+     "ci95": [
+      -2.4865899586395854,
+      3.135507064555602
+     ]
+    }
+   }
+  },
+  {
+   "name": "strat",
+   "base": "GRPO",
+   "family": "grpo_based",
+   "by_source": {
+    "mme_realworld": 0.6651917404129793,
+    "vstar": 0.8258928571428571,
+    "worldbench": 0.3185483870967742,
+    "mmmu_pro": 0.3076923076923077
+   },
+   "counts": {
+    "mme_realworld": {
+     "correct": 902,
+     "n": 1356
+    },
+    "vstar": {
+     "correct": 370,
+     "n": 448
+    },
+    "worldbench": {
+     "correct": 79,
+     "n": 248
+    },
+    "mmmu_pro": {
+     "correct": 48,
+     "n": 156
+    }
+   },
+   "macro_mean": 0.5293313230862295,
+   "pooled_correct": 1399,
+   "n": 2208,
+   "vs_base": {
+    "mme_realworld": {
+     "delta_pp": 0.07374631268436578,
+     "ci95": [
+      -2.5811209439528024,
+      2.6548672566371683
+     ],
+     "questions": 339
+    },
+    "vstar": {
+     "delta_pp": -1.7857142857142858,
+     "ci95": [
+      -5.803571428571429,
+      2.455357142857143
+     ],
+     "questions": 112
+    },
+    "worldbench": {
+     "delta_pp": -1.6129032258064515,
+     "ci95": [
+      -8.870967741935484,
+      5.645161290322581
+     ],
+     "questions": 62
+    },
+    "mmmu_pro": {
+     "delta_pp": -0.6410256410256411,
+     "ci95": [
+      -8.333333333333334,
+      6.410256410256411
+     ],
+     "questions": 39
+    },
+    "macro": {
+     "delta_pp": -0.9914742099655031,
+     "ci95": [
+      -3.9268827942905298,
+      1.8473869393672497
+     ]
+    }
+   }
+  },
+  {
+   "name": "max2",
+   "base": "GRPO",
+   "family": "grpo_based",
+   "by_source": {
+    "mme_realworld": 0.6556047197640118,
+    "vstar": 0.8549107142857143,
+    "worldbench": 0.32661290322580644,
+    "mmmu_pro": 0.3269230769230769
+   },
+   "counts": {
+    "mme_realworld": {
+     "correct": 889,
+     "n": 1356
+    },
+    "vstar": {
+     "correct": 383,
+     "n": 448
+    },
+    "worldbench": {
+     "correct": 81,
+     "n": 248
+    },
+    "mmmu_pro": {
+     "correct": 51,
+     "n": 156
+    }
+   },
+   "macro_mean": 0.5410128535496525,
+   "pooled_correct": 1404,
+   "n": 2208,
+   "vs_base": {
+    "mme_realworld": {
+     "delta_pp": -0.8849557522123894,
+     "ci95": [
+      -3.7610619469026547,
+      1.991150442477876
+     ],
+     "questions": 339
+    },
+    "vstar": {
+     "delta_pp": 1.1160714285714286,
+     "ci95": [
+      -2.9017857142857144,
+      5.357142857142857
+     ],
+     "questions": 112
+    },
+    "worldbench": {
+     "delta_pp": -0.8064516129032258,
+     "ci95": [
+      -9.274193548387096,
+      8.064516129032258
+     ],
+     "questions": 62
+    },
+    "mmmu_pro": {
+     "delta_pp": 1.2820512820512822,
+     "ci95": [
+      -4.487179487179487,
+      7.051282051282051
+     ],
+     "questions": 39
+    },
+    "macro": {
+     "delta_pp": 0.1766788363767739,
+     "ci95": [
+      -2.7560740265865786,
+      3.0406900602564333
+     ]
+    }
+   }
+  },
+  {
+   "name": "RLOO+first-action",
+   "base": "RLOO",
+   "family": "rloo_based",
+   "by_source": {
+    "mme_realworld": 0.6084070796460177,
+    "vstar": 0.8191964285714286,
+    "worldbench": 0.3064516129032258,
+    "mmmu_pro": 0.25
+   },
+   "counts": {
+    "mme_realworld": {
+     "correct": 825,
+     "n": 1356
+    },
+    "vstar": {
+     "correct": 367,
+     "n": 448
+    },
+    "worldbench": {
+     "correct": 76,
+     "n": 248
+    },
+    "mmmu_pro": {
+     "correct": 39,
+     "n": 156
+    }
+   },
+   "macro_mean": 0.496013780280168,
+   "pooled_correct": 1307,
+   "n": 2208,
+   "vs_base": {
+    "mme_realworld": {
+     "delta_pp": -4.71976401179941,
+     "ci95": [
+      -7.522123893805309,
+      -1.8436578171091444
+     ],
+     "questions": 339
+    },
+    "vstar": {
+     "delta_pp": -2.6785714285714284,
+     "ci95": [
+      -6.919642857142857,
+      1.5625
+     ],
+     "questions": 112
+    },
+    "worldbench": {
+     "delta_pp": 0.4032258064516129,
+     "ci95": [
+      -6.854838709677419,
+      7.661290322580645
+     ],
+     "questions": 62
+    },
+    "mmmu_pro": {
+     "delta_pp": -8.333333333333334,
+     "ci95": [
+      -17.94871794871795,
+      0.6410256410256411
+     ],
+     "questions": 39
+    },
+    "macro": {
+     "delta_pp": -3.83211074181314,
+     "ci95": [
+      -7.130692957269619,
+      -0.7123152886549893
+     ]
+    }
+   }
+  },
+  {
+   "name": "Htau",
+   "base": "DAPO",
+   "family": "dapo_based",
+   "by_source": {
+    "mme_realworld": 0.6792035398230089,
+    "vstar": 0.8571428571428571,
+    "worldbench": 0.33064516129032256,
+    "mmmu_pro": 0.32051282051282054
+   },
+   "counts": {
+    "mme_realworld": {
+     "correct": 921,
+     "n": 1356
+    },
+    "vstar": {
+     "correct": 384,
+     "n": 448
+    },
+    "worldbench": {
+     "correct": 82,
+     "n": 248
+    },
+    "mmmu_pro": {
+     "correct": 50,
+     "n": 156
+    }
+   },
+   "macro_mean": 0.5468760946922523,
+   "pooled_correct": 1437,
+   "n": 2208,
+   "vs_base": {
+    "mme_realworld": {
+     "delta_pp": -0.8849557522123894,
+     "ci95": [
+      -3.392330383480826,
+      1.6224188790560472
+     ],
+     "questions": 339
+    },
+    "vstar": {
+     "delta_pp": -1.5625,
+     "ci95": [
+      -4.6875,
+      1.5625
+     ],
+     "questions": 112
+    },
+    "worldbench": {
+     "delta_pp": -1.6129032258064515,
+     "ci95": [
+      -9.274193548387096,
+      6.048387096774194
+     ],
+     "questions": 62
+    },
+    "mmmu_pro": {
+     "delta_pp": -3.2051282051282053,
+     "ci95": [
+      -8.333333333333334,
+      1.9230769230769231
+     ],
+     "questions": 39
+    },
+    "macro": {
+     "delta_pp": -1.8163717957867616,
+     "ci95": [
+      -4.36831443257297,
+      0.703356417125194
+     ]
+    }
+   }
+  },
+  {
+   "name": "DAPO-SB",
+   "base": "DAPO",
+   "family": "dapo_based",
+   "by_source": {
+    "mme_realworld": 0.6799410029498525,
+    "vstar": 0.8325892857142857,
+    "worldbench": 0.2903225806451613,
+    "mmmu_pro": 0.3141025641025641
+   },
+   "counts": {
+    "mme_realworld": {
+     "correct": 922,
+     "n": 1356
+    },
+    "vstar": {
+     "correct": 373,
+     "n": 448
+    },
+    "worldbench": {
+     "correct": 72,
+     "n": 248
+    },
+    "mmmu_pro": {
+     "correct": 49,
+     "n": 156
+    }
+   },
+   "macro_mean": 0.5292388583529659,
+   "pooled_correct": 1416,
+   "n": 2208,
+   "vs_base": {
+    "mme_realworld": {
+     "delta_pp": -0.8112094395280236,
+     "ci95": [
+      -3.3185840707964602,
+      1.6224188790560472
+     ],
+     "questions": 339
+    },
+    "vstar": {
+     "delta_pp": -4.017857142857143,
+     "ci95": [
+      -8.035714285714286,
+      -0.22321428571428573
+     ],
+     "questions": 112
+    },
+    "worldbench": {
+     "delta_pp": -5.645161290322581,
+     "ci95": [
+      -13.709677419354838,
+      2.4193548387096775
+     ],
+     "questions": 62
+    },
+    "mmmu_pro": {
+     "delta_pp": -3.8461538461538463,
+     "ci95": [
+      -11.538461538461538,
+      3.8461538461538463
+     ],
+     "questions": 39
+    },
+    "macro": {
+     "delta_pp": -3.5800954297153984,
+     "ci95": [
+      -6.599740807509706,
+      -0.5846257686700258
+     ]
+    }
+   }
+  }
+ ]
+}
