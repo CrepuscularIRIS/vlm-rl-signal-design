@@ -1,0 +1,42 @@
+[
+ {
+  "file": "DESIGN.zh.md",
+  "sha256": "6917e3d316744b7cfda903f7667ddbcabf409c5bda77138cf3554279062cab39"
+ },
+ {
+  "file": "REPORT.zh.md",
+  "sha256": "157fa158218a06eba49fa0e771b3cc360fb4205b0646a4b5bf69541d61cade2f"
+ },
+ {
+  "file": "build_publication.py",
+  "sha256": "1e3d44174c880a144c520d5bc41d2795097f0d350c27146595c0aaeb87dc2ef8"
+ },
+ {
+  "file": "e1_by_bench_RP.json",
+  "sha256": "da04837a6c60db137323813bf85dc8772b87982303349198498a5b5db3321c08"
+ },
+ {
+  "file": "entry_e1.pdf",
+  "sha256": "9fe97850514566f31f7c6c06ddde91cfc0d1066153d1bf3357e31bf68b16acea"
+ },
+ {
+  "file": "entry_e1.png",
+  "sha256": "4b90cc6b0c3626f2d2974708433c47ab2b4cea1a8afc0c90956358d3949e4f31"
+ },
+ {
+  "file": "entry_patches.py",
+  "sha256": "d6d83956945f9b235eab9e7dae0b8cef9bd7a228cbd20d0104ee18463220241c"
+ },
+ {
+  "file": "entry_training.pdf",
+  "sha256": "2ede1eb4ad85e61dc5f372f77524961ce15b58f82bd084f29d413eb2c18258aa"
+ },
+ {
+  "file": "entry_training.png",
+  "sha256": "5b047040547004560e89c8f5f2838246dda0c3e6d069b6e79d5e6f73597689aa"
+ },
+ {
+  "file": "family_long.csv",
+  "sha256": "075605ec531e83acddb5ca75e112ddc20ecdc327677d0c0f2ca5ebbc0ce1e0c1"
+ }
+]

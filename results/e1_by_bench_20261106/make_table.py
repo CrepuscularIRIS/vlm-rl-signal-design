@@ -2,10 +2,10 @@
 import json
 import sys
 
-ORDER = ['A-SFT', 'GRPO', 'DAPO', 'GSPO', 'GiGPO', 'RLOO', 'SAPO',
+ORDER = ['A-SFT', 'GRPO', 'R-replay', 'P-pilot', 'DAPO', 'GSPO', 'GiGPO', 'RLOO', 'SAPO',
          'DTPO', 'G1', 'A+B', 'A+B+C', 'GRPO+A', 'strat', 'max2', 'Htau', 'DAPO-SB', 'RLOO+first-action']
-NAMES = {'Htau': 'Hτ', 'RLOO+first-action': 'RLOO + 首动作分叉', 'A-SFT': 'A-SFT 起点'}
-GROUP = {'A-SFT': '起点', 'GRPO': '优化器', 'DAPO': '优化器', 'GSPO': '优化器', 'GiGPO': '优化器', 'RLOO': '优化器',
+NAMES = {'R-replay': '**R：回放补满（新）**', 'P-pilot': '**P：混合题追加一组（新）**', 'Htau': 'Hτ', 'RLOO+first-action': 'RLOO + 首动作分叉', 'A-SFT': 'A-SFT 起点'}
+GROUP = {'A-SFT': '起点', 'R-replay': 'GRPO 底座（进入更新）', 'P-pilot': 'GRPO 底座（进入更新，1.56× rollout）', 'GRPO': '优化器', 'DAPO': '优化器', 'GSPO': '优化器', 'GiGPO': '优化器', 'RLOO': '优化器',
          'SAPO': '优化器', 'Htau': 'DAPO 底座', 'DAPO-SB': 'DAPO 底座', 'RLOO+first-action': 'RLOO 底座'}
 
 d = json.load(open(sys.argv[1]))
