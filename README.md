@@ -6,6 +6,14 @@ Qwen3-VL-4B 在 caption v5.1 协议下多轮裁图后回答选择题。本仓库
 - **完整阶段报告**（各方法公式、分源与配对表、案例、训练曲线、审计）：[docs/README_stage_20261106.md](docs/README_stage_20261106.md)
 - **代码**：[code/README.md](code/README.md)　**协议**：[protocol/CAPTION_V51.md](protocol/CAPTION_V51.md)　**实验流程**：[protocol/EXPERIMENT_LIFECYCLE.zh.md](protocol/EXPERIMENT_LIFECYCLE.zh.md)
 
+> **正式训练线 formal_v1（2026-11-10）**：
+> - 新的视图呈现规则：环境呈现、模型实际所见、回执像素说明三者一致，像素上限 2M；
+> - 重做 SFT（Qwen3-VL-4B / 8B、InternVL3.5-4B / 8B）；
+> - 重新筛选 12k RL 数据池：DeepEyes 8k + VisualProbe 4k，即 G1 V\* 3,000 / G2 图表 2,000 / G3 ThinkLite 3,000 / G4 VisualProbe 4,000；
+> - 4 × RTX PRO 6000 上按 Mini-o3 配方训练，数据过一遍即停。
+>
+> 设定与数据见 [results/formal_v1_rl_20261110/REPORT.zh.md](results/formal_v1_rl_20261110/REPORT.zh.md)。下面 §1–§2 的结果都属于 11-08 之前的旧呈现口径（数据加载器默认 589,824 像素二次缩小、A-SFT 起点、rl4k 题池），不能和 formal_v1 的数字直接比较。
+
 ## 1. 当前状态（2026-11-06）
 
 - **新底座 GRPO + R（回放补满）**：只改“哪些组进入更新”——本步全对 / 全错组换成上一步的混合组，每次更新的混合组 72 → 126；rollout 与 GRPO 相同（时长 1.02×）。E1 1450/2208（GRPO 1411、DAPO 1465）。多采 56% 新轨迹的 P（1438）未高于 R。[报告](results/entry_ab_20261106/REPORT.zh.md)
