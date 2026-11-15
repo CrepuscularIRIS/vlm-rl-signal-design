@@ -1,0 +1,7 @@
+model,protocol,coords,T1a_single_hit_valid,T2b_obs_with_target_hit_valid,T2c_obs_without_target_hit_valid,T2d_coords_hint_hit_valid,T1a_vstar_hit_valid,T1a_vstar_iou,T2b_box_inside_window_share
+Base,Default,int[0-1000],0.941,0.932,0.564,0.580,0.695,0.446,0.930
+Base->GRPO,Default,int[0-1000],0.946,0.944,0.916,0.924,0.751,0.407,0.956
+SFT,Cap,float[0-1],0.837,0.399,0.645,0.439,0.846,0.079,0.605
+SFT->GRPO,Cap,float[0-1],0.903,0.663,0.794,0.637,0.888,0.091,0.633
+Base [0-1] coords (2-decimal example),Default,float[0-1],,0.815,0.387,,,,
+Base->GRPO [0-1] coords (2-decimal example),Default,float[0-1],,0.857,0.742,,,,

@@ -8,6 +8,7 @@
 
 | 目录 | 内容 |
 |---|---|
+| [formal_v1_grpo_diagnosis_20261114](formal_v1_grpo_diagnosis_20261114/REPORT.zh.md) | 标准 GRPO 两臂（SFT 起点 / Base 起点，13k 池 51 步）、等裁图预算评测（B11：SFT→GRPO 55.73%、Base→GRPO 56.25%）、轨迹拆解与工具定位诊断：SFT 系在放大图里看到目标后回原图定位命中减半，SFT 语料缺少对应示范 |
 | [formal_v1_rl_20261110](formal_v1_rl_20261110/REPORT.zh.md) | 新的呈现规则、重做的 SFT 与四个 SFT 模型的 E1、12k RL 数据池（四个来源、各阶段筛选题数、任务构成）、Mini-o3 式 RL 配方与 4 卡吞吐 |
 
 以下各节都属于 11-08 之前的旧呈现口径。
